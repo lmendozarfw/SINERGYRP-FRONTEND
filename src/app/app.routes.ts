@@ -33,6 +33,13 @@ export const routes: Routes = [
             (p) => p.ConfigurationPage,
           ),
       },
+      {
+        path: 'product-engineering/new-product',
+        loadComponent: () =>
+          import('./features/product-engineering/pages/new-product/new-product.page').then(
+            (p) => p.NewProductPage,
+          ),
+      },
     ],
   },
   {

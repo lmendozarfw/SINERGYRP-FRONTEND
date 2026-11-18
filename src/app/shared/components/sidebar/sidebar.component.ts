@@ -16,11 +16,21 @@ import {
   SignOut,
   User,
   Users,
+  Wrench,
 } from '@primeicons/angular';
 
 interface NavItem {
   label: string;
-  icon: 'home' | 'box' | 'users' | 'inbox' | 'chart-bar' | 'search' | 'cog' | 'question-circle';
+  icon:
+    | 'home'
+    | 'box'
+    | 'users'
+    | 'inbox'
+    | 'chart-bar'
+    | 'search'
+    | 'cog'
+    | 'question-circle'
+    | 'wrench';
   route?: string;
   badge?: string;
 }
@@ -52,6 +62,7 @@ interface UserActionItem extends MenuItem {
     SignOut,
     User,
     Users,
+    Wrench,
   ],
   template: `
     <div class="ds-sidebar flex h-full flex-col" [class.ds-sidebar--collapsed]="isCollapsed()">
@@ -138,6 +149,9 @@ interface UserActionItem extends MenuItem {
               }
               @case ('search') {
                 <svg data-p-icon="search" [size]="16" class="shrink-0"></svg>
+              }
+              @case ('wrench') {
+                <svg data-p-icon="wrench" [size]="16" class="shrink-0"></svg>
               }
               @default {
                 <svg data-p-icon="cog" [size]="16" class="shrink-0"></svg>
@@ -258,6 +272,11 @@ export class SidebarComponent {
     { label: 'Inicio', icon: 'home', route: '/app/configuration' },
     { label: 'Activos fijos', icon: 'box', route: '/app/configuration' },
     { label: 'Clientes', icon: 'users', route: '/app/clients' },
+    {
+      label: 'Ingeniería de producto',
+      icon: 'wrench',
+      route: '/app/product-engineering/new-product',
+    },
     { label: 'Operaciones', icon: 'inbox', route: '/app/configuration', badge: '3' },
     { label: 'Reportes', icon: 'chart-bar', route: '/app/configuration' },
     { label: 'Búsquedas', icon: 'search', route: '/app/configuration' },

@@ -1,0 +1,52 @@
+<div class="ds-acciones">
+
+    <div class="ds-acciones__borrador">
+
+        <button
+            type="button"
+            pButton
+            class="ds-button ds-button--text"
+            [disabled]="guardando"
+            (click)="guardarBorrador.emit()"
+        >
+            <svg data-p-icon="save" [size]="16"></svg>
+            Guardar como borrador
+        </button>
+
+        <span class="ds-meta">
+            Puedes retomarlo en cualquier momento.
+        </span>
+
+    </div>
+
+    <div class="ds-acciones__navegacion">
+
+        @if (puedeRegresar) {
+
+            <button
+                type="button"
+                pButton
+                class="ds-button ds-button--secondary"
+                [disabled]="guardando"
+                (click)="regresar.emit()"
+            >
+                <svg data-p-icon="arrow-left" [size]="16"></svg>
+                Regresar
+            </button>
+
+        }
+
+        <button
+            type="button"
+            pButton
+            class="ds-button"
+            [disabled]="!puedeContinuar || guardando"
+            (click)="continuar.emit()"
+        >
+            {{ esUltimoPaso ? 'Finalizar' : 'Continuar' }}
+            <svg data-p-icon="arrow-right" [size]="16"></svg>
+        </button>
+
+    </div>
+
+</div>

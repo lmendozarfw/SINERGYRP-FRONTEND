@@ -1,0 +1,162 @@
+<div class="w-full rounded-md border border-dashed
+           transition-colors duration-200 p-4" [ngClass]="{
+        'border-blue-600 bg-blue-50': arrastrando,
+        'border-slate-300 bg-slate-50': !arrastrando && !deshabilitado,
+        'border-slate-200 bg-slate-100 opacity-60': deshabilitado
+    }" (dragover)="alArrastrarSobre($event)" (dragleave)="alSalirDelArea($event)" (drop)="alSoltarArchivo($event)">
+
+    <input #inputArchivo type="file" class="hidden" [accept]="formatosPermitidos" [multiple]="multiple"
+        [disabled]="deshabilitado" (change)="seleccionarArchivo($event)" />
+
+    <!-- Sin archivos seleccionados -->
+    @if (!archivos.length) {
+
+    <div class="flex flex-col items-center justify-center gap-2">
+
+        <i class="pi pi-cloud-upload text-xl text-blue-600"></i>
+
+        <span class="text-xs font-medium text-slate-700">
+            {{ textoVacioPrincipal }}
+        </span>
+
+        <span class="text-[11px] text-slate-500">
+            {{ textoVacioSecundario }}
+        </span>
+
+        <p-button [label]="textoVacioBoton" size="small" severity="secondary" [outlined]="true" [disabled]="deshabilitado"
+            styleClass="!text-xs !px-3 !py-1.5 !bg-white" (onClick)="abrirSelector(inputArchivo)" />
+
+        <span class="text-[10px] text-slate-400">
+            PNG, JPG o WEBP · Máximo {{ tamanioMaximoMB }} MB
+            @if (multiple) {
+                c/u
+                @if (maximoArchivos > 0) {
+                    · Hasta {{ maximoArchivos }} imágenes
+                }
+            }
+        </span>
+
+    </div>
+    }
+
+    <!-- Una sola imagen -->
+    @else if (!multiple) {
+
+    <div class="flex flex-col items-center gap-3">
+
+        @if (vistaPrevia && mostrarVistaPrevia) {
+
+        <img [src]="vistaPrevia" alt="Vista previa de imagen" class="max-h-40 max-w-full rounded-md object-contain" />
+
+        } @else {
+
+        <i class="pi pi-image text-3xl text-blue-600"></i>
+
+        }
+
+        <div class="flex flex-col items-center gap-1">
+
+            <span class="text-xs font-medium text-slate-700">
+                {{ archivos[0].archivo.name }}
+            </span>
+
+            <span class="text-[10px] text-slate-500">
+                {{ (archivos[0].archivo.size / 1024).toFixed(1) }} KB
+            </span>
+
+        </div>
+
+        <div class="flex items-center gap-2">
+
+            <p-button label="Reemplazar" icon="pi pi-refresh" size="small" severity="secondary" [outlined]="true"
+                [disabled]="deshabilitado" (onClick)="abrirSelector(inputArchivo)" />
+
+            <p-button label="Eliminar" icon="pi pi-trash" size="small" severity="danger" [text]="true"
+                [disabled]="deshabilitado" (onClick)="eliminarImagen()" />
+
+        </div>
+
+    </div>
+    }
+
+    <!-- Múltiples imágenes -->
+    @else {
+
+    <div class="flex flex-col gap-3">
+
+        <div class="grid grid-cols-2 gap-3">
+
+            @for (item of archivos; track item.id) {
+
+            <div class="overflow-hidden rounded-md border border-slate-200 bg-white">
+
+                <div class="relative">
+
+                    @if (item.vistaPrevia && mostrarVistaPrevia) {
+
+                    <img [src]="item.vistaPrevia" [alt]="item.archivo.name" class="h-28 w-full object-cover" />
+
+                    } @else {
+
+                    <div class="flex h-28 items-center justify-center bg-slate-50">
+                        <i class="pi pi-image text-2xl text-blue-600"></i>
+                    </div>
+
+                    }
+
+                    <button type="button"
+                        class="absolute right-1 top-1 flex size-6 items-center justify-center rounded-full bg-white/90 text-slate-600 shadow-sm hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 disabled:cursor-not-allowed disabled:opacity-60"
+                        [disabled]="deshabilitado" [attr.aria-label]="'Quitar ' + item.archivo.name"
+                        (click)="eliminarArchivo(item)">
+                        <i class="pi pi-times text-[10px]"></i>
+                    </button>
+
+                </div>
+
+                <div class="px-2 py-1.5">
+                    <p class="truncate text-[11px] font-medium text-slate-700" [title]="item.archivo.name">
+                        {{ item.archivo.name }}
+                    </p>
+                    <p class="text-[10px] text-slate-500">
+                        {{ (item.archivo.size / 1024).toFixed(1) }} KB
+                    </p>
+                </div>
+
+            </div>
+            }
+
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2">
+
+            <span class="text-[10px] text-slate-400">
+                PNG, JPG o WEBP · Máximo {{ tamanioMaximoMB }} MB c/u
+                @if (maximoArchivos > 0) {
+                    · Hasta {{ maximoArchivos }} imágenes
+                }
+            </span>
+
+            <p-button [label]="textoBotonAgregar" icon="pi pi-plus" size="small" severity="secondary" [outlined]="true"
+                [disabled]="deshabilitado || alcanzoMaximo" (onClick)="abrirSelector(inputArchivo)" />
+
+        </div>
+
+    </div>
+    }
+
+    <!-- Mensaje de error -->
+    @if (mensajeError) {
+
+    <div class="mt-3 flex items-center justify-center gap-1">
+
+        <i class="pi pi-exclamation-circle text-red-500 text-xs"></i>
+
+        <span class="text-xs text-red-600">
+            {{ mensajeError }}
+        </span>
+
+    </div>
+
+    }
+
+</div>
