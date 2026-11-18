@@ -17,6 +17,16 @@ export const routes: Routes = [
     loadComponent: () => import('./shared/templates/main.template').then((t) => t.MainTemplate),
     children: [
       {
+        path: '',
+        redirectTo: 'clients',
+        pathMatch: 'full',
+      },
+      {
+        path: 'clients',
+        loadComponent: () =>
+          import('./features/clients/pages/clients.page').then((p) => p.ClientsPage),
+      },
+      {
         path: 'configuration',
         loadComponent: () =>
           import('./features/configuration/pages/configuration.page').then(

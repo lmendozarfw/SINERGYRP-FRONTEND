@@ -257,7 +257,7 @@ export class SidebarComponent {
   readonly primaryItems: NavItem[] = [
     { label: 'Inicio', icon: 'home', route: '/app/configuration' },
     { label: 'Activos fijos', icon: 'box', route: '/app/configuration' },
-    { label: 'Clientes', icon: 'users', route: '/app/configuration' },
+    { label: 'Clientes', icon: 'users', route: '/app/clients' },
     { label: 'Operaciones', icon: 'inbox', route: '/app/configuration', badge: '3' },
     { label: 'Reportes', icon: 'chart-bar', route: '/app/configuration' },
     { label: 'Búsquedas', icon: 'search', route: '/app/configuration' },

@@ -18,7 +18,7 @@ export class BreadcrumbService {
   private readonly homeState = signal<BreadcrumbItem | null>({
     key: 'home',
     label: '',
-    route: '/app/configuration',
+    route: '/app/clients',
   });
 
   readonly items = this.state.asReadonly();
