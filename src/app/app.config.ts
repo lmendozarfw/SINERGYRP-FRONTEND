@@ -3,42 +3,105 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
+import { definePreset } from '@primeuix/themes';
 import { MessageService } from 'primeng/api';
 
-const AppTheme = {
-  ...Aura,
+const AppTheme = definePreset(Aura, {
   semantic: {
-    ...Aura.semantic,
     primary: {
-      ...Aura.semantic?.primary,
-      50: '{green.50}',
-      100: '{green.100}',
-      200: '{green.200}',
-      300: '{green.300}',
-      400: '{green.400}',
-      500: '{green.500}',
-      600: '{green.600}',
-      700: '{green.700}',
-      800: '{green.800}',
-      900: '{green.900}',
-      950: '{green.950}',
+      50: 'var(--ds-action-50)',
+      100: 'var(--ds-action-100)',
+      200: 'var(--ds-action-200)',
+      300: 'var(--ds-action-300)',
+      400: 'var(--ds-action-400)',
+      500: 'var(--ds-action-500)',
+      600: 'var(--ds-action-600)',
+      700: 'var(--ds-action-700)',
+      800: 'var(--ds-action-800)',
+      900: 'var(--ds-action-900)',
+      950: 'var(--ds-action-950)',
+      color: 'var(--ds-primary)',
+      contrastColor: '#ffffff',
+      hoverColor: 'var(--ds-primary-hover)',
+      activeColor: 'var(--ds-primary-active)',
+    },
+    surface: {
+      0: 'var(--ds-surface)',
+      50: 'var(--ds-canvas)',
+      100: 'var(--ds-canvas-strong)',
+      200: 'var(--ds-border)',
+      300: 'var(--ds-border)',
+      400: 'var(--ds-ink-muted)',
+      500: 'var(--ds-ink-muted)',
+      600: 'var(--ds-ink-muted)',
+      700: 'var(--ds-ink)',
+      800: 'var(--ds-ink)',
+      900: 'var(--ds-navy)',
+      950: 'var(--ds-navy)',
+    },
+    text: {
+      color: 'var(--ds-text)',
+      hoverColor: 'var(--ds-text)',
+      mutedColor: 'var(--ds-text-muted)',
+      hoverMutedColor: 'var(--ds-ink)',
+    },
+    content: {
+      background: 'var(--ds-bg-raised)',
+      borderColor: 'var(--ds-border)',
+      color: 'var(--ds-text)',
+      borderRadius: 'var(--ds-radius-card)',
+    },
+    formField: {
+      background: 'var(--ds-bg-raised)',
+      borderColor: 'var(--ds-border)',
+      hoverBorderColor: 'var(--ds-ink-soft)',
+      focusBorderColor: 'var(--ds-primary)',
+      invalidBorderColor: 'var(--ds-danger)',
+      color: 'var(--ds-text)',
+      placeholderColor: 'var(--ds-text-muted)',
+      borderRadius: 'var(--ds-radius-input)',
+      paddingX: '12px',
+      paddingY: '10px',
+      focusRing: {
+        width: '3px',
+        style: 'solid',
+        color: 'var(--ds-primary-ring)',
+        offset: '1px',
+        shadow: 'none',
+      },
+    },
+    focusRing: {
+      width: '3px',
+      style: 'solid',
+      color: 'var(--ds-primary-ring)',
+      offset: '2px',
+      shadow: 'none',
     },
   },
-};
+  components: {
+    button: {
+      root: {
+        borderRadius: 'var(--ds-radius-button)',
+        gap: '8px',
+      },
+    },
+  },
+});
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     providePrimeNG({
-            theme: {
-                preset: AppTheme,
-                options: {
-                    darkModeSelector: 'none',
-                },
-            },
-            license: 'eyJpZCI6IjhjY2MwMWZjLTAxMzgtNGYxZC1iMDlkLTQ2MGYyN2Q0ZTk0NSIsInByb2R1Y3QiOiJwcmltZXVpIiwidGllciI6ImNvbW11bml0eSIsInR5cGUiOiJkZXYiLCJpYXQiOjE3ODI4NTMzODQsImV4cCI6MTgxNDM4OTM4NH0.5X1GwjVS-s0_fDC5XCzABHltbeIeRXqYFiQyrIuL6CK2mdQe8bA_c6CF6xQtxxwFzjztmAW_RlHBw-8IRxf7CA'
-        }),
-        MessageService,
-  ]
+      theme: {
+        preset: AppTheme,
+        options: {
+          darkModeSelector: 'none',
+        },
+      },
+      license:
+        'eyJpZCI6IjhjY2MwMWZjLTAxMzgtNGYxZC1iMDlkLTQ2MGYyN2Q0ZTk0NSIsInByb2R1Y3QiOiJwcmltZXVpIiwidGllciI6ImNvbW11bml0eSIsInR5cGUiOiJkZXYiLCJpYXQiOjE3ODI4NTMzODQsImV4cCI6MTgxNDM4OTM4NH0.5X1GwjVS-s0_fDC5XCzABHltbeIeRXqYFiQyrIuL6CK2mdQe8bA_c6CF6xQtxxwFzjztmAW_RlHBw-8IRxf7CA',
+    }),
+    MessageService,
+  ],
 };

@@ -1,10 +1,30 @@
 import { Component, inject, signal, viewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ButtonDirective } from 'primeng/button';
+import { Checkbox } from 'primeng/checkbox';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
 import { InputPassword } from 'primeng/inputpassword';
 import { InputText } from 'primeng/inputtext';
-import { CheckCircle, Eye, EyeSlash, InfoCircle, Pencil, Qrcode, SignIn, Spinner, User } from '@primeicons/angular';
+import {
+  CheckCircle,
+  ExclamationTriangle,
+  Eye,
+  EyeSlash,
+  InfoCircle,
+  Pencil,
+  Qrcode,
+  SignIn,
+  Spinner,
+  User,
+} from '@primeicons/angular';
 import { FormLabelComponent } from '../../../../shared/components/form-label/form-label.component';
 import { QrScannerComponent } from '../../../../shared/components/qr-scanner/qr-scanner.component';
 import { ToastService } from '../../../../core/services/toast.service';
@@ -61,13 +81,18 @@ function toCredentials(username: unknown, password: unknown): BadgeCredentials |
   selector: 'app-login-page',
   templateUrl: './login.page.html',
   imports: [
+    FormsModule,
     ReactiveFormsModule,
     FormLabelComponent,
     QrScannerComponent,
     InputText,
     InputPassword,
+    IconField,
+    InputIcon,
+    Checkbox,
     ButtonDirective,
     CheckCircle,
+    ExclamationTriangle,
     User,
     InfoCircle,
     SignIn,
@@ -89,6 +114,7 @@ export class LoginPage {
   readonly mode = signal<'qr' | 'manual'>('qr');
   readonly badgeUser = signal<string | null>(null);
   readonly passwordMask = signal(true);
+  remember = false;
 
   constructor() {
     this.loginForm = new FormGroup({
@@ -118,6 +144,13 @@ export class LoginPage {
 
   togglePasswordMask(): void {
     this.passwordMask.update((mask) => !mask);
+  }
+
+  recoverPassword(): void {
+    this.toast.info(
+      'Recuperación de contraseña',
+      'Contacta al administrador de tu espacio corporativo.',
+    );
   }
 
   onBadgeScanned(decodedText: string): void {
