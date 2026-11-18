@@ -85,6 +85,11 @@ const AppTheme = definePreset(Aura, {
         gap: '8px',
       },
     },
+    datatable: {
+      headerCell: {
+        background: 'var(--ds-primary-soft)',
+      },
+    },
   },
 });
 

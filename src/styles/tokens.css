@@ -27,7 +27,7 @@
 
   --ds-primary-hover: color-mix(in srgb, var(--ds-action) 85%, black);
   --ds-primary-active: color-mix(in srgb, var(--ds-action) 72%, black);
-  --ds-primary-soft: color-mix(in srgb, var(--ds-action) 8%, white);
+  --ds-primary-soft: color-mix(in srgb, var(--ds-action) 5%, white);
   --ds-primary-ring: color-mix(in srgb, var(--ds-action) 35%, white);
 
   --ds-ink-soft: color-mix(in srgb, var(--ds-ink) 70%, white);

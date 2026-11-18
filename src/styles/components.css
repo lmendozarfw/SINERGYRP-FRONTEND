@@ -891,6 +891,7 @@ app-sidebar .ds-sidebar--collapsed.p-sidebar {
   border-collapse: collapse;
 }
 
+.ds-table.p-datatable .p-datatable-thead > tr > th,
 .ds-table .p-datatable-thead > tr > th {
   padding: 12px 16px;
   border: 0;

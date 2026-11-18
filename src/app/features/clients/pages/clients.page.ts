@@ -244,7 +244,7 @@ interface SelectOption {
         <section class="ds-client-form__section">
           <h3 class="ds-client-form__title">Datos generales</h3>
           <div class="ds-client-form__grid">
-            <div class="ds-field ds-client-form__full">
+            <div class="ds-field">
               <app-form-label for="client-razon-social" [required]="true">
                 Nombre o razón social
               </app-form-label>
