@@ -1,0 +1,73 @@
+:host {
+  display: block;
+}
+
+.ds-corridas-equivalencias {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ds-corridas-config {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ds-corridas-config__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ds-corridas-config__icon {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-radius-input);
+  background: var(--ds-primary-soft);
+  color: var(--ds-primary);
+}
+
+.ds-corridas-config__subtitle {
+  margin-top: 2px;
+  color: var(--ds-text-muted);
+}
+
+.ds-corridas-config__form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+:host ::ng-deep .ds-corridas-control.p-select {
+  width: 100%;
+  min-height: var(--ds-control-height);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-input);
+  background: var(--ds-bg-raised);
+}
+
+:host ::ng-deep .ds-corridas-control.p-select:hover {
+  border-color: var(--ds-ink-soft);
+}
+
+:host ::ng-deep .ds-corridas-control.p-select.p-focus {
+  border-color: var(--ds-primary);
+  box-shadow: var(--ds-focus-shadow);
+}
+
+:host ::ng-deep .ds-corridas-control .p-select-label {
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+@media (max-width: 1023px) {
+  .ds-corridas-config__form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,10 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DatePicker } from 'primeng/datepicker';
-import { InputText } from 'primeng/inputtext';
-import { Select } from 'primeng/select';
-import { Textarea } from 'primeng/textarea';
-import { CheckCircle, ExclamationTriangle, FileEdit, Sparkles, Tags, Images } from '@primeicons/angular';
+import { Component, inject } from '@angular/core';
 import { BreadcrumbService } from '../../../../core/services/breadcrumb.service';
 import { ToastService } from '../../../../core/services/toast.service';
 import {
@@ -12,39 +6,37 @@ import {
   PasoAsistente,
 } from '../../../../shared/components/asistente-pasos/asistente-pasos.component';
 import { AsistentePasosAccionesComponent } from '../../../../shared/components/asistente-pasos-acciones/asistente-pasos-acciones.component';
-import { FormLabelComponent } from '../../../../shared/components/form-label/form-label.component';
-import { SelectorImagenComponent } from '../../../../shared/components/selector-imagen/selector-imagen.component';
+import { DatosGeneralesComponent } from '../../components/datos-generales/datos-generales.component';
+import { CorridasEquivalenciasComponent } from '../../components/corridas-equivalencias/corridas-equivalencias.component';
+import { PiezasConsumosComponent } from '../../components/piezas-consumos/piezas-consumos.component';
+import { CombinacionesComponent } from '../../components/combinaciones/combinaciones.component';
+import { RevisionLiberacionComponent } from '../../components/revision-liberacion/revision-liberacion.component';
+import { NewProductWizardStore } from '../../stores/new-product-wizard.store';
 
-interface OpcionSelect {
-  label: string;
-  value: string;
+interface EncabezadoPaso {
+  titulo: string;
+  descripcion: string;
 }
 
 @Component({
   selector: 'app-new-product-page',
   imports: [
-    ReactiveFormsModule,
-    InputText,
-    Textarea,
-    Select,
-    DatePicker,
-    FormLabelComponent,
-    SelectorImagenComponent,
     AsistentePasosComponent,
     AsistentePasosAccionesComponent,
-    FileEdit,
-    Tags,
-    Sparkles,
-    Images,
-    CheckCircle,
-    ExclamationTriangle,
+    DatosGeneralesComponent,
+    CorridasEquivalenciasComponent,
+    PiezasConsumosComponent,
+    CombinacionesComponent,
+    RevisionLiberacionComponent,
   ],
+  providers: [NewProductWizardStore],
   templateUrl: './new-product.page.html',
   styleUrl: './new-product.page.scss',
 })
 export class NewProductPage {
   private readonly breadcrumb = inject(BreadcrumbService);
   private readonly toast = inject(ToastService);
+  private readonly wizard = inject(NewProductWizardStore);
 
   readonly pasos: PasoAsistente[] = [
     { id: 1, titulo: 'Datos generales' },
@@ -56,61 +48,29 @@ export class NewProductPage {
 
   pasoActual = 1;
 
-  readonly categorias: OpcionSelect[] = [
-    { label: 'Calzado', value: 'calzado' },
-    { label: 'Ropa', value: 'ropa' },
-    { label: 'Accesorios', value: 'accesorios' },
-    { label: 'Textiles', value: 'textiles' },
-  ];
-
-  readonly marcas: OpcionSelect[] = [
-    { label: 'Marca propia', value: 'marca-propia' },
-    { label: 'Licencia', value: 'licencia' },
-    { label: 'Sin marca', value: 'sin-marca' },
-  ];
-
-  readonly lineas: OpcionSelect[] = [
-    { label: 'Casual', value: 'casual' },
-    { label: 'Formal', value: 'formal' },
-    { label: 'Deportiva', value: 'deportiva' },
-    { label: 'Outdoor', value: 'outdoor' },
-  ];
-
-  readonly generos: OpcionSelect[] = [
-    { label: 'Dama', value: 'dama' },
-    { label: 'Caballero', value: 'caballero' },
-    { label: 'Unisex', value: 'unisex' },
-    { label: 'Infantil', value: 'infantil' },
-  ];
-
-  readonly estatusOpciones: OpcionSelect[] = [
-    { label: 'Borrador', value: 'borrador' },
-    { label: 'Activo', value: 'activo' },
-    { label: 'Inactivo', value: 'inactivo' },
-  ];
-
-  readonly modeloForm = new FormGroup({
-    codigo: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    nombre: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    fechaAlta: new FormControl<Date | null>(new Date()),
-    estatus: new FormControl('borrador', { nonNullable: true }),
-    descripcion: new FormControl('', { nonNullable: true }),
-    categoria: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    marca: new FormControl('', { nonNullable: true }),
-    linea: new FormControl('', { nonNullable: true }),
-    genero: new FormControl('', { nonNullable: true }),
-  });
-
-  readonly imagen = signal<File | null>(null);
+  readonly encabezados: Record<number, EncabezadoPaso> = {
+    1: {
+      titulo: 'Crea un nuevo modelo',
+      descripcion:
+        'Completa la información base del modelo. Después podrás configurar sus corridas, piezas y combinaciones.',
+    },
+    2: {
+      titulo: 'Corridas y equivalencias',
+      descripcion: 'Define las tallas disponibles y su correspondencia en otros sistemas.',
+    },
+    3: {
+      titulo: 'Piezas y consumos',
+      descripcion: 'Configura las piezas del modelo y sus consumos por corrida.',
+    },
+    4: {
+      titulo: 'Combinaciones',
+      descripcion: 'Combina colores, materiales y acabados para el modelo.',
+    },
+    5: {
+      titulo: 'Revisión y liberación',
+      descripcion: 'Revisa la información del modelo antes de liberarlo.',
+    },
+  };
 
   constructor() {
     this.breadcrumb.setItems([
@@ -124,35 +84,8 @@ export class NewProductPage {
     ]);
   }
 
-  get codigoInvalido(): boolean {
-    const control = this.modeloForm.controls.codigo;
-    return control.invalid && (control.touched || control.dirty);
-  }
-
-  get nombreInvalido(): boolean {
-    const control = this.modeloForm.controls.nombre;
-    return control.invalid && (control.touched || control.dirty);
-  }
-
-  get categoriaInvalida(): boolean {
-    const control = this.modeloForm.controls.categoria;
-    return control.invalid && (control.touched || control.dirty);
-  }
-
-  get nombreResumen(): string {
-    return this.modeloForm.controls.nombre.value.trim() || 'Sin nombre todavía';
-  }
-
-  get categoriaResumen(): string {
-    return this.etiqueta(this.categorias, this.modeloForm.controls.categoria.value);
-  }
-
-  get lineaResumen(): string {
-    return this.etiqueta(this.lineas, this.modeloForm.controls.linea.value);
-  }
-
-  get estadoResumen(): string {
-    return this.etiqueta(this.estatusOpciones, this.modeloForm.controls.estatus.value);
+  get encabezado(): EncabezadoPaso {
+    return this.encabezados[this.pasoActual] ?? this.encabezados[1];
   }
 
   get puedeRegresar(): boolean {
@@ -168,8 +101,7 @@ export class NewProductPage {
   }
 
   alContinuar(): void {
-    if (this.pasoActual === 1 && this.modeloForm.invalid) {
-      this.modeloForm.markAllAsTouched();
+    if (this.pasoActual === 1 && !this.wizard.validarDatosGenerales()) {
       this.toast.warning(
         'Revisa los datos generales',
         'Completa los campos obligatorios para continuar.',
@@ -193,17 +125,5 @@ export class NewProductPage {
       'Borrador guardado',
       'Puedes retomar este modelo más tarde desde Ingeniería de producto.',
     );
-  }
-
-  alSeleccionarImagen(archivo: File): void {
-    this.imagen.set(archivo);
-  }
-
-  alEliminarImagen(): void {
-    this.imagen.set(null);
-  }
-
-  private etiqueta(opciones: OpcionSelect[], valor: string): string {
-    return opciones.find((opcion) => opcion.value === valor)?.label ?? 'Sin definir';
   }
 }
