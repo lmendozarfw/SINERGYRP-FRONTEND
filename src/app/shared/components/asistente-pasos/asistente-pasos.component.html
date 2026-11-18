@@ -1,33 +1,22 @@
-<p-stepper
-    [value]="pasoActivo()"
-    (valueChange)="alCambiarValor($event)"
-    class="w-full"
->
+<p-stepper [value]="pasoActivo()" (valueChange)="alCambiarValor($event)" class="w-full">
     <p-step-list>
 
         @for (paso of pasos; track paso.id) {
 
-            <p-step [value]="paso.id">
+        <p-step [value]="paso.id">
 
-                <ng-template #content let-value="value">
+            <ng-template #content let-value="value">
 
-                    <div class="ds-paso">
+                <div class="ds-paso">
 
-                        <div class="ds-paso__cabecera">
+                    <div class="ds-paso__cabecera">
 
-                            <button
-                                type="button"
-                                class="ds-paso__boton"
-                                [disabled]="!puedeSeleccionar(paso)"
-                                [attr.aria-current]="
+                        <button type="button" class="ds-paso__boton" [disabled]="!puedeSeleccionar(paso)"
+                            [attr.aria-current]="
                                     pasoActivo() === paso.id ? 'step' : null
-                                "
-                                (click)="irA(paso.id)"
-                            >
+                                " (click)="irA(paso.id)">
 
-                                <span
-                                    class="ds-paso__circulo"
-                                    [ngClass]="{
+                            <span class="ds-paso__circulo" [ngClass]="{
                                         'ds-paso__circulo--activo':
                                             pasoActivo() === paso.id ||
                                             estaCompletado(paso),
@@ -39,47 +28,39 @@
 
                                         'ds-paso__circulo--bloqueado':
                                             estaBloqueado(paso)
-                                    }"
-                                >
-                                    @if (estaCompletado(paso)) {
-                                        <i class="pi pi-check"></i>
-                                    } @else if (estaBloqueado(paso)) {
-                                        <i class="pi pi-lock text-[10px]"></i>
-                                    } @else {
-                                        {{ paso.id }}
-                                    }
-                                </span>
+                                    }">
+                                @if (estaCompletado(paso)) {
+                                <svg data-p-icon="check" [size]="16"></svg>
+                                } @else if (estaBloqueado(paso)) {
+                                <svg data-p-icon="lock" [size]="16"></svg>
+                                } @else {
+                                {{ paso.id }}
+                                }
+                            </span>
 
-                            </button>
+                        </button>
 
-                            @if (!$last) {
-                                <span
-                                    class="ds-paso__linea"
-                                    [class.ds-paso__linea--activa]="
+                        @if (!$last) {
+                        <span class="ds-paso__linea" [class.ds-paso__linea--activa]="
                                         estaCompletado(paso)
-                                    "
-                                ></span>
-                            }
-
-                        </div>
-
-                        <span
-                            class="ds-paso__titulo"
-                            [class.ds-paso__titulo--activo]="
-                                pasoActivo() === paso.id
-                            "
-                            [class.ds-paso__titulo--bloqueado]="
-                                estaBloqueado(paso)
-                            "
-                        >
-                            {{ paso.titulo }}
-                        </span>
+                                    "></span>
+                        }
 
                     </div>
 
-                </ng-template>
+                    <span class="ds-paso__titulo" [class.ds-paso__titulo--activo]="
+                                pasoActivo() === paso.id
+                            " [class.ds-paso__titulo--bloqueado]="
+                                estaBloqueado(paso)
+                            ">
+                        {{ paso.titulo }}
+                    </span>
 
-            </p-step>
+                </div>
+
+            </ng-template>
+
+        </p-step>
         }
 
     </p-step-list>

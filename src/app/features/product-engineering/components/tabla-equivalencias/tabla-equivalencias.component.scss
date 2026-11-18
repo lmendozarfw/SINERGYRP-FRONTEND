@@ -71,8 +71,71 @@
   color: #ffffff;
 }
 
-:host ::ng-deep .ds-tabla-row--base > td {
+:host ::ng-deep .ds-tabla-sistema-col {
+  min-width: 180px;
+}
+
+.ds-tabla-sistema {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.ds-tabla-sistema__nombre {
+  color: var(--ds-text);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+:host ::ng-deep .ds-tabla-col {
+  min-width: 88px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+:host ::ng-deep .ds-tabla-col__valor {
+  display: block;
+  color: var(--ds-text);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+:host ::ng-deep .ds-tabla-col__sistema {
+  display: block;
+  color: var(--ds-text-muted);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+:host ::ng-deep .ds-tabla-col__activa {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+:host ::ng-deep .ds-tabla-col--base {
+  background: var(--ds-action-100);
+}
+
+:host ::ng-deep .ds-tabla-col--base .ds-tabla-col__valor {
+  color: var(--ds-action-800);
+}
+
+:host ::ng-deep .ds-tabla-row--principal > td {
   background: var(--ds-primary-soft);
+}
+
+:host ::ng-deep .ds-tabla-row--principal:hover > td {
+  background: var(--ds-action-100);
+}
+
+:host ::ng-deep .ds-tabla-col--inactiva .ds-tabla-input {
+  opacity: 0.55;
 }
 
 :host ::ng-deep .ds-tabla-input {

@@ -1,0 +1,26 @@
+:host {
+  display: block;
+}
+
+:host ::ng-deep .ds-piezas-expansion-cell {
+  padding: 0 !important;
+  background: var(--ds-canvas-strong);
+}
+
+:host ::ng-deep .ds-pieza-control.p-select {
+  min-height: var(--ds-control-height);
+}
+
+:host ::ng-deep .ds-pieza-numero--compact.p-inputnumber {
+  display: block;
+  width: 100%;
+}
+
+:host ::ng-deep .ds-pieza-numero--compact .p-inputnumber-input {
+  height: var(--ds-control-height-sm);
+  padding: 0 8px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  width: 100%;
+}

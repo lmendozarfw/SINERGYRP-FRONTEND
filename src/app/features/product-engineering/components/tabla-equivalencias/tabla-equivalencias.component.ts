@@ -5,8 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
-
-import { Table as TableIcon } from '@primeicons/angular';
+import { Download, Plus, Table as TableIcon } from '@primeicons/angular';
 
 export interface SistemaEquivalencia {
   clave: string;
@@ -37,14 +36,23 @@ const TALLAS: TallaEquivalencia[] = [
 
 @Component({
   selector: 'app-tabla-equivalencias',
-  imports: [FormsModule, ButtonModule, CheckboxModule, InputTextModule, TableModule, TableIcon],
+  imports: [
+    FormsModule,
+    ButtonModule,
+    CheckboxModule,
+    InputTextModule,
+    TableModule,
+    Download,
+    Plus,
+    TableIcon,
+  ],
   templateUrl: './tabla-equivalencias.component.html',
   styleUrl: './tabla-equivalencias.component.scss',
 })
 export class TablaEquivalenciasComponent {
   readonly titulo = input('Tallas y equivalencias');
   readonly descripcion = input(
-    'Valores de referencia: valida las equivalencias con el catálogo de tu horma.',
+    'Valida las equivalencias con el catálogo de tu horma.',
   );
   readonly sistemas = input<SistemaEquivalencia[]>(SISTEMAS);
   readonly tallas = input<TallaEquivalencia[]>(TALLAS);
@@ -59,11 +67,22 @@ export class TablaEquivalenciasComponent {
     return Math.max(this.sistemas().length - 1, 0);
   }
 
+  get sistemaPrincipalNombre(): string {
+    return (
+      this.sistemas().find((sistema) => sistema.clave === this.sistemaPrincipal())?.nombre ??
+      this.sistemaPrincipal()
+    );
+  }
+
   esSistemaPrincipal(clave: string): boolean {
     return clave === this.sistemaPrincipal();
   }
 
   esTallaBase(talla: TallaEquivalencia): boolean {
     return talla.id === this.tallaBaseId();
+  }
+
+  valorTalla(talla: TallaEquivalencia): string {
+    return talla.valores[this.sistemaPrincipal()] ?? '—';
   }
 }

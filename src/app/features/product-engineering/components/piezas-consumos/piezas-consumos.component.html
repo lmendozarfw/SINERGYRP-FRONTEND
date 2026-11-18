@@ -1,0 +1,663 @@
+<section class="ds-card flex flex-col gap-6">
+  <header class="flex flex-wrap items-start justify-between gap-4">
+    <div class="flex min-w-0 items-start gap-3">
+      <span
+        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]"
+      >
+        <svg data-p-icon="tags" [size]="18"></svg>
+      </span>
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-3">
+          <h3 class="ds-title-card">Piezas y consumos</h3>
+          <span
+            class="inline-flex h-6 items-center whitespace-nowrap rounded-full border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-2.5 text-xs font-semibold leading-[18px] text-[var(--ds-text-muted)]"
+          >
+            {{ piezas().length }} {{ piezas().length === 1 ? 'pieza' : 'piezas' }}
+          </span>
+        </div>
+        <p class="ds-body mt-0.5 text-[var(--ds-text-muted)]">
+          Define las piezas del modelo, el material que consumen y su rendimiento.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2 max-sm:w-full">
+      <button
+        type="button"
+        class="ds-button ds-button--secondary ds-button--compact max-sm:w-full"
+        (click)="abrirNuevaPieza()"
+      >
+        <svg data-p-icon="plus" [size]="16"></svg>
+        <span>Agregar pieza</span>
+      </button>
+    </div>
+  </header>
+
+  <p-table
+    styleClass="ds-table"
+    [value]="piezas()"
+    dataKey="id"
+    rowExpandMode="single"
+    [scrollable]="true"
+    [tableStyle]="{ 'min-width': '1120px' }"
+  >
+    <ng-template #header>
+      <tr>
+        <th class="ds-table__th ds-table__th--check" aria-label="Expandir pieza"></th>
+        <th class="ds-table__th min-w-[200px]">Pieza</th>
+        <th class="ds-table__th min-w-[130px]">Material</th>
+        <th class="ds-table__th min-w-[80px]">Unidad</th>
+        <th class="ds-table__th min-w-[120px]">Departamento</th>
+        <th class="ds-table__th min-w-[130px]">Corrida</th>
+        <th class="ds-table__th min-w-[190px]">Consumo</th>
+        <th class="ds-table__th min-w-[160px]">Suaje</th>
+        <th class="ds-table__th ds-table__th--right w-24 min-w-24">Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-pieza let-expanded="expanded">
+      <tr>
+        <td class="ds-table__td ds-table__td--check">
+          <button
+            type="button"
+            class="ds-icon-button"
+            [pRowToggler]="pieza"
+            [attr.aria-label]="expanded ? 'Contraer pieza' : 'Expandir pieza'"
+            [attr.aria-expanded]="expanded"
+          >
+            <svg
+              data-p-icon="chevron-right"
+              [size]="16"
+              class="transition-transform"
+              [class.rotate-90]="expanded"
+            ></svg>
+          </button>
+        </td>
+
+        <td class="ds-table__td">
+          <div class="flex flex-col items-start gap-0.5">
+            <span class="text-sm font-semibold leading-5 text-[var(--ds-text)]">
+              {{ pieza.nombre }}
+            </span>
+            <span class="text-xs leading-[18px] text-[var(--ds-text-muted)]">
+              {{ pieza.tipo }}
+            </span>
+          </div>
+        </td>
+
+        <td class="ds-table__td">{{ pieza.material }}</td>
+        <td class="ds-table__td">{{ pieza.unidad }}</td>
+        <td class="ds-table__td">{{ pieza.departamento }}</td>
+
+        <td class="ds-table__td">
+          <div class="flex flex-col items-start gap-0.5">
+            <span class="text-sm font-semibold leading-5 text-[var(--ds-text)]">
+              {{ corridaNombre(pieza.corrida) }}
+            </span>
+            <span class="text-xs leading-[18px] text-[var(--ds-text-muted)]">
+              {{ corridaDetalle(pieza.corrida) }}
+            </span>
+          </div>
+        </td>
+
+        <td class="ds-table__td">
+          <div class="flex flex-col items-start gap-0.5">
+            <span
+              class="inline-flex items-center whitespace-nowrap rounded-full bg-[var(--ds-primary-soft)] px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-[var(--ds-action-800)]"
+            >
+              {{ pieza.modoConsumo === 'general' ? 'General' : 'Por talla' }}
+            </span>
+            @if (pieza.modoConsumo === 'general') {
+              <span class="text-xs leading-[18px] text-[var(--ds-text-muted)]">
+                {{ pieza.consumoGeneral | number: '1.2-2' }} {{ pieza.unidad }} ·
+                {{ pieza.rendimientoGeneral | number: '1.0-2' }} pzas
+              </span>
+            } @else {
+              <span class="text-xs leading-[18px] text-[var(--ds-text-muted)]">
+                {{ pieza.consumosPorTalla.length }} tallas capturadas
+              </span>
+            }
+          </div>
+        </td>
+
+        <td class="ds-table__td">
+          @if (pieza.requiereSuaje) {
+            <span
+              class="inline-flex max-w-[150px] items-center overflow-hidden text-ellipsis whitespace-nowrap rounded-full border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-[var(--ds-text)]"
+              [title]="pieza.suaje"
+            >
+              {{ pieza.suaje }}
+            </span>
+          } @else {
+            <span class="ds-meta">No requiere</span>
+          }
+        </td>
+
+        <td class="ds-table__td ds-table__td--right">
+          <div class="ds-table__actions">
+            <button
+              type="button"
+              class="ds-icon-button"
+              [attr.aria-label]="'Editar ' + pieza.nombre"
+              (click)="abrirEdicion(pieza)"
+            >
+              <svg data-p-icon="pencil" [size]="15"></svg>
+            </button>
+            <button
+              type="button"
+              class="ds-icon-button ds-icon-button--danger"
+              [attr.aria-label]="'Eliminar ' + pieza.nombre"
+              (click)="eliminarPieza(pieza)"
+            >
+              <svg data-p-icon="trash" [size]="15"></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #expandedrow let-pieza>
+      <tr>
+        <td colspan="9" class="ds-piezas-expansion-cell">
+          <div class="border-t border-[var(--ds-border)] px-6 pb-6 pt-5">
+            @if (pieza.modoConsumo === 'general') {
+              <div class="flex flex-col gap-4 md:flex-row md:items-end">
+                <div
+                  class="flex flex-col gap-0.5 rounded-lg border border-[var(--ds-border)] bg-[var(--ds-bg-raised)] px-4 py-3 md:w-[220px] md:shrink-0"
+                >
+                  <span class="ds-meta">Consumo general</span>
+                  <span class="text-xl font-semibold leading-7 tabular-nums text-[var(--ds-text)]">
+                    {{ pieza.consumoGeneral | number: '1.2-2' }}
+                    <span class="text-xs font-medium leading-[18px] text-[var(--ds-text-muted)]">
+                      {{ pieza.unidad }}
+                    </span>
+                  </span>
+                </div>
+
+                <div
+                  class="flex flex-col gap-0.5 rounded-lg border border-[var(--ds-border)] bg-[var(--ds-bg-raised)] px-4 py-3 md:w-[220px] md:shrink-0"
+                >
+                  <span class="ds-meta">Rendimiento general</span>
+                  <span class="text-xl font-semibold leading-7 tabular-nums text-[var(--ds-text)]">
+                    {{ pieza.rendimientoGeneral | number: '1.0-2' }}
+                    <span class="text-xs font-medium leading-[18px] text-[var(--ds-text-muted)]">
+                      piezas
+                    </span>
+                  </span>
+                </div>
+
+                <p class="ds-meta m-0 md:flex-1 md:pb-0.5">
+                  Este consumo aplica a todas las tallas de la corrida
+                  {{ corridaNombre(pieza.corrida) }}.
+                </p>
+              </div>
+            } @else {
+              <div class="flex flex-col gap-2">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <span class="text-sm font-semibold leading-5 text-[var(--ds-text)]">
+                    Consumo por talla
+                  </span>
+                  <span class="ds-meta">
+                    {{ corridaNombre(pieza.corrida) }} · {{ corridaDetalle(pieza.corrida) }}
+                  </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                  <table class="w-full min-w-max border-collapse bg-[var(--ds-bg-raised)]">
+                    <thead>
+                      <tr>
+                        <th
+                          class="border border-[var(--ds-border)] bg-[var(--ds-primary-soft)] px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                          scope="col"
+                        >
+                          Concepto
+                        </th>
+                        @for (fila of pieza.consumosPorTalla; track fila.talla) {
+                          <th
+                            class="border border-[var(--ds-border)] bg-[var(--ds-primary-soft)] px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                            scope="col"
+                          >
+                            {{ fila.talla }}
+                          </th>
+                        }
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th
+                          class="border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                          scope="row"
+                        >
+                          Consumo ({{ pieza.unidad }})
+                        </th>
+                        @for (fila of pieza.consumosPorTalla; track fila.talla) {
+                          <td
+                            class="border border-[var(--ds-border)] px-3 py-2 text-center text-xs leading-[18px]"
+                          >
+                            <span class="font-semibold tabular-nums text-[var(--ds-text)]">
+                              {{ fila.consumo | number: '1.2-2' }}
+                            </span>
+                          </td>
+                        }
+                      </tr>
+                      <tr>
+                        <th
+                          class="border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                          scope="row"
+                        >
+                          Rendimiento (piezas)
+                        </th>
+                        @for (fila of pieza.consumosPorTalla; track fila.talla) {
+                          <td
+                            class="border border-[var(--ds-border)] px-3 py-2 text-center text-xs leading-[18px]"
+                          >
+                            <span class="font-semibold tabular-nums text-[var(--ds-text)]">
+                              {{ fila.rendimiento | number: '1.0-2' }}
+                            </span>
+                          </td>
+                        }
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            }
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="9">
+          <div class="flex flex-col items-center gap-1 p-6 text-center">
+            <span
+              class="mb-1 flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]"
+            >
+              <svg data-p-icon="tags" [size]="18"></svg>
+            </span>
+            <p class="ds-body m-0">Aún no hay piezas registradas.</p>
+            <p class="ds-meta m-0">Agrega la primera pieza para definir su material y consumo.</p>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  @if (piezas().length > 0) {
+    <p class="ds-meta m-0">Expande una pieza para revisar el detalle de su consumo.</p>
+  }
+</section>
+
+<p-dialog
+  [(visible)]="mostrarDialogo"
+  [header]="tituloDialogo"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: 'min(960px, calc(100vw - 32px))' }"
+  [contentStyle]="{
+    padding: '24px',
+    maxHeight: 'calc(100vh - 220px)',
+    overflowY: 'auto',
+  }"
+  (onHide)="alCerrarDialogo()"
+>
+  <form class="flex flex-col gap-6" [formGroup]="piezaForm" (ngSubmit)="guardarPieza()">
+    <section class="flex flex-col gap-4">
+      <header class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h4 class="m-0 text-[15px] font-semibold leading-[22px] text-[var(--ds-text)]">
+            Datos de la pieza
+          </h4>
+          <p class="ds-meta">Identifica la pieza y el material que consume.</p>
+        </div>
+      </header>
+
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div class="ds-field md:col-span-2">
+          <app-form-label for="pieza-nombre" required>Nombre de la pieza</app-form-label>
+          <input
+            pInputText
+            id="pieza-nombre"
+            type="text"
+            formControlName="nombre"
+            placeholder="Ej. Corte principal"
+            [invalid]="campoInvalido('nombre')"
+          />
+          @if (campoInvalido('nombre')) {
+            <span class="ds-field-error">
+              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+              Escribe el nombre de la pieza.
+            </span>
+          } @else {
+            <span class="ds-field-help">Nombre con el que se identifica la pieza.</span>
+          }
+        </div>
+
+        <div class="ds-field">
+          <app-form-label for="pieza-tipo" required>Tipo de pieza</app-form-label>
+          <p-select
+            class="ds-pieza-control"
+            inputId="pieza-tipo"
+            formControlName="tipo"
+            [options]="tiposPieza"
+            placeholder="Selecciona un tipo"
+            [fluid]="true"
+            [class.p-invalid]="campoInvalido('tipo')"
+          />
+          @if (campoInvalido('tipo')) {
+            <span class="ds-field-error">
+              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+              Selecciona el tipo de pieza.
+            </span>
+          } @else {
+            <span class="ds-field-help">Función de la pieza dentro del producto.</span>
+          }
+        </div>
+
+        <div class="ds-field">
+          <app-form-label for="pieza-material" required>Material</app-form-label>
+          <p-select
+            class="ds-pieza-control"
+            inputId="pieza-material"
+            formControlName="material"
+            [options]="materiales"
+            placeholder="Selecciona un material"
+            [fluid]="true"
+            [class.p-invalid]="campoInvalido('material')"
+          />
+          @if (campoInvalido('material')) {
+            <span class="ds-field-error">
+              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+              Selecciona el material.
+            </span>
+          } @else {
+            <span class="ds-field-help">Material principal que consume la pieza.</span>
+          }
+        </div>
+
+        <div class="ds-field">
+          <app-form-label for="pieza-unidad" required>Unidad de medida</app-form-label>
+          <p-select
+            class="ds-pieza-control"
+            inputId="pieza-unidad"
+            formControlName="unidad"
+            [options]="unidades"
+            placeholder="Selecciona una unidad"
+            [fluid]="true"
+            [class.p-invalid]="campoInvalido('unidad')"
+          />
+          @if (campoInvalido('unidad')) {
+            <span class="ds-field-error">
+              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+              Selecciona la unidad de medida.
+            </span>
+          } @else {
+            <span class="ds-field-help">Unidad usada para el consumo.</span>
+          }
+        </div>
+
+        <div class="ds-field">
+          <app-form-label for="pieza-departamento" required>Departamento</app-form-label>
+          <p-select
+            class="ds-pieza-control"
+            inputId="pieza-departamento"
+            formControlName="departamento"
+            [options]="departamentos"
+            placeholder="Selecciona un departamento"
+            [fluid]="true"
+            [class.p-invalid]="campoInvalido('departamento')"
+          />
+          @if (campoInvalido('departamento')) {
+            <span class="ds-field-error">
+              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+              Selecciona el departamento.
+            </span>
+          } @else {
+            <span class="ds-field-help">Área responsable de la pieza.</span>
+          }
+        </div>
+
+        <div class="ds-field">
+          <app-form-label for="pieza-corrida" required>Corrida</app-form-label>
+          <p-select
+            class="ds-pieza-control"
+            inputId="pieza-corrida"
+            formControlName="corrida"
+            [options]="opcionesCorrida"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Selecciona una corrida"
+            [fluid]="true"
+          />
+          <span class="ds-field-help">Rango de tallas al que pertenece la pieza.</span>
+        </div>
+
+        <div class="ds-field md:col-span-2">
+          <label
+            class="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-[var(--ds-text)]"
+            for="pieza-requiere-suaje"
+          >
+            <p-checkbox
+              class="ds-checkbox"
+              formControlName="requiereSuaje"
+              [binary]="true"
+              inputId="pieza-requiere-suaje"
+            />
+            <span>Esta pieza requiere suaje</span>
+          </label>
+        </div>
+
+        @if (requiereSuaje) {
+          <div class="ds-field md:col-span-2">
+            <app-form-label for="pieza-suaje" required>Suaje</app-form-label>
+            <p-select
+              class="ds-pieza-control"
+              inputId="pieza-suaje"
+              formControlName="suaje"
+              [options]="suajes"
+              placeholder="Selecciona un suaje"
+              [fluid]="true"
+              [class.p-invalid]="campoInvalido('suaje')"
+            />
+            @if (campoInvalido('suaje')) {
+              <span class="ds-field-error">
+                <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+                Selecciona el suaje de la pieza.
+              </span>
+            } @else {
+              <span class="ds-field-help">Herramienta usada para cortar la pieza.</span>
+            }
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-4 border-t border-[var(--ds-border)] pt-6">
+      <header class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h4 class="m-0 text-[15px] font-semibold leading-[22px] text-[var(--ds-text)]">
+            Consumo y rendimiento
+          </h4>
+          <p class="ds-meta">Define un consumo general o específico por talla.</p>
+        </div>
+
+        <div class="ds-field md:min-w-[180px]">
+          <app-form-label for="pieza-modo-consumo">Modo de consumo</app-form-label>
+          <p-select
+            class="ds-pieza-control"
+            inputId="pieza-modo-consumo"
+            formControlName="modoConsumo"
+            [options]="modosConsumo"
+            optionLabel="label"
+            optionValue="value"
+            [fluid]="true"
+          />
+        </div>
+      </header>
+
+      @if (modoConsumo === 'general') {
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div class="ds-field">
+            <app-form-label for="pieza-consumo-general" required>Consumo</app-form-label>
+            <p-inputnumber
+              class="ds-pieza-numero"
+              inputId="pieza-consumo-general"
+              formControlName="consumoGeneral"
+              [min]="0"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              [fluid]="true"
+              [class.p-invalid]="campoInvalido('consumoGeneral')"
+            />
+            @if (campoInvalido('consumoGeneral')) {
+              <span class="ds-field-error">
+                <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+                Captura un consumo mayor a cero.
+              </span>
+            } @else {
+              <span class="ds-field-help">
+                Cantidad de material por pieza en {{ unidadSeleccionada }}.
+              </span>
+            }
+          </div>
+
+          <div class="ds-field">
+            <app-form-label for="pieza-rendimiento-general" required> Rendimiento </app-form-label>
+            <p-inputnumber
+              class="ds-pieza-numero"
+              inputId="pieza-rendimiento-general"
+              formControlName="rendimientoGeneral"
+              [min]="0"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              [fluid]="true"
+              [class.p-invalid]="campoInvalido('rendimientoGeneral')"
+            />
+            @if (campoInvalido('rendimientoGeneral')) {
+              <span class="ds-field-error">
+                <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+                Captura un rendimiento mayor a cero.
+              </span>
+            } @else {
+              <span class="ds-field-help">Piezas obtenidas por unidad de material.</span>
+            }
+          </div>
+        </div>
+      } @else {
+        <div class="flex flex-col gap-2">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <span class="text-sm font-semibold leading-5 text-[var(--ds-text)]">
+              Consumo por talla
+            </span>
+            <span class="ds-meta">
+              {{ corridaNombre(piezaForm.controls.corrida.value) }} ·
+              {{ corridaDetalle(piezaForm.controls.corrida.value) }}
+            </span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-max border-collapse bg-[var(--ds-bg-raised)]">
+              <thead>
+                <tr>
+                  <th
+                    class="border border-[var(--ds-border)] bg-[var(--ds-primary-soft)] px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                    scope="col"
+                  >
+                    Concepto
+                  </th>
+                  @for (fila of consumosForm.controls; track fila) {
+                    <th
+                      class="border border-[var(--ds-border)] bg-[var(--ds-primary-soft)] px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                      scope="col"
+                    >
+                      {{ fila.controls.talla.value }}
+                    </th>
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th
+                    class="border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                    scope="row"
+                  >
+                    Consumo ({{ unidadSeleccionada }})
+                  </th>
+                  @for (fila of consumosForm.controls; track fila) {
+                    <td class="min-w-[84px] border border-[var(--ds-border)] p-1.5 text-center">
+                      <div [formGroup]="fila">
+                        <p-inputnumber
+                          class="ds-pieza-numero ds-pieza-numero--compact w-full"
+                          formControlName="consumo"
+                          [min]="0"
+                          [minFractionDigits]="2"
+                          [maxFractionDigits]="2"
+                          [fluid]="true"
+                          [ariaLabel]="'Consumo talla ' + fila.controls.talla.value"
+                          [class.p-invalid]="consumosInvalidos && fila.controls.consumo.value <= 0"
+                        />
+                      </div>
+                    </td>
+                  }
+                </tr>
+                <tr>
+                  <th
+                    class="border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                    scope="row"
+                  >
+                    Rendimiento (piezas)
+                  </th>
+                  @for (fila of consumosForm.controls; track fila) {
+                    <td class="min-w-[84px] border border-[var(--ds-border)] p-1.5 text-center">
+                      <div [formGroup]="fila">
+                        <p-inputnumber
+                          class="ds-pieza-numero ds-pieza-numero--compact w-full"
+                          formControlName="rendimiento"
+                          [min]="0"
+                          [minFractionDigits]="2"
+                          [maxFractionDigits]="2"
+                          [fluid]="true"
+                          [ariaLabel]="'Rendimiento talla ' + fila.controls.talla.value"
+                          [class.p-invalid]="
+                            consumosInvalidos && fila.controls.rendimiento.value <= 0
+                          "
+                        />
+                      </div>
+                    </td>
+                  }
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="ds-meta m-0">
+            Las tallas corresponden a la corrida seleccionada. Captura ambos valores para cada
+            talla.
+          </p>
+        </div>
+      }
+    </section>
+
+    @if (mensajeValidacion) {
+      <div class="ds-alert ds-alert--error" role="alert">
+        <svg data-p-icon="exclamation-triangle" [size]="16"></svg>
+        <span>{{ mensajeValidacion }}</span>
+      </div>
+    }
+  </form>
+
+  <ng-template #footer>
+    <div class="flex justify-end gap-2">
+      <button type="button" class="ds-button ds-button--secondary" (click)="cerrarDialogo()">
+        Cancelar
+      </button>
+      <button type="button" class="ds-button" (click)="guardarPieza()">
+        {{ piezaEnEdicion ? 'Guardar cambios' : 'Agregar pieza' }}
+      </button>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-confirmdialog />

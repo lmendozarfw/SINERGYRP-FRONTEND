@@ -1,24 +1,44 @@
-import { Component } from '@angular/core';
-import { Sparkles } from '@primeicons/angular';
+import { DecimalPipe } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { Filter, Plus, Search, Eye, Pencil, Trash } from '@primeicons/angular';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
+import { InputText } from 'primeng/inputtext';
+import { Select } from 'primeng/select';
+import { SortIcon, Table, TableHeaderCheckbox, TableCheckbox } from 'primeng/table';
+import { BulkActionsBarComponent } from '../../../../shared/components/bulk-actions-bar/bulk-actions-bar.component';
+import { BreadcrumbService } from '../../../../core/services/breadcrumb.service';
+import { Tag } from 'primeng/tag';
+import { Drawer } from 'primeng/drawer';
+import { FormLabelComponent } from '../../../../shared/components/form-label/form-label.component';
 
 @Component({
   selector: 'app-combinaciones',
-  imports: [Sparkles],
-  template: `
-    <div class="ds-card flex items-start gap-4">
-      <span
-        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]"
-      >
-        <svg data-p-icon="sparkles" [size]="20"></svg>
-      </span>
-      <div class="min-w-0">
-        <h3 class="ds-title-card">Combinaciones</h3>
-        <p class="ds-body mt-1 text-[var(--ds-text-muted)]">
-          Esta sección se encuentra en construcción. Pronto podrás combinar colores,
-          materiales y acabados del modelo.
-        </p>
-      </div>
-    </div>
-  `,
+  imports: [Filter, Plus, Search, IconField, InputIcon, InputText, Select, DecimalPipe, Eye, Pencil, Trash, SortIcon, Table, TableHeaderCheckbox, BulkActionsBarComponent, TableCheckbox, Tag, Drawer, FormLabelComponent],
+  templateUrl: './combinaciones.component.html',
 })
-export class CombinacionesComponent {}
+export class CombinacionesComponent {
+  private readonly breadcrumb = inject(BreadcrumbService);
+  readonly drawerVisible = signal(false);
+  readonly selectedClients = signal<any[]>([]);
+  readonly tipoPersonaOptions = [
+    { label: 'Física', value: 'Física' },
+    { label: 'Moral', value: 'Moral' },
+  ];
+
+  readonly regimenOptions = [
+    { label: '601 · General de Ley Personas Morales', value: '601 · General' },
+    { label: '612 · Personas Físicas con Actividades Empresariales', value: '612 · PFAE' },
+    { label: '616 · Sin obligaciones fiscales', value: '616 · Sin obligaciones' },
+  ];
+
+  constructor() {
+    this.breadcrumb.setItems([
+      { key: 'clients', label: 'Clientes', route: '/app/clients', disabled: true },
+    ]);
+  }
+
+  clearSelection(): void {
+    this.selectedClients.set([]);
+  }
+}

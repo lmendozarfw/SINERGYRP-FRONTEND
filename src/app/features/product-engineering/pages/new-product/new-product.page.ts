@@ -101,17 +101,18 @@ export class NewProductPage {
   }
 
   alContinuar(): void {
-    if (this.pasoActual === 1 && !this.wizard.validarDatosGenerales()) {
-      this.toast.warning(
-        'Revisa los datos generales',
-        'Completa los campos obligatorios para continuar.',
-      );
-      return;
-    }
+    // if (this.pasoActual === 1 && !this.wizard.validarDatosGenerales()) {
+    //   this.toast.warning(
+    //     'Revisa los datos generales',
+    //     'Completa los campos obligatorios para continuar.',
+    //   );
+    //   return;
+    // }
 
-    if (this.pasoActual < this.pasos.length) {
-      this.pasoActual += 1;
-    }
+    // if (this.pasoActual < this.pasos.length) {
+    //   this.pasoActual += 1;
+    // }
+    this.pasoActual += 1;
   }
 
   alRegresar(): void {

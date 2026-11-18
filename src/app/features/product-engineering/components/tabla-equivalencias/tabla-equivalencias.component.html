@@ -13,12 +13,7 @@
 
     <div class="ds-tabla-header__actions">
       <button type="button" pButton class="ds-button ds-button--secondary ds-button--compact">
-        <i class="pi pi-download"></i>
-        <span>Importar equivalencias</span>
-      </button>
-
-      <button type="button" pButton class="ds-button ds-button--secondary ds-button--compact">
-        <i class="pi pi-plus"></i>
+        <svg data-p-icon="plus" [size]="16"></svg>
         <span>Añadir sistema</span>
       </button>
     </div>
@@ -26,58 +21,63 @@
 
   <p-table
     styleClass="ds-table"
-    [value]="tallas()"
+    [value]="sistemas()"
     [scrollable]="true"
     [tableStyle]="{ 'min-width': '720px' }"
   >
     <ng-template #header>
       <tr>
-        <th class="ds-table__th ds-table__th--check">Activa</th>
-        @for (sistema of sistemas(); track sistema.clave) {
-          <th class="ds-table__th">
-            <span class="ds-table__th-content">
-              {{ sistema.nombre }}
-              @if (esSistemaPrincipal(sistema.clave)) {
-                <span class="ds-tabla-badge ds-tabla-badge--principal">Principal</span>
-              }
+        <th class="ds-table__th ds-tabla-sistema-col">Sistema</th>
+        @for (talla of tallas(); track talla.id) {
+          <th class="ds-table__th ds-tabla-col" [class.ds-tabla-col--base]="esTallaBase(talla)">
+            <span class="ds-tabla-col__valor">{{ valorTalla(talla) }}</span>
+            <span class="ds-tabla-col__sistema">{{ sistemaPrincipalNombre }}</span>
+            @if (esTallaBase(talla)) {
+              <span class="ds-tabla-badge">Base</span>
+            }
+            <span class="ds-tabla-col__activa">
+              <p-checkbox
+                class="ds-checkbox"
+                [binary]="true"
+                [(ngModel)]="talla.activa"
+                [inputId]="'talla-' + talla.id"
+                [disabled]="esTallaBase(talla)"
+                [ariaLabel]="'Talla ' + valorTalla(talla) + ' activa'"
+              />
             </span>
           </th>
         }
-        <th class="ds-table__th">Referencia</th>
       </tr>
     </ng-template>
 
-    <ng-template #body let-talla>
-      <tr [class.ds-tabla-row--base]="esTallaBase(talla)">
-        <td class="ds-table__td ds-table__td--check">
-          <p-checkbox
-            [binary]="true"
-            [(ngModel)]="talla.activa"
-            [inputId]="'talla-' + talla.id"
-            [disabled]="esTallaBase(talla)"
-          />
+    <ng-template #body let-sistema>
+      <tr>
+        <td class="ds-table__td">
+          <div class="ds-tabla-sistema">
+            <span class="ds-tabla-sistema__nombre">{{ sistema.nombre }}</span>
+            @if (esSistemaPrincipal(sistema.clave)) {
+              <span class="ds-tabla-badge">Principal</span>
+            }
+          </div>
         </td>
 
-        @for (sistema of sistemas(); track sistema.clave) {
-          <td class="ds-table__td">
+        @for (talla of tallas(); track talla.id) {
+          <td
+            class="ds-table__td"
+            [class.ds-tabla-col--base]="esTallaBase(talla)"
+            [class.ds-tabla-col--inactiva]="!talla.activa"
+          >
             <input
               pInputText
               type="text"
               class="ds-tabla-input"
               [class.ds-tabla-input--principal]="esSistemaPrincipal(sistema.clave)"
               [readonly]="esSistemaPrincipal(sistema.clave)"
+              [disabled]="!talla.activa"
               [(ngModel)]="talla.valores[sistema.clave]"
             />
           </td>
         }
-
-        <td class="ds-table__td">
-          @if (esTallaBase(talla)) {
-            <span class="ds-tabla-badge">Talla base</span>
-          } @else {
-            <span class="ds-meta">—</span>
-          }
-        </td>
       </tr>
     </ng-template>
   </p-table>
@@ -85,7 +85,7 @@
   <footer class="ds-tabla-footer">
     <div class="ds-tabla-footer__resumen">
       <button type="button" pButton class="ds-button ds-button--text ds-button--compact">
-        <i class="pi pi-plus"></i>
+        <svg data-p-icon="plus" [size]="18"></svg>
         <span>Añadir talla</span>
       </button>
 

@@ -9,6 +9,8 @@ import {
 
 import { CommonModule } from '@angular/common';
 import { StepperModule } from 'primeng/stepper';
+import { Lock, Check } from '@primeicons/angular';
+
 
 export interface PasoAsistente {
     id: number;
@@ -22,7 +24,9 @@ export interface PasoAsistente {
     standalone: true,
     imports: [
         CommonModule,
-        StepperModule
+        StepperModule,
+        Lock,
+        Check
     ],
     templateUrl: './asistente-pasos.component.html',
     styleUrl: './asistente-pasos.component.scss'
