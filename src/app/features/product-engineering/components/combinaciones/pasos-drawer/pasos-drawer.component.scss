@@ -1,0 +1,148 @@
+:host {
+  display: block;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--ds-border);
+  background: var(--ds-bg-raised);
+}
+
+:host ::ng-deep .ds-pasos-drawer {
+  width: 100%;
+}
+
+:host ::ng-deep .ds-pasos-drawer .p-steplist {
+  width: 100%;
+  align-items: flex-start;
+}
+
+:host ::ng-deep .ds-pasos-drawer .p-step {
+  min-width: 0;
+  padding: 0;
+  align-items: flex-start;
+  gap: 0;
+}
+
+:host ::ng-deep .ds-pasos-drawer .p-step:last-of-type {
+  flex: 0 0 auto;
+}
+
+:host ::ng-deep .ds-pasos-drawer .p-stepper-separator {
+  display: none;
+}
+
+.ds-pasos-drawer__paso {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.ds-pasos-drawer__cabecera {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.ds-pasos-drawer__boton {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ds-pasos-drawer__boton:disabled {
+  cursor: not-allowed;
+}
+
+.ds-pasos-drawer__circulo {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.ds-pasos-drawer__circulo--activo {
+  border-color: var(--ds-primary);
+  background: var(--ds-primary);
+  color: #fff;
+}
+
+.ds-pasos-drawer__circulo--completado {
+  border-color: var(--ds-primary);
+  background: var(--ds-primary-soft);
+  color: var(--ds-primary);
+}
+
+.ds-pasos-drawer__circulo--bloqueado {
+  border-color: var(--ds-border);
+  background: var(--ds-canvas-strong);
+  color: var(--ds-ink-soft);
+}
+
+.ds-pasos-drawer__linea {
+  flex: 1 1 auto;
+  height: 2px;
+  margin: 0 8px;
+  border-radius: 9999px;
+  background: var(--ds-border);
+  transition: background-color 0.2s;
+}
+
+.ds-pasos-drawer__linea--activa {
+  background: var(--ds-primary);
+}
+
+.ds-pasos-drawer__texto {
+  display: flex;
+  min-width: 0;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ds-pasos-drawer__titulo {
+  color: var(--ds-text-muted);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.ds-pasos-drawer__titulo--activo {
+  color: var(--ds-primary);
+}
+
+.ds-pasos-drawer__titulo--bloqueado {
+  color: var(--ds-ink-soft);
+}
+
+.ds-pasos-drawer__descripcion {
+  color: var(--ds-ink-soft);
+  font-size: 10px;
+  line-height: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .ds-pasos-drawer__descripcion {
+    display: none;
+  }
+
+  .ds-pasos-drawer__titulo {
+    font-size: 11px;
+  }
+}

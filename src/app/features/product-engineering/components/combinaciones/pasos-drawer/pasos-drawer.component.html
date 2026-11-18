@@ -1,0 +1,52 @@
+<p-stepper class="ds-pasos-drawer" [value]="pasoActivo()" (valueChange)="alCambiarValor($event)">
+  <p-step-list>
+    @for (paso of pasosConEstado(); track paso.id) {
+      <p-step [value]="paso.id">
+        <ng-template #content>
+          <div class="ds-pasos-drawer__paso">
+            <div class="ds-pasos-drawer__cabecera">
+              <button
+                type="button"
+                class="ds-pasos-drawer__boton"
+                [disabled]="!puedeSeleccionar(paso)"
+                [attr.aria-current]="pasoActivo() === paso.id ? 'step' : null"
+                (click)="irA(paso)"
+              >
+                <span
+                  class="ds-pasos-drawer__circulo"
+                  [class.ds-pasos-drawer__circulo--activo]="pasoActivo() === paso.id"
+                  [class.ds-pasos-drawer__circulo--completado]="estaCompletado(paso.id) && pasoActivo() !== paso.id"
+                  [class.ds-pasos-drawer__circulo--bloqueado]="paso.bloqueado"
+                >
+                  @if (estaCompletado(paso.id) && pasoActivo() !== paso.id) {
+                    <svg data-p-icon="check" [size]="14"></svg>
+                  } @else if (paso.bloqueado) {
+                    <svg data-p-icon="lock" [size]="14"></svg>
+                  } @else {
+                    {{ paso.id }}
+                  }
+                </span>
+              </button>
+              @if (!$last) {
+                <span
+                  class="ds-pasos-drawer__linea"
+                  [class.ds-pasos-drawer__linea--activa]="estaCompletado(paso.id)"
+                ></span>
+              }
+            </div>
+            <div class="ds-pasos-drawer__texto">
+              <span
+                class="ds-pasos-drawer__titulo"
+                [class.ds-pasos-drawer__titulo--activo]="pasoActivo() === paso.id"
+                [class.ds-pasos-drawer__titulo--bloqueado]="paso.bloqueado"
+              >
+                {{ paso.titulo }}
+              </span>
+              <span class="ds-pasos-drawer__descripcion">{{ paso.descripcion }}</span>
+            </div>
+          </div>
+        </ng-template>
+      </p-step>
+    }
+  </p-step-list>
+</p-stepper>

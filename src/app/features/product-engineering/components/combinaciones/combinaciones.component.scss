@@ -1,0 +1,56 @@
+:host {
+  display: block;
+}
+
+.ds-combinaciones-codigo {
+  color: var(--ds-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.ds-combinaciones-atributos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ds-combinaciones-atributo {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--ds-canvas-strong);
+  font-size: 11px;
+  line-height: 17px;
+}
+
+.ds-combinaciones-atributo__nombre {
+  color: var(--ds-text-muted);
+  font-weight: 600;
+}
+
+.ds-combinaciones-atributo__valor {
+  color: var(--ds-text);
+}
+
+.ds-combinaciones-version {
+  color: var(--ds-action-800);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+:host ::ng-deep .ds-combinaciones-drawer.p-drawer {
+  width: min(720px, 100vw);
+}
+
+:host ::ng-deep .ds-combinaciones-drawer .p-drawer-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-combinaciones-drawer__content {
+  padding: 24px;
+}
