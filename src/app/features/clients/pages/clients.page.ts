@@ -108,7 +108,7 @@ interface SelectOption {
         >
           <ng-template #header>
             <tr>
-              <th class="ds-table__th ds-table__th--check">
+              <th class="ds-table__th ds-table__th--check" style="width: 50px;">
                 <p-table-header-checkbox ariaLabel="Seleccionar todos los clientes" />
               </th>
               <th
