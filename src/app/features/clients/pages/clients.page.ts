@@ -20,6 +20,7 @@ interface SelectOption {
 
 @Component({
   selector: 'app-clients-page',
+  styleUrl: './clients.page.css',
   imports: [
     DecimalPipe,
     Drawer,

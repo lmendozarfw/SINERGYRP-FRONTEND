@@ -1,0 +1,34 @@
+.ds-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ds-text);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ds-checkbox.p-checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.ds-checkbox.p-checkbox .p-checkbox-box {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--ds-border);
+  border-radius: 4px;
+  background: var(--ds-bg-raised);
+}
+
+.ds-checkbox.p-checkbox[data-p-checked='true'] .p-checkbox-box,
+.ds-checkbox.p-checkbox:has(.p-checkbox-input:checked) .p-checkbox-box {
+  border-color: var(--ds-primary);
+  background: var(--ds-primary);
+  color: #ffffff;
+}
+
+.ds-checkbox:focus-visible,
+.ds-checkbox.p-checkbox:focus-visible .p-checkbox-box {
+  outline: none;
+  box-shadow: var(--ds-focus-shadow);
+}

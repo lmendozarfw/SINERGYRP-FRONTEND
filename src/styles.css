@@ -1,3 +1,16 @@
 @import 'tailwindcss';
 @import './styles/tokens.css';
-@import './styles/components.css';
+@import './styles/base.css';
+@import './styles/primitives/typography.css';
+@import './styles/primitives/buttons.css';
+@import './styles/primitives/forms.css';
+@import './styles/primitives/cards.css';
+@import './styles/primitives/alerts.css';
+@import './styles/primitives/dividers.css';
+@import './styles/primeng-overrides/sidebar.css';
+@import './styles/primeng-overrides/checkbox.css';
+@import './styles/primeng-overrides/breadcrumb.css';
+@import './styles/primeng-overrides/menu.css';
+@import './styles/primeng-overrides/select.css';
+@import './styles/primeng-overrides/table.css';
+@import './styles/primeng-overrides/drawer.css';

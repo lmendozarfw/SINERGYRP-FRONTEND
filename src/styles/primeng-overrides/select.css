@@ -1,0 +1,26 @@
+.ds-clients-select.p-select,
+.ds-client-form .p-select {
+  width: 100%;
+  min-height: var(--ds-control-height);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-input);
+  background: var(--ds-bg-raised);
+}
+
+.ds-clients-select.p-select:hover,
+.ds-client-form .p-select:hover {
+  border-color: var(--ds-ink-soft);
+}
+
+.ds-clients-select.p-select.p-focus,
+.ds-client-form .p-select.p-focus {
+  border-color: var(--ds-primary);
+  box-shadow: var(--ds-focus-shadow);
+}
+
+.ds-clients-select.p-select .p-select-label,
+.ds-client-form .p-select .p-select-label {
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 22px;
+}

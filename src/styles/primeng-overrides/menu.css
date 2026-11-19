@@ -1,0 +1,112 @@
+.ds-menu.p-menu {
+  width: 288px;
+  padding: 8px;
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-card);
+  background: var(--ds-bg-raised);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--ds-navy) 14%, transparent);
+}
+
+.ds-menu .p-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-menu .p-menu-item-content {
+  padding: 0;
+  border-radius: var(--ds-radius-input);
+  background: transparent;
+}
+
+.ds-menu .p-menu-item-content:hover {
+  background: var(--ds-primary-soft);
+}
+
+.ds-menu-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--ds-radius-input);
+  background: transparent;
+  color: var(--ds-text);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ds-menu-item:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-shadow);
+}
+
+.ds-menu-avatar {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-radius-input);
+  background: var(--ds-navy);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ds-menu-item--active .ds-menu-avatar {
+  background: var(--ds-primary);
+}
+
+.ds-menu-item__content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ds-menu-item__title {
+  color: var(--ds-text);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.ds-menu-item__subtitle {
+  color: var(--ds-text-muted);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.ds-menu-item__check {
+  margin-left: auto;
+  color: var(--ds-primary);
+}
+
+.ds-menu-item__icon {
+  display: flex;
+  width: 20px;
+  flex-shrink: 0;
+  justify-content: center;
+  color: var(--ds-text-muted);
+}
+
+.ds-menu-item--danger .ds-menu-item__icon,
+.ds-menu-item--danger .ds-menu-item__title {
+  color: var(--ds-danger);
+}
+
+.ds-menu-item--danger:hover .ds-menu-item__icon,
+.ds-menu-item--danger:hover .ds-menu-item__title {
+  color: color-mix(in srgb, var(--ds-danger) 80%, black);
+}
+
+.ds-menu--user {
+  width: 224px;
+}

@@ -1,0 +1,248 @@
+.ds-clients-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ds-clients-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ds-clients-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.ds-kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-card);
+  background: var(--ds-bg-raised);
+  box-shadow: none;
+}
+
+.ds-kpi-card__icon {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-radius-input);
+  background: var(--ds-primary-soft);
+  color: var(--ds-primary);
+}
+
+.ds-kpi-card__label {
+  color: var(--ds-text-muted);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ds-kpi-card__value {
+  color: var(--ds-text);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-clients-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.ds-clients-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px 12px;
+}
+
+.ds-clients-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.ds-clients-search {
+  flex: 1 1 280px;
+  min-width: 220px;
+  width: auto;
+}
+
+.ds-clients-select {
+  flex: 0 0 184px;
+  width: auto;
+}
+
+.ds-clients-filters .ds-button {
+  flex-shrink: 0;
+}
+
+.ds-table__th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ds-table__th--right,
+.ds-table__td--right {
+  text-align: right;
+}
+
+.ds-client-cell {
+  display: flex;
+  min-width: 240px;
+  align-items: center;
+  gap: 12px;
+}
+
+.ds-client-cell__avatar {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-radius-input);
+  background: var(--ds-navy);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ds-client-cell__title {
+  display: block;
+  overflow: hidden;
+  color: var(--ds-text);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-client-cell__subtitle,
+.ds-client-cell__text,
+.ds-client-cell__mono {
+  display: block;
+  color: var(--ds-text-muted);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.ds-client-cell__mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.03em;
+}
+
+.ds-client-cell__amount {
+  color: var(--ds-text);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-table__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.ds-icon-button {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-button);
+  background: transparent;
+  color: var(--ds-text-muted);
+  cursor: pointer;
+}
+
+.ds-icon-button:hover {
+  border-color: var(--ds-primary-soft);
+  background: var(--ds-primary-soft);
+  color: var(--ds-primary);
+}
+
+.ds-icon-button:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-shadow);
+}
+
+.ds-icon-button--danger:hover {
+  border-color: var(--ds-danger-line);
+  background: var(--ds-danger-soft);
+  color: var(--ds-danger);
+}
+
+.ds-table__empty {
+  padding: 32px;
+  color: var(--ds-text-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.ds-client-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 24px;
+}
+
+.ds-client-form__section + .ds-client-form__section {
+  padding-top: 24px;
+  border-top: 1px solid var(--ds-border);
+}
+
+.ds-client-form__title {
+  margin: 0 0 16px;
+  color: var(--ds-text);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.ds-client-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ds-client-form__full {
+  grid-column: 1 / -1;
+}
+
+.ds-client-form__textarea {
+  height: auto;
+  min-height: 96px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.ds-client-drawer__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 1023px) {
+  .ds-client-form__grid {
+    grid-template-columns: 1fr;
+  }
+}

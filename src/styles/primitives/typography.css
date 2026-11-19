@@ -1,0 +1,45 @@
+.ds-display {
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.ds-title-page {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.ds-title-section {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.ds-title-card {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 600;
+}
+
+.ds-body {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+.ds-label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--ds-text);
+}
+
+.ds-meta {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--ds-text-muted);
+}
