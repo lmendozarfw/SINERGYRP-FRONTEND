@@ -1,0 +1,172 @@
+<section class="ds-revision">
+
+    <div class="ds-card ds-revision__resumen">
+
+        <header class="ds-revision__cabecera">
+            <span class="ds-revision__icono">
+                <svg data-p-icon="check-circle" [size]="20"></svg>
+            </span>
+            <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <h3 class="ds-title-card">Revisión y liberación</h3>
+                    <span class="ds-revision__badge ds-revision__badge--proceso">En validación</span>
+                </div>
+                <p class="ds-body ds-revision__subtitulo">
+                    El modelo y sus combinaciones están en revisión. Consulta el estado de cada área antes de la liberación.
+                </p>
+            </div>
+        </header>
+
+        <div class="ds-revision__avance">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+                <span class="ds-revision__avance-titulo">
+                    {{ aprobadas }} de {{ validaciones.length }} áreas validadas
+                </span>
+                <span class="ds-revision__avance-detalle">Pendiente: {{ areaPendiente }}</span>
+            </div>
+            <div
+                class="ds-revision__barra"
+                role="progressbar"
+                [attr.aria-valuenow]="aprobadas"
+                [attr.aria-valuemin]="0"
+                [attr.aria-valuemax]="validaciones.length"
+                [attr.aria-label]="aprobadas + ' de ' + validaciones.length + ' áreas validadas'"
+            >
+                <span [style.width.%]="progreso"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ds-revision__layout">
+
+        <div class="ds-revision__main">
+
+            <div class="ds-card ds-revision__validaciones">
+
+                <header class="ds-revision__seccion-cabecera">
+                    <span class="ds-revision__icono">
+                        <svg data-p-icon="users" [size]="18"></svg>
+                    </span>
+                    <div class="min-w-0">
+                        <h3 class="ds-title-card">Validaciones por área</h3>
+                        <p class="ds-body ds-revision__subtitulo">
+                            Cada área deja constancia de su revisión. El modelo se libera cuando todas estén aprobadas.
+                        </p>
+                    </div>
+                </header>
+
+                <ol class="ds-revision__lista">
+                    @for (validacion of validaciones; track validacion.id) {
+                    <li class="ds-revision__area">
+                        <span
+                            class="ds-revision__marcador"
+                            [class.ds-revision__marcador--pendiente]="validacion.estado === 'pendiente'"
+                        >
+                            @if (validacion.estado === 'aprobada') {
+                                <svg data-p-icon="check" [size]="18"></svg>
+                            } @else {
+                                <svg data-p-icon="clock" [size]="18"></svg>
+                            }
+                        </span>
+
+                        <div class="ds-revision__area-contenido">
+                            <div class="flex flex-wrap items-start justify-between gap-2">
+                                <div class="min-w-0">
+                                    <h4 class="ds-revision__area-nombre">{{ validacion.area }}</h4>
+                                    <p class="ds-revision__area-detalle">{{ validacion.detalle }}</p>
+                                </div>
+                                <span
+                                    class="ds-revision__badge"
+                                    [class.ds-revision__badge--aprobada]="validacion.estado === 'aprobada'"
+                                    [class.ds-revision__badge--pendiente]="validacion.estado === 'pendiente'"
+                                >
+                                    @if (validacion.estado === 'aprobada') {
+                                        <svg data-p-icon="check" [size]="13"></svg>
+                                        Aprobado
+                                    } @else {
+                                        <svg data-p-icon="clock" [size]="13"></svg>
+                                        Pendiente
+                                    }
+                                </span>
+                            </div>
+
+                            <p class="ds-revision__comentario">{{ validacion.comentario }}</p>
+
+                            <div class="mt-2.5 flex flex-wrap gap-x-4 gap-y-1.5">
+                                <span class="inline-flex items-center gap-1.5 text-xs text-[var(--ds-text-muted)]">
+                                    <svg data-p-icon="user" [size]="14"></svg>
+                                    {{ validacion.responsable }} · {{ validacion.rol }}
+                                </span>
+                                <span class="inline-flex items-center gap-1.5 text-xs text-[var(--ds-text-muted)]">
+                                    <svg data-p-icon="calendar" [size]="14"></svg>
+                                    {{ validacion.fecha }}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    }
+                </ol>
+
+            </div>
+
+        </div>
+
+        <aside class="ds-revision__aside">
+
+            <div class="ds-card ds-revision__resumen-modelo">
+
+                <header class="ds-revision__seccion-cabecera">
+                    <span class="ds-revision__icono">
+                        <svg data-p-icon="tags" [size]="18"></svg>
+                    </span>
+                    <div class="min-w-0">
+                        <h3 class="ds-title-card">Modelo en revisión</h3>
+                        <p class="ds-body ds-revision__subtitulo">Información registrada en el asistente.</p>
+                    </div>
+                </header>
+
+                <dl class="ds-revision__detalles">
+                    <div class="ds-revision__detalle">
+                        <dt>Código</dt>
+                        <dd>{{ codigoModelo }}</dd>
+                    </div>
+                    <div class="ds-revision__detalle">
+                        <dt>Nombre</dt>
+                        <dd>{{ store.nombreResumen }}</dd>
+                    </div>
+                    <div class="ds-revision__detalle">
+                        <dt>Categoría</dt>
+                        <dd>{{ store.categoriaResumen }}</dd>
+                    </div>
+                    <div class="ds-revision__detalle">
+                        <dt>Línea</dt>
+                        <dd>{{ store.lineaResumen }}</dd>
+                    </div>
+                    <div class="ds-revision__detalle">
+                        <dt>Combinaciones</dt>
+                        <dd>{{ totalCombinaciones }} registradas</dd>
+                    </div>
+                    <div class="ds-revision__detalle">
+                        <dt>Versión</dt>
+                        <dd>v1.0</dd>
+                    </div>
+                </dl>
+
+            </div>
+
+            <div class="ds-alert ds-alert--warning ds-revision__alerta">
+                <svg data-p-icon="info-circle" [size]="18" class="shrink-0"></svg>
+                <div class="flex flex-col gap-0.5">
+                    <span class="ds-revision__alerta-titulo">Liberación pendiente</span>
+                    <span class="ds-revision__alerta-texto">
+                        Falta la validación de {{ areaPendiente }}. El modelo se liberará cuando todas las áreas estén aprobadas.
+                    </span>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>

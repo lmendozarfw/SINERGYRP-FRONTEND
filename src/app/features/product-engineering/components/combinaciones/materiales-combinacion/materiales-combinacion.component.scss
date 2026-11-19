@@ -111,11 +111,11 @@
 }
 
 .ds-materiales-fila {
-  display: grid;
-  grid-template-columns: minmax(140px, 0.8fr) minmax(0, 1.2fr);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 16px;
-  align-items: start;
-  padding: 16px;
+  padding: 12px;
   background: var(--ds-bg-raised);
 }
 
@@ -127,7 +127,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding-top: 22px;
 }
 
 .ds-materiales-fila__nombre {
@@ -143,9 +142,6 @@
   line-height: 18px;
 }
 
-.ds-materiales-fila__campo {
-  min-width: 0;
-}
 
 :host ::ng-deep .ds-combinacion-select.p-select {
   min-height: var(--ds-control-height);

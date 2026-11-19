@@ -12,6 +12,12 @@ import { ArrowLeft, ArrowRight, Save } from '@primeicons/angular';
 })
 export class AsistentePasosAccionesComponent {
 
+    @Input() pasoActual = 1;
+
+    @Input() totalPasos = 5;
+
+    @Input() siguientePaso = '';
+
     @Input() puedeRegresar = false;
 
     @Input() puedeContinuar = true;
@@ -25,4 +31,12 @@ export class AsistentePasosAccionesComponent {
     @Output() continuar = new EventEmitter<void>();
 
     @Output() guardarBorrador = new EventEmitter<void>();
+
+    get progreso(): number {
+        if (this.totalPasos <= 0) {
+            return 0;
+        }
+
+        return Math.min(100, Math.max(0, (this.pasoActual / this.totalPasos) * 100));
+    }
 }

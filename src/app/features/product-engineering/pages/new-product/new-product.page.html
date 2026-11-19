@@ -36,6 +36,9 @@
     </section>
 
     <app-asistente-pasos-acciones
+        [pasoActual]="pasoActual"
+        [totalPasos]="pasos.length"
+        [siguientePaso]="siguientePaso"
         [puedeRegresar]="puedeRegresar"
         [esUltimoPaso]="esUltimoPaso"
         (regresar)="alRegresar()"

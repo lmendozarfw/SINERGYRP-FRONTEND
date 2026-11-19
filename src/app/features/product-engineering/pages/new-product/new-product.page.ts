@@ -88,6 +88,10 @@ export class NewProductPage {
     return this.encabezados[this.pasoActual] ?? this.encabezados[1];
   }
 
+  get siguientePaso(): string {
+    return this.pasos[this.pasoActual]?.titulo ?? '';
+  }
+
   get puedeRegresar(): boolean {
     return this.pasoActual > 1;
   }

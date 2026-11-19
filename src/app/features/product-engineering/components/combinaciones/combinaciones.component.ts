@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ArrowLeft, ArrowRight, Check, Filter, Pencil, Plus, Search, Trash } from '@primeicons/angular';
+import { ArrowLeft, ArrowRight, Check, Filter, Pencil, Plus, Tags, Search, Trash } from '@primeicons/angular';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
@@ -23,7 +23,6 @@ import {
 import { AtributosCombinacionComponent } from './atributos-combinacion/atributos-combinacion.component';
 import { MaterialesCombinacionComponent } from './materiales-combinacion/materiales-combinacion.component';
 import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.component';
-
 @Component({
   selector: 'app-combinaciones',
   imports: [
@@ -51,6 +50,7 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
     Plus,
     Search,
     Trash,
+    Tags
   ],
   templateUrl: './combinaciones.component.html',
   styleUrl: './combinaciones.component.scss',
@@ -202,9 +202,9 @@ export class CombinacionesComponent {
 
   continuar(): void {
     if (this.esPasoUno()) {
-      if (!this.atributosStep()?.validar()) {
-        return;
-      }
+      // if (!this.atributosStep()?.validar()) {
+      //   return;
+      // }
 
       this.pasosDrawer()?.marcarCompletado(1);
       this.pasoActual.set(2);

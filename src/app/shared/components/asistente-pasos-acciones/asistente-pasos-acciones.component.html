@@ -13,42 +13,65 @@
             Guardar como borrador
         </button>
 
-        <span class="ds-meta">
+        <!-- <p class="ds-acciones__borrador-meta">
+            <svg data-p-icon="info-circle" [size]="14"></svg>
             Puedes retomarlo en cualquier momento.
-        </span>
+        </p> -->
 
     </div>
 
     <div class="ds-acciones__navegacion">
-        <div>
-            <p class="text-neutral-500 text-xs">Paso <span class="text-neutral-700 font-bold">1</span> de <span>5</span></p>
-            <p class="text-neutral-400 text-xs">Siguiente paso: Corridas y equivalencias</p>
+
+        <div class="ds-acciones__progreso">
+            <p class="ds-acciones__paso">
+                Paso <strong>{{ pasoActual }}</strong> de {{ totalPasos }}
+            </p>
+
+            <div
+                class="ds-acciones__barra"
+                role="progressbar"
+                [attr.aria-valuenow]="pasoActual"
+                [attr.aria-valuemin]="1"
+                [attr.aria-valuemax]="totalPasos"
+                [attr.aria-label]="'Progreso: paso ' + pasoActual + ' de ' + totalPasos"
+            >
+                <span [style.width.%]="progreso"></span>
+            </div>
+
+            @if (siguientePaso) {
+                <p class="ds-acciones__siguiente">
+                    Siguiente: <span>{{ siguientePaso }}</span>
+                </p>
+            }
         </div>
-        @if (puedeRegresar) {
+
+        <div class="ds-acciones__botones">
+            @if (puedeRegresar) {
+
+                <button
+                    type="button"
+                    pButton
+                    class="ds-button ds-button--secondary"
+                    [disabled]="guardando"
+                    (click)="regresar.emit()"
+                >
+                    <svg data-p-icon="arrow-left" [size]="16"></svg>
+                    Regresar
+                </button>
+
+            }
 
             <button
                 type="button"
                 pButton
-                class="ds-button ds-button--secondary"
-                [disabled]="guardando"
-                (click)="regresar.emit()"
+                class="ds-button"
+                [disabled]="!puedeContinuar || guardando"
+                (click)="continuar.emit()"
             >
-                <svg data-p-icon="arrow-left" [size]="16"></svg>
-                Regresar
+                {{ esUltimoPaso ? 'Finalizar' : 'Continuar' }}
+                <svg data-p-icon="arrow-right" [size]="16"></svg>
             </button>
-
-        }
-
-        <button
-            type="button"
-            pButton
-            class="ds-button"
-            [disabled]="!puedeContinuar || guardando"
-            (click)="continuar.emit()"
-        >
-            {{ esUltimoPaso ? 'Finalizar' : 'Continuar' }}
-            <svg data-p-icon="arrow-right" [size]="16"></svg>
-        </button>
+        </div>
 
     </div>
 

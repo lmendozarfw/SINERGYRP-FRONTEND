@@ -38,12 +38,12 @@
           <span class="ds-materiales-fila__nombre">{{ fila.pieza.nombre }}</span>
           <span class="ds-materiales-fila__id">{{ fila.pieza.id }}</span>
         </div>
-        <div class="ds-field ds-materiales-fila__campo">
+        <div class="ds-field ds-materiales-fila__campo min-w-1/2">
           <app-form-label [for]="'material-' + fila.pieza.id" [required]="true">
             Material
           </app-form-label>
           <p-select
-            class="ds-combinacion-select"
+            class="ds-combinacion-select w-full"
             [inputId]="'material-' + fila.pieza.id"
             [ngModel]="fila.material"
             (ngModelChange)="seleccionar(fila.pieza.id, $event)"

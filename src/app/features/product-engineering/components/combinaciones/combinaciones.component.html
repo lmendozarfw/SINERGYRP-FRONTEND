@@ -1,196 +1,137 @@
-<div class="ds-combinaciones-page">
-  <section class="ds-clients-heading">
-    <div class="min-w-0">
-      <h2 class="ds-title-page mt-1">Combinaciones</h2>
-      <p class="ds-body mt-1 max-w-2xl text-[var(--ds-text-muted)]">
-        Gestiona las combinaciones a partir del modelo base RDX.
-      </p>
+<div class="ds-card flex flex-col gap-6">
+  <header class="flex flex-wrap items-start justify-between gap-4">
+    <div class="flex min-w-0 items-start gap-3">
+      <span
+        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]">
+        <svg data-p-icon="tags" [size]="18"></svg>
+      </span>
+      <div class="min-w-0">
+        <div class="flex flex-wrap items-center gap-3">
+          <h3 class="ds-title-card">Listado de combinaciones</h3>
+        </div>
+        <p class="ds-body mt-0.5 text-[var(--ds-text-muted)]">
+          Define las combinaciones del modelo <span class="text-ds-primary font-semibold">RDX</span> y el material que los componen.
+        </p>
+      </div>
     </div>
-    <button type="button" class="ds-button" (click)="abrirDrawer()">
-      <svg data-p-icon="plus" [size]="16"></svg>
-      Nueva combinación
-    </button>
-  </section>
 
-  <div class="ds-clients-filters mt-8">
-    <p-iconfield iconPosition="left" class="ds-clients-search">
-      <p-inputicon>
-        <svg data-p-icon="search" [size]="16"></svg>
-      </p-inputicon>
-      <input
-        pInputText
-        type="text"
-        class="ds-input"
-        placeholder="Buscar por código de combinación"
-        aria-label="Buscar combinaciones"
-        [ngModel]="terminoBusqueda()"
-        (ngModelChange)="terminoBusqueda.set($event)"
-      />
-    </p-iconfield>
+    <div class="flex flex-wrap gap-2 max-sm:w-full">
+      <button type="button" class="ds-button" (click)="abrirDrawer()">
+        <svg data-p-icon="plus" [size]="16"></svg>
+        Nueva combinación
+      </button>
+    </div>
+  </header>
 
-    <p-select
-      class="ds-clients-select"
-      [options]="opcionesFiltroAtributo"
-      optionLabel="label"
-      optionValue="value"
-      aria-label="Filtrar combinaciones"
-    />
-    <button type="button" class="ds-button ds-button--secondary">
-      <svg data-p-icon="filter" [size]="14"></svg>
-      Filtros
-    </button>
-  </div>
+  <p-table styleClass="ds-table" [value]="combinacionesFiltradas()" dataKey="id" selectionMode="multiple"
+    [selection]="seleccion()" (selectionChange)="seleccion.set($event)" [paginator]="true" [rows]="6"
+    [rowsPerPageOptions]="[6, 12, 24]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} combinaciones" [scrollable]="true">
+    <ng-template #header>
+      <tr>
+        <th class="ds-table__th ds-table__th--check">
+          <p-table-header-checkbox ariaLabel="Seleccionar todas las combinaciones" />
+        </th>
+        <th pSortableColumn="codigo" class="ds-table__th" style="width: 220px; min-width: 220px">
+          <span class="ds-table__th-content">
+            Código
+            <p-sorticon field="codigo" />
+          </span>
+        </th>
+        <th class="ds-table__th" style="width: 320px; min-width: 320px">Atributos</th>
+        <th pSortableColumn="versionActual" class="ds-table__th" style="width: 100px; min-width: 100px">
+          <span class="ds-table__th-content">
+            Versión
+            <p-sorticon field="versionActual" />
+          </span>
+        </th>
+        <th class="ds-table__th" style="width: 130px; min-width: 130px">Estatus</th>
+        <th pSortableColumn="fechaRegistro" class="ds-table__th ds-table__th--right"
+          style="width: 170px; min-width: 170px">
+          <span class="ds-table__th-content">
+            Fecha de registro
+            <p-sorticon field="fechaRegistro" />
+          </span>
+        </th>
+        <th pSortableColumn="fechaModificacion" class="ds-table__th ds-table__th--right"
+          style="width: 190px; min-width: 190px">
+          <span class="ds-table__th-content">
+            Última modificación
+            <p-sorticon field="fechaModificacion" />
+          </span>
+        </th>
+        <th class="ds-table__th ds-table__th--right" style="width: 140px; min-width: 140px">
+          Acciones
+        </th>
+      </tr>
+    </ng-template>
 
-  <section class="ds-card ds-clients-card mt-4">
-    <p-table
-      styleClass="ds-table"
-      [value]="combinacionesFiltradas()"
-      dataKey="id"
-      selectionMode="multiple"
-      [selection]="seleccion()"
-      (selectionChange)="seleccion.set($event)"
-      [paginator]="true"
-      [rows]="6"
-      [rowsPerPageOptions]="[6, 12, 24]"
-      [showCurrentPageReport]="true"
-      currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} combinaciones"
-      [scrollable]="true"
-    >
-      <ng-template #header>
-        <tr>
-          <th class="ds-table__th ds-table__th--check">
-            <p-table-header-checkbox ariaLabel="Seleccionar todas las combinaciones" />
-          </th>
-          <th pSortableColumn="codigo" class="ds-table__th" style="width: 220px; min-width: 220px">
-            <span class="ds-table__th-content">
-              Código
-              <p-sorticon field="codigo" />
+    <ng-template #body let-combinacion let-i="index">
+      <tr class="ds-table__row">
+        <td class="ds-table__td ds-table__td--check">
+          <p-table-checkbox [value]="combinacion" [index]="i" ariaLabel="Seleccionar combinación" />
+        </td>
+        <td class="ds-table__td">
+          <span class="ds-combinaciones-codigo">{{ combinacion.codigo }}</span>
+        </td>
+        <td class="ds-table__td">
+          <div class="ds-combinaciones-atributos">
+            @for (atributo of atributos; track atributo.id) {
+            <span class="ds-combinaciones-atributo">
+              <span class="ds-combinaciones-atributo__nombre">{{ atributo.nombre }}</span>
+              <span class="ds-combinaciones-atributo__valor">{{ etiquetaAtributo(combinacion, atributo.id) }}</span>
             </span>
-          </th>
-          <th class="ds-table__th" style="width: 320px; min-width: 320px">Atributos</th>
-          <th pSortableColumn="versionActual" class="ds-table__th" style="width: 100px; min-width: 100px">
-            <span class="ds-table__th-content">
-              Versión
-              <p-sorticon field="versionActual" />
-            </span>
-          </th>
-          <th class="ds-table__th" style="width: 130px; min-width: 130px">Estatus</th>
-          <th pSortableColumn="fechaRegistro" class="ds-table__th ds-table__th--right"
-            style="width: 160px; min-width: 160px">
-            <span class="ds-table__th-content">
-              Fecha de registro
-              <p-sorticon field="fechaRegistro" />
-            </span>
-          </th>
-          <th pSortableColumn="fechaModificacion" class="ds-table__th ds-table__th--right"
-            style="width: 160px; min-width: 160px">
-            <span class="ds-table__th-content">
-              Última modificación
-              <p-sorticon field="fechaModificacion" />
-            </span>
-          </th>
-          <th class="ds-table__th ds-table__th--right" style="width: 140px; min-width: 140px">
-            Acciones
-          </th>
-        </tr>
-      </ng-template>
+            }
+          </div>
+        </td>
+        <td class="ds-table__td">
+          <span class="ds-combinaciones-version">V{{ combinacion.versionActual }}</span>
+        </td>
+        <td class="ds-table__td">
+          <p-tag value="Activa" severity="success" />
+        </td>
+        <td class="ds-table__td ds-table__td--right">
+          <span class="ds-client-cell__text">{{ combinacion.fechaRegistro | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </td>
+        <td class="ds-table__td ds-table__td--right">
+          <span class="ds-client-cell__text">{{ combinacion.fechaModificacion | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </td>
+        <td class="ds-table__td ds-table__td--right">
+          <div class="ds-table__actions">
+            <button type="button" class="ds-icon-button" aria-label="Editar combinación" (click)="editar(combinacion)">
+              <svg data-p-icon="pencil" [size]="15"></svg>
+            </button>
+            <button type="button" class="ds-icon-button ds-icon-button--danger" aria-label="Eliminar combinación"
+              (click)="eliminar(combinacion)">
+              <svg data-p-icon="trash" [size]="15"></svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
 
-      <ng-template #body let-combinacion let-i="index">
-        <tr class="ds-table__row">
-          <td class="ds-table__td ds-table__td--check">
-            <p-table-checkbox [value]="combinacion" [index]="i" ariaLabel="Seleccionar combinación" />
-          </td>
-          <td class="ds-table__td">
-            <span class="ds-combinaciones-codigo">{{ combinacion.codigo }}</span>
-          </td>
-          <td class="ds-table__td">
-            <div class="ds-combinaciones-atributos">
-              @for (atributo of atributos; track atributo.id) {
-                <span class="ds-combinaciones-atributo">
-                  <span class="ds-combinaciones-atributo__nombre">{{ atributo.nombre }}</span>
-                  <span class="ds-combinaciones-atributo__valor">{{ etiquetaAtributo(combinacion, atributo.id) }}</span>
-                </span>
-              }
-            </div>
-          </td>
-          <td class="ds-table__td">
-            <span class="ds-combinaciones-version">V{{ combinacion.versionActual }}</span>
-          </td>
-          <td class="ds-table__td">
-            <p-tag value="Activa" severity="success" />
-          </td>
-          <td class="ds-table__td ds-table__td--right">
-            <span class="ds-client-cell__text">{{ combinacion.fechaRegistro | date: 'dd/MM/yyyy HH:mm' }}</span>
-          </td>
-          <td class="ds-table__td ds-table__td--right">
-            <span class="ds-client-cell__text">{{ combinacion.fechaModificacion | date: 'dd/MM/yyyy HH:mm' }}</span>
-          </td>
-          <td class="ds-table__td ds-table__td--right">
-            <div class="ds-table__actions">
-              <button
-                type="button"
-                class="ds-icon-button"
-                aria-label="Editar combinación"
-                (click)="editar(combinacion)"
-              >
-                <svg data-p-icon="pencil" [size]="15"></svg>
-              </button>
-              <button
-                type="button"
-                class="ds-icon-button ds-icon-button--danger"
-                aria-label="Eliminar combinación"
-                (click)="eliminar(combinacion)"
-              >
-                <svg data-p-icon="trash" [size]="15"></svg>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-
-      <ng-template #emptymessage>
-        <tr>
-          <td colspan="8" class="ds-table__empty">
-            No hay combinaciones registradas. Crea una nueva combinación para comenzar.
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </section>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="8" class="ds-table__empty">
+          No hay combinaciones registradas. Crea una nueva combinación para comenzar.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 
-<p-drawer
-  [(visible)]="drawerVisible"
-  position="right"
-  styleClass="ds-client-drawer ds-combinaciones-drawer"
-  [header]="combinacionEditando() ? 'Editar combinación' : 'Nueva combinación'"
-  [modal]="true"
-  [dismissible]="true"
-  [closeOnEscape]="true"
-  [blockScroll]="true"
->
-  <app-pasos-drawer
-    [pasos]="pasos"
-    [pasoActivo]="pasoActual()"
-    (pasoActivoChange)="cambiarPaso($event)"
-  />
+<p-drawer [(visible)]="drawerVisible" position="right" styleClass="ds-client-drawer ds-combinaciones-drawer"
+  [header]="combinacionEditando() ? 'Editar combinación' : 'Nueva combinación'" [modal]="true" [dismissible]="true"
+  [closeOnEscape]="true" [blockScroll]="true">
+  <app-pasos-drawer [pasos]="pasos" [pasoActivo]="pasoActual()" (pasoActivoChange)="cambiarPaso($event)" />
 
   <div class="ds-combinaciones-drawer__content">
     @if (esPasoUno()) {
-      <app-atributos-combinacion
-        [atributos]="atributos"
-        [valores]="valoresAtributos()"
-        [codigo]="codigoGenerado()"
-        (valoresChange)="actualizarValores($event)"
-      />
+    <app-atributos-combinacion [atributos]="atributos" [valores]="valoresAtributos()" [codigo]="codigoGenerado()"
+      (valoresChange)="actualizarValores($event)" />
     } @else {
-      <app-materiales-combinacion
-        [piezas]="piezas"
-        [materiales]="opcionesMateriales"
-        [codigo]="codigoGenerado()"
-        [versiones]="combinacionEditando()?.versiones ?? []"
-        (materialesChange)="actualizarMateriales($event)"
-      />
+    <app-materiales-combinacion [piezas]="piezas" [materiales]="opcionesMateriales" [codigo]="codigoGenerado()"
+      [versiones]="combinacionEditando()?.versiones ?? []" (materialesChange)="actualizarMateriales($event)" />
     }
   </div>
 
@@ -206,9 +147,9 @@
       <button type="button" class="ds-button" (click)="continuar()">
         {{ esUltimoPaso() ? (combinacionEditando() ? 'Crear versión' : 'Crear combinación') : 'Continuar' }}
         @if (esUltimoPaso()) {
-          <svg data-p-icon="check" [size]="14"></svg>
+        <svg data-p-icon="check" [size]="14"></svg>
         } @else {
-          <svg data-p-icon="arrow-right" [size]="14"></svg>
+        <svg data-p-icon="arrow-right" [size]="14"></svg>
         }
       </button>
     </div>
@@ -216,5 +157,5 @@
 </p-drawer>
 
 @if (seleccion().length > 0) {
-  <app-bulk-actions-bar [count]="seleccion().length" (clear)="limpiarSeleccion()" (remove)="limpiarSeleccion()" />
+<app-bulk-actions-bar [count]="seleccion().length" (clear)="limpiarSeleccion()" (remove)="limpiarSeleccion()" />
 }
