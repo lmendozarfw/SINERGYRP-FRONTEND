@@ -13,6 +13,29 @@
     </p>
   </div>
 
+  <div class="ds-field mb-6">
+    <app-form-label for="login-empresa" required>Empresa</app-form-label>
+    <p-select
+      class="w-full"
+      inputId="login-empresa"
+      [formControl]="empresaControl"
+      [options]="empresas"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Selecciona una empresa"
+      [fluid]="true"
+      [class.p-invalid]="!!empresaError"
+    />
+    @if (empresaError) {
+      <span class="ds-field-error">
+        <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+        {{ empresaError }}
+      </span>
+    } @else {
+      <span class="ds-field-help">Selecciona la organización con la que vas a trabajar.</span>
+    }
+  </div>
+
   @if (mode() === 'qr') {
     <div class="flex flex-col gap-4">
       <app-qr-scanner

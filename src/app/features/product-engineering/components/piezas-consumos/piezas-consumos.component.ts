@@ -6,7 +6,7 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } fr
 import { ConfirmationService } from 'primeng/api';
 import { Checkbox } from 'primeng/checkbox';
 import { ConfirmDialog } from 'primeng/confirmdialog';
-import { Dialog } from 'primeng/dialog';
+import { Drawer } from 'primeng/drawer';
 import { InputNumber } from 'primeng/inputnumber';
 import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
@@ -60,7 +60,7 @@ type ConsumoFormGroup = FormGroup<{
     ReactiveFormsModule,
     Checkbox,
     ConfirmDialog,
-    Dialog,
+    Drawer,
     InputNumber,
     InputText,
     Select,
@@ -195,7 +195,7 @@ export class PiezasConsumosComponent {
 
   private siguienteId = 1;
 
-  mostrarDialogo = false;
+  mostrarDrawer = false;
   piezaEnEdicion: PiezaConsumo | null = null;
   mensajeValidacion = '';
   consumosInvalidos = false;
@@ -223,7 +223,7 @@ export class PiezasConsumosComponent {
     }));
   }
 
-  get tituloDialogo(): string {
+  get tituloDrawer(): string {
     return this.piezaEnEdicion ? 'Editar pieza' : 'Nueva pieza';
   }
 
@@ -257,7 +257,7 @@ export class PiezasConsumosComponent {
       rendimientoGeneral: 0,
     });
     this.regenerarConsumos(this.corridas[0].clave);
-    this.mostrarDialogo = true;
+    this.mostrarDrawer = true;
   }
 
   abrirEdicion(pieza: PiezaConsumo): void {
@@ -278,14 +278,14 @@ export class PiezasConsumosComponent {
       rendimientoGeneral: pieza.rendimientoGeneral,
     });
     this.regenerarConsumos(pieza.corrida, pieza.consumosPorTalla);
-    this.mostrarDialogo = true;
+    this.mostrarDrawer = true;
   }
 
-  cerrarDialogo(): void {
-    this.mostrarDialogo = false;
+  cerrarDrawer(): void {
+    this.mostrarDrawer = false;
   }
 
-  alCerrarDialogo(): void {
+  alCerrarDrawer(): void {
     this.piezaEnEdicion = null;
     this.mensajeValidacion = '';
     this.consumosInvalidos = false;
@@ -344,7 +344,7 @@ export class PiezasConsumosComponent {
       this.toast.success('Pieza agregada', `"${pieza.nombre}" se agregó a la lista.`);
     }
 
-    this.cerrarDialogo();
+    this.cerrarDrawer();
   }
 
   eliminarPieza(pieza: PiezaConsumo): void {

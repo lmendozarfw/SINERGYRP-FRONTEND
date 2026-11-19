@@ -13,6 +13,7 @@ import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputPassword } from 'primeng/inputpassword';
 import { InputText } from 'primeng/inputtext';
+import { Select } from 'primeng/select';
 import {
   CheckCircle,
   ExclamationTriangle,
@@ -89,6 +90,7 @@ function toCredentials(username: unknown, password: unknown): BadgeCredentials |
     InputPassword,
     IconField,
     InputIcon,
+    Select,
     Checkbox,
     ButtonDirective,
     CheckCircle,
@@ -111,6 +113,15 @@ export class LoginPage {
   private readonly toast = inject(ToastService);
   private readonly qrScanner = viewChild(QrScannerComponent);
 
+  readonly empresas = [
+    { label: 'Grupo Raudal', value: 'grupo-raudal' },
+    { label: 'Industrias del Norte', value: 'industrias-norte' },
+    { label: 'Comercial Delta', value: 'comercial-delta' },
+    { label: 'Organización Vertice', value: 'organizacion-vertice' },
+  ];
+
+  readonly empresaControl = new FormControl('', [Validators.required]);
+
   readonly mode = signal<'qr' | 'manual'>('qr');
   readonly badgeUser = signal<string | null>(null);
   readonly passwordMask = signal(true);
@@ -118,9 +129,17 @@ export class LoginPage {
 
   constructor() {
     this.loginForm = new FormGroup({
+      empresa: this.empresaControl,
       user: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
+  }
+
+  get empresaError(): string | null {
+    const control = this.empresaControl;
+    if ((!control.touched && !control.dirty) || !control.errors) return null;
+    if (control.errors['required']) return 'Selecciona una empresa';
+    return null;
   }
 
   get userError(): string | null {
@@ -153,7 +172,7 @@ export class LoginPage {
     );
   }
 
-  onBadgeScanned(decodedText: string): void {
+  async onBadgeScanned(decodedText: string): Promise<void> {
     if (this.authStore.loading()) return;
     const credentials = parseBadgeQr(decodedText);
     if (!credentials) {
@@ -162,7 +181,7 @@ export class LoginPage {
       return;
     }
     this.badgeUser.set(credentials.username);
-    void this.doLogin(credentials.username, credentials.password);
+    await this.entrar();
   }
 
   async onSubmit(): Promise<void> {
@@ -171,22 +190,14 @@ export class LoginPage {
       this.loginForm.markAllAsTouched();
       return;
     }
-    const { user: username, password } = this.loginForm.value;
-    await this.doLogin(username, password);
+    await this.entrar();
   }
 
   private resumeScanner(): void {
     this.qrScanner()?.resume();
   }
 
-  private async doLogin(username: string, password: string): Promise<void> {
-    await this.authStore.login(username, password);
-    if (this.authStore.error()) {
-      this.toast.error(this.authStore.error()!);
-      this.badgeUser.set(null);
-      this.resumeScanner();
-      return;
-    }
-    // dejar asi hasta tener otra funcionalidad
+  private async entrar(): Promise<void> {
+    await this.router.navigate(['/app/clients']);
   }
 }

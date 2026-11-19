@@ -10,7 +10,8 @@
           <h3 class="ds-title-card">Listado de combinaciones</h3>
         </div>
         <p class="ds-body mt-0.5 text-[var(--ds-text-muted)]">
-          Define las combinaciones del modelo <span class="text-ds-primary font-semibold">RDX</span> y el material que los componen.
+          Define las combinaciones del modelo <span class="text-ds-primary font-semibold">RDX</span> y el material que
+          los componen.
         </p>
       </div>
     </div>
@@ -136,14 +137,13 @@
   </div>
 
   <ng-template #footer>
-    <div class="ds-client-drawer__footer">
-      <button type="button" class="ds-button ds-button--secondary" (click)="cerrarDrawer()">
-        Cancelar
-      </button>
+    <div class="ds-client-drawer__footer flex justify-end gap-4">
+      @if (!esPasoUno()) {
       <button type="button" class="ds-button ds-button--secondary" [disabled]="esPasoUno()" (click)="regresar()">
         <svg data-p-icon="arrow-left" [size]="14"></svg>
         Anterior
       </button>
+      }
       <button type="button" class="ds-button" (click)="continuar()">
         {{ esUltimoPaso() ? (combinacionEditando() ? 'Crear versión' : 'Crear combinación') : 'Continuar' }}
         @if (esUltimoPaso()) {

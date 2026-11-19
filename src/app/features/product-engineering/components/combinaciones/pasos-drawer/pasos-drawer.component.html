@@ -3,7 +3,7 @@
     @for (paso of pasosConEstado(); track paso.id) {
       <p-step [value]="paso.id">
         <ng-template #content>
-          <div class="ds-pasos-drawer__paso">
+          <div class="flex flex-col flex-auto">
             <div class="ds-pasos-drawer__cabecera">
               <button
                 type="button"
