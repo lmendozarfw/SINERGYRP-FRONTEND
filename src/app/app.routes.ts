@@ -3,18 +3,18 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'auth',
-    loadComponent: () => import('./shared/templates/auth.tempalte').then((t) => t.AuthTemplate),
+    loadComponent: () => import('./compartido/plantillas/auth.plantilla').then((t) => t.AuthTemplate),
     children: [
       {
         path: 'login',
         loadComponent: () =>
-          import('./features/auth/pages/login/login.page').then((p) => p.LoginPage),
+          import('./features/auth/paginas/login/login.pagina').then((p) => p.LoginPage),
       },
     ],
   },
   {
     path: 'app',
-    loadComponent: () => import('./shared/templates/main.template').then((t) => t.MainTemplate),
+    loadComponent: () => import('./compartido/plantillas/main.plantilla').then((t) => t.MainTemplate),
     children: [
       {
         path: '',
@@ -24,19 +24,12 @@ export const routes: Routes = [
       {
         path: 'clients',
         loadComponent: () =>
-          import('./features/clients/pages/clients.page').then((p) => p.ClientsPage),
-      },
-      {
-        path: 'configuration',
-        loadComponent: () =>
-          import('./features/configuration/pages/configuration.page').then(
-            (p) => p.ConfigurationPage,
-          ),
+          import('./features/clientes/paginas/clientes.pagina').then((p) => p.ClientsPage),
       },
       {
         path: 'product-engineering/new-product',
         loadComponent: () =>
-          import('./features/product-engineering/pages/new-product/new-product.page').then(
+          import('./features/ingenieria-producto/paginas/new-product/new-product.page').then(
             (p) => p.NewProductPage,
           ),
       },

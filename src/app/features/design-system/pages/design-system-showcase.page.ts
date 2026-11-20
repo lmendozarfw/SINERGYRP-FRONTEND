@@ -9,9 +9,9 @@ import { InputText } from 'primeng/inputtext';
 import {
   PIcon,
 } from '@primeicons/angular';
-import { FormLabelComponent } from '../../../shared/components/form-label/form-label.component';
-import { EncabezadoPaginaComponent } from '../../../shared/components/encabezado-pagina/encabezado-pagina.component';
-import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
+import { FormLabelComponent } from '../../../compartido/componentes/form-label/form-label.component';
+import { EncabezadoPaginaComponent } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
+import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio';
 
 @Component({
   selector: 'app-design-system-showcase',

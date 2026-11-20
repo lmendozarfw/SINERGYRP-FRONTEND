@@ -1,9 +1,9 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { computed, inject } from "@angular/core";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "../servicios/auth.servicio";
 import { firstValueFrom } from "rxjs";
-import { LocalStorageService } from "../../../core/services/storage.service";
-import { IPermissionAuth, IUserAuth } from "../models/auth.model";
+import { LocalStorageService } from "../../../nucleo/servicios/storage.servicio";
+import { IPermissionAuth, IUserAuth } from "../modelos/auth";
 
 type AuthState = {
   user: IUserAuth | null;
