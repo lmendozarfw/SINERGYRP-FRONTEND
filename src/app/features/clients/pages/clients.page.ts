@@ -196,8 +196,8 @@ export class ClientsPage {
 
   onDelete(client?: Client): void {
     this.dialogoConfirmacion.mostrar({
-      titulo: '¿Eliminar departamento?',
-      mensaje: 'Esta acción eliminará el departamento seleccionado. ¿Deseas continuar?',
+      titulo: '¿Eliminar cliente?',
+      mensaje: 'Esta acción eliminará el cliente seleccionado. ¿Deseas continuar?',
       tipo: 'peligro',
       textoAceptar: 'Eliminar',
       textoCancelar: 'Cancelar',

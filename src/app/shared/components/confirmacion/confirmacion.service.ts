@@ -38,8 +38,8 @@ export class DialogoConfirmacionService {
             acceptLabel: opciones.textoAceptar ?? 'Aceptar',
             rejectLabel: opciones.textoCancelar ?? 'Cancelar',
 
+            acceptButtonProps: data,
             
-
             accept: opciones.alConfirmar,
             reject: opciones.alCancelar,
 
