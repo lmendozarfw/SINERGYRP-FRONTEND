@@ -49,7 +49,7 @@ import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.compone
 
         <p-sidebar-main class="flex min-w-0 flex-col">
           <header
-            class="flex h-16 shrink-0 items-center gap-3 border-b border-slate-200 bg-white px-4 lg:px-6"
+            class="flex h-12 shrink-0 items-center gap-2 border-b border-slate-200 bg-white px-3 lg:px-4"
           >
             <button
               pButton
