@@ -322,14 +322,9 @@
             placeholder="Ej. Corte principal"
             [invalid]="campoInvalido('nombre')"
           />
-          @if (campoInvalido('nombre')) {
-            <span class="ds-field-error">
-              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-              Escribe el nombre de la pieza.
-            </span>
-          } @else {
-            <span class="ds-field-help">Nombre con el que se identifica la pieza.</span>
-          }
+          <app-mensaje-ayuda-error [condicion]="campoInvalido('nombre')"
+            mensajeError="Escribe el nombre de la pieza."
+            mensajeAyuda="Nombre con el que se identifica la pieza."></app-mensaje-ayuda-error>
         </div>
 
         <div class="ds-field">
@@ -343,14 +338,9 @@
             [fluid]="true"
             [class.p-invalid]="campoInvalido('tipo')"
           />
-          @if (campoInvalido('tipo')) {
-            <span class="ds-field-error">
-              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-              Selecciona el tipo de pieza.
-            </span>
-          } @else {
-            <span class="ds-field-help">Función de la pieza dentro del producto.</span>
-          }
+          <app-mensaje-ayuda-error [condicion]="campoInvalido('tipo')"
+            mensajeError="Selecciona el tipo de pieza."
+            mensajeAyuda="Función de la pieza dentro del producto."></app-mensaje-ayuda-error>
         </div>
 
         <div class="ds-field">
@@ -364,14 +354,9 @@
             [fluid]="true"
             [class.p-invalid]="campoInvalido('material')"
           />
-          @if (campoInvalido('material')) {
-            <span class="ds-field-error">
-              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-              Selecciona el material.
-            </span>
-          } @else {
-            <span class="ds-field-help">Material principal que consume la pieza.</span>
-          }
+          <app-mensaje-ayuda-error [condicion]="campoInvalido('material')"
+            mensajeError="Selecciona el material."
+            mensajeAyuda="Material principal que consume la pieza."></app-mensaje-ayuda-error>
         </div>
 
         <div class="ds-field">
@@ -385,14 +370,9 @@
             [fluid]="true"
             [class.p-invalid]="campoInvalido('unidad')"
           />
-          @if (campoInvalido('unidad')) {
-            <span class="ds-field-error">
-              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-              Selecciona la unidad de medida.
-            </span>
-          } @else {
-            <span class="ds-field-help">Unidad usada para el consumo.</span>
-          }
+          <app-mensaje-ayuda-error [condicion]="campoInvalido('unidad')"
+            mensajeError="Selecciona la unidad de medida."
+            mensajeAyuda="Unidad usada para el consumo."></app-mensaje-ayuda-error>
         </div>
 
         <div class="ds-field">
@@ -406,14 +386,9 @@
             [fluid]="true"
             [class.p-invalid]="campoInvalido('departamento')"
           />
-          @if (campoInvalido('departamento')) {
-            <span class="ds-field-error">
-              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-              Selecciona el departamento.
-            </span>
-          } @else {
-            <span class="ds-field-help">Área responsable de la pieza.</span>
-          }
+          <app-mensaje-ayuda-error [condicion]="campoInvalido('departamento')"
+            mensajeError="Selecciona el departamento."
+            mensajeAyuda="Área responsable de la pieza."></app-mensaje-ayuda-error>
         </div>
 
         <div class="ds-field">
@@ -428,7 +403,7 @@
             placeholder="Selecciona una corrida"
             [fluid]="true"
           />
-          <span class="ds-field-help">Rango de tallas al que pertenece la pieza.</span>
+          <app-mensaje-ayuda-error mensajeAyuda="Rango de tallas al que pertenece la pieza."></app-mensaje-ayuda-error>
         </div>
 
         <div class="ds-field md:col-span-2">
@@ -458,14 +433,9 @@
               [fluid]="true"
               [class.p-invalid]="campoInvalido('suaje')"
             />
-            @if (campoInvalido('suaje')) {
-              <span class="ds-field-error">
-                <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-                Selecciona el suaje de la pieza.
-              </span>
-            } @else {
-              <span class="ds-field-help">Herramienta usada para cortar la pieza.</span>
-            }
+            <app-mensaje-ayuda-error [condicion]="campoInvalido('suaje')"
+              mensajeError="Selecciona el suaje de la pieza."
+              mensajeAyuda="Herramienta usada para cortar la pieza."></app-mensaje-ayuda-error>
           </div>
         }
       </div>
@@ -508,16 +478,9 @@
               [fluid]="true"
               [class.p-invalid]="campoInvalido('consumoGeneral')"
             />
-            @if (campoInvalido('consumoGeneral')) {
-              <span class="ds-field-error">
-                <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-                Captura un consumo mayor a cero.
-              </span>
-            } @else {
-              <span class="ds-field-help">
-                Cantidad de material por pieza en {{ unidadSeleccionada }}.
-              </span>
-            }
+            <app-mensaje-ayuda-error [condicion]="campoInvalido('consumoGeneral')"
+              mensajeError="Captura un consumo mayor a cero."
+              [mensajeAyuda]="'Cantidad de material por pieza en ' + unidadSeleccionada + '.'"></app-mensaje-ayuda-error>
           </div>
 
           <div class="ds-field">
@@ -532,14 +495,9 @@
               [fluid]="true"
               [class.p-invalid]="campoInvalido('rendimientoGeneral')"
             />
-            @if (campoInvalido('rendimientoGeneral')) {
-              <span class="ds-field-error">
-                <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-                Captura un rendimiento mayor a cero.
-              </span>
-            } @else {
-              <span class="ds-field-help">Piezas obtenidas por unidad de material.</span>
-            }
+            <app-mensaje-ayuda-error [condicion]="campoInvalido('rendimientoGeneral')"
+              mensajeError="Captura un rendimiento mayor a cero."
+              mensajeAyuda="Piezas obtenidas por unidad de material."></app-mensaje-ayuda-error>
           </div>
         </div>
       } @else {

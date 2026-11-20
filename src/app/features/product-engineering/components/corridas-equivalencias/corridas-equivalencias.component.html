@@ -1,17 +1,7 @@
 <div class="ds-corridas-equivalencias">
-  <section class="ds-card ds-corridas-config">
-    <header class="ds-corridas-config__header">
-      <span class="ds-corridas-config__icon">
-        <svg data-p-icon="sitemap" [size]="18"></svg>
-      </span>
-      <div class="min-w-0">
-        <h3 class="ds-title-card">Configuración de la corrida</h3>
-        <p class="ds-body ds-corridas-config__subtitle">
-          Define la corrida, el sistema principal y la talla base de desarrollo.
-        </p>
-      </div>
-    </header>
-
+  <app-tarjeta titulo="Configuración de la corrida"
+    descripcion="Define la corrida, el sistema principal y la talla base de desarrollo."
+    icono="sitemap">
     <form
       class="ds-corridas-config__form"
       [formGroup]="corridaForm"
@@ -28,7 +18,7 @@
           optionValue="clave"
           [fluid]="true"
         />
-        <span class="ds-field-help">Rango de tallas que se fabricará para el modelo.</span>
+        <app-mensaje-ayuda-error mensajeAyuda="Rango de tallas que se fabricará para el modelo."></app-mensaje-ayuda-error>
       </div>
 
       <div class="ds-field">
@@ -42,7 +32,7 @@
           optionValue="clave"
           [fluid]="true"
         />
-        <span class="ds-field-help">Sistema usado como referencia para las equivalencias.</span>
+        <app-mensaje-ayuda-error mensajeAyuda="Sistema usado como referencia para las equivalencias."></app-mensaje-ayuda-error>
       </div>
 
       <div class="ds-field">
@@ -56,10 +46,10 @@
           optionValue="value"
           [fluid]="true"
         />
-        <span class="ds-field-help">Talla sobre la que se desarrolla la horma del modelo.</span>
+        <app-mensaje-ayuda-error mensajeAyuda="Talla sobre la que se desarrolla la horma del modelo."></app-mensaje-ayuda-error>
       </div>
     </form>
-  </section>
+  </app-tarjeta>
 
   <app-tabla-equivalencias
     [sistemas]="sistemas"

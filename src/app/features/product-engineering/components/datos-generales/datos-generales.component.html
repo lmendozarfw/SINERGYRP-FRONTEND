@@ -3,62 +3,38 @@
     <div class="ds-new-product-form__main">
 
         <!-- Identidad del modelo -->
-        <div class="ds-card ds-new-product-card">
-
-            <header class="ds-new-product-card__header">
-                <span class="ds-new-product-card__icon">
-                    <svg data-p-icon="file-edit" [size]="18"></svg>
-                </span>
-                <div class="min-w-0">
-                    <h3 class="ds-title-card">Identidad del modelo</h3>
-                    <p class="ds-body ds-new-product-card__subtitle">
-                        Datos que identifican el modelo dentro de la ingeniería de producto.
-                    </p>
-                </div>
-            </header>
-
+        <app-tarjeta titulo="Identidad del modelo"
+            descripcion="Datos que identifican el modelo dentro de la ingeniería de producto." icono="file-edit">
             <div class="ds-new-product-grid">
 
                 <div class="ds-field">
                     <app-form-label for="modelo-codigo" required>Código del modelo</app-form-label>
-                    <input pInputText id="modelo-codigo" formControlName="codigo" type="text"
-                        placeholder="Ej. MDL-0001" [invalid]="store.codigoInvalido" />
-                    @if (store.codigoInvalido) {
-                    <span class="ds-field-error">
-                        <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-                        El código del modelo es obligatorio.
-                    </span>
-                    } @else {
-                    <span class="ds-field-help">Identificador único del modelo.</span>
-                    }
+                    <input pInputText id="modelo-codigo" formControlName="codigo" type="text" placeholder="Ej. MDL-0001" [invalid]="store.codigoInvalido" />
+                    <app-mensaje-ayuda-error [condicion]="store.codigoInvalido" mensajeError="El código del modelo es obligatorio." mensajeAyuda="Identificador único del modelo."></app-mensaje-ayuda-error>
+                    
                 </div>
 
                 <div class="ds-field">
                     <app-form-label for="modelo-nombre" required>Nombre del modelo</app-form-label>
                     <input pInputText id="modelo-nombre" formControlName="nombre" type="text"
                         placeholder="Ej. Botín urbano piel" [invalid]="store.nombreInvalido" />
-                    @if (store.nombreInvalido) {
-                    <span class="ds-field-error">
-                        <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-                        El nombre del modelo es obligatorio.
-                    </span>
-                    } @else {
-                    <span class="ds-field-help">Nombre comercial con el que se identificará.</span>
-                    }
+                    <app-mensaje-ayuda-error [condicion]="store.nombreInvalido"
+                        mensajeError="El nombre del modelo es obligatorio."
+                        mensajeAyuda="Nombre comercial con el que se identificará."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field">
                     <app-form-label for="modelo-fecha-alta">Fecha de alta</app-form-label>
-                    <p-datepicker class="ds-new-product-control" inputId="modelo-fecha-alta"
-                        formControlName="fechaAlta" dateFormat="dd/mm/yy" [showIcon]="true" [fluid]="true" />
-                    <span class="ds-field-help">Se registra automáticamente al crear el modelo.</span>
+                    <p-datepicker class="ds-new-product-control" inputId="modelo-fecha-alta" formControlName="fechaAlta"
+                        dateFormat="dd/mm/yy" [showIcon]="true" [fluid]="true" />
+                    <app-mensaje-ayuda-error mensajeAyuda="Se registra automáticamente al crear el modelo."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field">
                     <app-form-label for="modelo-estatus">Estatus</app-form-label>
                     <p-select class="ds-new-product-control" inputId="modelo-estatus" formControlName="estatus"
                         [options]="store.estatusOpciones" optionLabel="label" optionValue="value" [fluid]="true" />
-                    <span class="ds-field-help">El modelo puede iniciar como borrador.</span>
+                    <app-mensaje-ayuda-error mensajeAyuda="El modelo puede iniciar como borrador."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field ds-new-product-grid__full">
@@ -66,45 +42,26 @@
                     <textarea pTextarea id="modelo-descripcion" formControlName="descripcion" rows="3"
                         class="ds-input ds-new-product-textarea"
                         placeholder="Describe el modelo, su uso previsto y cualquier detalle relevante."></textarea>
-                    <span class="ds-field-help">Opcional. Ayuda a identificar el modelo en búsquedas y
-                        reportes.</span>
+                    <app-mensaje-ayuda-error
+                        mensajeAyuda="Opcional. Ayuda a identificar el modelo en búsquedas y reportes."></app-mensaje-ayuda-error>
                 </div>
 
             </div>
-
-        </div>
+        </app-tarjeta>
 
         <!-- Clasificación -->
-        <div class="ds-card ds-new-product-card">
-
-            <header class="ds-new-product-card__header">
-                <span class="ds-new-product-card__icon">
-                    <svg data-p-icon="tags" [size]="18"></svg>
-                </span>
-                <div class="min-w-0">
-                    <h3 class="ds-title-card">Clasificación</h3>
-                    <p class="ds-body ds-new-product-card__subtitle">
-                        Ubica el modelo dentro del catálogo de producto.
-                    </p>
-                </div>
-            </header>
-
+        <app-tarjeta titulo="Clasificación" descripcion="Ubica el modelo dentro del catálogo de producto." icono="tags">
             <div class="ds-new-product-grid">
 
                 <div class="ds-field">
                     <app-form-label for="modelo-categoria" required>Categoría</app-form-label>
-                    <p-select class="ds-new-product-control" inputId="modelo-categoria"
-                        formControlName="categoria" [options]="store.categorias" optionLabel="label"
-                        optionValue="value" placeholder="Selecciona una categoría" [fluid]="true"
+                    <p-select class="ds-new-product-control" inputId="modelo-categoria" formControlName="categoria"
+                        [options]="store.categorias" optionLabel="label" optionValue="value"
+                        placeholder="Selecciona una categoría" [fluid]="true"
                         [class.p-invalid]="store.categoriaInvalida" />
-                    @if (store.categoriaInvalida) {
-                    <span class="ds-field-error">
-                        <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-                        La categoría es obligatoria.
-                    </span>
-                    } @else {
-                    <span class="ds-field-help">Tipo de producto al que pertenece el modelo.</span>
-                    }
+                    <app-mensaje-ayuda-error [condicion]="store.categoriaInvalida"
+                        mensajeError="La categoría es obligatoria."
+                        mensajeAyuda="Tipo de producto al que pertenece el modelo."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field">
@@ -112,7 +69,7 @@
                     <p-select class="ds-new-product-control" inputId="modelo-marca" formControlName="marca"
                         [options]="store.marcas" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una marca" [fluid]="true" />
-                    <span class="ds-field-help">Marca o licencia asociada al modelo.</span>
+                    <app-mensaje-ayuda-error mensajeAyuda="Marca o licencia asociada al modelo."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field">
@@ -120,7 +77,7 @@
                     <p-select class="ds-new-product-control" inputId="modelo-linea" formControlName="linea"
                         [options]="store.lineas" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una línea" [fluid]="true" />
-                    <span class="ds-field-help">Línea comercial o colección del modelo.</span>
+                    <app-mensaje-ayuda-error mensajeAyuda="Línea comercial o colección del modelo."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field">
@@ -128,49 +85,25 @@
                     <p-select class="ds-new-product-control" inputId="modelo-genero" formControlName="genero"
                         [options]="store.generos" optionLabel="label" optionValue="value"
                         placeholder="Selecciona un género" [fluid]="true" />
-                    <span class="ds-field-help">Público objetivo del modelo.</span>
+                    <app-mensaje-ayuda-error mensajeAyuda="Público objetivo del modelo."></app-mensaje-ayuda-error>
                 </div>
 
             </div>
-
-        </div>
+        </app-tarjeta>
 
     </div>
 
     <aside class="ds-new-product-form__aside">
 
         <!-- Imagen -->
-        <div class="ds-card ds-new-product-card">
-            <header class="ds-new-product-card__header">
-                <span class="ds-new-product-card__icon">
-                    <svg data-p-icon="images" [size]="18"></svg>
-                </span>
-                <div class="min-w-0">
-                    <h3 class="ds-title-card">Imagen del modelo</h3>
-                    <p class="ds-body ds-new-product-card__subtitle">
-                        Referencia visual del modelo.
-                    </p>
-                </div>
-            </header>
+        <app-tarjeta titulo="Imagenes" descripcion="Referencia visual del modelo." icono="images">
             <app-selector-imagen [multiple]="true" [maximoArchivos]="4"
                 textoPrincipal="Arrastra la imagen del modelo aquí" textoSecundario="o selecciona un archivo"
                 (imagenesSeleccionadas)="store.actualizarImagenes($event)" />
-        </div>
+        </app-tarjeta>
 
         <!-- Resumen -->
-        <div class="ds-card ds-new-product-card">
-            <header class="ds-new-product-card__header">
-                <span class="ds-new-product-card__icon">
-                    <svg data-p-icon="sparkles" [size]="18"></svg>
-                </span>
-                <div class="min-w-0">
-                    <h3 class="ds-title-card">Así se creará tu modelo</h3>
-                    <p class="ds-body ds-new-product-card__subtitle">
-                        Resumen de la información capturada.
-                    </p>
-                </div>
-            </header>
-
+        <app-tarjeta titulo="Así se creará tu modelo" descripcion="Resumen de la información capturada." icono="sparkles">
             <dl class="ds-new-product-summary__list">
                 <div class="ds-new-product-summary__row">
                     <dt class="ds-new-product-summary__label">Nombre</dt>
@@ -205,7 +138,7 @@
                     </dd>
                 </div>
             </dl>
-        </div>
+        </app-tarjeta>
 
         <!-- Mensaje de siguiente paso -->
         <div class="ds-alert ds-alert--success ds-new-product-alert">

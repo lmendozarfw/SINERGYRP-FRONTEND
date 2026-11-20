@@ -42,20 +42,9 @@
 
         <div class="ds-revision__main">
 
-            <div class="ds-card ds-revision__validaciones">
-
-                <header class="ds-revision__seccion-cabecera">
-                    <span class="ds-revision__icono">
-                        <svg data-p-icon="users" [size]="18"></svg>
-                    </span>
-                    <div class="min-w-0">
-                        <h3 class="ds-title-card">Validaciones por área</h3>
-                        <p class="ds-body ds-revision__subtitulo">
-                            Cada área deja constancia de su revisión. El modelo se libera cuando todas estén aprobadas.
-                        </p>
-                    </div>
-                </header>
-
+            <app-tarjeta titulo="Validaciones por área"
+                descripcion="Cada área deja constancia de su revisión. El modelo se libera cuando todas estén aprobadas."
+                icono="users">
                 <ol class="ds-revision__lista">
                     @for (validacion of validaciones; track validacion.id) {
                     <li class="ds-revision__area">
@@ -107,25 +96,14 @@
                     </li>
                     }
                 </ol>
-
-            </div>
+            </app-tarjeta>
 
         </div>
 
         <aside class="ds-revision__aside">
 
-            <div class="ds-card ds-revision__resumen-modelo">
-
-                <header class="ds-revision__seccion-cabecera">
-                    <span class="ds-revision__icono">
-                        <svg data-p-icon="tags" [size]="18"></svg>
-                    </span>
-                    <div class="min-w-0">
-                        <h3 class="ds-title-card">Modelo en revisión</h3>
-                        <p class="ds-body ds-revision__subtitulo">Información registrada en el asistente.</p>
-                    </div>
-                </header>
-
+            <app-tarjeta titulo="Modelo en revisión" descripcion="Información registrada en el asistente."
+                icono="tags">
                 <dl class="ds-revision__detalles">
                     <div class="ds-revision__detalle">
                         <dt>Código</dt>
@@ -152,8 +130,7 @@
                         <dd>v1.0</dd>
                     </div>
                 </dl>
-
-            </div>
+            </app-tarjeta>
 
             <div class="ds-alert ds-alert--warning ds-revision__alerta">
                 <svg data-p-icon="info-circle" [size]="18" class="shrink-0"></svg>

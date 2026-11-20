@@ -8,35 +8,6 @@
   gap: 24px;
 }
 
-.ds-corridas-config {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.ds-corridas-config__header {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.ds-corridas-config__icon {
-  display: flex;
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--ds-radius-input);
-  background: var(--ds-primary-soft);
-  color: var(--ds-primary);
-}
-
-.ds-corridas-config__subtitle {
-  margin-top: 2px;
-  color: var(--ds-text-muted);
-}
-
 .ds-corridas-config__form {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

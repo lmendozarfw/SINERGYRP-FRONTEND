@@ -17,35 +17,6 @@
     gap: 24px;
 }
 
-.ds-new-product-card {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.ds-new-product-card__header {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.ds-new-product-card__icon {
-    display: flex;
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--ds-radius-input);
-    background: var(--ds-primary-soft);
-    color: var(--ds-primary);
-}
-
-.ds-new-product-card__subtitle {
-    margin-top: 2px;
-    color: var(--ds-text-muted);
-}
-
 .ds-new-product-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

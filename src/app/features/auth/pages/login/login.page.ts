@@ -16,7 +16,6 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import {
   CheckCircle,
-  ExclamationTriangle,
   Eye,
   EyeSlash,
   InfoCircle,
@@ -27,6 +26,7 @@ import {
   User,
 } from '@primeicons/angular';
 import { FormLabelComponent } from '../../../../shared/components/form-label/form-label.component';
+import { MensajeAyudaErrorComponent } from '../../../../shared/components/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { QrScannerComponent } from '../../../../shared/components/qr-scanner/qr-scanner.component';
 import { ToastService } from '../../../../core/services/toast.service';
 import { AuthStore } from '../../stores/auth.store';
@@ -85,6 +85,7 @@ function toCredentials(username: unknown, password: unknown): BadgeCredentials |
     FormsModule,
     ReactiveFormsModule,
     FormLabelComponent,
+    MensajeAyudaErrorComponent,
     QrScannerComponent,
     InputText,
     InputPassword,
@@ -94,7 +95,6 @@ function toCredentials(username: unknown, password: unknown): BadgeCredentials |
     Checkbox,
     ButtonDirective,
     CheckCircle,
-    ExclamationTriangle,
     User,
     InfoCircle,
     SignIn,

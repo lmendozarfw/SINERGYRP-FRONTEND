@@ -10,6 +10,7 @@ import { Tag } from 'primeng/tag';
 import { Eye, Filter, Pencil, Plus, Search, Trash } from '@primeicons/angular';
 import { BulkActionsBarComponent } from '../../../shared/components/bulk-actions-bar/bulk-actions-bar.component';
 import { FormLabelComponent } from '../../../shared/components/form-label/form-label.component';
+import { MensajeAyudaErrorComponent } from '../../../shared/components/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
 import { Client } from '../models/client.model';
 
@@ -32,6 +33,7 @@ interface SelectOption {
     Tag,
     BulkActionsBarComponent,
     FormLabelComponent,
+    MensajeAyudaErrorComponent,
     Eye,
     Filter,
     Pencil,
@@ -290,7 +292,7 @@ interface SelectOption {
                 placeholder="Ej. RIR240315AB1"
                 maxlength="13"
               />
-              <p class="ds-field-help">Registro Federal de Contribuyentes.</p>
+              <app-mensaje-ayuda-error mensajeAyuda="Registro Federal de Contribuyentes."></app-mensaje-ayuda-error>
             </div>
           </div>
         </section>

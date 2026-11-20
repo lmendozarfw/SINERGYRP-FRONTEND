@@ -3,9 +3,10 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
-import { ExclamationTriangle, ThLarge } from '@primeicons/angular';
+import { ThLarge } from '@primeicons/angular';
 
 import { FormLabelComponent } from '../../../../../shared/components/form-label/form-label.component';
+import { MensajeAyudaErrorComponent } from '../../../../../shared/components/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import {
   MaterialAsignado,
   OpcionSelectSimple,
@@ -21,7 +22,15 @@ interface FilaMaterial {
 @Component({
   selector: 'app-materiales-combinacion',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, FormsModule, Select, Tag, FormLabelComponent, ExclamationTriangle, ThLarge],
+  imports: [
+    DatePipe,
+    FormsModule,
+    Select,
+    Tag,
+    FormLabelComponent,
+    MensajeAyudaErrorComponent,
+    ThLarge,
+  ],
   templateUrl: './materiales-combinacion.component.html',
   styleUrl: './materiales-combinacion.component.scss',
 })

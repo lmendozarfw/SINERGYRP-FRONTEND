@@ -14,8 +14,7 @@
     gap: 20px;
 }
 
-.ds-revision__cabecera,
-.ds-revision__seccion-cabecera {
+.ds-revision__cabecera {
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -90,13 +89,6 @@
     min-width: 0;
     flex-direction: column;
     gap: 24px;
-}
-
-.ds-revision__validaciones,
-.ds-revision__resumen-modelo {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 
 .ds-revision__lista {

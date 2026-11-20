@@ -54,12 +54,8 @@
             placeholder="Selecciona un material"
             [class.p-invalid]="esInvalido(fila.pieza.id)"
           />
-          @if (esInvalido(fila.pieza.id)) {
-            <span class="ds-field-error">
-              <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
-              Selecciona el material de esta pieza.
-            </span>
-          }
+          <app-mensaje-ayuda-error [condicion]="esInvalido(fila.pieza.id)"
+            mensajeError="Selecciona el material de esta pieza."></app-mensaje-ayuda-error>
         </div>
       </div>
     }

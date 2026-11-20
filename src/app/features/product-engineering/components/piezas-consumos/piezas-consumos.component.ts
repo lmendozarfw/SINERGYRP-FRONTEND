@@ -15,6 +15,7 @@ import { ChevronRight, ExclamationTriangle, Pencil, Plus, Tags, Trash } from '@p
 
 import { ToastService } from '../../../../core/services/toast.service';
 import { FormLabelComponent } from '../../../../shared/components/form-label/form-label.component';
+import { MensajeAyudaErrorComponent } from '../../../../shared/components/mesaje-ayuda-error/mensaje-ayuda-error.component';
 
 type ModoConsumo = 'general' | 'porTalla';
 
@@ -66,6 +67,7 @@ type ConsumoFormGroup = FormGroup<{
     Select,
     TableModule,
     FormLabelComponent,
+    MensajeAyudaErrorComponent,
     ChevronRight,
     ExclamationTriangle,
     Pencil,

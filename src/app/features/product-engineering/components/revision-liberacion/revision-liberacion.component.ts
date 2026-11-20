@@ -1,15 +1,7 @@
 import { Component, inject } from '@angular/core';
-import {
-  Calendar,
-  Check,
-  CheckCircle,
-  Clock,
-  InfoCircle,
-  Tags,
-  User,
-  Users,
-} from '@primeicons/angular';
+import { Calendar, Check, CheckCircle, Clock, InfoCircle, User } from '@primeicons/angular';
 
+import { TarjetaComponent } from '../../../../shared/components/tarjeta/tarjeta.component';
 import { NewProductWizardStore } from '../../stores/new-product-wizard.store';
 
 type EstadoValidacion = 'aprobada' | 'pendiente';
@@ -27,7 +19,7 @@ interface ValidacionArea {
 
 @Component({
   selector: 'app-revision-liberacion',
-  imports: [Calendar, Check, CheckCircle, Clock, InfoCircle, Tags, User, Users],
+  imports: [Calendar, Check, CheckCircle, Clock, InfoCircle, User, TarjetaComponent],
   templateUrl: './revision-liberacion.component.html',
   styleUrl: './revision-liberacion.component.scss',
 })
