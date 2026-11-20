@@ -17,7 +17,7 @@ import { BreadcrumbComponent } from '../componentes/breadcrumb/breadcrumb.compon
     PIcon
   ],
   template: `
-    <div class="h-screen overflow-hidden bg-slate-50">
+    <div class="h-screen overflow-hidden bg-ds-canvas">
       <p-sidebar-layout class="relative! h-full">
         @if (isMobile()) {
           <p-sidebar-backdrop class="absolute!" />
@@ -47,7 +47,7 @@ import { BreadcrumbComponent } from '../componentes/breadcrumb/breadcrumb.compon
 
         <p-sidebar-main class="flex min-w-0 flex-col">
           <header
-            class="flex h-12 shrink-0 items-center gap-2 border-b border-slate-200 bg-white px-3 lg:px-4"
+            class="flex h-12 shrink-0 items-center gap-2 border-b border-ds-line bg-ds-surface px-3 lg:px-4"
           >
             <button
               pButton

@@ -6,27 +6,27 @@ let instances = 0;
 @Component({
   selector: 'app-qr-scanner',
   template: `
-    <div class="relative overflow-hidden rounded-2xl bg-black">
+    <div class="relative overflow-hidden rounded-2xl bg-ds-canvas-inverse">
       <div [id]="readerId" class="mx-auto w-full" [style.maxWidth.px]="size"></div>
 
       @if (error(); as message) {
-      <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[#1e1e1e] px-6 text-center">
-        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white">
+      <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-ds-canvas-inverse-soft px-6 text-center">
+        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-ds-on-navy/10 text-ds-on-navy">
           <svg pIcon="pi-exclamation-triangle"></svg>
         </span>
-        <p class="m-0 text-sm text-white/90">{{ message }}</p>
+        <p class="m-0 text-sm text-ds-on-navy/90">{{ message }}</p>
         <button nz-button nzType="primary" (click)="start()">
            <svg pIcon="pi-refresh"></svg>
           Reintentar
         </button>
       </div>
       } @else if (busy) {
-      <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/70 px-6 text-center">
-        <p class="m-0 text-sm text-white/90">{{ busyText }}</p>
+      <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-ds-canvas-inverse/70 px-6 text-center">
+        <p class="m-0 text-sm text-ds-on-navy/90">{{ busyText }}</p>
       </div>
       } @else {
       <p
-        class="absolute inset-x-0 bottom-3 m-0 flex items-center justify-center gap-1.5 px-4 text-center text-xs text-white/90">
+        class="absolute inset-x-0 bottom-3 m-0 flex items-center justify-center gap-1.5 px-4 text-center text-xs text-ds-on-navy/90">
         <svg pIcon="pi-qrcode"></svg>
         {{ hint }}
       </p>

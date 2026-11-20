@@ -24,7 +24,7 @@
 .ds-checkbox.p-checkbox:has(.p-checkbox-input:checked) .p-checkbox-box {
   border-color: var(--ds-primary);
   background: var(--ds-primary);
-  color: #ffffff;
+  color: var(--ds-on-primary);
 }
 
 .ds-checkbox:focus-visible,

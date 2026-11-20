@@ -29,20 +29,20 @@ export class ConfirmacionComponent {
     }
 
     obtenerClaseIcono(tipo: string): string {
-        return 'bg-[#130f40]';
+        return 'bg-ds-navy';
         // Aun no me decido si poner varios colores
         switch (tipo) {
             case 'advertencia':
-                return 'bg-[#f0932b]';
+                return 'bg-ds-warning';
 
             case 'peligro':
-                return 'bg-[#eb4d4b]';
+                return 'bg-ds-danger';
 
             case 'informacion':
-                return 'bg-[#686de0]';
+                return 'bg-ds-primary';
 
             default:
-                return 'bg-[#130f40]';
+                return 'bg-ds-navy';
         }
     }
 }

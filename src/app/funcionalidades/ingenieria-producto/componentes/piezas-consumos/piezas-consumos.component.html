@@ -2,7 +2,7 @@
   <header class="flex flex-wrap items-start justify-between gap-4">
     <div class="flex min-w-0 items-start gap-3">
       <span
-        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]"
+        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-ds-primary-soft text-ds-primary"
       >
         <svg pIcon="tags" [size]="18"></svg>
       </span>
@@ -10,12 +10,12 @@
         <div class="flex flex-wrap items-center gap-3">
           <h3 class="ds-title-card">Piezas y consumos</h3>
           <span
-            class="inline-flex h-6 items-center whitespace-nowrap rounded-full border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-2.5 text-xs font-semibold leading-[18px] text-[var(--ds-text-muted)]"
+            class="inline-flex h-6 items-center whitespace-nowrap rounded-full border border-ds-line bg-ds-canvas-strong px-2.5 text-xs font-semibold leading-[18px] text-ds-muted"
           >
             {{ piezas().length }} {{ piezas().length === 1 ? 'pieza' : 'piezas' }}
           </span>
         </div>
-        <p class="ds-body mt-0.5 text-[var(--ds-text-muted)]">
+        <p class="ds-body mt-0.5 text-ds-muted">
           Define las piezas del modelo, el material que consumen y su rendimiento.
         </p>
       </div>
@@ -76,10 +76,10 @@
 
         <td class="ds-table__td">
           <div class="flex flex-col items-start gap-0.5">
-            <span class="text-sm font-semibold leading-5 text-[var(--ds-text)]">
+            <span class="text-sm font-semibold leading-5 text-ds-ink">
               {{ pieza.nombre }}
             </span>
-            <span class="text-xs leading-[18px] text-[var(--ds-text-muted)]">
+            <span class="text-xs leading-[18px] text-ds-muted">
               {{ pieza.tipo }}
             </span>
           </div>
@@ -91,10 +91,10 @@
 
         <td class="ds-table__td">
           <div class="flex flex-col items-start gap-0.5">
-            <span class="text-sm font-semibold leading-5 text-[var(--ds-text)]">
+            <span class="text-sm font-semibold leading-5 text-ds-ink">
               {{ corridaNombre(pieza.corrida) }}
             </span>
-            <span class="text-xs leading-[18px] text-[var(--ds-text-muted)]">
+            <span class="text-xs leading-[18px] text-ds-muted">
               {{ corridaDetalle(pieza.corrida) }}
             </span>
           </div>
@@ -103,17 +103,17 @@
         <td class="ds-table__td">
           <div class="flex flex-col items-start gap-0.5">
             <span
-              class="inline-flex items-center whitespace-nowrap rounded-full bg-[var(--ds-primary-soft)] px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-[var(--ds-action-800)]"
+              class="inline-flex items-center whitespace-nowrap rounded-full bg-ds-primary-soft px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-ds-primary-strong"
             >
               {{ pieza.modoConsumo === 'general' ? 'General' : 'Por talla' }}
             </span>
             @if (pieza.modoConsumo === 'general') {
-              <span class="text-xs leading-[18px] text-[var(--ds-text-muted)]">
+              <span class="text-xs leading-[18px] text-ds-muted">
                 {{ pieza.consumoGeneral | number: '1.2-2' }} {{ pieza.unidad }} ·
                 {{ pieza.rendimientoGeneral | number: '1.0-2' }} pzas
               </span>
             } @else {
-              <span class="text-xs leading-[18px] text-[var(--ds-text-muted)]">
+              <span class="text-xs leading-[18px] text-ds-muted">
                 {{ pieza.consumosPorTalla.length }} tallas capturadas
               </span>
             }
@@ -123,7 +123,7 @@
         <td class="ds-table__td">
           @if (pieza.requiereSuaje) {
             <span
-              class="inline-flex max-w-[150px] items-center overflow-hidden text-ellipsis whitespace-nowrap rounded-full border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-[var(--ds-text)]"
+              class="inline-flex max-w-[150px] items-center overflow-hidden text-ellipsis whitespace-nowrap rounded-full border border-ds-line bg-ds-canvas-strong px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-ds-ink"
               [title]="pieza.suaje"
             >
               {{ pieza.suaje }}
@@ -159,28 +159,28 @@
     <ng-template #expandedrow let-pieza>
       <tr>
         <td colspan="9" class="ds-piezas-expansion-cell">
-          <div class="border-t border-[var(--ds-border)] px-6 pb-6 pt-5">
+          <div class="border-t border-ds-line px-6 pb-6 pt-5">
             @if (pieza.modoConsumo === 'general') {
               <div class="flex flex-col gap-4 md:flex-row md:items-end">
                 <div
-                  class="flex flex-col gap-0.5 rounded-lg border border-[var(--ds-border)] bg-[var(--ds-bg-raised)] px-4 py-3 md:w-[220px] md:shrink-0"
+                  class="flex flex-col gap-0.5 rounded-lg border border-ds-line bg-ds-surface px-4 py-3 md:w-[220px] md:shrink-0"
                 >
                   <span class="ds-meta">Consumo general</span>
-                  <span class="text-xl font-semibold leading-7 tabular-nums text-[var(--ds-text)]">
+                  <span class="text-xl font-semibold leading-7 tabular-nums text-ds-ink">
                     {{ pieza.consumoGeneral | number: '1.2-2' }}
-                    <span class="text-xs font-medium leading-[18px] text-[var(--ds-text-muted)]">
+                    <span class="text-xs font-medium leading-[18px] text-ds-muted">
                       {{ pieza.unidad }}
                     </span>
                   </span>
                 </div>
 
                 <div
-                  class="flex flex-col gap-0.5 rounded-lg border border-[var(--ds-border)] bg-[var(--ds-bg-raised)] px-4 py-3 md:w-[220px] md:shrink-0"
+                  class="flex flex-col gap-0.5 rounded-lg border border-ds-line bg-ds-surface px-4 py-3 md:w-[220px] md:shrink-0"
                 >
                   <span class="ds-meta">Rendimiento general</span>
-                  <span class="text-xl font-semibold leading-7 tabular-nums text-[var(--ds-text)]">
+                  <span class="text-xl font-semibold leading-7 tabular-nums text-ds-ink">
                     {{ pieza.rendimientoGeneral | number: '1.0-2' }}
-                    <span class="text-xs font-medium leading-[18px] text-[var(--ds-text-muted)]">
+                    <span class="text-xs font-medium leading-[18px] text-ds-muted">
                       piezas
                     </span>
                   </span>
@@ -194,7 +194,7 @@
             } @else {
               <div class="flex flex-col gap-2">
                 <div class="flex flex-wrap items-baseline justify-between gap-2">
-                  <span class="text-sm font-semibold leading-5 text-[var(--ds-text)]">
+                  <span class="text-sm font-semibold leading-5 text-ds-ink">
                     Consumo por talla
                   </span>
                   <span class="ds-meta">
@@ -203,18 +203,18 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                  <table class="w-full min-w-max border-collapse bg-[var(--ds-bg-raised)]">
+                  <table class="w-full min-w-max border-collapse bg-ds-surface">
                     <thead>
                       <tr>
                         <th
-                          class="border border-[var(--ds-border)] bg-[var(--ds-primary-soft)] px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                          class="border border-ds-line bg-ds-primary-soft px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-ds-muted"
                           scope="col"
                         >
                           Concepto
                         </th>
                         @for (fila of pieza.consumosPorTalla; track fila.talla) {
                           <th
-                            class="border border-[var(--ds-border)] bg-[var(--ds-primary-soft)] px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                            class="border border-ds-line bg-ds-primary-soft px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-ds-muted"
                             scope="col"
                           >
                             {{ fila.talla }}
@@ -225,16 +225,16 @@
                     <tbody>
                       <tr>
                         <th
-                          class="border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                          class="border border-ds-line bg-ds-canvas-strong px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-ds-muted"
                           scope="row"
                         >
                           Consumo ({{ pieza.unidad }})
                         </th>
                         @for (fila of pieza.consumosPorTalla; track fila.talla) {
                           <td
-                            class="border border-[var(--ds-border)] px-3 py-2 text-center text-xs leading-[18px]"
+                            class="border border-ds-line px-3 py-2 text-center text-xs leading-[18px]"
                           >
-                            <span class="font-semibold tabular-nums text-[var(--ds-text)]">
+                            <span class="font-semibold tabular-nums text-ds-ink">
                               {{ fila.consumo | number: '1.2-2' }}
                             </span>
                           </td>
@@ -242,16 +242,16 @@
                       </tr>
                       <tr>
                         <th
-                          class="border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                          class="border border-ds-line bg-ds-canvas-strong px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-ds-muted"
                           scope="row"
                         >
                           Rendimiento (piezas)
                         </th>
                         @for (fila of pieza.consumosPorTalla; track fila.talla) {
                           <td
-                            class="border border-[var(--ds-border)] px-3 py-2 text-center text-xs leading-[18px]"
+                            class="border border-ds-line px-3 py-2 text-center text-xs leading-[18px]"
                           >
-                            <span class="font-semibold tabular-nums text-[var(--ds-text)]">
+                            <span class="font-semibold tabular-nums text-ds-ink">
                               {{ fila.rendimiento | number: '1.0-2' }}
                             </span>
                           </td>
@@ -272,7 +272,7 @@
         <td colspan="9">
           <div class="flex flex-col items-center gap-1 p-6 text-center">
             <span
-              class="mb-1 flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]"
+              class="mb-1 flex h-9 w-9 items-center justify-center rounded-lg bg-ds-primary-soft text-ds-primary"
             >
               <svg pIcon="tags" [size]="18"></svg>
             </span>
@@ -304,7 +304,7 @@
     <section class="flex flex-col gap-4">
       <header class="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h4 class="m-0 text-[15px] font-semibold leading-[22px] text-[var(--ds-text)]">
+          <h4 class="m-0 text-[15px] font-semibold leading-[22px] text-ds-ink">
             Datos de la pieza
           </h4>
           <p class="ds-meta">Identifica la pieza y el material que consume.</p>
@@ -408,7 +408,7 @@
 
         <div class="ds-field md:col-span-2">
           <label
-            class="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-[var(--ds-text)]"
+            class="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-ds-ink"
             for="pieza-requiere-suaje"
           >
             <p-checkbox
@@ -441,10 +441,10 @@
       </div>
     </section>
 
-    <section class="flex flex-col gap-4 border-t border-[var(--ds-border)] pt-6">
+    <section class="flex flex-col gap-4 border-t border-ds-line pt-6">
       <header class="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h4 class="m-0 text-[15px] font-semibold leading-[22px] text-[var(--ds-text)]">
+          <h4 class="m-0 text-[15px] font-semibold leading-[22px] text-ds-ink">
             Consumo y rendimiento
           </h4>
           <p class="ds-meta">Define un consumo general o específico por talla.</p>
@@ -503,7 +503,7 @@
       } @else {
         <div class="flex flex-col gap-2">
           <div class="flex flex-wrap items-baseline justify-between gap-2">
-            <span class="text-sm font-semibold leading-5 text-[var(--ds-text)]">
+            <span class="text-sm font-semibold leading-5 text-ds-ink">
               Consumo por talla
             </span>
             <span class="ds-meta">
@@ -513,18 +513,18 @@
           </div>
 
           <div class="overflow-x-auto">
-            <table class="w-full min-w-max border-collapse bg-[var(--ds-bg-raised)]">
+            <table class="w-full min-w-max border-collapse bg-ds-surface">
               <thead>
                 <tr>
                   <th
-                    class="border border-[var(--ds-border)] bg-[var(--ds-primary-soft)] px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                    class="border border-ds-line bg-ds-primary-soft px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-ds-muted"
                     scope="col"
                   >
                     Concepto
                   </th>
                   @for (fila of consumosForm.controls; track fila) {
                     <th
-                      class="border border-[var(--ds-border)] bg-[var(--ds-primary-soft)] px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                      class="border border-ds-line bg-ds-primary-soft px-3 py-2 text-center text-xs font-semibold leading-[18px] whitespace-nowrap text-ds-muted"
                       scope="col"
                     >
                       {{ fila.controls.talla.value }}
@@ -535,13 +535,13 @@
               <tbody>
                 <tr>
                   <th
-                    class="border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                    class="border border-ds-line bg-ds-canvas-strong px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-ds-muted"
                     scope="row"
                   >
                     Consumo ({{ unidadSeleccionada }})
                   </th>
                   @for (fila of consumosForm.controls; track fila) {
-                    <td class="min-w-[84px] border border-[var(--ds-border)] p-1.5 text-center">
+                    <td class="min-w-[84px] border border-ds-line p-1.5 text-center">
                       <div [formGroup]="fila">
                         <p-inputnumber
                           class="ds-pieza-numero ds-pieza-numero--compact w-full"
@@ -559,13 +559,13 @@
                 </tr>
                 <tr>
                   <th
-                    class="border border-[var(--ds-border)] bg-[var(--ds-canvas-strong)] px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-[var(--ds-text-muted)]"
+                    class="border border-ds-line bg-ds-canvas-strong px-3 py-2 text-left text-xs font-semibold leading-[18px] whitespace-nowrap text-ds-muted"
                     scope="row"
                   >
                     Rendimiento (piezas)
                   </th>
                   @for (fila of consumosForm.controls; track fila) {
-                    <td class="min-w-[84px] border border-[var(--ds-border)] p-1.5 text-center">
+                    <td class="min-w-[84px] border border-ds-line p-1.5 text-center">
                       <div [formGroup]="fila">
                         <p-inputnumber
                           class="ds-pieza-numero ds-pieza-numero--compact w-full"

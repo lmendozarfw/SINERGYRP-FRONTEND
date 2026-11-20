@@ -6,8 +6,14 @@
   --ds-ink: #18283e;
   --ds-ink-muted: #536479;
   --ds-line: #dce3ec;
+  --ds-line-strong: color-mix(in srgb, var(--ds-line) 80%, var(--ds-ink-muted));
   --ds-canvas: #fdfdfd;
   --ds-surface: #ffffff;
+  --ds-on-primary: #ffffff;
+  --ds-on-navy: #ffffff;
+  --ds-on-navy-soft: color-mix(in srgb, var(--ds-on-navy) 14%, transparent);
+  --ds-canvas-inverse: #000000;
+  --ds-canvas-inverse-soft: #1e1e1e;
 
   --ds-success: #15803d;
   --ds-warning: #b45309;
@@ -27,6 +33,8 @@
 
   --ds-primary-hover: color-mix(in srgb, var(--ds-action) 85%, black);
   --ds-primary-active: color-mix(in srgb, var(--ds-action) 72%, black);
+  --ds-primary-strong: var(--ds-action-800);
+  --ds-primary-deep: var(--ds-action-900);
   --ds-primary-soft: color-mix(in srgb, var(--ds-action) 5%, white);
   --ds-primary-ring: color-mix(in srgb, var(--ds-action) 35%, white);
 
@@ -50,6 +58,7 @@
   --ds-bg-raised: var(--ds-surface);
   --ds-border: var(--ds-line);
   --ds-primary: var(--ds-action);
+  --ds-focus-ring: var(--ds-primary-ring);
   --ds-focus-shadow: 0 0 0 3px var(--ds-primary-ring);
   --ds-focus-shadow-danger: 0 0 0 3px var(--ds-danger-ring);
 
@@ -63,37 +72,44 @@
 }
 
 @theme inline {
-  --color-navy-950: var(--ds-navy);
-
-  --color-blue-50: var(--ds-action-50);
-  --color-blue-100: var(--ds-action-100);
-  --color-blue-200: var(--ds-action-200);
-  --color-blue-300: var(--ds-action-300);
-  --color-blue-400: var(--ds-action-400);
-  --color-blue-500: var(--ds-action-500);
-  --color-blue-600: var(--ds-action);
-  --color-blue-700: var(--ds-action-700);
-  --color-blue-800: var(--ds-action-800);
-  --color-blue-900: var(--ds-action-900);
-  --color-blue-950: var(--ds-action-950);
-
-  --color-slate-50: var(--ds-canvas);
-  --color-slate-100: var(--ds-canvas-strong);
-  --color-slate-200: var(--ds-border);
-  --color-slate-600: var(--ds-text-muted);
-  --color-slate-900: var(--ds-text);
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-inherit: inherit;
 
   --color-ds-primary: var(--ds-primary);
+  --color-ds-primary-hover: var(--ds-primary-hover);
   --color-ds-primary-soft: var(--ds-primary-soft);
-  --color-ds-ink: var(--ds-text);
-  --color-ds-muted: var(--ds-text-muted);
-  --color-ds-line: var(--ds-border);
-  --color-ds-canvas: var(--ds-bg);
-  --color-ds-surface: var(--ds-bg-raised);
+  --color-ds-primary-strong: var(--ds-primary-strong);
+  --color-ds-primary-deep: var(--ds-primary-deep);
+  --color-ds-ink: var(--ds-ink);
+  --color-ds-ink-soft: var(--ds-ink-soft);
+  --color-ds-muted: var(--ds-ink-muted);
+  --color-ds-line: var(--ds-line);
+  --color-ds-line-strong: var(--ds-line-strong);
+  --color-ds-canvas: var(--ds-canvas);
+  --color-ds-canvas-strong: var(--ds-canvas-strong);
+  --color-ds-canvas-inverse: var(--ds-canvas-inverse);
+  --color-ds-canvas-inverse-soft: var(--ds-canvas-inverse-soft);
+  --color-ds-surface: var(--ds-surface);
+  --color-ds-on-primary: var(--ds-on-primary);
+  --color-ds-on-navy: var(--ds-on-navy);
+  --color-ds-on-navy-soft: var(--ds-on-navy-soft);
   --color-ds-navy: var(--ds-navy);
+  --color-ds-navy-line: var(--ds-navy-line);
+  --color-ds-navy-muted: var(--ds-navy-muted);
+  --color-ds-navy-hover: var(--ds-navy-hover);
   --color-ds-success: var(--ds-success);
+  --color-ds-success-soft: var(--ds-success-soft);
+  --color-ds-success-line: var(--ds-success-line);
   --color-ds-warning: var(--ds-warning);
+  --color-ds-warning-soft: var(--ds-warning-soft);
+  --color-ds-warning-line: var(--ds-warning-line);
   --color-ds-danger: var(--ds-danger);
+  --color-ds-danger-soft: var(--ds-danger-soft);
+  --color-ds-danger-line: var(--ds-danger-line);
+  --color-ds-focus: var(--ds-focus-ring);
 
+  --shadow-ds-focus: var(--ds-focus-shadow);
   --font-sans: var(--ds-font);
 }

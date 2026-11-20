@@ -27,8 +27,8 @@ interface UserActionItem extends MenuItem {
   host: { class: 'block h-full' },
   imports: [Menu, PIcon],
   template: `
-    <div class="flex h-full w-full flex-col border-r border-[var(--ds-navy-line)] bg-navy-950 text-white">
-      <div class="flex items-center gap-3 border-b border-[var(--ds-navy-line)] py-6"
+    <div class="flex h-full w-full flex-col border-r border-ds-navy-line bg-ds-navy text-ds-on-navy">
+      <div class="flex items-center gap-3 border-b border-ds-navy-line py-6"
         [class.px-4]="!isCollapsed()" [class.px-2]="isCollapsed()"
         [class.justify-center]="isCollapsed()">
         <img
@@ -40,12 +40,12 @@ interface UserActionItem extends MenuItem {
         @if (!isCollapsed()) {
           <button
             type="button"
-            class="flex min-w-0 flex-1 items-center gap-3 border-0 bg-transparent p-0 text-left text-inherit cursor-pointer focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none"
+            class="flex min-w-0 flex-1 items-center gap-3 border-0 bg-transparent p-0 text-left text-inherit cursor-pointer focus-visible:shadow-ds-focus focus-visible:outline-none"
             (click)="workspaceMenu.toggle($event)"
           >
             <span class="min-w-0">
-              <span class="block truncate text-sm font-semibold text-white">{{ selectedWorkspace() }}</span>
-              <span class="block truncate text-xs leading-[18px] text-[var(--ds-navy-muted)]">{{
+              <span class="block truncate text-sm font-semibold text-ds-on-navy">{{ selectedWorkspace() }}</span>
+              <span class="block truncate text-xs leading-[18px] text-ds-navy-muted">{{
                 selectedWorkspaceItem().detail
               }}</span>
             </span>
@@ -80,7 +80,7 @@ interface UserActionItem extends MenuItem {
       </div>
 
       @if (!isCollapsed()) {
-        <p class="px-4 pt-6 pb-2 text-xs font-semibold leading-[18px] tracking-[0.08em] text-[var(--ds-navy-muted)] uppercase">Principal</p>
+        <p class="px-4 pt-6 pb-2 text-xs font-semibold leading-[18px] tracking-[0.08em] text-ds-navy-muted uppercase">Principal</p>
       } @else {
         <div class="h-4"></div>
       }
@@ -90,7 +90,7 @@ interface UserActionItem extends MenuItem {
           @if (item.children?.length) {
             <button
               type="button"
-              class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]"
+              class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent text-left text-sm font-medium text-ds-navy-muted transition-colors hover:bg-ds-navy-hover hover:text-ds-on-navy focus-visible:shadow-ds-focus focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-ds-on-primary data-[active=true]:hover:bg-ds-primary-hover"
               [class.px-3]="!isCollapsed()" [class.px-0]="isCollapsed()"
               [class.justify-center]="isCollapsed()"
               [attr.data-active]="isItemActive(item) ? 'true' : null"
@@ -102,18 +102,18 @@ interface UserActionItem extends MenuItem {
               @if (!isCollapsed()) {
                 <span class="truncate">{{ item.label }}</span>
                 @if (item.badge) {
-                  <span class="ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-[rgba(255,255,255,0.14)] px-1.5 text-xs leading-[18px] text-white">{{ item.badge }}</span>
+                  <span class="ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-ds-on-navy-soft px-1.5 text-xs leading-[18px] text-ds-on-navy">{{ item.badge }}</span>
                 }
                 <svg pIcon="chevron-down" [size]="12" class="ml-auto shrink-0 transition-transform" [class.rotate-180]="isSubmenuOpen(item.label)"></svg>
               }
             </button>
 
             @if (!isCollapsed() && isSubmenuOpen(item.label)) {
-              <div class="ml-9 flex flex-col gap-0.5 border-l border-[var(--ds-navy-line)] pl-3">
+              <div class="ml-9 flex flex-col gap-0.5 border-l border-ds-navy-line pl-3">
                 @for (child of item.children; track child.label) {
                   <button
                     type="button"
-                    class="flex h-9 w-full items-center gap-2 rounded-md border-0 bg-transparent px-3 text-left text-xs font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]"
+                    class="flex h-9 w-full items-center gap-2 rounded-md border-0 bg-transparent px-3 text-left text-xs font-medium text-ds-navy-muted transition-colors hover:bg-ds-navy-hover hover:text-ds-on-navy focus-visible:shadow-ds-focus focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-ds-on-primary data-[active=true]:hover:bg-ds-primary-hover"
                     [attr.data-active]="activeItem() === child.label ? 'true' : null"
                     [attr.aria-current]="activeItem() === child.label ? 'page' : null"
                     [attr.title]="child.label"
@@ -128,7 +128,7 @@ interface UserActionItem extends MenuItem {
           } @else {
             <button
               type="button"
-              class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]"
+              class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent text-left text-sm font-medium text-ds-navy-muted transition-colors hover:bg-ds-navy-hover hover:text-ds-on-navy focus-visible:shadow-ds-focus focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-ds-on-primary data-[active=true]:hover:bg-ds-primary-hover"
               [class.px-3]="!isCollapsed()" [class.px-0]="isCollapsed()"
               [class.justify-center]="isCollapsed()"
               [attr.data-active]="activeItem() === item.label ? 'true' : null"
@@ -140,7 +140,7 @@ interface UserActionItem extends MenuItem {
               @if (!isCollapsed()) {
                 <span class="truncate">{{ item.label }}</span>
                 @if (item.badge) {
-                  <span class="ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-[rgba(255,255,255,0.14)] px-1.5 text-xs leading-[18px] text-white">{{ item.badge }}</span>
+                  <span class="ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-md bg-ds-on-navy-soft px-1.5 text-xs leading-[18px] text-ds-on-navy">{{ item.badge }}</span>
                 }
               }
             </button>
@@ -148,17 +148,17 @@ interface UserActionItem extends MenuItem {
         }
       </nav>
 
-      <div class="mx-3 my-4 h-px bg-[var(--ds-navy-line)]"></div>
+      <div class="mx-3 my-4 h-px bg-ds-navy-line"></div>
 
       @if (!isCollapsed()) {
-        <p class="px-4 pt-6 pb-2 text-xs font-semibold leading-[18px] tracking-[0.08em] text-[var(--ds-navy-muted)] uppercase">Configuración</p>
+        <p class="px-4 pt-6 pb-2 text-xs font-semibold leading-[18px] tracking-[0.08em] text-ds-navy-muted uppercase">Configuración</p>
       }
 
       <nav class="flex flex-col gap-1 px-3" aria-label="Configuración">
         @for (item of secondaryItems; track item.label) {
           <button
             type="button"
-            class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]"
+            class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent text-left text-sm font-medium text-ds-navy-muted transition-colors hover:bg-ds-navy-hover hover:text-ds-on-navy focus-visible:shadow-ds-focus focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-ds-on-primary data-[active=true]:hover:bg-ds-primary-hover"
             [class.px-3]="!isCollapsed()" [class.px-0]="isCollapsed()"
             [class.justify-center]="isCollapsed()"
             [attr.data-active]="activeItem() === item.label ? 'true' : null"
@@ -181,17 +181,17 @@ interface UserActionItem extends MenuItem {
         }
       </nav>
 
-      <div class="mt-auto border-t border-[var(--ds-navy-line)] px-4 py-4 text-xs leading-[18px] text-[var(--ds-navy-muted)]">
-        <button type="button" class="group flex w-full cursor-pointer items-center gap-3 border-0 bg-transparent p-0 text-left text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none" (click)="userMenu.toggle($event)">
+      <div class="mt-auto border-t border-ds-navy-line px-4 py-4 text-xs leading-[18px] text-ds-navy-muted">
+        <button type="button" class="group flex w-full cursor-pointer items-center gap-3 border-0 bg-transparent p-0 text-left text-ds-on-navy focus-visible:shadow-ds-focus focus-visible:outline-none" (click)="userMenu.toggle($event)">
           <span
-            class="flex size-8 shrink-0 items-center justify-center rounded-full bg-blue-700 text-xs font-semibold text-white"
+            class="flex size-8 shrink-0 items-center justify-center rounded-full bg-ds-primary-strong text-xs font-semibold text-ds-on-navy"
           >
             LM
           </span>
           @if (!isCollapsed()) {
             <span class="min-w-0">
-              <span class="block truncate text-white">Luis Mendoza</span>
-              <span class="block truncate text-[var(--ds-navy-muted)] group-hover:text-white">Empleado · #5366</span>
+              <span class="block truncate text-ds-on-navy">Luis Mendoza</span>
+              <span class="block truncate text-ds-navy-muted group-hover:text-ds-on-navy">Empleado · #5366</span>
             </span>
             <svg pIcon="ellipsis-v" [size]="16" class="ml-auto shrink-0"></svg>
           }
@@ -250,17 +250,20 @@ export class SidebarComponent {
       label: 'Tesoreria',
       icon: 'dollar',
       children: [
-        { label: 'Cuentas por cobrar', icon: 'wallet', route: '/app/configuration' },
-        { label: 'Cuentas por pagar', icon: 'credit-card', route: '/app/configuration' },
-        { label: 'Clientes', icon: 'users', route: '/app/clients' },
+        { label: 'Cuentas por cobrar', icon: 'wallet', route: '/app/cuentas-por-cobrar' },
+        { label: 'Cuentas por pagar', icon: 'credit-card', route: '/app/cuentas-por-pagar' },
+        { label: 'Clientes', icon: 'users', route: '/app/clientes' },
+        { label: 'Proveedores', icon: 'shopping-cart', route: '/app/proveedores' },
+        { label: 'Facturas', icon: 'receipt', route: '/app/clientes' },
+        { label: 'Aplicaciones de cobros', icon: 'credit-card', route: '/app/clientes' },
       ],
     },
     {
       label: 'Ingeniería de producto',
       icon: 'wrench',
-      route: '/app/product-engineering/new-product',
+      route: '/app/ingenieria-producto/nuevo-producto',
     },
-    { label: 'Operaciones', icon: 'inbox', route: '/app/configuration', badge: '3' },
+    { label: 'Diseño y desarrollo', icon: 'inbox', route: '/app/configuration', badge: '3' },
     { label: 'Reportes', icon: 'chart-bar', route: '/app/configuration' },
     { label: 'Búsquedas', icon: 'search', route: '/app/configuration' },
   ];

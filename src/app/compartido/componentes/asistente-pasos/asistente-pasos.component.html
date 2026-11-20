@@ -21,11 +21,11 @@
                             <span
                                 class="flex size-7 min-w-7 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors"
                                 [ngClass]="{
-                                    'border-ds-primary bg-ds-primary text-white':
+                                    'border-ds-primary bg-ds-primary text-ds-on-primary':
                                         !estaBloqueado(paso) && (pasoActivo() === paso.id || estaCompletado(paso)),
-                                    'border-slate-100 bg-slate-100 text-slate-600':
+                                    'border-ds-canvas-strong bg-ds-canvas-strong text-ds-muted':
                                         !estaCompletado(paso) && pasoActivo() !== paso.id && !estaBloqueado(paso),
-                                    'border-slate-200 bg-slate-100 text-ds-ink/70': estaBloqueado(paso)
+                                    'border-ds-line bg-ds-canvas-strong text-ds-ink/70': estaBloqueado(paso)
                                 }">
                                 @if (estaCompletado(paso)) {
                                 <svg pIcon="check" [size]="16"></svg>
@@ -39,7 +39,7 @@
                         </button>
 
                         @if (!$last) {
-                        <span class="mx-2 h-0.5 flex-1 rounded-full transition-colors" [class.bg-slate-200]="!estaCompletado(paso)"
+                        <span class="mx-2 h-0.5 flex-1 rounded-full transition-colors" [class.bg-ds-line]="!estaCompletado(paso)"
                             [class.bg-ds-primary]="estaCompletado(paso)"></span>
                         }
 
@@ -48,7 +48,7 @@
                     <span class="text-[11px] font-medium leading-4 transition-colors" [ngClass]="{
                                 'text-ds-primary': !estaBloqueado(paso) && pasoActivo() === paso.id,
                                 'text-ds-ink/70': estaBloqueado(paso),
-                                'text-slate-600': !estaBloqueado(paso) && pasoActivo() !== paso.id
+                                'text-ds-muted': !estaBloqueado(paso) && pasoActivo() !== paso.id
                             }">
                         {{ paso.titulo }}
                     </span>

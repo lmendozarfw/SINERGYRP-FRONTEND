@@ -1,15 +1,15 @@
 <section class="flex flex-col gap-6">
   <header class="flex flex-col gap-1">
-    <h3 class="text-[15px] font-semibold leading-[22px] text-slate-900">Atributos de la combinación</h3>
-    <p class="text-[13px] leading-5 text-slate-600">
+    <h3 class="text-[15px] font-semibold leading-[22px] text-ds-ink">Atributos de la combinación</h3>
+    <p class="text-[13px] leading-5 text-ds-muted">
       Selecciona un valor para cada atributo. El código se genera automáticamente con los valores elegidos.
     </p>
   </header>
 
-  <div class="flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-100 p-4">
+  <div class="flex items-center justify-between gap-4 rounded-xl border border-ds-line bg-ds-canvas-strong p-4">
     <div>
-      <span class="block text-[11px] font-semibold uppercase leading-4 tracking-[0.04em] text-slate-600">Modelo base</span>
-      <span class="mt-0.5 block text-base font-semibold leading-6 text-slate-900">{{ modeloBase() }}</span>
+      <span class="block text-[11px] font-semibold uppercase leading-4 tracking-[0.04em] text-ds-muted">Modelo base</span>
+      <span class="mt-0.5 block text-base font-semibold leading-6 text-ds-ink">{{ modeloBase() }}</span>
     </div>
     <p-tag value="En proceso" severity="warn" />
   </div>
@@ -38,23 +38,23 @@
     }
   </div>
 
-  <div class="flex flex-col gap-3 rounded-xl border border-dashed border-slate-200 bg-white p-4">
+  <div class="flex flex-col gap-3 rounded-xl border border-dashed border-ds-line bg-ds-surface p-4">
     <div class="flex items-center justify-between gap-3">
-      <span class="block text-[11px] font-semibold uppercase leading-4 tracking-[0.04em] text-slate-600">Código de la combinación</span>
+      <span class="block text-[11px] font-semibold uppercase leading-4 tracking-[0.04em] text-ds-muted">Código de la combinación</span>
       @if (todosSeleccionados()) {
         <p-tag value="Completo" severity="success" />
       } @else {
         <p-tag value="Incompleto" severity="warn" />
       }
     </div>
-    <div class="wrap-anywhere rounded-lg bg-slate-100 px-3.5 py-3 font-mono text-[15px] font-semibold tracking-[0.06em] text-slate-900">{{ codigo() }}</div>
+    <div class="wrap-anywhere rounded-lg bg-ds-canvas-strong px-3.5 py-3 font-mono text-[15px] font-semibold tracking-[0.06em] text-ds-ink">{{ codigo() }}</div>
     <div class="flex flex-wrap gap-2">
       @for (item of resumen(); track item.id) {
         <span
           class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs leading-[18px]"
           [class]="item.etiqueta === 'Sin seleccionar'
-            ? 'bg-slate-100 text-slate-600'
-            : 'bg-blue-50 text-blue-800'"
+            ? 'bg-ds-canvas-strong text-ds-muted'
+            : 'bg-ds-primary-soft text-ds-primary-strong'"
         >
           <span class="font-semibold">{{ item.nombre }}</span>
           <span class="opacity-90">{{ item.etiqueta }}</span>

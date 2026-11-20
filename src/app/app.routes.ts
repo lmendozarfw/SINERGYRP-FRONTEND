@@ -6,7 +6,7 @@ export const routes: Routes = [
     loadComponent: () => import('./compartido/plantillas/auth.plantilla').then((t) => t.AuthTemplate),
     children: [
       {
-        path: 'login',
+        path: 'inicio-sesion',
         loadComponent: () =>
           import('./funcionalidades/auth/paginas/login/login.pagina').then((p) => p.LoginPage),
       },
@@ -18,16 +18,16 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'clients',
+        redirectTo: 'clientes',
         pathMatch: 'full',
       },
       {
-        path: 'clients',
+        path: 'clientes',
         loadComponent: () =>
           import('./funcionalidades/clientes/paginas/clientes.pagina').then((p) => p.ClientsPage),
       },
       {
-        path: 'product-engineering/new-product',
+        path: 'ingenieria-producto/nuevo-producto',
         loadComponent: () =>
           import('./funcionalidades/ingenieria-producto/paginas/nuevo-producto/nuevo-producto.pagina').then(
             (p) => p.NewProductPage,
@@ -36,7 +36,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'design-system',
+    path: 'sistem-diseno',
     loadComponent: () =>
       import('./funcionalidades/design-system/pages/design-system-showcase.page').then(
         (p) => p.DesignSystemShowcasePage,
@@ -44,6 +44,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'auth/login',
+    redirectTo: 'auth/inicio-sesion',
   },
 ];

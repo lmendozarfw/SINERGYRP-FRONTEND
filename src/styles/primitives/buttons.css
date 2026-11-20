@@ -9,7 +9,7 @@
   border: 1px solid transparent;
   border-radius: var(--ds-radius-button);
   background: var(--ds-primary);
-  color: #ffffff;
+  color: var(--ds-on-primary);
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
@@ -27,7 +27,7 @@
 .ds-button:hover:not(:disabled) {
   background: var(--ds-primary-hover);
   border-color: transparent;
-  color: #ffffff;
+  color: var(--ds-on-primary);
 }
 
 .ds-button.p-button:active:not(:disabled):not(.p-disabled),

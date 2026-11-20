@@ -39,7 +39,7 @@ const AppTheme = definePreset(Aura, {
       900: 'var(--ds-action-900)',
       950: 'var(--ds-action-950)',
       color: 'var(--ds-primary)',
-      contrastColor: '#ffffff',
+      contrastColor: 'var(--ds-on-primary)',
       hoverColor: 'var(--ds-primary-hover)',
       activeColor: 'var(--ds-primary-active)',
     },

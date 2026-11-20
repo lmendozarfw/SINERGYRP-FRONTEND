@@ -6,19 +6,19 @@ import { PIcon } from '@primeicons/angular';
   selector: 'auth-template',
   imports: [RouterOutlet, PIcon],
   template: `
-    <div class="flex min-h-screen bg-slate-50">
+    <div class="flex min-h-screen bg-ds-canvas">
       <section
-        class="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-linear-to-br from-navy-950 via-navy-950 to-blue-900 px-12 py-12 text-white lg:flex"
+        class="relative hidden w-1/2 flex-col justify-between overflow-hidden bg-linear-to-br from-ds-navy via-ds-navy to-ds-primary-deep px-12 py-12 text-ds-on-navy lg:flex"
       >
         <div class="relative z-10 flex items-center gap-3">
           <div
-            class="flex size-10 items-center justify-center rounded-lg bg-blue-600 text-base font-semibold text-white"
+            class="flex size-10 items-center justify-center rounded-lg bg-ds-primary text-base font-semibold text-ds-on-primary"
           >
             S
           </div>
           <div>
             <p class="text-sm font-semibold">SINERGYRP</p>
-            <p class="ds-meta text-white/60!">Sistema de administración y manufactura</p>
+            <p class="ds-meta text-ds-on-navy/60!">Sistema de administración y manufactura</p>
           </div>
         </div>
 
@@ -26,14 +26,14 @@ import { PIcon } from '@primeicons/angular';
           <h1 class="ds-display mb-2">Tu empresa.</h1>
           <h1 class="ds-display mb-2">Conectada.</h1>
           <h1 class="ds-display">Bajo control.</h1>
-          <p class="ds-body mt-6 text-white/70!">
+          <p class="ds-body mt-6 text-ds-on-navy/70!">
 Una visión integral para tomar mejores decisiones
 y avanzar con confianza.          </p>
 
           <div class="mt-12 flex flex-col gap-4">
             <div class="flex items-center gap-3">
               <span
-                class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/10"
+                class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-ds-on-navy/10"
               >
                 <svg pIcon="check-circle" [size]="20"></svg>
               </span>
@@ -41,7 +41,7 @@ y avanzar con confianza.          </p>
             </div>
             <div class="flex items-center gap-3">
               <span
-                class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/10"
+                class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-ds-on-navy/10"
               >
                 <svg pIcon="qrcode" [size]="20"></svg>
               </span>
@@ -49,7 +49,7 @@ y avanzar con confianza.          </p>
             </div>
             <div class="flex items-center gap-3">
               <span
-                class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/10"
+                class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-ds-on-navy/10"
               >
                 <svg pIcon="chart-bar" [size]="20"></svg>
               </span>
@@ -58,13 +58,13 @@ y avanzar con confianza.          </p>
           </div>
         </div>
 
-        <p class="ds-meta relative z-10 text-white/50!">© 2026  SINERGYERP · Espacio corporativo</p>
+        <p class="ds-meta relative z-10 text-ds-on-navy/50!">© 2026  SINERGYERP · Espacio corporativo</p>
 
         <div
-          class="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-blue-600/20 blur-3xl"
+          class="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-ds-primary/20 blur-3xl"
         ></div>
         <div
-          class="pointer-events-none absolute -bottom-32 -left-24 size-80 rounded-full bg-blue-600/10 blur-3xl"
+          class="pointer-events-none absolute -bottom-32 -left-24 size-80 rounded-full bg-ds-primary/10 blur-3xl"
         ></div>
       </section>
 

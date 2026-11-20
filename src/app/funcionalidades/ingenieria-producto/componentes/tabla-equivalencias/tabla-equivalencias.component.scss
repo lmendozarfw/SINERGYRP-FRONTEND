@@ -68,7 +68,7 @@
 
 .ds-tabla-badge--principal {
   background: var(--ds-primary);
-  color: #ffffff;
+  color: var(--ds-on-primary);
 }
 
 :host ::ng-deep .ds-tabla-sistema-col {

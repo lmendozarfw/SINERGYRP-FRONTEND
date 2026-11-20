@@ -55,7 +55,7 @@
   justify-content: center;
   border-radius: var(--ds-radius-input);
   background: var(--ds-navy);
-  color: #ffffff;
+  color: var(--ds-on-navy);
   font-size: 14px;
   font-weight: 600;
 }

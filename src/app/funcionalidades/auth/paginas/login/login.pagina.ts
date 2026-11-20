@@ -182,6 +182,6 @@ export class LoginPage {
   }
 
   private async entrar(): Promise<void> {
-    await this.router.navigate(['/app/clients']);
+    await this.router.navigate(['/app/clientes']);
   }
 }

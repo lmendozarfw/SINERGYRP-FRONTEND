@@ -75,11 +75,11 @@ import { PIcon } from '@primeicons/angular';
         align-items: center;
         gap: 12px;
         padding: 10px 12px 10px 14px;
-        border: 1px solid rgb(255 255 255 / 10%);
+        border: 1px solid color-mix(in srgb, var(--ds-on-navy) 10%, transparent);
         border-radius: 14px;
         background: var(--ds-navy);
-        box-shadow: 0 18px 40px rgb(16 29 48 / 28%);
-        color: #fff;
+        box-shadow: 0 18px 40px color-mix(in srgb, var(--ds-navy) 28%, transparent);
+        color: var(--ds-on-navy);
         backdrop-filter: blur(12px);
       }
 
@@ -99,14 +99,14 @@ import { PIcon } from '@primeicons/angular';
         padding: 0 8px;
         border-radius: 999px;
         background: var(--ds-primary);
-        color: #fff;
+        color: var(--ds-on-primary);
         font-size: 13px;
         font-weight: 600;
         font-variant-numeric: tabular-nums;
       }
 
       .ds-bulk-bar__label {
-        color: rgb(255 255 255 / 78%);
+        color: color-mix(in srgb, var(--ds-on-navy) 78%, transparent);
         font-size: 13px;
         font-weight: 500;
       }
@@ -114,7 +114,7 @@ import { PIcon } from '@primeicons/angular';
       .ds-bulk-bar__divider {
         width: 1px;
         height: 24px;
-        background: rgb(255 255 255 / 14%);
+        background: var(--ds-on-navy-soft);
       }
 
       .ds-bulk-bar__actions {
@@ -132,7 +132,7 @@ import { PIcon } from '@primeicons/angular';
         border: 0;
         border-radius: 8px;
         background: transparent;
-        color: rgb(255 255 255 / 82%);
+        color: color-mix(in srgb, var(--ds-on-navy) 82%, transparent);
         font: inherit;
         font-size: 13px;
         font-weight: 500;
@@ -148,33 +148,33 @@ import { PIcon } from '@primeicons/angular';
       }
 
       .ds-bulk-bar__action:hover {
-        background: rgb(255 255 255 / 10%);
-        color: #fff;
+        background: color-mix(in srgb, var(--ds-on-navy) 10%, transparent);
+        color: var(--ds-on-navy);
       }
 
       .ds-bulk-bar__action--danger {
-        color: #fca5a5;
+        color: color-mix(in srgb, var(--ds-danger) 45%, white);
       }
 
       .ds-bulk-bar__action--danger:hover {
-        background: rgb(220 38 38 / 18%);
-        color: #fecaca;
+        background: color-mix(in srgb, var(--ds-danger) 18%, transparent);
+        color: color-mix(in srgb, var(--ds-danger) 25%, white);
       }
 
       .ds-bulk-bar__close {
         width: 34px;
         padding: 0;
-        color: rgb(255 255 255 / 60%);
+        color: color-mix(in srgb, var(--ds-on-navy) 60%, transparent);
       }
 
       .ds-bulk-bar__close:hover {
-        background: rgb(255 255 255 / 10%);
-        color: #fff;
+        background: color-mix(in srgb, var(--ds-on-navy) 10%, transparent);
+        color: var(--ds-on-navy);
       }
 
       .ds-bulk-bar__action:focus-visible,
       .ds-bulk-bar__close:focus-visible {
-        outline: 2px solid #93c5fd;
+        outline: 2px solid var(--ds-focus-ring);
         outline-offset: 2px;
       }
 

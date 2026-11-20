@@ -78,13 +78,13 @@
 .ds-pasos-drawer__circulo--activo {
   border-color: var(--ds-primary);
   background: var(--ds-primary);
-  color: #fff;
+  color: var(--ds-on-primary);
 }
 
 .ds-pasos-drawer__circulo--completado {
   border-color: var(--ds-primary);
   background: var(--ds-primary);
-  color: #fff;
+  color: var(--ds-on-primary);
 }
 
 .ds-pasos-drawer__circulo--bloqueado {
