@@ -6,7 +6,7 @@
   --ds-ink: #18283e;
   --ds-ink-muted: #536479;
   --ds-line: #dce3ec;
-  --ds-canvas: #f6f8fb;
+  --ds-canvas: #fdfdfd;
   --ds-surface: #ffffff;
 
   --ds-success: #15803d;
@@ -31,7 +31,7 @@
   --ds-primary-ring: color-mix(in srgb, var(--ds-action) 35%, white);
 
   --ds-ink-soft: color-mix(in srgb, var(--ds-ink) 70%, white);
-  --ds-canvas-strong: color-mix(in srgb, var(--ds-canvas) 90%, var(--ds-line));
+  --ds-canvas-strong: color-mix(in srgb, var(--ds-canvas) 50%, var(--ds-line));
   --ds-navy-hover: color-mix(in srgb, var(--ds-navy) 88%, white);
   --ds-navy-line: color-mix(in srgb, var(--ds-navy) 80%, white);
   --ds-navy-muted: color-mix(in srgb, white 65%, var(--ds-navy));

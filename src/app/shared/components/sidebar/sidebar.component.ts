@@ -67,11 +67,11 @@ interface UserActionItem extends MenuItem {
   template: `
     <div class="ds-sidebar flex h-full flex-col" [class.ds-sidebar--collapsed]="isCollapsed()">
       <div class="ds-sidebar__header">
-        <div
-          class="flex size-8 shrink-0 items-center justify-center rounded-md bg-blue-600 text-sm font-semibold text-white"
-        >
-          {{ selectedWorkspaceItem().initial }}
-        </div>
+        <img
+          src="assets/imagenes/isotipo-sinergy.png"
+          alt="Sinergy"
+          class="size-8 shrink-0 object-contain"
+        />
 
         @if (!isCollapsed()) {
           <button
