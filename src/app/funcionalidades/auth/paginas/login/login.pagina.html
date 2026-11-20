@@ -112,6 +112,7 @@
         </div>
         <button
           type="button"
+          pButton
           class="ds-button ds-button--text ds-button--compact"
           (click)="recoverPassword()"
         >
@@ -134,7 +135,7 @@
 
   <div class="ds-divider"></div>
 
-  <button type="button" class="ds-button ds-button--secondary w-full" (click)="toggleMode()">
+  <button type="button" pButton class="ds-button ds-button--secondary w-full" (click)="toggleMode()">
     @if (mode() === 'qr') {
       <svg pIcon="pencil" [size]="16"></svg>
     } @else {

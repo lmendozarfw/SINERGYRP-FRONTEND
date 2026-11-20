@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { ButtonDirective } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
@@ -9,6 +10,7 @@ import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { PIcon } from '@primeicons/angular';
 import { BulkActionsBarComponent } from '../../../compartido/componentes/bulk-actions-bar/bulk-actions-bar.component';
+import { CopiarTextoComponent } from '../../../compartido/componentes/copiar-texto/copiar-texto.component';
 import { FormLabelComponent } from '../../../compartido/componentes/form-label/form-label.component';
 import { MensajeAyudaErrorComponent } from '../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { EncabezadoPaginaComponent } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
@@ -27,6 +29,7 @@ interface SelectOption {
   host: { class: 'block' },
   imports: [
     DecimalPipe,
+    ButtonDirective,
     Drawer,
     IconField,
     InputIcon,
@@ -35,6 +38,7 @@ interface SelectOption {
     TableModule,
     Tag,
     BulkActionsBarComponent,
+    CopiarTextoComponent,
     FormLabelComponent,
     MensajeAyudaErrorComponent,
     EncabezadoPaginaComponent,

@@ -4,6 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ConfirmationService } from 'primeng/api';
+import { ButtonDirective } from 'primeng/button';
 import { Checkbox } from 'primeng/checkbox';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { Drawer } from 'primeng/drawer';
@@ -59,6 +60,7 @@ type ConsumoFormGroup = FormGroup<{
   imports: [
     DecimalPipe,
     ReactiveFormsModule,
+    ButtonDirective,
     Checkbox,
     ConfirmDialog,
     Drawer,

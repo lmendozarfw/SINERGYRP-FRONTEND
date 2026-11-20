@@ -3,7 +3,7 @@
     titulo="Clientes"
     descripcion="Consulta la información fiscal y comercial de tus clientes, y administra sus condiciones de crédito desde un solo lugar."
   >
-    <button type="button" class="ds-button" (click)="openDrawer()">
+    <button type="button" pButton class="ds-button" (click)="openDrawer()">
       <svg pIcon="plus" [size]="16"></svg>
       Nuevo cliente
     </button>
@@ -39,7 +39,7 @@
       placeholder="Régimen fiscal"
       aria-label="Filtrar por régimen fiscal"
     />
-    <button type="button" class="ds-button ds-button--secondary shrink-0">
+    <button type="button" pButton class="ds-button ds-button--secondary shrink-0">
       <svg pIcon="filter" [size]="14"></svg>
       Filtros
     </button>
@@ -111,13 +111,17 @@
                 {{ client.nombre_razon_social.charAt(0) }}
               </span>
               <span class="min-w-0">
-                <span class="block truncate text-sm font-semibold leading-5 text-ds-ink">{{ client.nombre_razon_social }}</span>
+                <app-copiar-texto
+                  [valor]="client.nombre_razon_social"
+                  etiqueta="Cliente"
+                  variante="nombre"
+                />
                 <span class="block text-xs leading-[18px] text-ds-muted">{{ client.nombre_comercial }}</span>
               </span>
             </div>
           </td>
           <td>
-            <span class="block font-mono text-xs leading-[18px] tracking-[0.03em] text-ds-muted">{{ client.rfc }}</span>
+            <app-copiar-texto [valor]="client.rfc" etiqueta="RFC" />
           </td>
           <td>
             <p-tag
@@ -341,12 +345,13 @@
     <div class="flex justify-end gap-2">
       <button
         type="button"
+        pButton
         class="ds-button ds-button--secondary"
         (click)="drawerVisible.set(false)"
       >
         Cancelar
       </button>
-      <button type="button" class="ds-button">Guardar cliente</button>
+      <button type="button" pButton class="ds-button">Guardar cliente</button>
     </div>
   </ng-template>
 </p-drawer>

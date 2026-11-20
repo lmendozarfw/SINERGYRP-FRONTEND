@@ -166,14 +166,7 @@ interface UserActionItem extends MenuItem {
             [attr.title]="item.label"
             (click)="open(item)"
           >
-            @switch (item.icon) {
-              @case ('cog') {
-                <svg pIcon="cog" [size]="16" class="shrink-0"></svg>
-              }
-              @default {
-                <svg pIcon="question-circle" [size]="16" class="shrink-0"></svg>
-              }
-            }
+            <svg [pIcon]="item.icon" [size]="16" class="shrink-0"></svg>
             @if (!isCollapsed()) {
               <span class="truncate">{{ item.label }}</span>
             }
@@ -211,20 +204,7 @@ interface UserActionItem extends MenuItem {
               (click)="handleUserAction($any(item), userMenu)"
             >
               <span class="ds-menu-item__icon">
-                @switch ($any(item).key) {
-                  @case ('profile') {
-                    <svg pIcon="user" [size]="16"></svg>
-                  }
-                  @case ('settings') {
-                    <svg pIcon="cog" [size]="16"></svg>
-                  }
-                  @case ('help') {
-                    <svg pIcon="question-circle" [size]="16"></svg>
-                  }
-                  @default {
-                    <svg pIcon="sign-out" [size]="16"></svg>
-                  }
-                }
+                <svg [pIcon]="$any(item).key" [size]="16"></svg>
               </span>
               <span class="ds-menu-item__title">{{ item.label }}</span>
             </button>

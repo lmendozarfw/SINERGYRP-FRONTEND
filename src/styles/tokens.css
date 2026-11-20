@@ -1,3 +1,75 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_18pt-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_18pt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_18pt-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500 600;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_18pt-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_18pt-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display 24';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_24pt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display 24';
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_24pt-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display 28';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_28pt-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter Display 28';
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+  src: url('/fuentes/Inter/Inter_28pt-Bold.ttf') format('truetype');
+}
+
 :root {
   color-scheme: light;
 
@@ -63,6 +135,8 @@
   --ds-focus-shadow-danger: 0 0 0 3px var(--ds-danger-ring);
 
   --ds-font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ds-font-display: 'Inter Display 24', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --ds-font-display-xl: 'Inter Display 28', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --ds-radius-button: 6px;
   --ds-radius-input: 8px;
   --ds-radius-card: 12px;
@@ -112,4 +186,6 @@
 
   --shadow-ds-focus: var(--ds-focus-shadow);
   --font-sans: var(--ds-font);
+  --font-display: var(--ds-font-display);
+  --font-display-xl: var(--ds-font-display-xl);
 }

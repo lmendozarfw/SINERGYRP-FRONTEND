@@ -1,12 +1,13 @@
 
 import { Component } from '@angular/core';
+import { ButtonDirective } from 'primeng/button';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { PIcon } from '@primeicons/angular';
 
 @Component({
     selector: 'app-confirmacion',
     standalone: true,
-    imports: [ConfirmDialog, PIcon],
+    imports: [ButtonDirective, ConfirmDialog, PIcon],
     templateUrl: './confirmacion.component.html',
     styleUrl: './confirmacion.component.scss',
 })

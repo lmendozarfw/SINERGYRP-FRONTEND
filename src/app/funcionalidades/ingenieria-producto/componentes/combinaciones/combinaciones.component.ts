@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PIcon } from '@primeicons/angular';
+import { ButtonDirective } from 'primeng/button';
 import { SortIcon, Table, TableHeaderCheckbox, TableCheckbox } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { Drawer } from 'primeng/drawer';
@@ -24,6 +25,7 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
   imports: [
     DatePipe,
     FormsModule,
+    ButtonDirective,
     SortIcon,
     Table,
     TableHeaderCheckbox,

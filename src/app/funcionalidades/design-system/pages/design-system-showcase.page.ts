@@ -36,7 +36,7 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
           descripcion="Referencia visual de la paleta, tipografía y componentes. Usa Tab para ver el anillo de foco."
           nivel="h1"
         >
-          <a routerLink="/auth/login" class="ds-button ds-button--secondary">Ir al login</a>
+          <a routerLink="/auth/login" pButton class="ds-button ds-button--secondary">Ir al login</a>
         </app-encabezado-pagina>
 
         <section class="flex flex-col gap-4">
