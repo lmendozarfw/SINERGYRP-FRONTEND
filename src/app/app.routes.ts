@@ -8,7 +8,7 @@ export const routes: Routes = [
       {
         path: 'login',
         loadComponent: () =>
-          import('./features/auth/paginas/login/login.pagina').then((p) => p.LoginPage),
+          import('./funcionalidades/auth/paginas/login/login.pagina').then((p) => p.LoginPage),
       },
     ],
   },
@@ -24,12 +24,12 @@ export const routes: Routes = [
       {
         path: 'clients',
         loadComponent: () =>
-          import('./features/clientes/paginas/clientes.pagina').then((p) => p.ClientsPage),
+          import('./funcionalidades/clientes/paginas/clientes.pagina').then((p) => p.ClientsPage),
       },
       {
         path: 'product-engineering/new-product',
         loadComponent: () =>
-          import('./features/ingenieria-producto/paginas/new-product/new-product.page').then(
+          import('./funcionalidades/ingenieria-producto/paginas/nuevo-producto/nuevo-producto.pagina').then(
             (p) => p.NewProductPage,
           ),
       },
@@ -38,7 +38,7 @@ export const routes: Routes = [
   {
     path: 'design-system',
     loadComponent: () =>
-      import('./features/design-system/pages/design-system-showcase.page').then(
+      import('./funcionalidades/design-system/pages/design-system-showcase.page').then(
         (p) => p.DesignSystemShowcasePage,
       ),
   },

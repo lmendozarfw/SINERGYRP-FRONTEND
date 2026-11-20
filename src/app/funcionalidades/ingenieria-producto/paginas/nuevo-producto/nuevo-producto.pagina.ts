@@ -20,7 +20,7 @@ interface EncabezadoPaso {
 }
 
 @Component({
-  selector: 'app-new-product-page',
+  selector: 'app-nuevo-producto-pagina',
   imports: [
     AsistentePasosComponent,
     AsistentePasosAccionesComponent,
@@ -32,8 +32,7 @@ interface EncabezadoPaso {
     RevisionLiberacionComponent,
   ],
   providers: [NewProductWizardStore],
-  templateUrl: './new-product.page.html',
-  styleUrl: './new-product.page.scss',
+  templateUrl: './nuevo-producto.pagina.html',
 })
 export class NewProductPage {
   private readonly breadcrumb = inject(BreadcrumbService);

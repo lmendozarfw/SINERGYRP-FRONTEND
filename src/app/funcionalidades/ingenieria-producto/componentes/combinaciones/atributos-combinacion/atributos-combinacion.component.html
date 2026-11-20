@@ -1,0 +1,65 @@
+<section class="flex flex-col gap-6">
+  <header class="flex flex-col gap-1">
+    <h3 class="text-[15px] font-semibold leading-[22px] text-slate-900">Atributos de la combinación</h3>
+    <p class="text-[13px] leading-5 text-slate-600">
+      Selecciona un valor para cada atributo. El código se genera automáticamente con los valores elegidos.
+    </p>
+  </header>
+
+  <div class="flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-100 p-4">
+    <div>
+      <span class="block text-[11px] font-semibold uppercase leading-4 tracking-[0.04em] text-slate-600">Modelo base</span>
+      <span class="mt-0.5 block text-base font-semibold leading-6 text-slate-900">{{ modeloBase() }}</span>
+    </div>
+    <p-tag value="En proceso" severity="warn" />
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 max-[640px]:grid-cols-1">
+    @for (atributo of atributos(); track atributo.id) {
+      <div class="ds-field">
+        <app-form-label [for]="'atributo-' + atributo.id" [required]="true">
+          {{ atributo.nombre }}
+        </app-form-label>
+        <p-select
+          class="ds-combinacion-select"
+          [inputId]="'atributo-' + atributo.id"
+          [options]="atributo.opciones"
+          optionLabel="label"
+          optionValue="value"
+          [ngModel]="valores()[atributo.id]"
+          (ngModelChange)="seleccionar(atributo.id, $event)"
+          [fluid]="true"
+          [placeholder]="'Selecciona ' + atributo.nombre.toLowerCase()"
+          [class.p-invalid]="esInvalido(atributo.id)"
+        />
+        <app-mensaje-ayuda-error [condicion]="esInvalido(atributo.id)"
+          [mensajeError]="'Selecciona un valor para ' + atributo.nombre.toLowerCase() + '.'"></app-mensaje-ayuda-error>
+      </div>
+    }
+  </div>
+
+  <div class="flex flex-col gap-3 rounded-xl border border-dashed border-slate-200 bg-white p-4">
+    <div class="flex items-center justify-between gap-3">
+      <span class="block text-[11px] font-semibold uppercase leading-4 tracking-[0.04em] text-slate-600">Código de la combinación</span>
+      @if (todosSeleccionados()) {
+        <p-tag value="Completo" severity="success" />
+      } @else {
+        <p-tag value="Incompleto" severity="warn" />
+      }
+    </div>
+    <div class="wrap-anywhere rounded-lg bg-slate-100 px-3.5 py-3 font-mono text-[15px] font-semibold tracking-[0.06em] text-slate-900">{{ codigo() }}</div>
+    <div class="flex flex-wrap gap-2">
+      @for (item of resumen(); track item.id) {
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs leading-[18px]"
+          [class]="item.etiqueta === 'Sin seleccionar'
+            ? 'bg-slate-100 text-slate-600'
+            : 'bg-blue-50 text-blue-800'"
+        >
+          <span class="font-semibold">{{ item.nombre }}</span>
+          <span class="opacity-90">{{ item.etiqueta }}</span>
+        </span>
+      }
+    </div>
+  </div>
+</section>

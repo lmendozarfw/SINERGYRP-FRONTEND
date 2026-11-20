@@ -1,4 +1,4 @@
-<div class="ds-new-product-page">
+<div class="flex flex-col gap-6">
     <app-encabezado-pagina
         [titulo]="encabezado.titulo"
         [descripcion]="encabezado.descripcion"
@@ -11,7 +11,7 @@
         (pasoCambiado)="alCambiarPaso($event)"
     />
 
-    <section class="ds-new-product-step">
+    <section>
         @switch (pasoActual) {
             @case (1) {
                 <app-datos-generales />
