@@ -196,46 +196,53 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
         <section class="flex flex-col gap-4">
           <h2 class="ds-title-section">6. Sidebar</h2>
           <div class="ds-card flex justify-center p-0!">
-            <div class="ds-sidebar flex flex-col rounded-xl">
-              <div class="ds-sidebar__header">
+            <div class="flex min-h-[420px] w-72 flex-col rounded-xl border-r border-[var(--ds-navy-line)] bg-navy-950 text-white">
+              <div class="flex items-center gap-3 border-b border-[var(--ds-navy-line)] px-4 py-6">
                 <div
                   class="flex size-8 shrink-0 items-center justify-center rounded-md bg-blue-600 text-sm font-bold text-white"
                 >
                   N
                 </div>
-                <span class="ds-sidebar__brand">Nexo ERP</span>
+                <span class="text-sm font-semibold text-white">Nexo ERP</span>
               </div>
-              <p class="ds-sidebar__section">Principal</p>
-              <nav class="ds-sidebar__nav">
-                <button type="button" class="ds-sidebar__item ds-sidebar__item--active">
+              <p class="px-4 pt-6 pb-2 text-xs font-semibold leading-[18px] tracking-[0.08em] text-[var(--ds-navy-muted)] uppercase">Principal</p>
+              <nav class="flex flex-col gap-1 px-3">
+                <button type="button"
+                  class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]"
+                  data-active="true">
                   <svg data-p-icon="home" [size]="16"></svg>
                   Inicio
                 </button>
-                <button type="button" class="ds-sidebar__item">
+                <button type="button"
+                  class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
                   <svg data-p-icon="inbox" [size]="16"></svg>
                   Operaciones
                 </button>
-                <button type="button" class="ds-sidebar__item">
+                <button type="button"
+                  class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
                   <svg data-p-icon="users" [size]="16"></svg>
                   Clientes
                 </button>
-                <button type="button" class="ds-sidebar__item">
+                <button type="button"
+                  class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
                   <svg data-p-icon="search" [size]="16"></svg>
                   Consultas
                 </button>
               </nav>
-              <div class="ds-sidebar__divider"></div>
-              <nav class="ds-sidebar__nav">
-                <button type="button" class="ds-sidebar__item">
+              <div class="mx-3 my-4 h-px bg-[var(--ds-navy-line)]"></div>
+              <nav class="flex flex-col gap-1 px-3">
+                <button type="button"
+                  class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
                   <svg data-p-icon="bell" [size]="16"></svg>
                   Notificaciones
                 </button>
-                <button type="button" class="ds-sidebar__item">
+                <button type="button"
+                  class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
                   <svg data-p-icon="cog" [size]="16"></svg>
                   Configuración
                 </button>
               </nav>
-              <div class="ds-sidebar__footer mt-auto">Nexo ERP · Espacio corporativo</div>
+              <div class="mt-auto border-t border-[var(--ds-navy-line)] px-4 py-4 text-xs leading-[18px] text-[var(--ds-navy-muted)]">Nexo ERP · Espacio corporativo</div>
             </div>
           </div>
         </section>
