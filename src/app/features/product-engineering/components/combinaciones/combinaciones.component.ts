@@ -1,11 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ArrowLeft, ArrowRight, Check, Filter, Pencil, Plus, Tags, Search, Trash } from '@primeicons/angular';
-import { IconField } from 'primeng/iconfield';
-import { InputIcon } from 'primeng/inputicon';
-import { InputText } from 'primeng/inputtext';
-import { Select } from 'primeng/select';
+import { ArrowLeft, ArrowRight, Check, Pencil, Plus, Tags, Trash } from '@primeicons/angular';
 import { SortIcon, Table, TableHeaderCheckbox, TableCheckbox } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { Drawer } from 'primeng/drawer';
@@ -28,10 +24,6 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
   imports: [
     DatePipe,
     FormsModule,
-    IconField,
-    InputIcon,
-    InputText,
-    Select,
     SortIcon,
     Table,
     TableHeaderCheckbox,
@@ -45,10 +37,8 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
     ArrowLeft,
     ArrowRight,
     Check,
-    Filter,
     Pencil,
     Plus,
-    Search,
     Trash,
     Tags
   ],

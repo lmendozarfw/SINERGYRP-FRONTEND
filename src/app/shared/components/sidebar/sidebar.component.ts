@@ -3,36 +3,15 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import {
-  Box,
-  ChartBar,
-  Check,
-  ChevronDown,
-  Cog,
-  EllipsisV,
-  Home,
-  Inbox,
-  QuestionCircle,
-  Search,
-  SignOut,
-  User,
-  Users,
-  Wrench,
+  PIcon
 } from '@primeicons/angular';
 
 interface NavItem {
   label: string;
-  icon:
-    | 'home'
-    | 'box'
-    | 'users'
-    | 'inbox'
-    | 'chart-bar'
-    | 'search'
-    | 'cog'
-    | 'question-circle'
-    | 'wrench';
+  icon: string;
   route?: string;
   badge?: string;
+  children?: NavItem[];
 }
 
 interface WorkspaceItem extends MenuItem {
@@ -49,20 +28,7 @@ interface UserActionItem extends MenuItem {
   selector: 'app-sidebar',
   imports: [
     Menu,
-    Box,
-    ChartBar,
-    Check,
-    ChevronDown,
-    Cog,
-    EllipsisV,
-    Home,
-    Inbox,
-    QuestionCircle,
-    Search,
-    SignOut,
-    User,
-    Users,
-    Wrench,
+    PIcon
   ],
   template: `
     <div class="ds-sidebar flex h-full flex-col" [class.ds-sidebar--collapsed]="isCollapsed()">
@@ -85,7 +51,7 @@ interface UserActionItem extends MenuItem {
                 selectedWorkspaceItem().detail
               }}</span>
             </span>
-            <svg data-p-icon="chevron-down" [size]="14" class="ml-auto shrink-0"></svg>
+            <svg pIcon="chevron-down" [size]="14" class="ml-auto shrink-0"></svg>
           </button>
           <p-menu
             #workspaceMenu
@@ -107,7 +73,7 @@ interface UserActionItem extends MenuItem {
                   <span class="ds-menu-item__subtitle">{{ $any(item).detail }}</span>
                 </span>
                 @if (selectedWorkspace() === item.label) {
-                  <svg data-p-icon="check" [size]="16" class="ds-menu-item__check"></svg>
+                  <svg pIcon="check" [size]="16" class="ds-menu-item__check"></svg>
                 }
               </button>
             </ng-template>
@@ -131,32 +97,7 @@ interface UserActionItem extends MenuItem {
             [attr.title]="item.label"
             (click)="open(item)"
           >
-            @switch (item.icon) {
-              @case ('home') {
-                <svg data-p-icon="home" [size]="16" class="shrink-0"></svg>
-              }
-              @case ('box') {
-                <svg data-p-icon="box" [size]="16" class="shrink-0"></svg>
-              }
-              @case ('users') {
-                <svg data-p-icon="users" [size]="16" class="shrink-0"></svg>
-              }
-              @case ('inbox') {
-                <svg data-p-icon="inbox" [size]="16" class="shrink-0"></svg>
-              }
-              @case ('chart-bar') {
-                <svg data-p-icon="chart-bar" [size]="16" class="shrink-0"></svg>
-              }
-              @case ('search') {
-                <svg data-p-icon="search" [size]="16" class="shrink-0"></svg>
-              }
-              @case ('wrench') {
-                <svg data-p-icon="wrench" [size]="16" class="shrink-0"></svg>
-              }
-              @default {
-                <svg data-p-icon="cog" [size]="16" class="shrink-0"></svg>
-              }
-            }
+            <svg [pIcon]="item.icon" [size]="16" class="shrink-0"></svg>
             @if (!isCollapsed()) {
               <span class="truncate">{{ item.label }}</span>
               @if (item.badge) {
@@ -185,10 +126,10 @@ interface UserActionItem extends MenuItem {
           >
             @switch (item.icon) {
               @case ('cog') {
-                <svg data-p-icon="cog" [size]="16" class="shrink-0"></svg>
+                <svg pIcon="cog" [size]="16" class="shrink-0"></svg>
               }
               @default {
-                <svg data-p-icon="question-circle" [size]="16" class="shrink-0"></svg>
+                <svg pIcon="question-circle" [size]="16" class="shrink-0"></svg>
               }
             }
             @if (!isCollapsed()) {
@@ -210,7 +151,7 @@ interface UserActionItem extends MenuItem {
               <span class="block truncate text-white">Luis Mendoza</span>
               <span class="ds-sidebar__hint block truncate">Empleado · #5366</span>
             </span>
-            <svg data-p-icon="ellipsis-v" [size]="16" class="ml-auto shrink-0"></svg>
+            <svg pIcon="ellipsis-v" [size]="16" class="ml-auto shrink-0"></svg>
           }
         </button>
         <p-menu
@@ -230,16 +171,16 @@ interface UserActionItem extends MenuItem {
               <span class="ds-menu-item__icon">
                 @switch ($any(item).key) {
                   @case ('profile') {
-                    <svg data-p-icon="user" [size]="16"></svg>
+                    <svg pIcon="user" [size]="16"></svg>
                   }
                   @case ('settings') {
-                    <svg data-p-icon="cog" [size]="16"></svg>
+                    <svg pIcon="cog" [size]="16"></svg>
                   }
                   @case ('help') {
-                    <svg data-p-icon="question-circle" [size]="16"></svg>
+                    <svg pIcon="question-circle" [size]="16"></svg>
                   }
                   @default {
-                    <svg data-p-icon="sign-out" [size]="16"></svg>
+                    <svg pIcon="sign-out" [size]="16"></svg>
                   }
                 }
               </span>
@@ -270,7 +211,7 @@ export class SidebarComponent {
 
   readonly primaryItems: NavItem[] = [
     { label: 'Inicio', icon: 'home', route: '/app/configuration' },
-    { label: 'Activos fijos', icon: 'box', route: '/app/configuration' },
+    { label: 'Tesoreria', icon: 'dollar', route: '' },
     { label: 'Clientes', icon: 'users', route: '/app/clients' },
     {
       label: 'Ingeniería de producto',

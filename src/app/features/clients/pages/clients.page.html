@@ -1,0 +1,360 @@
+<div class="flex flex-col gap-6">
+  <app-encabezado-pagina
+    titulo="Clientes"
+    descripcion="Consulta la información fiscal y comercial de tus clientes, y administra sus condiciones de crédito desde un solo lugar."
+  >
+    <button type="button" class="ds-button" (click)="openDrawer()">
+      <svg data-p-icon="plus" [size]="16"></svg>
+      Nuevo cliente
+    </button>
+  </app-encabezado-pagina>
+
+  <div class="mt-8 flex flex-nowrap items-center gap-2">
+    <p-iconfield iconPosition="left" class="w-auto min-w-[220px] grow basis-[280px]">
+      <p-inputicon>
+        <svg data-p-icon="search" [size]="16"></svg>
+      </p-inputicon>
+      <input
+        pInputText
+        type="text"
+        class="ds-input"
+        placeholder="Buscar por nombre o RFC"
+        aria-label="Buscar clientes"
+      />
+    </p-iconfield>
+
+    <p-select
+      class="ds-clients-select w-[184px]! shrink-0"
+      [options]="tipoPersonaOptions"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Tipo de persona"
+      aria-label="Filtrar por tipo de persona"
+    />
+    <p-select
+      class="ds-clients-select w-[184px]! shrink-0"
+      [options]="regimenOptions"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Régimen fiscal"
+      aria-label="Filtrar por régimen fiscal"
+    />
+    <button type="button" class="ds-button ds-button--secondary shrink-0">
+      <svg data-p-icon="filter" [size]="14"></svg>
+      Filtros
+    </button>
+  </div>
+
+  <section class="ds-card overflow-hidden p-0!">
+    <p-table
+      styleClass="ds-table"
+      [value]="clients"
+      dataKey="rfc"
+      selectionMode="multiple"
+      [selection]="selectedClients()"
+      (selectionChange)="selectedClients.set($event)"
+      [paginator]="true"
+      [rows]="6"
+      [rowsPerPageOptions]="[6, 12, 24]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} clientes"
+      [scrollable]="true"
+    >
+      <ng-template #header>
+        <tr>
+          <th class="ds-table__th--check">
+            <p-table-header-checkbox ariaLabel="Seleccionar todos los clientes" />
+          </th>
+          <th pSortableColumn="nombre_razon_social" class="w-[300px] min-w-[300px]">
+            <span class="inline-flex items-center gap-1.5">
+              Cliente
+              <p-sorticon field="nombre_razon_social" />
+            </span>
+          </th>
+          <th pSortableColumn="rfc" class="w-[150px] min-w-[150px]">
+            <span class="inline-flex items-center gap-1.5">
+              RFC
+              <p-sorticon field="rfc" />
+            </span>
+          </th>
+          <th pSortableColumn="tipo_persona" class="w-[160px] min-w-[160px]">
+            <span class="inline-flex items-center gap-1.5">
+              Tipo de persona
+              <p-sorticon field="tipo_persona" />
+            </span>
+          </th>
+          <th class="w-[190px] min-w-[190px]">Régimen fiscal</th>
+          <th pSortableColumn="limite_credito" class="w-[175px] min-w-[175px] text-right!">
+            <span class="inline-flex items-center gap-1.5">
+              Límite de crédito
+              <p-sorticon field="limite_credito" />
+            </span>
+          </th>
+          <th pSortableColumn="dias_credito" class="w-[90px] min-w-[90px] text-right!">
+            <span class="inline-flex items-center gap-1.5">
+              Días
+              <p-sorticon field="dias_credito" />
+            </span>
+          </th>
+          <th class="w-[140px] min-w-[140px] text-right!">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template #body let-client let-i="index">
+        <tr>
+          <td class="ds-table__td--check">
+            <p-table-checkbox [value]="client" [index]="i" ariaLabel="Seleccionar cliente" />
+          </td>
+          <td>
+            <div class="flex min-w-[240px] items-center gap-3">
+              <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-navy-950 text-sm font-semibold text-white">
+                {{ client.nombre_razon_social.charAt(0) }}
+              </span>
+              <span class="min-w-0">
+                <span class="block truncate text-sm font-semibold leading-5 text-ds-ink">{{ client.nombre_razon_social }}</span>
+                <span class="block text-xs leading-[18px] text-ds-muted">{{ client.nombre_comercial }}</span>
+              </span>
+            </div>
+          </td>
+          <td>
+            <span class="block font-mono text-xs leading-[18px] tracking-[0.03em] text-ds-muted">{{ client.rfc }}</span>
+          </td>
+          <td>
+            <p-tag
+              [value]="client.tipo_persona"
+              [severity]="client.tipo_persona === 'Moral' ? 'info' : 'success'"
+            />
+          </td>
+          <td>
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ client.id_regimen_fiscal }}</span>
+          </td>
+          <td class="text-right!">
+            <span class="text-sm font-semibold tabular-nums text-ds-ink">
+              {{ '$' + (client.limite_credito | number: '1.0-0') }}
+            </span>
+          </td>
+          <td class="text-right!">
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ client.dias_credito }}</span>
+          </td>
+          <td class="text-right!">
+            <div class="flex justify-end gap-1">
+              <button type="button"
+                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none"
+                aria-label="Ver cliente">
+                <svg data-p-icon="eye" [size]="15"></svg>
+              </button>
+              <button type="button"
+                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none"
+                aria-label="Editar cliente">
+                <svg data-p-icon="pencil" [size]="15"></svg>
+              </button>
+              <button type="button"
+                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-[var(--ds-danger-line)] hover:bg-[var(--ds-danger-soft)] hover:text-ds-danger focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none"
+                aria-label="Eliminar cliente">
+                <svg data-p-icon="trash" [size]="15"></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="8" class="p-8 text-center text-sm text-ds-muted">
+            No hay clientes que coincidan con los filtros seleccionados.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
+</div>
+
+<p-drawer
+  [(visible)]="drawerVisible"
+  position="right"
+  styleClass="ds-client-drawer"
+  header="Nuevo cliente"
+  [modal]="true"
+  [dismissible]="true"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+>
+  <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault()">
+    <section>
+      <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Datos generales</h3>
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div class="ds-field">
+          <app-form-label for="client-razon-social" [required]="true">
+            Nombre o razón social
+          </app-form-label>
+          <input
+            id="client-razon-social"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. Grupo Industrial Raudal, S.A. de C.V."
+          />
+        </div>
+        <div class="ds-field">
+          <app-form-label for="client-nombre-comercial">Nombre comercial</app-form-label>
+          <input
+            id="client-nombre-comercial"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. Raudal"
+          />
+        </div>
+        <div class="ds-field">
+          <app-form-label for="client-tipo-persona" [required]="true">
+            Tipo de persona
+          </app-form-label>
+          <p-select
+            inputId="client-tipo-persona"
+            class="w-full"
+            [options]="tipoPersonaOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-form-label for="client-rfc" [required]="true">RFC</app-form-label>
+          <input
+            id="client-rfc"
+            pInputText
+            type="text"
+            class="ds-input uppercase"
+            placeholder="Ej. RIR240315AB1"
+            maxlength="13"
+          />
+          <app-mensaje-ayuda-error mensajeAyuda="Registro Federal de Contribuyentes."></app-mensaje-ayuda-error>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-ds-line pt-6">
+      <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Configuración fiscal</h3>
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div class="ds-field">
+          <app-form-label for="client-regimen-fiscal">ID régimen fiscal</app-form-label>
+          <p-select
+            inputId="client-regimen-fiscal"
+            class="w-full"
+            [options]="regimenOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-form-label for="client-tipo-iva">ID tipo de IVA</app-form-label>
+          <p-select
+            inputId="client-tipo-iva"
+            class="w-full"
+            [options]="ivaOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field col-span-full">
+          <app-form-label for="client-uso-cfdi">ID uso de CFDI predeterminado</app-form-label>
+          <p-select
+            inputId="client-uso-cfdi"
+            class="w-full"
+            [options]="usoCfdiOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-ds-line pt-6">
+      <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Condiciones comerciales</h3>
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div class="ds-field">
+          <app-form-label for="client-forma-pago"
+            >ID forma de pago predeterminada</app-form-label
+          >
+          <p-select
+            inputId="client-forma-pago"
+            class="w-full"
+            [options]="formaPagoOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-form-label for="client-metodo-pago"
+            >ID método de pago predeterminado</app-form-label
+          >
+          <p-select
+            inputId="client-metodo-pago"
+            class="w-full"
+            [options]="metodoPagoOptions"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-form-label for="client-limite-credito">Límite de crédito</app-form-label>
+          <input
+            id="client-limite-credito"
+            pInputText
+            type="text"
+            class="ds-input"
+            inputmode="decimal"
+            placeholder="0.00"
+          />
+        </div>
+        <div class="ds-field">
+          <app-form-label for="client-dias-credito">Días de crédito</app-form-label>
+          <input
+            id="client-dias-credito"
+            pInputText
+            type="number"
+            class="ds-input"
+            placeholder="0"
+            min="0"
+          />
+        </div>
+        <div class="ds-field col-span-full">
+          <app-form-label for="client-observaciones">Observaciones</app-form-label>
+          <textarea
+            id="client-observaciones"
+            pInputText
+            rows="4"
+            class="ds-input h-auto! min-h-24! resize-y! px-3! py-2.5!"
+            placeholder="Notas internas sobre el cliente…"
+          ></textarea>
+        </div>
+      </div>
+    </section>
+  </form>
+
+  <ng-template #footer>
+    <div class="flex justify-end gap-2">
+      <button
+        type="button"
+        class="ds-button ds-button--secondary"
+        (click)="drawerVisible.set(false)"
+      >
+        Cancelar
+      </button>
+      <button type="button" class="ds-button">Guardar cliente</button>
+    </div>
+  </ng-template>
+</p-drawer>
+
+@if (selectedClients().length > 0) {
+  <app-bulk-actions-bar
+    [count]="selectedClients().length"
+    (clear)="clearSelection()"
+    (remove)="clearSelection()"
+  />
+}

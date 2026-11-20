@@ -1,10 +1,27 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter, Router } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
 import { MessageService } from 'primeng/api';
+// Configuración de Sentry
+import * as Sentry from "@sentry/angular";
+Sentry.init({
+  dsn: "https://d0956fc4ac9892486ec676fcbb763719@o4512465429069824.ingest.us.sentry.io/4512465437261824",
+  integrations: [
+    Sentry.browserTracingIntegration(),
+    Sentry.replayIntegration()
+  ],
+  // Tracing
+  tracesSampleRate: 1.0, // Capture 100% of traces. Adjust this value in production.
+  // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
+  tracePropagationTargets: ["localhost", /^https:\/\/yourserver\.io\/api/],
+  // Session Replay
+  replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
+  replaysOnErrorSampleRate: 1.0 // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+});
+// Configuración de Sentry
 
 const AppTheme = definePreset(Aura, {
   semantic: {
@@ -108,5 +125,16 @@ export const appConfig: ApplicationConfig = {
         'eyJpZCI6IjhjY2MwMWZjLTAxMzgtNGYxZC1iMDlkLTQ2MGYyN2Q0ZTk0NSIsInByb2R1Y3QiOiJwcmltZXVpIiwidGllciI6ImNvbW11bml0eSIsInR5cGUiOiJkZXYiLCJpYXQiOjE3ODI4NTMzODQsImV4cCI6MTgxNDM4OTM4NH0.5X1GwjVS-s0_fDC5XCzABHltbeIeRXqYFiQyrIuL6CK2mdQe8bA_c6CF6xQtxxwFzjztmAW_RlHBw-8IRxf7CA',
     }),
     MessageService,
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler(),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    provideAppInitializer(() => {
+      inject(Sentry.TraceService);
+    })
   ],
 };
