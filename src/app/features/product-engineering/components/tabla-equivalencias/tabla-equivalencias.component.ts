@@ -5,7 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
-import { Plus, Table as TableIcon } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 
 export interface SistemaEquivalencia {
   clave: string;
@@ -42,8 +42,7 @@ const TALLAS: TallaEquivalencia[] = [
     CheckboxModule,
     InputTextModule,
     TableModule,
-    Plus,
-    TableIcon,
+    PIcon,
   ],
   templateUrl: './tabla-equivalencias.component.html',
   styleUrl: './tabla-equivalencias.component.scss',

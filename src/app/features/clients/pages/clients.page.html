@@ -4,7 +4,7 @@
     descripcion="Consulta la información fiscal y comercial de tus clientes, y administra sus condiciones de crédito desde un solo lugar."
   >
     <button type="button" class="ds-button" (click)="openDrawer()">
-      <svg data-p-icon="plus" [size]="16"></svg>
+      <svg pIcon="plus" [size]="16"></svg>
       Nuevo cliente
     </button>
   </app-encabezado-pagina>
@@ -12,7 +12,7 @@
   <div class="mt-8 flex flex-nowrap items-center gap-2">
     <p-iconfield iconPosition="left" class="w-auto min-w-[220px] grow basis-[280px]">
       <p-inputicon>
-        <svg data-p-icon="search" [size]="16"></svg>
+        <svg pIcon="search" [size]="16"></svg>
       </p-inputicon>
       <input
         pInputText
@@ -40,7 +40,7 @@
       aria-label="Filtrar por régimen fiscal"
     />
     <button type="button" class="ds-button ds-button--secondary shrink-0">
-      <svg data-p-icon="filter" [size]="14"></svg>
+      <svg pIcon="filter" [size]="14"></svg>
       Filtros
     </button>
   </div>
@@ -62,7 +62,7 @@
     >
       <ng-template #header>
         <tr>
-          <th class="ds-table__th--check" class="w-[60px] min-w-[60px]">
+          <th class="ds-table__th--check" class="w-[40px] min-w-[40px]">
             <p-table-header-checkbox ariaLabel="Seleccionar todos los clientes" />
           </th>
           <th pSortableColumn="nombre_razon_social" class="w-[300px] min-w-[300px]">
@@ -141,17 +141,17 @@
               <button type="button"
                 class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none"
                 aria-label="Ver cliente">
-                <svg data-p-icon="eye" [size]="15"></svg>
+                <svg pIcon="eye" [size]="15"></svg>
               </button>
               <button type="button"
                 class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none"
                 aria-label="Editar cliente">
-                <svg data-p-icon="pencil" [size]="15"></svg>
+                <svg pIcon="pencil" [size]="15"></svg>
               </button>
               <button type="button"
                 class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-[var(--ds-danger-line)] hover:bg-[var(--ds-danger-soft)] hover:text-ds-danger focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none"
-                aria-label="Eliminar cliente">
-                <svg data-p-icon="trash" [size]="15"></svg>
+                aria-label="Eliminar cliente" (click)="onDelete(client)">
+                <svg pIcon="trash" [size]="15"></svg>
               </button>
             </div>
           </td>
@@ -358,3 +358,5 @@
     (remove)="clearSelection()"
   />
 }
+
+<p-confirmdialog />

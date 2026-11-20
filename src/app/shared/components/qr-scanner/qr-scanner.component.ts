@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output, signal } from '@angular/core';
 import { Html5Qrcode, Html5QrcodeSupportedFormats } from 'html5-qrcode';
-
+import { PIcon } from '@primeicons/angular';
 let instances = 0;
 
 @Component({
@@ -12,11 +12,11 @@ let instances = 0;
       @if (error(); as message) {
       <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-[#1e1e1e] px-6 text-center">
         <span class="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white">
-          <svg data-p-icon="pi-exclamation-triangle"></svg>
+          <svg pIcon="pi-exclamation-triangle"></svg>
         </span>
         <p class="m-0 text-sm text-white/90">{{ message }}</p>
         <button nz-button nzType="primary" (click)="start()">
-           <svg data-p-icon="pi-refresh"></svg>
+           <svg pIcon="pi-refresh"></svg>
           Reintentar
         </button>
       </div>
@@ -27,12 +27,13 @@ let instances = 0;
       } @else {
       <p
         class="absolute inset-x-0 bottom-3 m-0 flex items-center justify-center gap-1.5 px-4 text-center text-xs text-white/90">
-        <svg data-p-icon="pi-qrcode"></svg>
+        <svg pIcon="pi-qrcode"></svg>
         {{ hint }}
       </p>
       }
     </div>
   `,
+  imports: [PIcon]
 })
 export class QrScannerComponent implements AfterViewInit, OnDestroy {
   @Input() size = 300;

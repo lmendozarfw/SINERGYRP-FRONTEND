@@ -4,7 +4,7 @@
       <span
         class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]"
       >
-        <svg data-p-icon="tags" [size]="18"></svg>
+        <svg pIcon="tags" [size]="18"></svg>
       </span>
       <div class="min-w-0">
         <div class="flex flex-wrap items-center gap-3">
@@ -27,7 +27,7 @@
         class="ds-button ds-button--secondary ds-button--compact max-sm:w-full"
         (click)="abrirNuevaPieza()"
       >
-        <svg data-p-icon="plus" [size]="16"></svg>
+        <svg pIcon="plus" [size]="16"></svg>
         <span>Agregar pieza</span>
       </button>
     </div>
@@ -66,7 +66,7 @@
             [attr.aria-expanded]="expanded"
           >
             <svg
-              data-p-icon="chevron-right"
+              pIcon="chevron-right"
               [size]="16"
               class="transition-transform"
               [class.rotate-90]="expanded"
@@ -141,7 +141,7 @@
               [attr.aria-label]="'Editar ' + pieza.nombre"
               (click)="abrirEdicion(pieza)"
             >
-              <svg data-p-icon="pencil" [size]="15"></svg>
+              <svg pIcon="pencil" [size]="15"></svg>
             </button>
             <button
               type="button"
@@ -149,7 +149,7 @@
               [attr.aria-label]="'Eliminar ' + pieza.nombre"
               (click)="eliminarPieza(pieza)"
             >
-              <svg data-p-icon="trash" [size]="15"></svg>
+              <svg pIcon="trash" [size]="15"></svg>
             </button>
           </div>
         </td>
@@ -274,7 +274,7 @@
             <span
               class="mb-1 flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]"
             >
-              <svg data-p-icon="tags" [size]="18"></svg>
+              <svg pIcon="tags" [size]="18"></svg>
             </span>
             <p class="ds-body m-0">Aún no hay piezas registradas.</p>
             <p class="ds-meta m-0">Agrega la primera pieza para definir su material y consumo.</p>
@@ -597,7 +597,7 @@
 
     @if (mensajeValidacion) {
       <div class="ds-alert ds-alert--error" role="alert">
-        <svg data-p-icon="exclamation-triangle" [size]="16"></svg>
+        <svg pIcon="exclamation-triangle" [size]="16"></svg>
         <span>{{ mensajeValidacion }}</span>
       </div>
     }

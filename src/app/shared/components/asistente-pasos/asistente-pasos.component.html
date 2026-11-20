@@ -28,9 +28,9 @@
                                     'border-slate-200 bg-slate-100 text-ds-ink/70': estaBloqueado(paso)
                                 }">
                                 @if (estaCompletado(paso)) {
-                                <svg data-p-icon="check" [size]="16"></svg>
+                                <svg pIcon="check" [size]="16"></svg>
                                 } @else if (estaBloqueado(paso)) {
-                                <svg data-p-icon="lock" [size]="16"></svg>
+                                <svg pIcon="lock" [size]="16"></svg>
                                 } @else {
                                 {{ paso.id }}
                                 }

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ButtonDirective } from 'primeng/button';
-import { ArrowLeft, ArrowRight, Save } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 
 @Component({
     selector: 'app-asistente-pasos-acciones',
     standalone: true,
-    imports: [ButtonDirective, ArrowLeft, ArrowRight, Save],
+    imports: [ButtonDirective, PIcon],
     templateUrl: './asistente-pasos-acciones.component.html',
     styleUrl: './asistente-pasos-acciones.component.scss'
 })

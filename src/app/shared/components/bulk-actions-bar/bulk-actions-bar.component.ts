@@ -1,9 +1,9 @@
 import { Component, input, output } from '@angular/core';
-import { Download, Pencil, Times, Trash } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 
 @Component({
   selector: 'app-bulk-actions-bar',
-  imports: [Download, Pencil, Times, Trash],
+  imports: [PIcon],
   template: `
     <div class="ds-bulk-bar" role="toolbar" aria-label="Acciones para la selección">
       <div class="ds-bulk-bar__count" aria-live="polite">
@@ -22,7 +22,7 @@ import { Download, Pencil, Times, Trash } from '@primeicons/angular';
           aria-label="Editar clientes seleccionados"
           (click)="edit.emit()"
         >
-          <svg data-p-icon="pencil" [size]="16"></svg>
+          <svg pIcon="pencil" [size]="16"></svg>
           <span>Editar</span>
         </button>
         <button
@@ -31,7 +31,7 @@ import { Download, Pencil, Times, Trash } from '@primeicons/angular';
           aria-label="Exportar clientes seleccionados"
           (click)="download.emit()"
         >
-          <svg data-p-icon="download" [size]="16"></svg>
+          <svg pIcon="download" [size]="16"></svg>
           <span>Exportar</span>
         </button>
         <button
@@ -40,7 +40,7 @@ import { Download, Pencil, Times, Trash } from '@primeicons/angular';
           aria-label="Eliminar clientes seleccionados"
           (click)="remove.emit()"
         >
-          <svg data-p-icon="trash" [size]="16"></svg>
+          <svg pIcon="trash" [size]="16"></svg>
           <span>Eliminar</span>
         </button>
       </div>
@@ -53,7 +53,7 @@ import { Download, Pencil, Times, Trash } from '@primeicons/angular';
         aria-label="Limpiar selección"
         (click)="clear.emit()"
       >
-        <svg data-p-icon="times" [size]="16"></svg>
+        <svg pIcon="times" [size]="16"></svg>
       </button>
     </div>
   `,

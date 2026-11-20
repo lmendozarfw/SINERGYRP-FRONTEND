@@ -7,16 +7,7 @@ import { Checkbox } from 'primeng/checkbox';
 import { InputPassword } from 'primeng/inputpassword';
 import { InputText } from 'primeng/inputtext';
 import {
-  Bell,
-  CheckCircle,
-  Cog,
-  ExclamationTriangle,
-  Eye,
-  Home,
-  InfoCircle,
-  Inbox,
-  Search,
-  Users,
+  PIcon,
 } from '@primeicons/angular';
 import { FormLabelComponent } from '../../../shared/components/form-label/form-label.component';
 import { EncabezadoPaginaComponent } from '../../../shared/components/encabezado-pagina/encabezado-pagina.component';
@@ -34,16 +25,7 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
     InputPassword,
     FormLabelComponent,
     EncabezadoPaginaComponent,
-    Home,
-    Inbox,
-    Search,
-    Users,
-    Bell,
-    Cog,
-    CheckCircle,
-    InfoCircle,
-    ExclamationTriangle,
-    Eye,
+    PIcon
   ],
   template: `
     <div class="min-h-screen bg-slate-50 p-6 lg:p-10">
@@ -136,7 +118,7 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
               <app-form-label for="field-error" required>Contraseña</app-form-label>
               <input pInputText id="field-error" value="abc123" [invalid]="true" />
               <span class="ds-field-error">
-                <svg data-p-icon="exclamation-triangle" [size]="14"></svg>
+                <svg pIcon="exclamation-triangle" [size]="14"></svg>
                 La contraseña no cumple los requisitos
               </span>
             </div>
@@ -157,7 +139,7 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
                   [attr.aria-label]="mask ? 'Mostrar contraseña' : 'Ocultar contraseña'"
                   (click)="mask = !mask"
                 >
-                  <svg data-p-icon="eye" [size]="16"></svg>
+                  <svg pIcon="eye" [size]="16"></svg>
                 </button>
               </div>
             </div>
@@ -210,22 +192,22 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
                 <button type="button"
                   class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]"
                   data-active="true">
-                  <svg data-p-icon="home" [size]="16"></svg>
+                  <svg pIcon="home" [size]="16"></svg>
                   Inicio
                 </button>
                 <button type="button"
                   class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
-                  <svg data-p-icon="inbox" [size]="16"></svg>
+                  <svg pIcon="inbox" [size]="16"></svg>
                   Operaciones
                 </button>
                 <button type="button"
                   class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
-                  <svg data-p-icon="users" [size]="16"></svg>
+                  <svg pIcon="users" [size]="16"></svg>
                   Clientes
                 </button>
                 <button type="button"
                   class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
-                  <svg data-p-icon="search" [size]="16"></svg>
+                  <svg pIcon="search" [size]="16"></svg>
                   Consultas
                 </button>
               </nav>
@@ -233,12 +215,12 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
               <nav class="flex flex-col gap-1 px-3">
                 <button type="button"
                   class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
-                  <svg data-p-icon="bell" [size]="16"></svg>
+                  <svg pIcon="bell" [size]="16"></svg>
                   Notificaciones
                 </button>
                 <button type="button"
                   class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent px-3 text-left text-sm font-medium text-[var(--ds-navy-muted)] transition-colors hover:bg-[var(--ds-navy-hover)] hover:text-white focus-visible:shadow-[var(--ds-focus-shadow)] focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-white data-[active=true]:hover:bg-[var(--ds-primary-hover)]">
-                  <svg data-p-icon="cog" [size]="16"></svg>
+                  <svg pIcon="cog" [size]="16"></svg>
                   Configuración
                 </button>
               </nav>
@@ -251,19 +233,19 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
           <h2 class="ds-title-section">7. Estados semánticos</h2>
           <div class="grid gap-3 md:grid-cols-2">
             <div class="ds-alert ds-alert--success">
-              <svg data-p-icon="check-circle" [size]="16"></svg>
+              <svg pIcon="check-circle" [size]="16"></svg>
               <span><b>Éxito:</b> los cambios se guardaron correctamente.</span>
             </div>
             <div class="ds-alert ds-alert--info">
-              <svg data-p-icon="info-circle" [size]="16"></svg>
+              <svg pIcon="info-circle" [size]="16"></svg>
               <span><b>Aviso:</b> revisa la información antes de continuar.</span>
             </div>
             <div class="ds-alert ds-alert--warning">
-              <svg data-p-icon="exclamation-triangle" [size]="16"></svg>
+              <svg pIcon="exclamation-triangle" [size]="16"></svg>
               <span><b>Advertencia:</b> existen registros pendientes.</span>
             </div>
             <div class="ds-alert ds-alert--error">
-              <svg data-p-icon="exclamation-triangle" [size]="16"></svg>
+              <svg pIcon="exclamation-triangle" [size]="16"></svg>
               <span><b>Error:</b> no fue posible completar la operación.</span>
             </div>
           </div>

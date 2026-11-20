@@ -19,9 +19,9 @@
                   [class.ds-pasos-drawer__circulo--bloqueado]="paso.bloqueado"
                 >
                   @if (estaCompletado(paso.id) && pasoActivo() !== paso.id) {
-                    <svg data-p-icon="check" [size]="14"></svg>
+                    <svg pIcon="check" [size]="14"></svg>
                   } @else if (paso.bloqueado) {
-                    <svg data-p-icon="lock" [size]="14"></svg>
+                    <svg pIcon="lock" [size]="14"></svg>
                   } @else {
                     {{ paso.id }}
                   }

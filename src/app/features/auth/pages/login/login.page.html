@@ -1,7 +1,7 @@
 <div class="w-full min-w-[350px] max-w-[400px]">
   <div class="mb-8 flex flex-col items-center text-center">
     <div class="mb-4 flex size-12 items-center justify-center rounded-xl bg-blue-600 text-white">
-      <svg data-p-icon="check-circle" [size]="24"></svg>
+      <svg pIcon="check-circle" [size]="24"></svg>
     </div>
     <h2 class="ds-title-section">Bienvenido de nuevo</h2>
     <p class="ds-meta mt-2">
@@ -44,14 +44,14 @@
 
       @if (badgeUser() && !authStore.loading()) {
         <div class="ds-alert ds-alert--success">
-          <svg data-p-icon="user" [size]="16" class="mt-0.5 shrink-0"></svg>
+          <svg pIcon="user" [size]="16" class="mt-0.5 shrink-0"></svg>
           <span
             >Sesión iniciada como <b>{{ badgeUser() }}</b></span
           >
         </div>
       } @else {
         <div class="ds-alert ds-alert--info">
-          <svg data-p-icon="info-circle" [size]="16" class="mt-0.5 shrink-0"></svg>
+          <svg pIcon="info-circle" [size]="16" class="mt-0.5 shrink-0"></svg>
           <span> El gafete contiene tus credenciales, por lo que el acceso es automático. </span>
         </div>
       }
@@ -89,9 +89,9 @@
             (click)="togglePasswordMask()"
           >
             @if (passwordMask()) {
-              <svg data-p-icon="eye" [size]="16"></svg>
+              <svg pIcon="eye" [size]="16"></svg>
             } @else {
-              <svg data-p-icon="eye-slash" [size]="16"></svg>
+              <svg pIcon="eye-slash" [size]="16"></svg>
             }
           </p-inputicon>
         </p-iconfield>
@@ -122,9 +122,9 @@
       <button pButton type="submit" class="ds-button w-full" [loading]="authStore.loading()">
         <span class="flex items-center justify-center gap-2">
           @if (authStore.loading()) {
-            <svg data-p-icon="spinner" [spin]="true" [size]="16"></svg>
+            <svg pIcon="spinner" [spin]="true" [size]="16"></svg>
           } @else {
-            <svg data-p-icon="sign-in" [size]="16"></svg>
+            <svg pIcon="sign-in" [size]="16"></svg>
           }
           Iniciar sesión
         </span>
@@ -136,9 +136,9 @@
 
   <button type="button" class="ds-button ds-button--secondary w-full" (click)="toggleMode()">
     @if (mode() === 'qr') {
-      <svg data-p-icon="pencil" [size]="16"></svg>
+      <svg pIcon="pencil" [size]="16"></svg>
     } @else {
-      <svg data-p-icon="qrcode" [size]="16"></svg>
+      <svg pIcon="qrcode" [size]="16"></svg>
     }
     {{ mode() === 'qr' ? 'Ingresar manualmente' : 'Escanear QR del gafete' }}
   </button>

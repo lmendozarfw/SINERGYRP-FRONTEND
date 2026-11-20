@@ -3,7 +3,7 @@
     <div class="flex min-w-0 items-start gap-3">
       <span
         class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--ds-primary-soft)] text-[var(--ds-primary)]">
-        <svg data-p-icon="tags" [size]="18"></svg>
+        <svg pIcon="tags" [size]="18"></svg>
       </span>
       <div class="min-w-0">
         <div class="flex flex-wrap items-center gap-3">
@@ -18,7 +18,7 @@
 
     <div class="flex flex-wrap gap-2 max-sm:w-full">
       <button type="button" class="ds-button" (click)="abrirDrawer()">
-        <svg data-p-icon="plus" [size]="16"></svg>
+        <svg pIcon="plus" [size]="16"></svg>
         Nueva combinación
       </button>
     </div>
@@ -30,7 +30,7 @@
     currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} combinaciones" [scrollable]="true">
     <ng-template #header>
       <tr>
-        <th class="ds-table__th ds-table__th--check" class="w-[60px] min-w-[60px]">
+        <th class="ds-table__th ds-table__th--check" class="w-[40px] min-w-[40px]">
           <p-table-header-checkbox ariaLabel="Seleccionar todas las combinaciones" />
         </th>
         <th pSortableColumn="codigo" class="ds-table__th" style="width: 220px; min-width: 220px">
@@ -100,11 +100,11 @@
         <td class="ds-table__td ds-table__td--right">
           <div class="ds-table__actions">
             <button type="button" class="ds-icon-button" aria-label="Editar combinación" (click)="editar(combinacion)">
-              <svg data-p-icon="pencil" [size]="15"></svg>
+              <svg pIcon="pencil" [size]="15"></svg>
             </button>
             <button type="button" class="ds-icon-button ds-icon-button--danger" aria-label="Eliminar combinación"
               (click)="eliminar(combinacion)">
-              <svg data-p-icon="trash" [size]="15"></svg>
+              <svg pIcon="trash" [size]="15"></svg>
             </button>
           </div>
         </td>
@@ -140,16 +140,16 @@
     <div class="ds-client-drawer__footer flex justify-end gap-4">
       @if (!esPasoUno()) {
       <button type="button" class="ds-button ds-button--secondary" [disabled]="esPasoUno()" (click)="regresar()">
-        <svg data-p-icon="arrow-left" [size]="14"></svg>
+        <svg pIcon="arrow-left" [size]="14"></svg>
         Anterior
       </button>
       }
       <button type="button" class="ds-button" (click)="continuar()">
         {{ esUltimoPaso() ? (combinacionEditando() ? 'Crear versión' : 'Crear combinación') : 'Continuar' }}
         @if (esUltimoPaso()) {
-        <svg data-p-icon="check" [size]="14"></svg>
+        <svg pIcon="check" [size]="14"></svg>
         } @else {
-        <svg data-p-icon="arrow-right" [size]="14"></svg>
+        <svg pIcon="arrow-right" [size]="14"></svg>
         }
       </button>
     </div>

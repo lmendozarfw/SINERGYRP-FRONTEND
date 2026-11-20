@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ArrowLeft, ArrowRight, Check, Pencil, Plus, Tags, Trash } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 import { SortIcon, Table, TableHeaderCheckbox, TableCheckbox } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { Drawer } from 'primeng/drawer';
@@ -34,13 +34,7 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
     AtributosCombinacionComponent,
     MaterialesCombinacionComponent,
     PasosDrawerComponent,
-    ArrowLeft,
-    ArrowRight,
-    Check,
-    Pencil,
-    Plus,
-    Trash,
-    Tags
+    PIcon
   ],
   templateUrl: './combinaciones.component.html',
   styleUrl: './combinaciones.component.scss',

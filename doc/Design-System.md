@@ -169,14 +169,14 @@ Todos los componentes se basan en **PrimeNG** y se personalizan con Tailwind + C
                 <div class="text-sm font-medium text-color mb-2">Create a password</div>
                 <p-iconfield>
                     <p-inputicon>
-                        <svg data-p-icon="lock"></svg>
+                        <svg pIcon="lock"></svg>
                     </p-inputicon>
                     <input pInputPassword [(ngModel)]="value" [(mask)]="mask" [fluid]="true" />
                     <p-inputicon (click)="mask = !mask" style="cursor: pointer">
                         @if (mask) {
-                            <svg data-p-icon="eye" [size]="16"></svg>
+                            <svg pIcon="eye" [size]="16"></svg>
                         } @else {
-                            <svg data-p-icon="eye-slash" [size]="16"></svg>
+                            <svg pIcon="eye-slash" [size]="16"></svg>
                         }
                     </p-inputicon>
                 </p-iconfield>
@@ -190,9 +190,9 @@ Todos los componentes se basan en **PrimeNG** y se personalizan con Tailwind + C
                                 "
                             >
                                 @if (rule.test(value)) {
-                                    <svg data-p-icon="check" [size]="12"></svg>
+                                    <svg pIcon="check" [size]="12"></svg>
                                 } @else {
-                                    <svg data-p-icon="times" [size]="12"></svg>
+                                    <svg pIcon="times" [size]="12"></svg>
                                 }
                             </span>
                             {{ rule.label }}

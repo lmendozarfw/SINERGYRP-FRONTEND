@@ -15,15 +15,7 @@ import { InputPassword } from 'primeng/inputpassword';
 import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import {
-  CheckCircle,
-  Eye,
-  EyeSlash,
-  InfoCircle,
-  Pencil,
-  Qrcode,
-  SignIn,
-  Spinner,
-  User,
+  PIcon
 } from '@primeicons/angular';
 import { FormLabelComponent } from '../../../../shared/components/form-label/form-label.component';
 import { MensajeAyudaErrorComponent } from '../../../../shared/components/mesaje-ayuda-error/mensaje-ayuda-error.component';
@@ -94,15 +86,7 @@ function toCredentials(username: unknown, password: unknown): BadgeCredentials |
     Select,
     Checkbox,
     ButtonDirective,
-    CheckCircle,
-    User,
-    InfoCircle,
-    SignIn,
-    Spinner,
-    Pencil,
-    Qrcode,
-    Eye,
-    EyeSlash,
+    PIcon
   ],
 })
 export class LoginPage {

@@ -1,0 +1,64 @@
+
+<p-confirmdialog
+    key="confirmacion-global"
+    styleClass="dialogo-confirmacion"
+    [closable]="false"
+    [closeOnEscape]="true"
+    [dismissableMask]="false"
+    [breakpoints]="{
+        '640px': 'calc(100vw - 2rem)'
+    }"
+>
+    <ng-template
+        #headless
+        let-message
+        let-onAccept="onAccept"
+        let-onReject="onReject"
+    >
+        <div class="confirmacion-contenido">
+
+            <!-- Icono -->
+            <div
+                class="confirmacion-icono"
+                [class]="obtenerClaseIcono(message.data?.tipo)"
+            >
+                <i
+                    class="pi"
+                    [class]="obtenerIcono(message.data?.tipo)"
+                ></i>
+            </div>
+
+            <!-- Título -->
+            <h2 class="confirmacion-titulo">
+                {{ message.header }}
+            </h2>
+
+            <!-- Mensaje -->
+            <p class="confirmacion-mensaje">
+                {{ message.message }}
+            </p>
+
+            <!-- Acciones -->
+            <div class="confirmacion-acciones">
+
+                <button
+                    type="button"
+                    class="boton-confirmar"
+                    (click)="onAccept()"
+                >
+                    {{ message.acceptLabel || 'Aceptar' }}
+                </button>
+
+                <button
+                    type="button"
+                    class="boton-cancelar"
+                    (click)="onReject()"
+                >
+                    {{ message.rejectLabel || 'Cancelar' }}
+                </button>
+
+            </div>
+
+        </div>
+    </ng-template>
+</p-confirmdialog>

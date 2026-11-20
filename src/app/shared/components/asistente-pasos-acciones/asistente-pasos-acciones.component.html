@@ -9,12 +9,12 @@
             [disabled]="guardando"
             (click)="guardarBorrador.emit()"
         >
-            <svg data-p-icon="save" [size]="16"></svg>
+            <svg pIcon="save" [size]="16"></svg>
             Guardar como borrador
         </button>
 
         <!-- <p class="ds-acciones__borrador-meta">
-            <svg data-p-icon="info-circle" [size]="14"></svg>
+            <svg pIcon="info-circle" [size]="14"></svg>
             Puedes retomarlo en cualquier momento.
         </p> -->
 
@@ -55,7 +55,7 @@
                     [disabled]="guardando"
                     (click)="regresar.emit()"
                 >
-                    <svg data-p-icon="arrow-left" [size]="16"></svg>
+                    <svg pIcon="arrow-left" [size]="16"></svg>
                     Regresar
                 </button>
 
@@ -69,7 +69,7 @@
                 (click)="continuar.emit()"
             >
                 {{ esUltimoPaso ? 'Finalizar' : 'Continuar' }}
-                <svg data-p-icon="arrow-right" [size]="16"></svg>
+                <svg pIcon="arrow-right" [size]="16"></svg>
             </button>
         </div>
 

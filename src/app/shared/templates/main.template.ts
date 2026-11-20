@@ -2,7 +2,7 @@ import { Component, computed, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
-import { Bars, ChevronLeft, ChevronRight } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
 
@@ -14,9 +14,7 @@ import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.compone
     RouterOutlet,
     SidebarComponent,
     BreadcrumbComponent,
-    Bars,
-    ChevronLeft,
-    ChevronRight,
+    PIcon
   ],
   template: `
     <div class="h-screen overflow-hidden bg-slate-50">
@@ -59,11 +57,11 @@ import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.compone
               [attr.aria-label]="sidebarOpen() ? 'Cerrar menú' : 'Abrir menú'"
             >
               @if (isMobile()) {
-                <svg data-p-icon="bars" [size]="18"></svg>
+                <svg pIcon="bars" [size]="18"></svg>
               } @else if (sidebarOpen()) {
-                <svg data-p-icon="chevron-left" [size]="18"></svg>
+                <svg pIcon="chevron-left" [size]="18"></svg>
               } @else {
-                <svg data-p-icon="chevron-right" [size]="18"></svg>
+                <svg pIcon="chevron-right" [size]="18"></svg>
               }
             </button>
 

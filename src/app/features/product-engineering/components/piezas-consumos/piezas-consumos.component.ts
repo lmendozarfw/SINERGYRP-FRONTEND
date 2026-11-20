@@ -11,7 +11,7 @@ import { InputNumber } from 'primeng/inputnumber';
 import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
-import { ChevronRight, ExclamationTriangle, Pencil, Plus, Tags, Trash } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 
 import { ToastService } from '../../../../core/services/toast.service';
 import { FormLabelComponent } from '../../../../shared/components/form-label/form-label.component';
@@ -68,12 +68,7 @@ type ConsumoFormGroup = FormGroup<{
     TableModule,
     FormLabelComponent,
     MensajeAyudaErrorComponent,
-    ChevronRight,
-    ExclamationTriangle,
-    Pencil,
-    Plus,
-    Tags,
-    Trash,
+    PIcon
   ],
   templateUrl: './piezas-consumos.component.html',
   styleUrl: './piezas-consumos.component.scss',

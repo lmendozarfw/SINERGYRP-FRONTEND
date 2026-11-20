@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
-import { ThLarge } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 
 import { FormLabelComponent } from '../../../../../shared/components/form-label/form-label.component';
 import { MensajeAyudaErrorComponent } from '../../../../../shared/components/mesaje-ayuda-error/mensaje-ayuda-error.component';
@@ -29,7 +29,7 @@ interface FilaMaterial {
     Tag,
     FormLabelComponent,
     MensajeAyudaErrorComponent,
-    ThLarge,
+    PIcon,
   ],
   templateUrl: './materiales-combinacion.component.html',
   styleUrl: './materiales-combinacion.component.scss',

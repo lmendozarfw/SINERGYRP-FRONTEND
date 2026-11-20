@@ -4,7 +4,7 @@
 
         <header class="ds-revision__cabecera">
             <span class="ds-revision__icono">
-                <svg data-p-icon="check-circle" [size]="20"></svg>
+                <svg pIcon="check-circle" [size]="20"></svg>
             </span>
             <div class="min-w-0">
                 <div class="flex flex-wrap items-center gap-2.5">
@@ -53,9 +53,9 @@
                             [class.ds-revision__marcador--pendiente]="validacion.estado === 'pendiente'"
                         >
                             @if (validacion.estado === 'aprobada') {
-                                <svg data-p-icon="check" [size]="18"></svg>
+                                <svg pIcon="check" [size]="18"></svg>
                             } @else {
-                                <svg data-p-icon="clock" [size]="18"></svg>
+                                <svg pIcon="clock" [size]="18"></svg>
                             }
                         </span>
 
@@ -71,10 +71,10 @@
                                     [class.ds-revision__badge--pendiente]="validacion.estado === 'pendiente'"
                                 >
                                     @if (validacion.estado === 'aprobada') {
-                                        <svg data-p-icon="check" [size]="13"></svg>
+                                        <svg pIcon="check" [size]="13"></svg>
                                         Aprobado
                                     } @else {
-                                        <svg data-p-icon="clock" [size]="13"></svg>
+                                        <svg pIcon="clock" [size]="13"></svg>
                                         Pendiente
                                     }
                                 </span>
@@ -84,11 +84,11 @@
 
                             <div class="mt-2.5 flex flex-wrap gap-x-4 gap-y-1.5">
                                 <span class="inline-flex items-center gap-1.5 text-xs text-[var(--ds-text-muted)]">
-                                    <svg data-p-icon="user" [size]="14"></svg>
+                                    <svg pIcon="user" [size]="14"></svg>
                                     {{ validacion.responsable }} · {{ validacion.rol }}
                                 </span>
                                 <span class="inline-flex items-center gap-1.5 text-xs text-[var(--ds-text-muted)]">
-                                    <svg data-p-icon="calendar" [size]="14"></svg>
+                                    <svg pIcon="calendar" [size]="14"></svg>
                                     {{ validacion.fecha }}
                                 </span>
                             </div>
@@ -133,7 +133,7 @@
             </app-tarjeta>
 
             <div class="ds-alert ds-alert--warning ds-revision__alerta">
-                <svg data-p-icon="info-circle" [size]="18" class="shrink-0"></svg>
+                <svg pIcon="info-circle" [size]="18" class="shrink-0"></svg>
                 <div class="flex flex-col gap-0.5">
                     <span class="ds-revision__alerta-titulo">Liberación pendiente</span>
                     <span class="ds-revision__alerta-texto">

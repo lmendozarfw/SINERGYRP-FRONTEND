@@ -4,9 +4,10 @@ import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 // Configuración de Sentry
 import * as Sentry from "@sentry/angular";
+import { DialogoConfirmacionService } from './shared/components/confirmacion/confirmacion.service';
 Sentry.init({
   dsn: "https://d0956fc4ac9892486ec676fcbb763719@o4512465429069824.ingest.us.sentry.io/4512465437261824",
   integrations: [
@@ -125,6 +126,9 @@ export const appConfig: ApplicationConfig = {
         'eyJpZCI6IjhjY2MwMWZjLTAxMzgtNGYxZC1iMDlkLTQ2MGYyN2Q0ZTk0NSIsInByb2R1Y3QiOiJwcmltZXVpIiwidGllciI6ImNvbW11bml0eSIsInR5cGUiOiJkZXYiLCJpYXQiOjE3ODI4NTMzODQsImV4cCI6MTgxNDM4OTM4NH0.5X1GwjVS-s0_fDC5XCzABHltbeIeRXqYFiQyrIuL6CK2mdQe8bA_c6CF6xQtxxwFzjztmAW_RlHBw-8IRxf7CA',
     }),
     MessageService,
+    MessageService, 
+    ConfirmationService,
+    DialogoConfirmacionService,
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler(),

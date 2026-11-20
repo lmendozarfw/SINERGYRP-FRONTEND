@@ -7,14 +7,15 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
-import { Eye, Filter, Pencil, Plus, Search, Trash } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 import { BulkActionsBarComponent } from '../../../shared/components/bulk-actions-bar/bulk-actions-bar.component';
 import { FormLabelComponent } from '../../../shared/components/form-label/form-label.component';
 import { MensajeAyudaErrorComponent } from '../../../shared/components/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { EncabezadoPaginaComponent } from '../../../shared/components/encabezado-pagina/encabezado-pagina.component';
 import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
 import { Client } from '../models/client.model';
-import { ButtonDirective } from 'primeng/button';
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { DialogoConfirmacionService } from '../../../shared/components/confirmacion/confirmacion.service';
 
 interface SelectOption {
   label: string;
@@ -37,16 +38,13 @@ interface SelectOption {
     FormLabelComponent,
     MensajeAyudaErrorComponent,
     EncabezadoPaginaComponent,
-    Eye,
-    Filter,
-    Pencil,
-    Plus,
-    Search,
-    Trash,
+    PIcon,
+    ConfirmDialog,
   ],
   templateUrl: './clients.page.html',
 })
 export class ClientsPage {
+  private readonly dialogoConfirmacion = inject(DialogoConfirmacionService);
   private readonly breadcrumb = inject(BreadcrumbService);
 
   readonly drawerVisible = signal(false);
@@ -194,5 +192,19 @@ export class ClientsPage {
 
   clearSelection(): void {
     this.selectedClients.set([]);
+  }
+
+  onDelete(client?: Client): void {
+    this.dialogoConfirmacion.mostrar({
+      titulo: '¿Eliminar departamento?',
+      mensaje: 'Esta acción eliminará el departamento seleccionado. ¿Deseas continuar?',
+      tipo: 'peligro',
+      textoAceptar: 'Eliminar',
+      textoCancelar: 'Cancelar',
+
+      alConfirmar: () => {
+        console.log('Eliminado');
+      }
+    });
   }
 }

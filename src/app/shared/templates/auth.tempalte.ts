@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ChartBar, CheckCircle, Qrcode } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 
 @Component({
   selector: 'auth-template',
-  imports: [RouterOutlet, CheckCircle, Qrcode, ChartBar],
+  imports: [RouterOutlet, PIcon],
   template: `
     <div class="flex min-h-screen bg-slate-50">
       <section
@@ -35,7 +35,7 @@ y avanzar con confianza.          </p>
               <span
                 class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/10"
               >
-                <svg data-p-icon="check-circle" [size]="20"></svg>
+                <svg pIcon="check-circle" [size]="20"></svg>
               </span>
               <p class="ds-body">Inventario claro y trazable</p>
             </div>
@@ -43,7 +43,7 @@ y avanzar con confianza.          </p>
               <span
                 class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/10"
               >
-                <svg data-p-icon="qrcode" [size]="20"></svg>
+                <svg pIcon="qrcode" [size]="20"></svg>
               </span>
               <p class="ds-body">Acceso por código QR para un registro ágil</p>
             </div>
@@ -51,7 +51,7 @@ y avanzar con confianza.          </p>
               <span
                 class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-white/10"
               >
-                <svg data-p-icon="chart-bar" [size]="20"></svg>
+                <svg pIcon="chart-bar" [size]="20"></svg>
               </span>
               <p class="ds-body">Reportes y valorización al alcance de un clic</p>
             </div>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { StepperModule } from 'primeng/stepper';
-import { Check, Lock } from '@primeicons/angular';
+import { PIcon } from '@primeicons/angular';
 
 export interface PasoDrawer {
   id: number;
@@ -12,7 +12,7 @@ export interface PasoDrawer {
 @Component({
   selector: 'app-pasos-drawer',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [StepperModule, Check, Lock],
+  imports: [StepperModule, PIcon],
   templateUrl: './pasos-drawer.component.html',
   styleUrl: './pasos-drawer.component.scss',
 })
