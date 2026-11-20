@@ -6,6 +6,7 @@ import {
   PasoAsistente,
 } from '../../../../shared/components/asistente-pasos/asistente-pasos.component';
 import { AsistentePasosAccionesComponent } from '../../../../shared/components/asistente-pasos-acciones/asistente-pasos-acciones.component';
+import { EncabezadoPaginaComponent } from '../../../../shared/components/encabezado-pagina/encabezado-pagina.component';
 import { DatosGeneralesComponent } from '../../components/datos-generales/datos-generales.component';
 import { CorridasEquivalenciasComponent } from '../../components/corridas-equivalencias/corridas-equivalencias.component';
 import { PiezasConsumosComponent } from '../../components/piezas-consumos/piezas-consumos.component';
@@ -23,6 +24,7 @@ interface EncabezadoPaso {
   imports: [
     AsistentePasosComponent,
     AsistentePasosAccionesComponent,
+    EncabezadoPaginaComponent,
     DatosGeneralesComponent,
     CorridasEquivalenciasComponent,
     PiezasConsumosComponent,

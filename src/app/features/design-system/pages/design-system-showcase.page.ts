@@ -19,6 +19,7 @@ import {
   Users,
 } from '@primeicons/angular';
 import { FormLabelComponent } from '../../../shared/components/form-label/form-label.component';
+import { EncabezadoPaginaComponent } from '../../../shared/components/encabezado-pagina/encabezado-pagina.component';
 import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
 
 @Component({
@@ -32,6 +33,7 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
     InputText,
     InputPassword,
     FormLabelComponent,
+    EncabezadoPaginaComponent,
     Home,
     Inbox,
     Search,
@@ -46,17 +48,14 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
   template: `
     <div class="min-h-screen bg-slate-50 p-6 lg:p-10">
       <div class="mx-auto flex max-w-6xl flex-col gap-8">
-        <header class="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p class="ds-meta uppercase tracking-widest">SINERGYRP · Design System</p>
-            <h1 class="ds-title-page mt-2">Componentes y fundamentos</h1>
-            <p class="ds-body mt-2 text-slate-600">
-              Referencia visual de la paleta, tipografía y componentes. Usa Tab para ver el anillo
-              de foco.
-            </p>
-          </div>
+        <app-encabezado-pagina
+          eyebrow="SINERGYRP · Design System"
+          titulo="Componentes y fundamentos"
+          descripcion="Referencia visual de la paleta, tipografía y componentes. Usa Tab para ver el anillo de foco."
+          nivel="h1"
+        >
           <a routerLink="/auth/login" class="ds-button ds-button--secondary">Ir al login</a>
-        </header>
+        </app-encabezado-pagina>
 
         <section class="flex flex-col gap-4">
           <h2 class="ds-title-section">1. Paleta</h2>

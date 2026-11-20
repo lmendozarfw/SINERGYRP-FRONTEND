@@ -22,6 +22,7 @@ export interface PasoAsistente {
 @Component({
     selector: 'app-asistente-pasos',
     standalone: true,
+    host: { class: 'block w-full' },
     imports: [
         CommonModule,
         StepperModule,

@@ -1,12 +1,8 @@
 <div class="ds-new-product-page">
-    <section class="ds-new-product-heading">
-        <div class="min-w-0">
-            <h2 class="ds-title-page mt-1">{{ encabezado.titulo }}</h2>
-            <p class="ds-body mt-1 max-w-2xl text-[var(--ds-text-muted)]">
-                {{ encabezado.descripcion }}
-            </p>
-        </div>
-    </section>
+    <app-encabezado-pagina
+        [titulo]="encabezado.titulo"
+        [descripcion]="encabezado.descripcion"
+    />
 
     <app-asistente-pasos
         [pasos]="pasos"

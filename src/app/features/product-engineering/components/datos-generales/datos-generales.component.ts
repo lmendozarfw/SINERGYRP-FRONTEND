@@ -13,6 +13,7 @@ import { NewProductWizardStore } from '../../stores/new-product-wizard.store';
 
 @Component({
   selector: 'app-datos-generales',
+  host: { class: 'block' },
   imports: [
     ReactiveFormsModule,
     InputText,
@@ -26,7 +27,6 @@ import { NewProductWizardStore } from '../../stores/new-product-wizard.store';
     MensajeAyudaErrorComponent,
   ],
   templateUrl: './datos-generales.component.html',
-  styleUrl: './datos-generales.component.scss',
 })
 export class DatosGeneralesComponent {
   protected readonly store = inject(NewProductWizardStore);

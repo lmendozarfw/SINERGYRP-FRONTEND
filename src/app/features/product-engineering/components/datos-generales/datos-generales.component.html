@@ -1,17 +1,16 @@
-<form class="ds-new-product-form" [formGroup]="store.modeloForm" (ngSubmit)="store.validarDatosGenerales()">
+<form class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]" [formGroup]="store.modeloForm" (ngSubmit)="store.validarDatosGenerales()">
 
-    <div class="ds-new-product-form__main">
+    <div class="flex min-w-0 flex-col gap-6">
 
         <!-- Identidad del modelo -->
         <app-tarjeta titulo="Identidad del modelo"
             descripcion="Datos que identifican el modelo dentro de la ingeniería de producto." icono="file-edit">
-            <div class="ds-new-product-grid">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                 <div class="ds-field">
                     <app-form-label for="modelo-codigo" required>Código del modelo</app-form-label>
                     <input pInputText id="modelo-codigo" formControlName="codigo" type="text" placeholder="Ej. MDL-0001" [invalid]="store.codigoInvalido" />
                     <app-mensaje-ayuda-error [condicion]="store.codigoInvalido" mensajeError="El código del modelo es obligatorio." mensajeAyuda="Identificador único del modelo."></app-mensaje-ayuda-error>
-                    
                 </div>
 
                 <div class="ds-field">
@@ -25,22 +24,22 @@
 
                 <div class="ds-field">
                     <app-form-label for="modelo-fecha-alta">Fecha de alta</app-form-label>
-                    <p-datepicker class="ds-new-product-control" inputId="modelo-fecha-alta" formControlName="fechaAlta"
+                    <p-datepicker class="flex w-full" inputId="modelo-fecha-alta" formControlName="fechaAlta"
                         dateFormat="dd/mm/yy" [showIcon]="true" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Se registra automáticamente al crear el modelo."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field">
                     <app-form-label for="modelo-estatus">Estatus</app-form-label>
-                    <p-select class="ds-new-product-control" inputId="modelo-estatus" formControlName="estatus"
+                    <p-select class="flex w-full" inputId="modelo-estatus" formControlName="estatus"
                         [options]="store.estatusOpciones" optionLabel="label" optionValue="value" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="El modelo puede iniciar como borrador."></app-mensaje-ayuda-error>
                 </div>
 
-                <div class="ds-field ds-new-product-grid__full">
+                <div class="ds-field col-span-full">
                     <app-form-label for="modelo-descripcion">Descripción</app-form-label>
                     <textarea pTextarea id="modelo-descripcion" formControlName="descripcion" rows="3"
-                        class="ds-input ds-new-product-textarea"
+                        class="ds-input h-auto min-h-[108px] resize-y px-3 py-2.5 leading-[22px]"
                         placeholder="Describe el modelo, su uso previsto y cualquier detalle relevante."></textarea>
                     <app-mensaje-ayuda-error
                         mensajeAyuda="Opcional. Ayuda a identificar el modelo en búsquedas y reportes."></app-mensaje-ayuda-error>
@@ -51,11 +50,11 @@
 
         <!-- Clasificación -->
         <app-tarjeta titulo="Clasificación" descripcion="Ubica el modelo dentro del catálogo de producto." icono="tags">
-            <div class="ds-new-product-grid">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                 <div class="ds-field">
                     <app-form-label for="modelo-categoria" required>Categoría</app-form-label>
-                    <p-select class="ds-new-product-control" inputId="modelo-categoria" formControlName="categoria"
+                    <p-select class="flex w-full" inputId="modelo-categoria" formControlName="categoria"
                         [options]="store.categorias" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una categoría" [fluid]="true"
                         [class.p-invalid]="store.categoriaInvalida" />
@@ -66,7 +65,7 @@
 
                 <div class="ds-field">
                     <app-form-label for="modelo-marca">Marca</app-form-label>
-                    <p-select class="ds-new-product-control" inputId="modelo-marca" formControlName="marca"
+                    <p-select class="flex w-full" inputId="modelo-marca" formControlName="marca"
                         [options]="store.marcas" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una marca" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Marca o licencia asociada al modelo."></app-mensaje-ayuda-error>
@@ -74,7 +73,7 @@
 
                 <div class="ds-field">
                     <app-form-label for="modelo-linea">Línea</app-form-label>
-                    <p-select class="ds-new-product-control" inputId="modelo-linea" formControlName="linea"
+                    <p-select class="flex w-full" inputId="modelo-linea" formControlName="linea"
                         [options]="store.lineas" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una línea" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Línea comercial o colección del modelo."></app-mensaje-ayuda-error>
@@ -82,7 +81,7 @@
 
                 <div class="ds-field">
                     <app-form-label for="modelo-genero">Género</app-form-label>
-                    <p-select class="ds-new-product-control" inputId="modelo-genero" formControlName="genero"
+                    <p-select class="flex w-full" inputId="modelo-genero" formControlName="genero"
                         [options]="store.generos" optionLabel="label" optionValue="value"
                         placeholder="Selecciona un género" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Público objetivo del modelo."></app-mensaje-ayuda-error>
@@ -93,7 +92,7 @@
 
     </div>
 
-    <aside class="ds-new-product-form__aside">
+    <aside class="flex min-w-0 flex-col gap-6">
 
         <!-- Imagen -->
         <app-tarjeta titulo="Imagenes" descripcion="Referencia visual del modelo." icono="images">
@@ -104,35 +103,38 @@
 
         <!-- Resumen -->
         <app-tarjeta titulo="Así se creará tu modelo" descripcion="Resumen de la información capturada." icono="sparkles">
-            <dl class="ds-new-product-summary__list">
-                <div class="ds-new-product-summary__row">
-                    <dt class="ds-new-product-summary__label">Nombre</dt>
-                    <dd class="ds-new-product-summary__value"
-                        [class.ds-new-product-summary__value--muted]="!store.modeloForm.controls.nombre.value">
+            <dl class="m-0 flex flex-col">
+                <div class="flex items-baseline justify-between gap-4 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                    <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Nombre</dt>
+                    <dd class="m-0 text-right text-sm leading-5 wrap-anywhere"
+                        [class.text-ds-ink]="!!store.modeloForm.controls.nombre.value"
+                        [class.text-ds-muted]="!store.modeloForm.controls.nombre.value"
+                        [class.font-medium]="!!store.modeloForm.controls.nombre.value"
+                        [class.font-normal]="!store.modeloForm.controls.nombre.value">
                         {{ store.nombreResumen }}
                     </dd>
                 </div>
 
-                <div class="ds-new-product-summary__row">
-                    <dt class="ds-new-product-summary__label">Categoría</dt>
-                    <dd class="ds-new-product-summary__value">{{ store.categoriaResumen }}</dd>
+                <div class="flex items-baseline justify-between gap-4 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                    <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Categoría</dt>
+                    <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">{{ store.categoriaResumen }}</dd>
                 </div>
 
-                <div class="ds-new-product-summary__row">
-                    <dt class="ds-new-product-summary__label">Línea</dt>
-                    <dd class="ds-new-product-summary__value">{{ store.lineaResumen }}</dd>
+                <div class="flex items-baseline justify-between gap-4 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                    <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Línea</dt>
+                    <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">{{ store.lineaResumen }}</dd>
                 </div>
 
-                <div class="ds-new-product-summary__row">
-                    <dt class="ds-new-product-summary__label">Versión inicial</dt>
-                    <dd class="ds-new-product-summary__value">v1.0</dd>
+                <div class="flex items-baseline justify-between gap-4 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                    <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Versión inicial</dt>
+                    <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">v1.0</dd>
                 </div>
 
-                <div class="ds-new-product-summary__row">
-                    <dt class="ds-new-product-summary__label">Estado inicial</dt>
-                    <dd class="ds-new-product-summary__value">
-                        <span class="ds-new-product-status">
-                            <span class="ds-new-product-status__dot"></span>
+                <div class="flex items-baseline justify-between gap-4 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                    <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Estado inicial</dt>
+                    <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">
+                        <span class="inline-flex items-center gap-1.5 rounded-full bg-ds-primary-soft px-2 py-0.5 text-xs font-semibold leading-[18px] text-blue-800">
+                            <span class="size-1.5 rounded-full bg-ds-primary"></span>
                             {{ store.estadoResumen }}
                         </span>
                     </dd>
@@ -141,11 +143,11 @@
         </app-tarjeta>
 
         <!-- Mensaje de siguiente paso -->
-        <div class="ds-alert ds-alert--success ds-new-product-alert">
+        <div class="ds-alert ds-alert--success items-start">
             <svg data-p-icon="check-circle" [size]="18" class="shrink-0"></svg>
-            <div class="ds-new-product-alert__contenido">
-                <span class="ds-new-product-alert__titulo">Todo listo para continuar</span>
-                <span class="ds-new-product-alert__texto">
+            <div class="flex flex-col gap-0.5">
+                <span class="text-sm font-semibold leading-5">Todo listo para continuar</span>
+                <span class="text-xs leading-[18px] opacity-[0.85]">
                     Al guardar el modelo podrás configurar corridas, equivalencias, piezas,
                     consumos y combinaciones.
                 </span>

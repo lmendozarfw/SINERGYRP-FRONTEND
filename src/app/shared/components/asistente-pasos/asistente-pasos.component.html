@@ -7,28 +7,26 @@
 
             <ng-template #content let-value="value">
 
-                <div class="ds-paso">
+                <div class="flex w-full flex-col gap-3">
 
-                    <div class="ds-paso__cabecera">
+                    <div class="flex w-full items-center">
 
-                        <button type="button" class="ds-paso__boton" [disabled]="!puedeSeleccionar(paso)"
+                        <button type="button"
+                            class="flex shrink-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 disabled:cursor-not-allowed"
+                            [disabled]="!puedeSeleccionar(paso)"
                             [attr.aria-current]="
                                     pasoActivo() === paso.id ? 'step' : null
                                 " (click)="irA(paso.id)">
 
-                            <span class="ds-paso__circulo" [ngClass]="{
-                                        'ds-paso__circulo--activo':
-                                            pasoActivo() === paso.id ||
-                                            estaCompletado(paso),
-
-                                        'ds-paso__circulo--pendiente':
-                                            !estaCompletado(paso) &&
-                                            pasoActivo() !== paso.id &&
-                                            !estaBloqueado(paso),
-
-                                        'ds-paso__circulo--bloqueado':
-                                            estaBloqueado(paso)
-                                    }">
+                            <span
+                                class="flex size-7 min-w-7 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors"
+                                [ngClass]="{
+                                    'border-ds-primary bg-ds-primary text-white':
+                                        !estaBloqueado(paso) && (pasoActivo() === paso.id || estaCompletado(paso)),
+                                    'border-slate-100 bg-slate-100 text-slate-600':
+                                        !estaCompletado(paso) && pasoActivo() !== paso.id && !estaBloqueado(paso),
+                                    'border-slate-200 bg-slate-100 text-ds-ink/70': estaBloqueado(paso)
+                                }">
                                 @if (estaCompletado(paso)) {
                                 <svg data-p-icon="check" [size]="16"></svg>
                                 } @else if (estaBloqueado(paso)) {
@@ -41,18 +39,17 @@
                         </button>
 
                         @if (!$last) {
-                        <span class="ds-paso__linea" [class.ds-paso__linea--activa]="
-                                        estaCompletado(paso)
-                                    "></span>
+                        <span class="mx-2 h-0.5 flex-1 rounded-full transition-colors" [class.bg-slate-200]="!estaCompletado(paso)"
+                            [class.bg-ds-primary]="estaCompletado(paso)"></span>
                         }
 
                     </div>
 
-                    <span class="ds-paso__titulo" [class.ds-paso__titulo--activo]="
-                                pasoActivo() === paso.id
-                            " [class.ds-paso__titulo--bloqueado]="
-                                estaBloqueado(paso)
-                            ">
+                    <span class="text-[11px] font-medium leading-4 transition-colors" [ngClass]="{
+                                'text-ds-primary': !estaBloqueado(paso) && pasoActivo() === paso.id,
+                                'text-ds-ink/70': estaBloqueado(paso),
+                                'text-slate-600': !estaBloqueado(paso) && pasoActivo() !== paso.id
+                            }">
                         {{ paso.titulo }}
                     </span>
 

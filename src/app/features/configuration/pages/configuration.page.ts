@@ -2,11 +2,14 @@ import { Component, inject } from '@angular/core';
 import { TabsModule } from 'primeng/tabs';
 import { ButtonModule } from 'primeng/button';
 import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
+import { EncabezadoPaginaComponent } from '../../../shared/components/encabezado-pagina/encabezado-pagina.component';
 
 @Component({
   selector: 'app-configuration',
   template: `
     <div class="space-y-4">
+      <app-encabezado-pagina titulo="Configuración" />
+
       <button type="button" pButton (click)="value = 'tab2'">Go to Payment</button>
       <p-tabs [(value)]="value">
         <p-tablist>
@@ -26,7 +29,7 @@ import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
     </div>
   `,
   styles: [],
-  imports: [TabsModule, ButtonModule],
+  imports: [TabsModule, ButtonModule, EncabezadoPaginaComponent],
 })
 export class ConfigurationPage {
   private readonly breadcrumb = inject(BreadcrumbService);

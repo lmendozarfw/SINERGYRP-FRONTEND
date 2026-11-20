@@ -11,6 +11,7 @@ import { Eye, Filter, Pencil, Plus, Search, Trash } from '@primeicons/angular';
 import { BulkActionsBarComponent } from '../../../shared/components/bulk-actions-bar/bulk-actions-bar.component';
 import { FormLabelComponent } from '../../../shared/components/form-label/form-label.component';
 import { MensajeAyudaErrorComponent } from '../../../shared/components/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { EncabezadoPaginaComponent } from '../../../shared/components/encabezado-pagina/encabezado-pagina.component';
 import { BreadcrumbService } from '../../../core/services/breadcrumb.service';
 import { Client } from '../models/client.model';
 
@@ -34,6 +35,7 @@ interface SelectOption {
     BulkActionsBarComponent,
     FormLabelComponent,
     MensajeAyudaErrorComponent,
+    EncabezadoPaginaComponent,
     Eye,
     Filter,
     Pencil,
@@ -43,19 +45,15 @@ interface SelectOption {
   ],
   template: `
     <div class="ds-clients-page">
-      <section class="ds-clients-heading">
-        <div class="min-w-0">
-          <h2 class="ds-title-page mt-1">Clientes</h2>
-          <p class="ds-body mt-1 max-w-2xl text-[var(--ds-text-muted)]">
-            Consulta la información fiscal y comercial de tus clientes, y administra sus condiciones
-            de crédito desde un solo lugar.
-          </p>
-        </div>
+      <app-encabezado-pagina
+        titulo="Clientes"
+        descripcion="Consulta la información fiscal y comercial de tus clientes, y administra sus condiciones de crédito desde un solo lugar."
+      >
         <button type="button" class="ds-button" (click)="openDrawer()">
           <svg data-p-icon="plus" [size]="16"></svg>
           Nuevo cliente
         </button>
-      </section>
+      </app-encabezado-pagina>
 
       <div class="ds-clients-filters mt-8">
         <p-iconfield iconPosition="left" class="ds-clients-search">

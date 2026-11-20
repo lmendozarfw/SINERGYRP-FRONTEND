@@ -4,14 +4,6 @@
   gap: 24px;
 }
 
-.ds-clients-heading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-}
-
 .ds-clients-kpis {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
