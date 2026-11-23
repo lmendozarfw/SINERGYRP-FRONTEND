@@ -3,9 +3,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 
-import { FormLabelComponent } from '../../../../compartido/componentes/form-label/form-label.component';
-import { MensajeAyudaErrorComponent } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { TarjetaComponent } from '../../../../compartido/componentes/tarjeta/tarjeta.component';
+import { EtiquetaFormularioComponente } from '../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { TarjetaComponente } from '../../../../compartido/componentes/tarjeta/tarjeta.componente';
 import {
   SistemaEquivalencia,
   TablaEquivalenciasComponent,
@@ -24,9 +24,9 @@ interface CorridaOpcion {
   imports: [
     ReactiveFormsModule,
     Select,
-    FormLabelComponent,
-    MensajeAyudaErrorComponent,
-    TarjetaComponent,
+    EtiquetaFormularioComponente,
+    MensajeAyudaErrorComponente,
+    TarjetaComponente,
     TablaEquivalenciasComponent,
   ],
   templateUrl: './corridas-equivalencias.component.html',

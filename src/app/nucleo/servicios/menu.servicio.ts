@@ -1,89 +1,89 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 
-export interface MenuItem {
-  key: string;
-  label: string;
-  icon?: string;
-  route?: string;
+export interface ElementoMenu {
+  clave: string;
+  etiqueta: string;
+  icono?: string;
+  ruta?: string;
   visible?: boolean;
-  disabled?: boolean;
-  allowedRoles?: string | string[] | null | undefined;
+  deshabilitado?: boolean;
+  rolesPermitidos?: string | string[] | null | undefined;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class MenuService {
-  private readonly allItems = signal<MenuItem[]>([
+export class MenuServicio {
+  private readonly todosLosElementos = signal<ElementoMenu[]>([
     {
-      key: 'dashboard',
-      label: 'Dashboard',
-      icon: 'dashboard',
-      route: '/o/dashboard',
-      allowedRoles: [],
+      clave: 'dashboard',
+      etiqueta: 'Panel',
+      icono: 'dashboard',
+      ruta: '/o/dashboard',
+      rolesPermitidos: [],
     },
     {
-      key: 'authorization-codes',
-      label: 'Códigos de autorización',
-      icon: 'safety',
-      route: '/o/authorization-codes',
-      allowedRoles: [],
+      clave: 'authorization-codes',
+      etiqueta: 'Códigos de autorización',
+      icono: 'safety',
+      ruta: '/o/authorization-codes',
+      rolesPermitidos: [],
     },
     {
-      key: 'registers',
-      label: 'Bitácora de defectos',
-      icon: 'solution',
-      route: '/o/inspection-logs',
-      allowedRoles: [],
+      clave: 'registers',
+      etiqueta: 'Bitácora de defectos',
+      icono: 'solution',
+      ruta: '/o/inspection-logs',
+      rolesPermitidos: [],
     },
     {
-      key: 'report',
-      label: 'Reportes',
-      icon: 'bar-chart',
-      route: '/o/reports',
-      allowedRoles: [],
+      clave: 'report',
+      etiqueta: 'Reportes',
+      icono: 'bar-chart',
+      ruta: '/o/reports',
+      rolesPermitidos: [],
     },
     {
-      key: 'settings',
-      label: 'Configuración',
-      icon: 'setting',
-      route: '/o/settings',
-      allowedRoles: [],
+      clave: 'settings',
+      etiqueta: 'Configuración',
+      icono: 'setting',
+      ruta: '/o/settings',
+      rolesPermitidos: [],
     },
     {
-      key: 'users',
-      label: 'Usuarios',
-      icon: 'user',
-      route: '/o/users',
-      allowedRoles: [],
+      clave: 'users',
+      etiqueta: 'Usuarios',
+      icono: 'user',
+      ruta: '/o/users',
+      rolesPermitidos: [],
     },
   ]);
 
-  readonly items = computed<MenuItem[]>(() =>
-    this.allItems()
-  );
+  readonly elementos = computed<ElementoMenu[]>(() => this.todosLosElementos());
 
-  setItems(items: MenuItem[]): void {
-    this.allItems.set(items);
+  establecerElementos(elementos: ElementoMenu[]): void {
+    this.todosLosElementos.set(elementos);
   }
 
-  addItem(item: MenuItem): void {
-    this.allItems.update((items) => [...items, item]);
+  agregarElemento(elemento: ElementoMenu): void {
+    this.todosLosElementos.update((elementos) => [...elementos, elemento]);
   }
 
-  removeItem(key: string): void {
-    this.allItems.update((items) => items.filter((i) => i.key !== key));
+  eliminarElemento(clave: string): void {
+    this.todosLosElementos.update((elementos) => elementos.filter((elemento) => elemento.clave !== clave));
   }
 
-  updateItem(key: string, partial: Partial<MenuItem>): void {
-    this.allItems.update((items) => items.map((i) => (i.key === key ? { ...i, ...partial } : i)));
+  actualizarElemento(clave: string, cambios: Partial<ElementoMenu>): void {
+    this.todosLosElementos.update((elementos) =>
+      elementos.map((elemento) => (elemento.clave === clave ? { ...elemento, ...cambios } : elemento))
+    );
   }
 
-  setVisible(key: string, visible: boolean): void {
-    this.updateItem(key, { visible });
+  establecerVisible(clave: string, visible: boolean): void {
+    this.actualizarElemento(clave, { visible });
   }
 
-  setDisabled(key: string, disabled: boolean): void {
-    this.updateItem(key, { disabled });
+  establecerDeshabilitado(clave: string, deshabilitado: boolean): void {
+    this.actualizarElemento(clave, { deshabilitado });
   }
 }

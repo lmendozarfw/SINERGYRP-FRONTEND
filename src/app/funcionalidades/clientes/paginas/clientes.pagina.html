@@ -188,9 +188,9 @@
       <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Datos generales</h3>
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div class="ds-field">
-          <app-form-label for="client-razon-social" [required]="true">
+          <app-etiqueta-formulario para="client-razon-social" [obligatorio]="true">
             Nombre o razón social
-          </app-form-label>
+          </app-etiqueta-formulario>
           <input
             id="client-razon-social"
             pInputText
@@ -200,7 +200,7 @@
           />
         </div>
         <div class="ds-field">
-          <app-form-label for="client-nombre-comercial">Nombre comercial</app-form-label>
+          <app-etiqueta-formulario para="client-nombre-comercial">Nombre comercial</app-etiqueta-formulario>
           <input
             id="client-nombre-comercial"
             pInputText
@@ -210,9 +210,9 @@
           />
         </div>
         <div class="ds-field">
-          <app-form-label for="client-tipo-persona" [required]="true">
+          <app-etiqueta-formulario para="client-tipo-persona" [obligatorio]="true">
             Tipo de persona
-          </app-form-label>
+          </app-etiqueta-formulario>
           <p-select
             inputId="client-tipo-persona"
             class="w-full"
@@ -223,7 +223,7 @@
           />
         </div>
         <div class="ds-field">
-          <app-form-label for="client-rfc" [required]="true">RFC</app-form-label>
+          <app-etiqueta-formulario para="client-rfc" [obligatorio]="true">RFC</app-etiqueta-formulario>
           <input
             id="client-rfc"
             pInputText
@@ -241,7 +241,7 @@
       <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Configuración fiscal</h3>
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div class="ds-field">
-          <app-form-label for="client-regimen-fiscal">ID régimen fiscal</app-form-label>
+          <app-etiqueta-formulario para="client-regimen-fiscal">ID régimen fiscal</app-etiqueta-formulario>
           <p-select
             inputId="client-regimen-fiscal"
             class="w-full"
@@ -252,7 +252,7 @@
           />
         </div>
         <div class="ds-field">
-          <app-form-label for="client-tipo-iva">ID tipo de IVA</app-form-label>
+          <app-etiqueta-formulario para="client-tipo-iva">ID tipo de IVA</app-etiqueta-formulario>
           <p-select
             inputId="client-tipo-iva"
             class="w-full"
@@ -263,7 +263,7 @@
           />
         </div>
         <div class="ds-field col-span-full">
-          <app-form-label for="client-uso-cfdi">ID uso de CFDI predeterminado</app-form-label>
+          <app-etiqueta-formulario para="client-uso-cfdi">ID uso de CFDI predeterminado</app-etiqueta-formulario>
           <p-select
             inputId="client-uso-cfdi"
             class="w-full"
@@ -280,8 +280,8 @@
       <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Condiciones comerciales</h3>
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div class="ds-field">
-          <app-form-label for="client-forma-pago"
-            >ID forma de pago predeterminada</app-form-label
+          <app-etiqueta-formulario para="client-forma-pago"
+            >ID forma de pago predeterminada</app-etiqueta-formulario
           >
           <p-select
             inputId="client-forma-pago"
@@ -293,8 +293,8 @@
           />
         </div>
         <div class="ds-field">
-          <app-form-label for="client-metodo-pago"
-            >ID método de pago predeterminado</app-form-label
+          <app-etiqueta-formulario para="client-metodo-pago"
+            >ID método de pago predeterminado</app-etiqueta-formulario
           >
           <p-select
             inputId="client-metodo-pago"
@@ -306,7 +306,7 @@
           />
         </div>
         <div class="ds-field">
-          <app-form-label for="client-limite-credito">Límite de crédito</app-form-label>
+          <app-etiqueta-formulario para="client-limite-credito">Límite de crédito</app-etiqueta-formulario>
           <input
             id="client-limite-credito"
             pInputText
@@ -317,7 +317,7 @@
           />
         </div>
         <div class="ds-field">
-          <app-form-label for="client-dias-credito">Días de crédito</app-form-label>
+          <app-etiqueta-formulario para="client-dias-credito">Días de crédito</app-etiqueta-formulario>
           <input
             id="client-dias-credito"
             pInputText
@@ -328,7 +328,7 @@
           />
         </div>
         <div class="ds-field col-span-full">
-          <app-form-label for="client-observaciones">Observaciones</app-form-label>
+          <app-etiqueta-formulario para="client-observaciones">Observaciones</app-etiqueta-formulario>
           <textarea
             id="client-observaciones"
             pInputText
@@ -357,10 +357,10 @@
 </p-drawer>
 
 @if (selectedClients().length > 0) {
-  <app-bulk-actions-bar
-    [count]="selectedClients().length"
-    (clear)="clearSelection()"
-    (remove)="clearSelection()"
+  <app-barra-acciones-masivas
+    [cantidad]="selectedClients().length"
+    (limpiar)="clearSelection()"
+    (eliminar)="clearSelection()"
   />
 }
 

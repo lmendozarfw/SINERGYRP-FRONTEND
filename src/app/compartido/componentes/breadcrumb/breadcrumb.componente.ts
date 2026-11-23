@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio';
+import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servicio';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -9,7 +9,7 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
     <p-breadcrumb
       styleClass="ds-breadcrumb"
       [model]="breadcrumb.menuItems()"
-      [home]="breadcrumb.homeMenuItem()"
+      [home]="breadcrumb.inicioMenu()"
       homeAriaLabel="Ir al inicio"
     />
   `,
@@ -23,6 +23,6 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
     `,
   ],
 })
-export class BreadcrumbComponent {
-  readonly breadcrumb = inject(BreadcrumbService);
+export class BreadcrumbComponente {
+  readonly breadcrumb = inject(BreadcrumbServicio);
 }

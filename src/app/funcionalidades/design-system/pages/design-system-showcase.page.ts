@@ -9,9 +9,9 @@ import { InputText } from 'primeng/inputtext';
 import {
   PIcon,
 } from '@primeicons/angular';
-import { FormLabelComponent } from '../../../compartido/componentes/form-label/form-label.component';
-import { EncabezadoPaginaComponent } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
-import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio';
+import { EtiquetaFormularioComponente } from '../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { EncabezadoPaginaComponente } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
+import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servicio';
 
 @Component({
   selector: 'app-design-system-showcase',
@@ -23,8 +23,8 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
     Checkbox,
     InputText,
     InputPassword,
-    FormLabelComponent,
-    EncabezadoPaginaComponent,
+    EtiquetaFormularioComponente,
+    EncabezadoPaginaComponente,
     PIcon
   ],
   template: `
@@ -104,7 +104,7 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
           <h2 class="ds-title-section">4. Inputs y formularios</h2>
           <div class="ds-card grid gap-6 md:grid-cols-3">
             <div class="ds-field">
-              <app-form-label for="field-default">Nombre de usuario</app-form-label>
+              <app-etiqueta-formulario para="field-default">Nombre de usuario</app-etiqueta-formulario>
               <input
                 pInputText
                 id="field-default"
@@ -115,7 +115,7 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
             </div>
 
             <div class="ds-field">
-              <app-form-label for="field-error" required>Contraseña</app-form-label>
+              <app-etiqueta-formulario para="field-error" obligatorio>Contraseña</app-etiqueta-formulario>
               <input pInputText id="field-error" value="abc123" [invalid]="true" />
               <span class="ds-field-error">
                 <svg pIcon="exclamation-triangle" [size]="14"></svg>
@@ -124,13 +124,13 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
             </div>
 
             <div class="ds-field">
-              <app-form-label for="field-disabled">Campo deshabilitado</app-form-label>
+              <app-etiqueta-formulario para="field-disabled">Campo deshabilitado</app-etiqueta-formulario>
               <input pInputText id="field-disabled" value="Solo lectura" disabled />
               <span class="ds-field-help">El estado también se acompaña de texto.</span>
             </div>
 
             <div class="ds-field">
-              <app-form-label for="field-password">Password</app-form-label>
+              <app-etiqueta-formulario para="field-password">Password</app-etiqueta-formulario>
               <div class="relative">
                 <input pInputPassword id="field-password" [(ngModel)]="password" [mask]="mask" />
                 <button
@@ -255,7 +255,7 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
   `,
 })
 export class DesignSystemShowcasePage {
-  private readonly breadcrumb = inject(BreadcrumbService);
+  private readonly breadcrumb = inject(BreadcrumbServicio);
 
   readonly palette = [
     { name: 'Navy 950', token: '--ds-navy' },
@@ -281,9 +281,9 @@ export class DesignSystemShowcasePage {
   accepted = false;
 
   constructor() {
-    this.breadcrumb.setItems([
-      { key: 'configuration', label: 'Configuración', route: '/app/configuration' },
-      { key: 'components', label: 'Componentes', route: '/design-system', disabled: true },
+    this.breadcrumb.configurar([
+      { llave: 'configuration', etiqueta: 'Configuración', ruta: '/app/configuration' },
+      { llave: 'components', etiqueta: 'Componentes', ruta: '/design-system', deshabilitado: true },
     ]);
   }
 }

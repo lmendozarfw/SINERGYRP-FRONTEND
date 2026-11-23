@@ -157,5 +157,5 @@
 </p-drawer>
 
 @if (seleccion().length > 0) {
-<app-bulk-actions-bar [count]="seleccion().length" (clear)="limpiarSeleccion()" (remove)="limpiarSeleccion()" />
+<app-barra-acciones-masivas [cantidad]="seleccion().length" (limpiar)="limpiarSeleccion()" (eliminar)="limpiarSeleccion()" />
 }

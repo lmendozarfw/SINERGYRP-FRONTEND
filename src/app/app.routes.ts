@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'auth',
-    loadComponent: () => import('./compartido/plantillas/auth.plantilla').then((t) => t.AuthTemplate),
+    loadComponent: () => import('./compartido/plantillas/autenticacion.plantilla').then((t) => t.AutenticacionPlantilla),
     children: [
       {
         path: 'inicio-sesion',
@@ -14,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'app',
-    loadComponent: () => import('./compartido/plantillas/main.plantilla').then((t) => t.MainTemplate),
+    loadComponent: () => import('./compartido/plantillas/principal.plantilla').then((t) => t.PrincipalPlantilla),
     children: [
       {
         path: '',

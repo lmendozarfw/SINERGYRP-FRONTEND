@@ -3,17 +3,17 @@ import { RouterOutlet } from '@angular/router';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { PIcon } from '@primeicons/angular';
-import { SidebarComponent } from '../componentes/sidebar/sidebar.component';
-import { BreadcrumbComponent } from '../componentes/breadcrumb/breadcrumb.component';
+import { SidebarComponente } from '../componentes/sidebar/sidebar.component';
+import { BreadcrumbComponente } from '../componentes/breadcrumb/breadcrumb.componente';
 
 @Component({
-  selector: 'main-template',
+  selector: 'principal-plantilla',
   imports: [
     SidebarModule,
     ButtonModule,
     RouterOutlet,
-    SidebarComponent,
-    BreadcrumbComponent,
+    SidebarComponente,
+    BreadcrumbComponente,
     PIcon
   ],
   template: `
@@ -37,9 +37,9 @@ import { BreadcrumbComponent } from '../componentes/breadcrumb/breadcrumb.compon
           <p-sidebar-aside>
             <p-sidebar-panel class="bg-transparent! p-0!">
               <app-sidebar
-                [mobile]="isMobile()"
-                [collapsed]="isSidebarCollapsed()"
-                (navigate)="onSidebarNavigate()"
+                [movil]="isMobile()"
+                [contraido]="isSidebarCollapsed()"
+                (navegar)="onSidebarNavigate()"
               />
             </p-sidebar-panel>
           </p-sidebar-aside>
@@ -82,7 +82,7 @@ import { BreadcrumbComponent } from '../componentes/breadcrumb/breadcrumb.compon
     </div>
   `,
 })
-export class MainTemplate {
+export class PrincipalPlantilla {
   readonly isMobile = signal(false);
   readonly sidebarOpen = signal(true);
   readonly expandedWidth = '21rem';

@@ -314,7 +314,7 @@
 
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div class="ds-field">
-          <app-form-label for="pieza-nombre" required>Nombre de la pieza</app-form-label>
+          <app-etiqueta-formulario para="pieza-nombre" obligatorio>Nombre de la pieza</app-etiqueta-formulario>
           <input
             pInputText
             id="pieza-nombre"
@@ -329,7 +329,7 @@
         </div>
 
         <div class="ds-field">
-          <app-form-label for="pieza-tipo" required>Tipo de pieza</app-form-label>
+          <app-etiqueta-formulario para="pieza-tipo" obligatorio>Tipo de pieza</app-etiqueta-formulario>
           <p-select
             class="ds-pieza-control"
             inputId="pieza-tipo"
@@ -345,7 +345,7 @@
         </div>
 
         <div class="ds-field">
-          <app-form-label for="pieza-material" required>Material</app-form-label>
+          <app-etiqueta-formulario para="pieza-material" obligatorio>Material</app-etiqueta-formulario>
           <p-select
             class="ds-pieza-control"
             inputId="pieza-material"
@@ -361,7 +361,7 @@
         </div>
 
         <div class="ds-field">
-          <app-form-label for="pieza-unidad" required>Unidad de medida</app-form-label>
+          <app-etiqueta-formulario para="pieza-unidad" obligatorio>Unidad de medida</app-etiqueta-formulario>
           <p-select
             class="ds-pieza-control"
             inputId="pieza-unidad"
@@ -377,7 +377,7 @@
         </div>
 
         <div class="ds-field">
-          <app-form-label for="pieza-departamento" required>Departamento</app-form-label>
+          <app-etiqueta-formulario para="pieza-departamento" obligatorio>Departamento</app-etiqueta-formulario>
           <p-select
             class="ds-pieza-control"
             inputId="pieza-departamento"
@@ -393,7 +393,7 @@
         </div>
 
         <div class="ds-field">
-          <app-form-label for="pieza-corrida" required>Corrida</app-form-label>
+          <app-etiqueta-formulario para="pieza-corrida" obligatorio>Corrida</app-etiqueta-formulario>
           <p-select
             class="ds-pieza-control"
             inputId="pieza-corrida"
@@ -424,7 +424,7 @@
 
         @if (requiereSuaje) {
           <div class="ds-field md:col-span-2">
-            <app-form-label for="pieza-suaje" required>Suaje</app-form-label>
+            <app-etiqueta-formulario para="pieza-suaje" obligatorio>Suaje</app-etiqueta-formulario>
             <p-select
               class="ds-pieza-control"
               inputId="pieza-suaje"
@@ -452,7 +452,7 @@
         </div>
 
         <div class="ds-field md:min-w-[180px]">
-          <app-form-label for="pieza-modo-consumo">Modo de consumo</app-form-label>
+          <app-etiqueta-formulario para="pieza-modo-consumo">Modo de consumo</app-etiqueta-formulario>
           <p-select
             class="ds-pieza-control"
             inputId="pieza-modo-consumo"
@@ -468,7 +468,7 @@
       @if (modoConsumo === 'general') {
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div class="ds-field">
-            <app-form-label for="pieza-consumo-general" required>Consumo</app-form-label>
+            <app-etiqueta-formulario para="pieza-consumo-general" obligatorio>Consumo</app-etiqueta-formulario>
             <p-inputnumber
               class="ds-pieza-numero"
               inputId="pieza-consumo-general"
@@ -485,7 +485,7 @@
           </div>
 
           <div class="ds-field">
-            <app-form-label for="pieza-rendimiento-general" required> Rendimiento </app-form-label>
+            <app-etiqueta-formulario para="pieza-rendimiento-general" obligatorio> Rendimiento </app-etiqueta-formulario>
             <p-inputnumber
               class="ds-pieza-numero"
               inputId="pieza-rendimiento-general"

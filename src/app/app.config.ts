@@ -1,4 +1,5 @@
-import { APP_INITIALIZER, ApplicationConfig, ErrorHandler, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig, ErrorHandler, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, Router } from '@angular/router';
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
@@ -7,7 +8,7 @@ import { definePreset } from '@primeuix/themes';
 import { ConfirmationService, MessageService } from 'primeng/api';
 // Configuración de Sentry
 import * as Sentry from "@sentry/angular";
-import { DialogoConfirmacionService } from './compartido/componentes/confirmacion/confirmacion.service';
+import { DialogoConfirmacionServicio } from './compartido/componentes/confirmacion/confirmacion.servicio';
 Sentry.init({
   dsn: "https://d0956fc4ac9892486ec676fcbb763719@o4512465429069824.ingest.us.sentry.io/4512465437261824",
   integrations: [
@@ -114,6 +115,7 @@ const AppTheme = definePreset(Aura, {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
+    provideHttpClient(),
     provideRouter(routes),
     providePrimeNG({
       theme: {
@@ -128,7 +130,7 @@ export const appConfig: ApplicationConfig = {
     MessageService,
     MessageService, 
     ConfirmationService,
-    DialogoConfirmacionService,
+    DialogoConfirmacionServicio,
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler(),

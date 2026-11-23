@@ -3,77 +3,72 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
-function toHttpParams(params?: Record<string, string | number | boolean>): HttpParams {
-  let httpParams = new HttpParams();
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      httpParams = httpParams.set(key, String(value));
+function hacerParametrosHttp(parametros?: Record<string, string | number | boolean>): HttpParams {
+  let parametrosHttp = new HttpParams();
+  if (parametros) {
+    Object.entries(parametros).forEach(([key, value]) => {
+      parametrosHttp = parametrosHttp.set(key, String(value));
     });
   }
-  return httpParams;
+  return parametrosHttp;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class ApiServicio {
   constructor(private http: HttpClient) {}
 
-  getAll<TResponse>(
+  obtenerTodos<TRespuesta>(
     endpoint: string,
-    params?: Record<string, string | number | boolean>,
-  ): Observable<TResponse[]> {
-    return this.http.get<TResponse[]>(`${environment.apiUrl}/${endpoint}`, { params: toHttpParams(params) });
+    parametros?: Record<string, string | number | boolean>,
+  ): Observable<TRespuesta[]> {
+    return this.http.get<TRespuesta[]>(`${environment.apiUrl}/${endpoint}`, { params: hacerParametrosHttp(parametros) });
   }
 
-  getById<TResponse>(endpoint: string, id: number | string): Observable<TResponse> {
-    return this.http.get<TResponse>(`${environment.apiUrl}/${endpoint}/${id}`);
+  obtenerPorId<TRespuesta>(endpoint: string, id: number | string): Observable<TRespuesta> {
+    return this.http.get<TRespuesta>(`${environment.apiUrl}/${endpoint}/${id}`);
   }
 
-  get<TResponse>(
+  obtener<TRespuesta>(
     endpoint: string,
-    params?: Record<string, string | number | boolean>,
-  ): Observable<TResponse> {
-    return this.http.get<TResponse>(`${environment.apiUrl}/${endpoint}`, { params: toHttpParams(params) });
+    parametros?: Record<string, string | number | boolean>,
+  ): Observable<TRespuesta> {
+    return this.http.get<TRespuesta>(`${environment.apiUrl}/${endpoint}`, { params: hacerParametrosHttp(parametros) });
   }
 
-  download(
+  descargar(
     endpoint: string,
-    fallbackFilename: string,
-    params?: Record<string, string | number | boolean>,
+    parametros?: Record<string, string | number | boolean>,
   ): Observable<HttpResponse<Blob>> {
     return this.http.get(`${environment.apiUrl}/${endpoint}`, {
-      params: toHttpParams(params),
+      params: hacerParametrosHttp(parametros),
       responseType: 'blob',
       observe: 'response',
     });
   }
 
-  create<TRequest, TResponse>(endpoint: string, data: Partial<TRequest>): Observable<TResponse> {
-    return this.http.post<TResponse>(`${environment.apiUrl}/${endpoint}`, data);
+  crear<TPeticion, TRespuesta>(endpoint: string, data: Partial<TPeticion>): Observable<TRespuesta> {
+    return this.http.post<TRespuesta>(`${environment.apiUrl}/${endpoint}`, data);
   }
 
-  post<TRequest, TResponse>(endpoint: string, data: Partial<TRequest>): Observable<TResponse> {
-    return this.http.post<TResponse>(`${environment.apiUrl}/${endpoint}`, data);
+  post<TPeticion, TRespuesta>(endpoint: string, data: Partial<TPeticion>): Observable<TRespuesta> {
+    return this.http.post<TRespuesta>(`${environment.apiUrl}/${endpoint}`, data);
   }
 
-  update<TRequest, TResponse>(
+  actualizar<TPeticion, TRespuesta>(
     endpoint: string,
     id: number | string,
-    data: Partial<TRequest>,
-  ): Observable<TResponse> {
-    return this.http.put<TResponse>(`${environment.apiUrl}/${endpoint}/${id}`, data);
+    informacion: Partial<TPeticion>,
+  ): Observable<TRespuesta> {
+    return this.http.put<TRespuesta>(`${environment.apiUrl}/${endpoint}/${id}`, informacion);
   }
 
-  put<TResponse>(endpoint: string, data: unknown = {}): Observable<TResponse> {
-    return this.http.put<TResponse>(`${environment.apiUrl}/${endpoint}`, data);
+  actualizarParcial<TRespuesta>(endpoint: string, data: unknown = {}): Observable<TRespuesta> {
+    return this.http.patch<TRespuesta>(`${environment.apiUrl}/${endpoint}`, data);
   }
 
-  patch<TResponse>(endpoint: string, data: unknown = {}): Observable<TResponse> {
-    return this.http.patch<TResponse>(`${environment.apiUrl}/${endpoint}`, data);
-  }
-
-  delete<TResponse>(endpoint: string, id: number | string): Observable<TResponse> {
-    return this.http.delete<TResponse>(`${environment.apiUrl}/${endpoint}/${id}`);
+  eliminar<TRespuesta>(endpoint: string, id: number | string): Observable<TRespuesta> {
+    return this.http.delete<TRespuesta>(`${environment.apiUrl}/${endpoint}/${id}`);
   }
 }

@@ -1,24 +1,9 @@
-export interface ILoginRequest {
-    username: string;
-    password: string;
-}
-
-export interface ILoginResponse {
+export interface IInicioSesionRespuesta {
     token: string;
 }
 
-export interface IPermissionAuth {
+export interface IMiInformacion {
     id: string;
-    code: string;
-}
-
-export interface IUserAuth {
-    id: string;
-    fullName: string;
-}
-
-export interface IMeResponse {
-    id: string;
-    user: IUserAuth;
-    permissions: IPermissionAuth[];
+    usuario: string;
+    permisos: string[];
 }

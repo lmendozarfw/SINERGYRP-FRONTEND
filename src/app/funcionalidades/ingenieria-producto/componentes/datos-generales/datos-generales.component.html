@@ -8,13 +8,13 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                 <div class="ds-field">
-                    <app-form-label for="modelo-codigo" required>Código del modelo</app-form-label>
+                    <app-etiqueta-formulario para="modelo-codigo" obligatorio>Código del modelo</app-etiqueta-formulario>
                     <input pInputText id="modelo-codigo" formControlName="codigo" type="text" placeholder="Ej. MDL-0001" [invalid]="store.codigoInvalido" />
                     <app-mensaje-ayuda-error [condicion]="store.codigoInvalido" mensajeError="El código del modelo es obligatorio." mensajeAyuda="Identificador único del modelo."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field">
-                    <app-form-label for="modelo-nombre" required>Nombre del modelo</app-form-label>
+                    <app-etiqueta-formulario para="modelo-nombre" obligatorio>Nombre del modelo</app-etiqueta-formulario>
                     <input pInputText id="modelo-nombre" formControlName="nombre" type="text"
                         placeholder="Ej. Botín urbano piel" [invalid]="store.nombreInvalido" />
                     <app-mensaje-ayuda-error [condicion]="store.nombreInvalido"
@@ -23,21 +23,21 @@
                 </div>
 
                 <div class="ds-field">
-                    <app-form-label for="modelo-fecha-alta">Fecha de alta</app-form-label>
+                    <app-etiqueta-formulario para="modelo-fecha-alta">Fecha de alta</app-etiqueta-formulario>
                     <p-datepicker class="flex w-full" inputId="modelo-fecha-alta" formControlName="fechaAlta"
                         dateFormat="dd/mm/yy" [showIcon]="true" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Se registra automáticamente al crear el modelo."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field">
-                    <app-form-label for="modelo-estatus">Estatus</app-form-label>
+                    <app-etiqueta-formulario para="modelo-estatus">Estatus</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-estatus" formControlName="estatus"
                         [options]="store.estatusOpciones" optionLabel="label" optionValue="value" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="El modelo puede iniciar como borrador."></app-mensaje-ayuda-error>
                 </div>
 
                 <div class="ds-field col-span-full">
-                    <app-form-label for="modelo-descripcion">Descripción</app-form-label>
+                    <app-etiqueta-formulario para="modelo-descripcion">Descripción</app-etiqueta-formulario>
                     <textarea pTextarea id="modelo-descripcion" formControlName="descripcion" rows="3"
                         class="ds-input h-auto min-h-[108px] resize-y px-3 py-2.5 leading-[22px]"
                         placeholder="Describe el modelo, su uso previsto y cualquier detalle relevante."></textarea>
@@ -53,7 +53,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
                 <div class="ds-field">
-                    <app-form-label for="modelo-categoria" required>Categoría</app-form-label>
+                    <app-etiqueta-formulario para="modelo-categoria" obligatorio>Categoría</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-categoria" formControlName="categoria"
                         [options]="store.categorias" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una categoría" [fluid]="true"
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="ds-field">
-                    <app-form-label for="modelo-marca">Marca</app-form-label>
+                    <app-etiqueta-formulario para="modelo-marca">Marca</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-marca" formControlName="marca"
                         [options]="store.marcas" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una marca" [fluid]="true" />
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="ds-field">
-                    <app-form-label for="modelo-linea">Línea</app-form-label>
+                    <app-etiqueta-formulario para="modelo-linea">Línea</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-linea" formControlName="linea"
                         [options]="store.lineas" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una línea" [fluid]="true" />
@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="ds-field">
-                    <app-form-label for="modelo-genero">Género</app-form-label>
+                    <app-etiqueta-formulario para="modelo-genero">Género</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-genero" formControlName="genero"
                         [options]="store.generos" optionLabel="label" optionValue="value"
                         placeholder="Selecciona un género" [fluid]="true" />

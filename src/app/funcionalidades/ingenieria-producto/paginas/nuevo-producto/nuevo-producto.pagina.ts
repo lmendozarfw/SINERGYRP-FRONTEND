@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { BreadcrumbService } from '../../../../nucleo/servicios/breadcrumb.servicio';
-import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
+import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.servicio';
+import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
 import {
-  AsistentePasosComponent,
-  PasoAsistente,
-} from '../../../../compartido/componentes/asistente-pasos/asistente-pasos.component';
-import { AsistentePasosAccionesComponent } from '../../../../compartido/componentes/asistente-pasos-acciones/asistente-pasos-acciones.component';
-import { EncabezadoPaginaComponent } from '../../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
+  AsistentePasosComponente,
+  IPasoAsistente,
+} from '../../../../compartido/componentes/asistente-pasos/asistente-pasos.componente';
+import { AsistentePasosAccionesComponente } from '../../../../compartido/componentes/asistente-pasos-acciones/asistente-pasos-acciones.componente';
+import { EncabezadoPaginaComponente } from '../../../../compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
 import { DatosGeneralesComponent } from '../../componentes/datos-generales/datos-generales.component';
 import { CorridasEquivalenciasComponent } from '../../componentes/corridas-equivalencias/corridas-equivalencias.component';
 import { PiezasConsumosComponent } from '../../componentes/piezas-consumos/piezas-consumos.component';
@@ -22,9 +22,9 @@ interface EncabezadoPaso {
 @Component({
   selector: 'app-nuevo-producto-pagina',
   imports: [
-    AsistentePasosComponent,
-    AsistentePasosAccionesComponent,
-    EncabezadoPaginaComponent,
+    AsistentePasosComponente,
+    AsistentePasosAccionesComponente,
+    EncabezadoPaginaComponente,
     DatosGeneralesComponent,
     CorridasEquivalenciasComponent,
     PiezasConsumosComponent,
@@ -35,11 +35,11 @@ interface EncabezadoPaso {
   templateUrl: './nuevo-producto.pagina.html',
 })
 export class NewProductPage {
-  private readonly breadcrumb = inject(BreadcrumbService);
-  private readonly toast = inject(ToastService);
+  private readonly breadcrumb = inject(BreadcrumbServicio);
+  private readonly avisos = inject(AvisosServicio);
   private readonly wizard = inject(NewProductWizardStore);
 
-  readonly pasos: PasoAsistente[] = [
+  readonly pasos: IPasoAsistente[] = [
     { id: 1, titulo: 'Datos generales' },
     { id: 2, titulo: 'Corridas y equivalencias' },
     { id: 3, titulo: 'Piezas y consumos' },
@@ -74,14 +74,14 @@ export class NewProductPage {
   };
 
   constructor() {
-    this.breadcrumb.setItems([
+    this.breadcrumb.configurar([
       {
-        key: 'product-engineering',
-        label: 'Ingeniería de producto',
-        route: '/app/product-engineering/new-product',
-        disabled: true,
+        llave: 'product-engineering',
+        etiqueta: 'Ingeniería de producto',
+        ruta: '/app/product-engineering/new-product',
+        deshabilitado: true,
       },
-      { key: 'new-product', label: 'Nuevo producto', disabled: true },
+      { llave: 'new-product', etiqueta: 'Nuevo producto', deshabilitado: true },
     ]);
   }
 
@@ -107,7 +107,7 @@ export class NewProductPage {
 
   alContinuar(): void {
     // if (this.pasoActual === 1 && !this.wizard.validarDatosGenerales()) {
-    //   this.toast.warning(
+    //   this.avisos.advertencia(
     //     'Revisa los datos generales',
     //     'Completa los campos obligatorios para continuar.',
     //   );
@@ -127,7 +127,7 @@ export class NewProductPage {
   }
 
   guardarBorrador(): void {
-    this.toast.success(
+    this.avisos.exito(
       'Borrador guardado',
       'Puedes retomar este modelo más tarde desde Ingeniería de producto.',
     );

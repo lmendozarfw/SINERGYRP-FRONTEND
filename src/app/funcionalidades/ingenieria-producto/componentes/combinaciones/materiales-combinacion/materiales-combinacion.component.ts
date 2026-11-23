@@ -5,8 +5,8 @@ import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
 import { PIcon } from '@primeicons/angular';
 
-import { FormLabelComponent } from '../../../../../compartido/componentes/form-label/form-label.component';
-import { MensajeAyudaErrorComponent } from '../../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { EtiquetaFormularioComponente } from '../../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '../../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import {
   MaterialAsignado,
   OpcionSelectSimple,
@@ -27,8 +27,8 @@ interface FilaMaterial {
     FormsModule,
     Select,
     Tag,
-    FormLabelComponent,
-    MensajeAyudaErrorComponent,
+    EtiquetaFormularioComponente,
+    MensajeAyudaErrorComponente,
     PIcon,
   ],
   templateUrl: './materiales-combinacion.component.html',

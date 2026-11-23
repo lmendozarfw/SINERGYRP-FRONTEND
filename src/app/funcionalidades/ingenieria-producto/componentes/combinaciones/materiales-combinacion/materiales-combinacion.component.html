@@ -39,9 +39,9 @@
           <span class="ds-materiales-fila__id">{{ fila.pieza.id }}</span>
         </div>
         <div class="ds-field ds-materiales-fila__campo min-w-1/2">
-          <app-form-label [for]="'material-' + fila.pieza.id" [required]="true">
+          <app-etiqueta-formulario [para]="'material-' + fila.pieza.id" [obligatorio]="true">
             Material
-          </app-form-label>
+          </app-etiqueta-formulario>
           <p-select
             class="ds-combinacion-select w-full"
             [inputId]="'material-' + fila.pieza.id"

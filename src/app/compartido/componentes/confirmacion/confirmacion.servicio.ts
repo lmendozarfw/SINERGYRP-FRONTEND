@@ -21,7 +21,7 @@ export interface OpcionesConfirmacion {
 @Injectable({
     providedIn: 'root'
 })
-export class DialogoConfirmacionService {
+export class DialogoConfirmacionServicio {
 
     private readonly confirmationService = inject(ConfirmationService);
 

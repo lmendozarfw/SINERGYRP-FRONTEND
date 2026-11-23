@@ -1,23 +1,15 @@
 <p-stepper [value]="pasoActivo()" (valueChange)="alCambiarValor($event)" class="w-full">
     <p-step-list>
-
-        @for (paso of pasos; track paso.id) {
-
-        <p-step [value]="paso.id">
-
-            <ng-template #content let-value="value">
-
+        @for (paso of pasos(); track paso.id) {
+        <p-step [value]="paso.id" [disabled]="estaBloqueado(paso)">
+            <ng-template #content>
                 <div class="flex w-full flex-col gap-3">
-
                     <div class="flex w-full items-center">
-
                         <button type="button"
                             class="flex shrink-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 disabled:cursor-not-allowed"
-                            [disabled]="!puedeSeleccionar(paso)"
-                            [attr.aria-current]="
+                            [disabled]="!puedeSeleccionar(paso)" [attr.aria-current]="
                                     pasoActivo() === paso.id ? 'step' : null
                                 " (click)="irA(paso.id)">
-
                             <span
                                 class="flex size-7 min-w-7 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors"
                                 [ngClass]="{
@@ -35,16 +27,13 @@
                                 {{ paso.id }}
                                 }
                             </span>
-
                         </button>
-
                         @if (!$last) {
-                        <span class="mx-2 h-0.5 flex-1 rounded-full transition-colors" [class.bg-ds-line]="!estaCompletado(paso)"
+                        <span class="mx-2 h-0.5 flex-1 rounded-full transition-colors"
+                            [class.bg-ds-line]="!estaCompletado(paso)"
                             [class.bg-ds-primary]="estaCompletado(paso)"></span>
                         }
-
                     </div>
-
                     <span class="text-[11px] font-medium leading-4 transition-colors" [ngClass]="{
                                 'text-ds-primary': !estaBloqueado(paso) && pasoActivo() === paso.id,
                                 'text-ds-ink/70': estaBloqueado(paso),
@@ -52,13 +41,9 @@
                             }">
                         {{ paso.titulo }}
                     </span>
-
                 </div>
-
             </ng-template>
-
         </p-step>
         }
-
     </p-step-list>
 </p-stepper>

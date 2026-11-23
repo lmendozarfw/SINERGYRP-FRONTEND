@@ -39,7 +39,7 @@ import { PIcon } from '@primeicons/angular';
     `],
     imports: [PIcon]
 })
-export class TarjetaComponent {
+export class TarjetaComponente {
     titulo = input<string>();
     descripcion = input<string>();
     icono = input<string>();
