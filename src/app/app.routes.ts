@@ -8,7 +8,7 @@ export const routes: Routes = [
       {
         path: 'inicio-sesion',
         loadComponent: () =>
-          import('./funcionalidades/auth/paginas/inicio-sesion/inicio-sesion.pagina').then((p) => p.LoginPage),
+          import('./funcionalidades/autenticacion/paginas/inicio-sesion/inicio-sesion.pagina').then((p) => p.LoginPage),
       },
     ],
   },
