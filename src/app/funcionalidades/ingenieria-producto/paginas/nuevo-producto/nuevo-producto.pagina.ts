@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.servicio';
 import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
 import {
-  AsistentePasosComponent,
-  PasoAsistente,
+  AsistentePasosComponente,
+  IPasoAsistente,
 } from '../../../../compartido/componentes/asistente-pasos/asistente-pasos.component';
 import { AsistentePasosAccionesComponent } from '../../../../compartido/componentes/asistente-pasos-acciones/asistente-pasos-acciones.component';
 import { EncabezadoPaginaComponent } from '../../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
@@ -22,7 +22,7 @@ interface EncabezadoPaso {
 @Component({
   selector: 'app-nuevo-producto-pagina',
   imports: [
-    AsistentePasosComponent,
+    AsistentePasosComponente,
     AsistentePasosAccionesComponent,
     EncabezadoPaginaComponent,
     DatosGeneralesComponent,
@@ -39,7 +39,7 @@ export class NewProductPage {
   private readonly toast = inject(ToastService);
   private readonly wizard = inject(NewProductWizardStore);
 
-  readonly pasos: PasoAsistente[] = [
+  readonly pasos: IPasoAsistente[] = [
     { id: 1, titulo: 'Datos generales' },
     { id: 2, titulo: 'Corridas y equivalencias' },
     { id: 3, titulo: 'Piezas y consumos' },
