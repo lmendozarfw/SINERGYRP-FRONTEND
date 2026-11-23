@@ -150,7 +150,17 @@
   --color-transparent: transparent;
   --color-current: currentColor;
   --color-inherit: inherit;
-
+  --color-ds-action-50: var(--ds-action-50);
+  --color-ds-action-100: var(--ds-action-100);
+  --color-ds-action-200: var(--ds-action-200);
+  --color-ds-action-300: var(--ds-action-300);
+  --color-ds-action-400: var(--ds-action-400);
+  --color-ds-action-500: var(--ds-action-500);
+  --color-ds-action-600: var(--ds-action-600);
+  --color-ds-action-700: var(--ds-action-700);
+  --color-ds-action-800: var(--ds-action-800);
+  --color-ds-action-900: var(--ds-action-900);
+  --color-ds-action-950: var(--ds-action-950);
   --color-ds-primary: var(--ds-primary);
   --color-ds-primary-hover: var(--ds-primary-hover);
   --color-ds-primary-soft: var(--ds-primary-soft);
@@ -188,4 +198,8 @@
   --font-sans: var(--ds-font);
   --font-display: var(--ds-font-display);
   --font-display-xl: var(--ds-font-display-xl);
+
+  --radius-ds-button: var(--ds-radius-button);
+  --radius-ds-input: var(--ds-radius-input);
+  --radius-ds-card: var(--ds-radius-card);
 }

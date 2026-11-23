@@ -7,8 +7,8 @@
     </p>
   </header>
 
-  <div class="flex items-center gap-3 rounded-[var(--ds-radius-card)] border border-ds-line bg-ds-canvas-strong px-4 py-3.5">
-    <div class="flex size-9 shrink-0 items-center justify-center rounded-[var(--ds-radius-input)] bg-ds-primary-soft text-ds-primary">
+  <div class="flex items-center gap-3 rounded-ds-card border border-ds-line bg-ds-canvas-strong px-4 py-3.5">
+    <div class="flex size-9 shrink-0 items-center justify-center rounded-ds-input bg-ds-primary-soft text-ds-primary">
       <svg pIcon="th-large" [size]="18"></svg>
     </div>
     <div class="min-w-0">
@@ -31,7 +31,7 @@
     </div>
   }
 
-  <div class="flex flex-col divide-y divide-ds-line overflow-hidden rounded-[var(--ds-radius-card)] border border-ds-line">
+  <div class="flex flex-col divide-y divide-ds-line overflow-hidden rounded-ds-card border border-ds-line">
     @for (fila of filas(); track fila.pieza.id) {
       <div class="flex items-center justify-between gap-4 bg-ds-surface p-3 max-sm:gap-3">
         <div class="flex flex-col gap-0.5">
@@ -62,7 +62,7 @@
   </div>
 
   @if (todosAsignados()) {
-    <div class="flex flex-col gap-2 rounded-[var(--ds-radius-card)] border border-ds-primary bg-ds-primary-soft px-4 py-3.5">
+    <div class="flex flex-col gap-2 rounded-ds-card border border-ds-primary bg-ds-primary-soft px-4 py-3.5">
       <span class="text-[13px] font-semibold leading-5 text-ds-primary-strong">Resumen de la versión V{{ proximaVersion() }}</span>
       <div class="flex flex-col gap-1">
         @for (fila of filas(); track fila.pieza.id) {

@@ -2,7 +2,7 @@
   <header class="flex flex-wrap items-start justify-between gap-4">
     <div class="min-w-0">
       <div class="flex flex-wrap items-center gap-3">
-        <span class="flex size-9 shrink-0 items-center justify-center rounded-[var(--ds-radius-input)] bg-ds-primary-soft text-ds-primary">
+        <span class="flex size-9 shrink-0 items-center justify-center rounded-ds-input bg-ds-primary-soft text-ds-primary">
           <svg pIcon="table" [size]="18"></svg>
         </span>
         <h3 class="ds-title-card">{{ titulo() }}</h3>
@@ -30,7 +30,7 @@
         <th class="ds-table__th ds-tabla-sistema-col min-w-[180px]!">Sistema</th>
         @for (talla of tallas(); track talla.id) {
           <th
-            class="ds-table__th ds-tabla-col min-w-[88px]! text-center! align-middle! [&.ds-tabla-col--base]:bg-[var(--ds-action-100)]! [&.ds-tabla-col--base_.ds-tabla-col\_\_valor]:text-ds-primary-strong!"
+            class="ds-table__th ds-tabla-col min-w-[88px]! text-center! align-middle! [&.ds-tabla-col--base]:bg-ds-action-100! [&.ds-tabla-col--base_.ds-tabla-col\_\_valor]:text-ds-primary-strong!"
             [class.ds-tabla-col--base]="esTallaBase(talla)"
           >
             <span class="ds-tabla-col__valor block text-sm font-semibold leading-5 text-ds-ink tabular-nums">{{ valorTalla(talla) }}</span>
@@ -66,14 +66,14 @@
 
         @for (talla of tallas(); track talla.id) {
           <td
-            class="ds-table__td [&.ds-tabla-col--base]:bg-[var(--ds-action-100)]! [&.ds-tabla-col--inactiva_.ds-tabla-input]:opacity-55!"
+            class="ds-table__td [&.ds-tabla-col--base]:bg-ds-action-100! [&.ds-tabla-col--inactiva_.ds-tabla-input]:opacity-55!"
             [class.ds-tabla-col--base]="esTallaBase(talla)"
             [class.ds-tabla-col--inactiva]="!talla.activa"
           >
             <input
               pInputText
               type="text"
-              class="ds-tabla-input h-[var(--ds-control-height-sm)]! px-2.5! tabular-nums! [&.ds-tabla-input--principal]:border-[var(--ds-action-200)]! [&.ds-tabla-input--principal]:bg-ds-primary-soft! [&.ds-tabla-input--principal]:text-ds-primary-strong! [&.ds-tabla-input--principal]:font-semibold!"
+              class="ds-tabla-input px-2.5! tabular-nums! [&.ds-tabla-input--principal]:border-ds-action-200! [&.ds-tabla-input--principal]:bg-ds-primary-soft! [&.ds-tabla-input--principal]:text-ds-primary-strong! [&.ds-tabla-input--principal]:font-semibold!"
               [class.ds-tabla-input--principal]="esSistemaPrincipal(sistema.clave)"
               [readonly]="esSistemaPrincipal(sistema.clave)"
               [disabled]="!talla.activa"
