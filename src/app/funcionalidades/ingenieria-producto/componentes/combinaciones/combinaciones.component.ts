@@ -7,8 +7,8 @@ import { Tag } from 'primeng/tag';
 import { Drawer } from 'primeng/drawer';
 
 import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.servicio';
-import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
-import { BulkActionsBarComponent } from '../../../../compartido/componentes/bulk-actions-bar/bulk-actions-bar.component';
+import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
+import { BarraAccionesMasivasComponente } from '../../../../compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
 import {
   AtributoCombinacion,
   Combinacion,
@@ -30,7 +30,7 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
     TableCheckbox,
     Tag,
     Drawer,
-    BulkActionsBarComponent,
+    BarraAccionesMasivasComponente,
     AtributosCombinacionComponent,
     MaterialesCombinacionComponent,
     PasosDrawerComponent,
@@ -41,7 +41,7 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
 })
 export class CombinacionesComponent {
   private readonly breadcrumb = inject(BreadcrumbServicio);
-  private readonly toast = inject(ToastService);
+  private readonly avisos = inject(AvisosServicio);
 
   private readonly atributosStep = viewChild(AtributosCombinacionComponent);
   private readonly materialesStep = viewChild(MaterialesCombinacionComponent);
@@ -228,7 +228,7 @@ export class CombinacionesComponent {
   eliminar(combinacion: Combinacion): void {
     this.combinaciones.update((items) => items.filter((item) => item.id !== combinacion.id));
     this.seleccion.update((items) => items.filter((item) => item.id !== combinacion.id));
-    this.toast.info('Combinación eliminada', combinacion.codigo);
+    this.avisos.informacion('Combinación eliminada', combinacion.codigo);
   }
 
   etiquetaAtributo(combinacion: Combinacion, atributoId: string): string {
@@ -276,7 +276,7 @@ export class CombinacionesComponent {
             : item,
         ),
       );
-      this.toast.success(
+      this.avisos.exito(
         'Nueva versión creada',
         `${this.codigoGenerado()} · Versión ${version.numero}`,
       );
@@ -293,7 +293,7 @@ export class CombinacionesComponent {
       };
 
       this.combinaciones.update((items) => [combinacion, ...items]);
-      this.toast.success('Combinación creada', combinacion.codigo);
+      this.avisos.exito('Combinación creada', combinacion.codigo);
     }
 
     this.pasosDrawer()?.marcarCompletado(2);

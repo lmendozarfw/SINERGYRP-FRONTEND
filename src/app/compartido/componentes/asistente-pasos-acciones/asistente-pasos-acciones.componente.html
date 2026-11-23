@@ -1,0 +1,72 @@
+<div
+    class="flex flex-wrap items-center justify-between gap-x-6 gap-y-4 rounded-[var(--ds-radius-card)] border border-ds-line bg-ds-surface px-6 py-3.5 max-sm:items-stretch"
+>
+    <div class="flex flex-col items-start gap-0.5">
+        <button
+            type="button"
+            pButton
+            class="ds-button ds-button--text"
+            [disabled]="guardando()"
+            (click)="guardarBorrador.emit()"
+        >
+            <svg pIcon="save" [size]="16"></svg>
+            Guardar como borrador
+        </button>
+    </div>
+
+    <div
+        class="ml-auto flex items-center gap-4 max-sm:ml-0 max-sm:flex-col max-sm:items-stretch"
+    >
+        <div class="flex min-w-[180px] flex-col gap-1 max-sm:min-w-0">
+            <p class="m-0 text-xs leading-4 text-ds-muted">
+                Paso <strong class="text-[14px] font-semibold leading-4 text-ds-ink">{{ pasoActual() }}</strong> de {{ totalPasos() }}
+            </p>
+
+            <div
+                class="h-1 w-full overflow-hidden rounded-full bg-ds-line"
+                role="progressbar"
+                [attr.aria-valuenow]="pasoActual()"
+                [attr.aria-valuemin]="1"
+                [attr.aria-valuemax]="totalPasos()"
+                [attr.aria-label]="'Progreso: paso ' + pasoActual() + ' de ' + totalPasos()"
+            >
+                <span
+                    class="block h-full rounded-[inherit] bg-ds-primary transition-[width] duration-200 ease-[ease]"
+                    [style.width.%]="progreso()"
+                ></span>
+            </div>
+
+            @if (siguientePaso()) {
+                <p class="m-0 text-xs leading-4 text-ds-muted">
+                    Siguiente: <span class="font-medium text-ds-ink">{{ siguientePaso() }}</span>
+                </p>
+            }
+        </div>
+
+        <div class="flex items-center gap-2">
+            @if (puedeRegresar()) {
+                <button
+                    type="button"
+                    pButton
+                    class="ds-button ds-button--secondary max-sm:flex-1"
+                    [disabled]="guardando()"
+                    (click)="regresar.emit()"
+                >
+                    <svg pIcon="arrow-left" [size]="16"></svg>
+                    Regresar
+                </button>
+            }
+
+            <button
+                type="button"
+                pButton
+                class="ds-button max-sm:flex-1"
+                [disabled]="!puedeContinuar() || guardando()"
+                (click)="continuar.emit()"
+            >
+                {{ esUltimoPaso() ? 'Finalizar' : 'Continuar' }}
+                <svg pIcon="arrow-right" [size]="16"></svg>
+            </button>
+        </div>
+    </div>
+</div>

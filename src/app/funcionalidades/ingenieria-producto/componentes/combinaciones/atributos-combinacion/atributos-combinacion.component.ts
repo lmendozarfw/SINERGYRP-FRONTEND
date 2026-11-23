@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
-import { FormLabelComponent } from '../../../../../compartido/componentes/form-label/form-label.component';
-import { MensajeAyudaErrorComponent } from '../../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { EtiquetaFormularioComponente } from '../../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '../../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { AtributoCombinacion, AtributoOpcion } from '../../../modelos/combinacion';
 
 @Component({
   selector: 'app-atributos-combinacion',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule, Select, Tag, FormLabelComponent, MensajeAyudaErrorComponent],
+  imports: [FormsModule, Select, Tag, EtiquetaFormularioComponente, MensajeAyudaErrorComponente],
   templateUrl: './atributos-combinacion.component.html',
   styleUrl: './atributos-combinacion.component.scss',
 })

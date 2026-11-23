@@ -17,10 +17,10 @@ import { Select } from 'primeng/select';
 import {
   PIcon
 } from '@primeicons/angular';
-import { FormLabelComponent } from '../../../../compartido/componentes/form-label/form-label.component';
-import { MensajeAyudaErrorComponent } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { EtiquetaFormularioComponente } from '../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { QrScannerComponent } from '../../../../compartido/componentes/qr-scanner/qr-scanner.component';
-import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
+import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
 import { InicioSesionComando } from '../../casos-uso/inicio-sesion.caso-uso';
 import { AutenticacionStore } from '../../stores/auth.store';
 
@@ -48,8 +48,8 @@ function convertirACredenciales(usuario: unknown, contrasena: unknown): ICredenc
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    FormLabelComponent,
-    MensajeAyudaErrorComponent,
+    EtiquetaFormularioComponente,
+    MensajeAyudaErrorComponente,
     QrScannerComponent,
     InputText,
     InputPassword,
@@ -66,7 +66,7 @@ export class LoginPage {
 
   authStore = inject(AutenticacionStore);
   rutas = inject(Router);
-  private readonly toast = inject(ToastService);
+  private readonly avisos = inject(AvisosServicio);
   private readonly qrScanner = viewChild(QrScannerComponent);
 
   readonly empresas = [
@@ -122,7 +122,7 @@ export class LoginPage {
   }
 
   recoverPassword(): void {
-    this.toast.info(
+    this.avisos.informacion(
       'Recuperación de contraseña',
       'Contacta al administrador de tu espacio corporativo.',
     );
@@ -132,7 +132,7 @@ export class LoginPage {
     if (this.authStore.cargando()) return;
     const credentials = interpretarQR(decodedText);
     if (!credentials) {
-      this.toast.warning('El QR escaneado no contiene credenciales válidas');
+      this.avisos.advertencia('El QR escaneado no contiene credenciales válidas');
       this.resumeScanner();
       return;
     }
@@ -156,7 +156,7 @@ export class LoginPage {
   private comandoActual(): InicioSesionComando | null {
     if (!this.empresaControl.value) {
       this.empresaControl.markAsTouched();
-      this.toast.warning('Selecciona una empresa');
+      this.avisos.advertencia('Selecciona una empresa');
       if (this.mode() === 'qr') this.resumeScanner();
       return null;
     }
@@ -164,7 +164,7 @@ export class LoginPage {
     if (this.mode() === 'qr') {
       const credenciales = this.badgeCredentials();
       if (!credenciales) {
-        this.toast.warning('Escanea el QR de tu gafete');
+        this.avisos.advertencia('Escanea el QR de tu gafete');
         this.resumeScanner();
         return null;
       }
@@ -189,7 +189,7 @@ export class LoginPage {
         this.badgeCredentials.set(null);
         this.resumeScanner();
       }
-      this.toast.error('No se pudo iniciar sesión', error);
+      this.avisos.error('No se pudo iniciar sesión', error);
       return;
     }
 

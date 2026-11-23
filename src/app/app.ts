@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Toast } from 'primeng/toast';
-import { ConfirmacionComponent } from './compartido/componentes/confirmacion/confirmacion.component';
+import { ConfirmacionComponente } from './compartido/componentes/confirmacion/confirmacion.componente';
 
 @Component({
-  imports: [RouterOutlet, Toast, ConfirmacionComponent],
+  imports: [RouterOutlet, Toast, ConfirmacionComponente],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

@@ -13,9 +13,9 @@ import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { PIcon } from '@primeicons/angular';
 
-import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
-import { FormLabelComponent } from '../../../../compartido/componentes/form-label/form-label.component';
-import { MensajeAyudaErrorComponent } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
+import { EtiquetaFormularioComponente } from '../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 
 type ModoConsumo = 'general' | 'porTalla';
 
@@ -66,8 +66,8 @@ type ConsumoFormGroup = FormGroup<{
     InputText,
     Select,
     TableModule,
-    FormLabelComponent,
-    MensajeAyudaErrorComponent,
+    EtiquetaFormularioComponente,
+    MensajeAyudaErrorComponente,
     PIcon
   ],
   templateUrl: './piezas-consumos.component.html',
@@ -75,7 +75,7 @@ type ConsumoFormGroup = FormGroup<{
   providers: [ConfirmationService],
 })
 export class PiezasConsumosComponent {
-  private readonly toast = inject(ToastService);
+  private readonly avisos = inject(AvisosServicio);
   private readonly confirmationService = inject(ConfirmationService);
 
   readonly tiposPieza = [
@@ -336,9 +336,9 @@ export class PiezasConsumosComponent {
     );
 
     if (editando) {
-      this.toast.success('Pieza actualizada', `"${pieza.nombre}" se guardó correctamente.`);
+      this.avisos.exito('Pieza actualizada', `"${pieza.nombre}" se guardó correctamente.`);
     } else {
-      this.toast.success('Pieza agregada', `"${pieza.nombre}" se agregó a la lista.`);
+      this.avisos.exito('Pieza agregada', `"${pieza.nombre}" se agregó a la lista.`);
     }
 
     this.cerrarDrawer();
@@ -355,7 +355,7 @@ export class PiezasConsumosComponent {
       rejectButtonStyleClass: 'ds-button ds-button--secondary ds-button--compact',
       accept: () => {
         this.piezasState.update((piezas) => piezas.filter((item) => item.id !== pieza.id));
-        this.toast.info('Pieza eliminada', `"${pieza.nombre}" se quitó de la lista.`);
+        this.avisos.informacion('Pieza eliminada', `"${pieza.nombre}" se quitó de la lista.`);
       },
     });
   }

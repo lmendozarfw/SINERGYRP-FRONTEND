@@ -7,10 +7,10 @@ import { PIcon } from '@primeicons/angular';
     selector: 'app-confirmacion',
     standalone: true,
     imports: [ConfirmDialog, PIcon],
-    templateUrl: './confirmacion.component.html',
-    styleUrl: './confirmacion.component.scss',
+    templateUrl: './confirmacion.componente.html',
+    styleUrl: './confirmacion.componente.scss',
 })
-export class ConfirmacionComponent {
+export class ConfirmacionComponente {
 
     obtenerIcono(tipo?: string): string {
         switch (tipo) {

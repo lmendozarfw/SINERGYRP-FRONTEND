@@ -8,14 +8,14 @@ import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { PIcon } from '@primeicons/angular';
-import { BulkActionsBarComponent } from '../../../compartido/componentes/bulk-actions-bar/bulk-actions-bar.component';
-import { FormLabelComponent } from '../../../compartido/componentes/form-label/form-label.component';
-import { MensajeAyudaErrorComponent } from '../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { EncabezadoPaginaComponent } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
+import { BarraAccionesMasivasComponente } from '../../../compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
+import { EtiquetaFormularioComponente } from '../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { EncabezadoPaginaComponente } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
 import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servicio';
 import { Cliente } from '../modelos/cliente';
 import { ConfirmDialog } from 'primeng/confirmdialog';
-import { DialogoConfirmacionService } from '../../../compartido/componentes/confirmacion/confirmacion.service';
+import { DialogoConfirmacionServicio } from '../../../compartido/componentes/confirmacion/confirmacion.servicio';
 
 interface SelectOption {
   label: string;
@@ -34,17 +34,17 @@ interface SelectOption {
     Select,
     TableModule,
     Tag,
-    BulkActionsBarComponent,
-    FormLabelComponent,
-    MensajeAyudaErrorComponent,
-    EncabezadoPaginaComponent,
+    BarraAccionesMasivasComponente,
+    EtiquetaFormularioComponente,
+    MensajeAyudaErrorComponente,
+    EncabezadoPaginaComponente,
     PIcon,
     ConfirmDialog,
   ],
   templateUrl: './clientes.pagina.html',
 })
 export class ClientsPage {
-  private readonly dialogoConfirmacion = inject(DialogoConfirmacionService);
+  private readonly dialogoConfirmacion = inject(DialogoConfirmacionServicio);
   private readonly breadcrumb = inject(BreadcrumbServicio);
 
   readonly drawerVisible = signal(false);

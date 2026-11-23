@@ -35,7 +35,7 @@ import { Component, input } from '@angular/core';
   `,
   host: { class: 'block' },
 })
-export class EncabezadoPaginaComponent {
+export class EncabezadoPaginaComponente {
   titulo = input.required<string>();
   descripcion = input<string>();
   eyebrow = input<string>();

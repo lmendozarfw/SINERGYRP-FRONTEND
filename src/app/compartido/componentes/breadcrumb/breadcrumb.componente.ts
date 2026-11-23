@@ -23,6 +23,6 @@ import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servici
     `,
   ],
 })
-export class BreadcrumbComponent {
+export class BreadcrumbComponente {
   readonly breadcrumb = inject(BreadcrumbServicio);
 }

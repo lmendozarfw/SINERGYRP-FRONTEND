@@ -1,6 +1,6 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { computed, inject } from "@angular/core";
-import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/storage.servicio";
+import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/almacenamiento.servicio";
 import { InicioSesionCasoUso, InicioSesionComando } from "../casos-uso/inicio-sesion.caso-uso";
 import { IMiInformacion } from "../modelos/auth";
 
@@ -91,8 +91,8 @@ export const AutenticacionStore = signalStore(
           // this.setUser(user);
           // this.setPermissions(response.permissions);
 
-          // storageService.set('user', user);
-          // storageService.set('permissions', response.permissions);
+          // almacenamiento.establecer('user', user);
+          // almacenamiento.establecer('permissions', response.permissions);
 
           patchState(store, {
             cargando: false,

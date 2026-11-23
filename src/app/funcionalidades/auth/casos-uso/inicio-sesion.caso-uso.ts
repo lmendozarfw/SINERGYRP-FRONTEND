@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { Comando } from "../../../nucleo/interfaces/comando.interface";
 import { AuthService } from "../servicios/auth.servicio";
-import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/storage.servicio";
+import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/almacenamiento.servicio";
 import { firstValueFrom } from "rxjs";
 
 export interface InicioSesionComando {
@@ -12,7 +12,7 @@ export interface InicioSesionComando {
 @Injectable({ providedIn: 'root' })
 export class InicioSesionCasoUso implements Comando<InicioSesionComando, string> {
     private readonly authService = inject(AuthService);
-    private readonly storageService = inject(AlmacenamientoLocalServicio);
+    private readonly almacenamiento = inject(AlmacenamientoLocalServicio);
 
     async ejecutar(comando: InicioSesionComando): Promise<string> {
         if (!comando.nombreUsuario || !comando.contrasena) {
@@ -20,7 +20,7 @@ export class InicioSesionCasoUso implements Comando<InicioSesionComando, string>
         }
 
         const respuesta = await firstValueFrom(this.authService.iniciarSesion(comando));
-        this.storageService.establecer('access_token', respuesta.token);
+        this.almacenamiento.establecer('access_token', respuesta.token);
         return respuesta.token;
     }
 }

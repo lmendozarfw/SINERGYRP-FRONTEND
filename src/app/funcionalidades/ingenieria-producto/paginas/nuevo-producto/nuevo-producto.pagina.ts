@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.servicio';
-import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
+import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
 import {
   AsistentePasosComponente,
   IPasoAsistente,
-} from '../../../../compartido/componentes/asistente-pasos/asistente-pasos.component';
-import { AsistentePasosAccionesComponent } from '../../../../compartido/componentes/asistente-pasos-acciones/asistente-pasos-acciones.component';
-import { EncabezadoPaginaComponent } from '../../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
+} from '../../../../compartido/componentes/asistente-pasos/asistente-pasos.componente';
+import { AsistentePasosAccionesComponente } from '../../../../compartido/componentes/asistente-pasos-acciones/asistente-pasos-acciones.componente';
+import { EncabezadoPaginaComponente } from '../../../../compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
 import { DatosGeneralesComponent } from '../../componentes/datos-generales/datos-generales.component';
 import { CorridasEquivalenciasComponent } from '../../componentes/corridas-equivalencias/corridas-equivalencias.component';
 import { PiezasConsumosComponent } from '../../componentes/piezas-consumos/piezas-consumos.component';
@@ -23,8 +23,8 @@ interface EncabezadoPaso {
   selector: 'app-nuevo-producto-pagina',
   imports: [
     AsistentePasosComponente,
-    AsistentePasosAccionesComponent,
-    EncabezadoPaginaComponent,
+    AsistentePasosAccionesComponente,
+    EncabezadoPaginaComponente,
     DatosGeneralesComponent,
     CorridasEquivalenciasComponent,
     PiezasConsumosComponent,
@@ -36,7 +36,7 @@ interface EncabezadoPaso {
 })
 export class NewProductPage {
   private readonly breadcrumb = inject(BreadcrumbServicio);
-  private readonly toast = inject(ToastService);
+  private readonly avisos = inject(AvisosServicio);
   private readonly wizard = inject(NewProductWizardStore);
 
   readonly pasos: IPasoAsistente[] = [
@@ -107,7 +107,7 @@ export class NewProductPage {
 
   alContinuar(): void {
     // if (this.pasoActual === 1 && !this.wizard.validarDatosGenerales()) {
-    //   this.toast.warning(
+    //   this.avisos.advertencia(
     //     'Revisa los datos generales',
     //     'Completa los campos obligatorios para continuar.',
     //   );
@@ -127,7 +127,7 @@ export class NewProductPage {
   }
 
   guardarBorrador(): void {
-    this.toast.success(
+    this.avisos.exito(
       'Borrador guardado',
       'Puedes retomar este modelo más tarde desde Ingeniería de producto.',
     );

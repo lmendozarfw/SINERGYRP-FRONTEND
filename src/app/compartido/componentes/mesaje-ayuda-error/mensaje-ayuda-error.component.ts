@@ -15,7 +15,7 @@ import { PIcon } from '@primeicons/angular';
     styles: [],
     imports: [PIcon]
 })
-export class MensajeAyudaErrorComponent {
+export class MensajeAyudaErrorComponente {
     condicion = input<boolean>();
     mensajeAyuda = input<string>();
     mensajeError = input<string>();

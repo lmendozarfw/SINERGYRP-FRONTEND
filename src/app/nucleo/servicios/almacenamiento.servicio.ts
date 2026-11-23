@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AlmacenamientoLocalServicio {
-
   establecer<T>(llave: string, valor: T): void {
     localStorage.setItem(llave, JSON.stringify(valor));
   }

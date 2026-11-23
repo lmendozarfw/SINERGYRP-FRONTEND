@@ -14,7 +14,7 @@
   </div>
 
   <div class="ds-field mb-6">
-    <app-form-label for="login-empresa" required>Empresa</app-form-label>
+    <app-etiqueta-formulario para="login-empresa" obligatorio>Empresa</app-etiqueta-formulario>
     <p-select
       class="w-full"
       inputId="login-empresa"
@@ -59,7 +59,7 @@
   } @else {
     <form [formGroup]="loginForm" class="flex flex-col gap-6 w-full" (ngSubmit)="onSubmit()">
       <div class="ds-field">
-        <app-form-label for="login-user" required>Nombre de usuario</app-form-label>
+        <app-etiqueta-formulario para="login-user" obligatorio>Nombre de usuario</app-etiqueta-formulario>
         <input
           pInputText
           id="login-user"
@@ -73,7 +73,7 @@
       </div>
 
       <div class="ds-field">
-        <app-form-label for="login-password" required>Contraseña</app-form-label>
+        <app-etiqueta-formulario para="login-password" obligatorio>Contraseña</app-etiqueta-formulario>
         <p-iconfield>
           <input
             pInputPassword

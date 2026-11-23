@@ -5,10 +5,10 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { Textarea } from 'primeng/textarea';
 import { PIcon } from '@primeicons/angular';
-import { FormLabelComponent } from '../../../../compartido/componentes/form-label/form-label.component';
-import { MensajeAyudaErrorComponent } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { SelectorImagenComponent } from '../../../../compartido/componentes/selector-imagen/selector-imagen.component';
-import { TarjetaComponent } from '../../../../compartido/componentes/tarjeta/tarjeta.component';
+import { EtiquetaFormularioComponente } from '../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { SelectorImagenComponente } from '../../../../compartido/componentes/selector-imagen/selector-imagen.component';
+import { TarjetaComponente } from '../../../../compartido/componentes/tarjeta/tarjeta.componente';
 import { NewProductWizardStore } from '../../stores/asistente-nuevo-producto.store';
 
 @Component({
@@ -20,11 +20,11 @@ import { NewProductWizardStore } from '../../stores/asistente-nuevo-producto.sto
     Textarea,
     Select,
     DatePicker,
-    FormLabelComponent,
-    SelectorImagenComponent,
+    EtiquetaFormularioComponente,
+    SelectorImagenComponente,
     PIcon,
-    TarjetaComponent,
-    MensajeAyudaErrorComponent,
+    TarjetaComponente,
+    MensajeAyudaErrorComponente,
   ],
   templateUrl: './datos-generales.component.html',
 })

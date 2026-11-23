@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { PIcon } from '@primeicons/angular';
 
 @Component({
-  selector: 'auth-template',
+  selector: 'autenticacion-plantilla',
   imports: [RouterOutlet, PIcon],
   template: `
     <div class="flex min-h-screen bg-ds-canvas">
@@ -74,4 +74,4 @@ y avanzar con confianza.          </p>
     </div>
   `,
 })
-export class AuthTemplate { }
+export class AutenticacionPlantilla { }

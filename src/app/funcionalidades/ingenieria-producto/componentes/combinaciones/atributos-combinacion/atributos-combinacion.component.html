@@ -17,9 +17,9 @@
   <div class="grid grid-cols-2 gap-4 max-[640px]:grid-cols-1">
     @for (atributo of atributos(); track atributo.id) {
       <div class="ds-field">
-        <app-form-label [for]="'atributo-' + atributo.id" [required]="true">
+        <app-etiqueta-formulario [para]="'atributo-' + atributo.id" [obligatorio]="true">
           {{ atributo.nombre }}
-        </app-form-label>
+        </app-etiqueta-formulario>
         <p-select
           class="ds-combinacion-select"
           [inputId]="'atributo-' + atributo.id"
