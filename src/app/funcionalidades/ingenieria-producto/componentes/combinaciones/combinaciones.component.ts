@@ -6,7 +6,7 @@ import { SortIcon, Table, TableHeaderCheckbox, TableCheckbox } from 'primeng/tab
 import { Tag } from 'primeng/tag';
 import { Drawer } from 'primeng/drawer';
 
-import { BreadcrumbService } from '../../../../nucleo/servicios/breadcrumb.servicio';
+import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.servicio';
 import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
 import { BulkActionsBarComponent } from '../../../../compartido/componentes/bulk-actions-bar/bulk-actions-bar.component';
 import {
@@ -40,7 +40,7 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
   styleUrl: './combinaciones.component.scss',
 })
 export class CombinacionesComponent {
-  private readonly breadcrumb = inject(BreadcrumbService);
+  private readonly breadcrumb = inject(BreadcrumbServicio);
   private readonly toast = inject(ToastService);
 
   private readonly atributosStep = viewChild(AtributosCombinacionComponent);
@@ -153,9 +153,9 @@ export class CombinacionesComponent {
   readonly esUltimoPaso = computed(() => this.pasoActual() === this.pasos.length);
 
   constructor() {
-    this.breadcrumb.setItems([
-      { key: 'product-engineering', label: 'Ingeniería de producto', route: '/app/product-engineering/new-product', disabled: true },
-      { key: 'combinaciones', label: 'Combinaciones', disabled: true },
+    this.breadcrumb.configurar([
+      { llave: 'product-engineering', etiqueta: 'Ingeniería de producto', ruta: '/app/product-engineering/new-product', deshabilitado: true },
+      { llave: 'combinaciones', etiqueta: 'Combinaciones', deshabilitado: true },
     ]);
   }
 

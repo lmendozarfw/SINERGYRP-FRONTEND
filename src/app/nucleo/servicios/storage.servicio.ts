@@ -3,35 +3,35 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class LocalStorageService {
+export class AlmacenamientoLocalServicio {
 
-  set<T>(key: string, value: T): void {
-    localStorage.setItem(key, JSON.stringify(value));
+  establecer<T>(llave: string, valor: T): void {
+    localStorage.setItem(llave, JSON.stringify(valor));
   }
 
-  get<T>(key: string): T | null {
-    const value = localStorage.getItem(key);
+  obtener<T>(llave: string): T | null {
+    const valor = localStorage.getItem(llave);
 
-    if (value === null) {
+    if (valor === null) {
       return null;
     }
 
     try {
-      return JSON.parse(value) as T;
+      return JSON.parse(valor) as T;
     } catch {
       return null;
     }
   }
 
-  remove(key: string): void {
-    localStorage.removeItem(key);
+  remover(llave: string): void {
+    localStorage.removeItem(llave);
   }
 
-  clear(): void {
+  limpiar(): void {
     localStorage.clear();
   }
 
-  has(key: string): boolean {
-    return localStorage.getItem(key) !== null;
+  tiene(llave: string): boolean {
+    return localStorage.getItem(llave) !== null;
   }
 }

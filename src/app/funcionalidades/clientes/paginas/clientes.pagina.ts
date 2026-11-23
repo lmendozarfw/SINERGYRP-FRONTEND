@@ -12,7 +12,7 @@ import { BulkActionsBarComponent } from '../../../compartido/componentes/bulk-ac
 import { FormLabelComponent } from '../../../compartido/componentes/form-label/form-label.component';
 import { MensajeAyudaErrorComponent } from '../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { EncabezadoPaginaComponent } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
-import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio';
+import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servicio';
 import { Cliente } from '../modelos/cliente';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { DialogoConfirmacionService } from '../../../compartido/componentes/confirmacion/confirmacion.service';
@@ -45,7 +45,7 @@ interface SelectOption {
 })
 export class ClientsPage {
   private readonly dialogoConfirmacion = inject(DialogoConfirmacionService);
-  private readonly breadcrumb = inject(BreadcrumbService);
+  private readonly breadcrumb = inject(BreadcrumbServicio);
 
   readonly drawerVisible = signal(false);
   readonly selectedClients = signal<Cliente[]>([]);
@@ -181,8 +181,8 @@ export class ClientsPage {
   ];
 
   constructor() {
-    this.breadcrumb.setItems([
-      { key: 'clients', label: 'Clientes', route: '/app/clients', disabled: true },
+    this.breadcrumb.configurar([
+      { llave: 'clients', etiqueta: 'Clientes', ruta: '/app/clients', deshabilitado: true },
     ]);
   }
 

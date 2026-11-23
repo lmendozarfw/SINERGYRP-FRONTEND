@@ -1,33 +1,18 @@
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { ApiService } from "../../../nucleo/servicios/api.servicio";
-import { LocalStorageService } from "../../../nucleo/servicios/storage.servicio";
-import { ILoginRequest, ILoginResponse, IMeResponse } from "../modelos/auth";
+import { ApiServicio } from "../../../nucleo/servicios/api.servicio";
+import { IInicioSesionRespuesta, IMiInformacion } from "../modelos/auth";
+import { InicioSesionComando } from "../casos-uso/inicio-sesion.caso-uso";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    private api = inject(ApiService);
-    private storageService = inject(LocalStorageService);
+    private api = inject(ApiServicio);
 
-    login(request: ILoginRequest): Observable<ILoginResponse> {
-
-        return this.api.post<ILoginRequest, ILoginResponse>(
-            'Auth/Login',
-            request
-        );
+    iniciarSesion(request: InicioSesionComando): Observable<IInicioSesionRespuesta> {
+        return this.api.post('Auth/Login', request);
     }
 
-    me(): Observable<IMeResponse> {
-        return this.api.get<IMeResponse>('auth/Me');
-    }
-
-    getToken(): string | null {
-        return this.storageService.get<string>("access_token");
-    }
-
-    logout() {
-        this.storageService.remove('user');
-        this.storageService.remove('access_token');
-        this.storageService.remove('permissions');
+    me(): Observable<IMiInformacion> {
+        return this.api.obtener('auth/Me');
     }
 }

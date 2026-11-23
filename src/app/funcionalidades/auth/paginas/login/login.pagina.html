@@ -36,17 +36,17 @@
     <div class="flex flex-col gap-4">
       <app-qr-scanner
         [size]="300"
-        [busy]="authStore.loading()"
-        [busyText]="'Validando ' + (badgeUser() ?? 'credenciales') + '…'"
+        [busy]="authStore.cargando()"
+        [busyText]="'Validando ' + (badgeCredentials()?.usuario ?? 'credenciales') + '…'"
         hint="Apunta el QR de tu gafete"
         (scanned)="onBadgeScanned($event)"
       />
 
-      @if (badgeUser() && !authStore.loading()) {
+      @if (badgeCredentials() && !authStore.cargando()) {
         <div class="ds-alert ds-alert--success">
           <svg pIcon="user" [size]="16" class="mt-0.5 shrink-0"></svg>
           <span
-            >Sesión iniciada como <b>{{ badgeUser() }}</b></span
+            >Sesión iniciada como <b>{{ badgeCredentials()?.usuario }}</b></span
           >
         </div>
       } @else {
@@ -119,9 +119,9 @@
         </button>
       </div>
 
-      <button pButton type="submit" class="ds-button w-full" [loading]="authStore.loading()">
+      <button pButton type="submit" class="ds-button w-full">
         <span class="flex items-center justify-center gap-2">
-          @if (authStore.loading()) {
+          @if (authStore.cargando()) {
             <svg pIcon="spinner" [spin]="true" [size]="16"></svg>
           } @else {
             <svg pIcon="sign-in" [size]="16"></svg>

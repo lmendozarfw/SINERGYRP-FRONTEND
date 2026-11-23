@@ -21,53 +21,25 @@ import { FormLabelComponent } from '../../../../compartido/componentes/form-labe
 import { MensajeAyudaErrorComponent } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { QrScannerComponent } from '../../../../compartido/componentes/qr-scanner/qr-scanner.component';
 import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
-import { AuthStore } from '../../stores/auth.store';
+import { InicioSesionComando } from '../../casos-uso/inicio-sesion.caso-uso';
+import { AutenticacionStore } from '../../stores/auth.store';
 
-export interface BadgeCredentials {
-  username: string;
-  password: string;
+export interface ICredencialQR {
+  usuario: string;
+  contrasena: string;
 }
 
-export function parseBadgeQr(raw: string): BadgeCredentials | null {
-  console.log('parseBadgeQr', raw);
-  const text = raw.trim();
-  if (!text) return null;
-
-  if (text.startsWith('{')) {
-    try {
-      const data = JSON.parse(text) as Record<string, unknown>;
-      console.log('parseBadgeQr - Parsed JSON:', data);
-      return toCredentials(
-        data['usuario'] ?? data['user'] ?? data['username'],
-        data['password'] ?? data['clave'],
-      );
-    } catch {
-      return null;
-    }
-  }
-
-  if (text.startsWith('?') || /^[a-z][a-z0-9+.-]*:\/\//i.test(text)) {
-    try {
-      const params = new URL(text, window.location.origin).searchParams;
-      return toCredentials(
-        params.get('usuario') ?? params.get('user') ?? params.get('username'),
-        params.get('password') ?? params.get('clave'),
-      );
-    } catch {
-      return null;
-    }
-  }
-
-  const separator = text.includes('|') ? '|' : text.includes(':') ? ':' : null;
-  if (!separator) return null;
-  const index = text.indexOf(separator);
-  return toCredentials(text.slice(0, index), text.slice(index + 1));
+export function interpretarQR(raw: string): ICredencialQR | null {
+  const texto = raw.trim();
+  if (!texto) return null;
+  // El codigo QR del gafete tiene solo el numero de empleado
+  return convertirACredenciales(texto, texto);
 }
 
-function toCredentials(username: unknown, password: unknown): BadgeCredentials | null {
-  const user = String(username ?? '').trim();
-  const secret = String(password ?? '');
-  return user && secret ? { username: user, password: secret } : null;
+function convertirACredenciales(usuario: unknown, contrasena: unknown): ICredencialQR | null {
+  const nombreUsuario = String(usuario ?? '').trim();
+  const secreto = String(contrasena ?? '');
+  return nombreUsuario && secreto ? { usuario: nombreUsuario, contrasena: secreto } : null;
 }
 
 @Component({
@@ -92,8 +64,8 @@ function toCredentials(username: unknown, password: unknown): BadgeCredentials |
 export class LoginPage {
   loginForm: FormGroup;
 
-  authStore = inject(AuthStore);
-  router = inject(Router);
+  authStore = inject(AutenticacionStore);
+  rutas = inject(Router);
   private readonly toast = inject(ToastService);
   private readonly qrScanner = viewChild(QrScannerComponent);
 
@@ -107,7 +79,7 @@ export class LoginPage {
   readonly empresaControl = new FormControl('', [Validators.required]);
 
   readonly mode = signal<'qr' | 'manual'>('qr');
-  readonly badgeUser = signal<string | null>(null);
+  readonly badgeCredentials = signal<ICredencialQR | null>(null);
   readonly passwordMask = signal(true);
   remember = false;
 
@@ -141,7 +113,7 @@ export class LoginPage {
   }
 
   toggleMode(): void {
-    this.badgeUser.set(null);
+    this.badgeCredentials.set(null);
     this.mode.update((mode) => (mode === 'qr' ? 'manual' : 'qr'));
   }
 
@@ -157,19 +129,19 @@ export class LoginPage {
   }
 
   async onBadgeScanned(decodedText: string): Promise<void> {
-    if (this.authStore.loading()) return;
-    const credentials = parseBadgeQr(decodedText);
+    if (this.authStore.cargando()) return;
+    const credentials = interpretarQR(decodedText);
     if (!credentials) {
       this.toast.warning('El QR escaneado no contiene credenciales válidas');
       this.resumeScanner();
       return;
     }
-    this.badgeUser.set(credentials.username);
+    this.badgeCredentials.set(credentials);
     await this.entrar();
   }
 
   async onSubmit(): Promise<void> {
-    if (this.authStore.loading()) return;
+    if (this.authStore.cargando()) return;
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -181,7 +153,46 @@ export class LoginPage {
     this.qrScanner()?.resume();
   }
 
+  private comandoActual(): InicioSesionComando | null {
+    if (!this.empresaControl.value) {
+      this.empresaControl.markAsTouched();
+      this.toast.warning('Selecciona una empresa');
+      if (this.mode() === 'qr') this.resumeScanner();
+      return null;
+    }
+
+    if (this.mode() === 'qr') {
+      const credenciales = this.badgeCredentials();
+      if (!credenciales) {
+        this.toast.warning('Escanea el QR de tu gafete');
+        this.resumeScanner();
+        return null;
+      }
+      return { nombreUsuario: credenciales.usuario, contrasena: credenciales.contrasena };
+    }
+
+    return {
+      nombreUsuario: this.loginForm.value['user'] ?? '',
+      contrasena: this.loginForm.value['password'] ?? '',
+    };
+  }
+
   private async entrar(): Promise<void> {
-    await this.router.navigate(['/app/clientes']);
+    const comando = this.comandoActual();
+    if (!comando) return;
+
+    await this.authStore.inicioSesion(comando);
+
+    const error = this.authStore.error();
+    if (error) {
+      if (this.mode() === 'qr') {
+        this.badgeCredentials.set(null);
+        this.resumeScanner();
+      }
+      this.toast.error('No se pudo iniciar sesión', error);
+      return;
+    }
+
+    await this.rutas.navigate(['/app/clientes']);
   }
 }

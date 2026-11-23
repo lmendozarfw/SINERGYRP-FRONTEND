@@ -11,7 +11,7 @@ import {
 } from '@primeicons/angular';
 import { FormLabelComponent } from '../../../compartido/componentes/form-label/form-label.component';
 import { EncabezadoPaginaComponent } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.component';
-import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio';
+import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servicio';
 
 @Component({
   selector: 'app-design-system-showcase',
@@ -255,7 +255,7 @@ import { BreadcrumbService } from '../../../nucleo/servicios/breadcrumb.servicio
   `,
 })
 export class DesignSystemShowcasePage {
-  private readonly breadcrumb = inject(BreadcrumbService);
+  private readonly breadcrumb = inject(BreadcrumbServicio);
 
   readonly palette = [
     { name: 'Navy 950', token: '--ds-navy' },
@@ -281,9 +281,9 @@ export class DesignSystemShowcasePage {
   accepted = false;
 
   constructor() {
-    this.breadcrumb.setItems([
-      { key: 'configuration', label: 'Configuración', route: '/app/configuration' },
-      { key: 'components', label: 'Componentes', route: '/design-system', disabled: true },
+    this.breadcrumb.configurar([
+      { llave: 'configuration', etiqueta: 'Configuración', ruta: '/app/configuration' },
+      { llave: 'components', etiqueta: 'Componentes', ruta: '/design-system', deshabilitado: true },
     ]);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { BreadcrumbService } from '../../../../nucleo/servicios/breadcrumb.servicio';
+import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.servicio';
 import { ToastService } from '../../../../nucleo/servicios/toast.servicio';
 import {
   AsistentePasosComponent,
@@ -35,7 +35,7 @@ interface EncabezadoPaso {
   templateUrl: './nuevo-producto.pagina.html',
 })
 export class NewProductPage {
-  private readonly breadcrumb = inject(BreadcrumbService);
+  private readonly breadcrumb = inject(BreadcrumbServicio);
   private readonly toast = inject(ToastService);
   private readonly wizard = inject(NewProductWizardStore);
 
@@ -74,14 +74,14 @@ export class NewProductPage {
   };
 
   constructor() {
-    this.breadcrumb.setItems([
+    this.breadcrumb.configurar([
       {
-        key: 'product-engineering',
-        label: 'Ingeniería de producto',
-        route: '/app/product-engineering/new-product',
-        disabled: true,
+        llave: 'product-engineering',
+        etiqueta: 'Ingeniería de producto',
+        ruta: '/app/product-engineering/new-product',
+        deshabilitado: true,
       },
-      { key: 'new-product', label: 'Nuevo producto', disabled: true },
+      { llave: 'new-product', etiqueta: 'Nuevo producto', deshabilitado: true },
     ]);
   }
 

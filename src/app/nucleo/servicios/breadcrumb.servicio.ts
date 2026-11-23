@@ -1,107 +1,107 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
-export interface BreadcrumbItem {
-  key?: string;
-  label: string;
-  route?: string | unknown[];
+export interface ElementoBreadcrumb {
+  llave?: string;
+  etiqueta: string;
+  ruta?: string | unknown[];
   url?: string;
-  icon?: string;
-  disabled?: boolean;
+  icono?: string;
+  deshabilitado?: boolean;
   visible?: boolean;
-  command?: () => void;
+  accion?: () => void;
 }
 
 @Injectable({ providedIn: 'root' })
-export class BreadcrumbService {
-  private readonly state = signal<BreadcrumbItem[]>([]);
-  private readonly homeState = signal<BreadcrumbItem | null>({
-    key: 'home',
-    label: '',
-    route: '/app/clients',
+export class BreadcrumbServicio {
+  private readonly estado = signal<ElementoBreadcrumb[]>([]);
+  private readonly estadoInicio = signal<ElementoBreadcrumb | null>({
+    llave: 'home',
+    etiqueta: '',
+    ruta: '/app/clientes',
   });
 
-  readonly items = this.state.asReadonly();
-  readonly home = this.homeState.asReadonly();
+  readonly items = this.estado.asReadonly();
+  readonly inicio = this.estadoInicio.asReadonly();
 
   private readonly visibleItems = computed(() =>
-    this.state().filter((item) => item.visible !== false),
+    this.estado().filter((elemento) => elemento.visible !== false),
   );
 
   readonly menuItems = computed<MenuItem[]>(() =>
-    this.visibleItems().map((item) => this.toMenuItem(item)),
+    this.visibleItems().map((item) => this.aElementoMenu(item)),
   );
 
-  readonly homeMenuItem = computed<MenuItem | undefined>(() => {
-    const home = this.home();
-    return home && home.visible !== false ? this.toMenuItem(home) : undefined;
+  readonly inicioMenu = computed<MenuItem | undefined>(() => {
+    const inicio = this.inicio();
+    return inicio && inicio.visible !== false ? this.aElementoMenu(inicio) : undefined;
   });
 
-  setItems(items: readonly BreadcrumbItem[]): void {
-    this.state.set(items.map((item) => this.normalize(item)));
+  configurar(elementos: readonly ElementoBreadcrumb[]): void {
+    this.estado.set(elementos.map((elemento) => this.normalizar(elemento)));
   }
 
-  addItem(item: BreadcrumbItem): void {
-    this.state.update((items) => [...items, this.normalize(item)]);
+  agregar(elemento: ElementoBreadcrumb): void {
+    this.estado.update((items) => [...items, this.normalizar(elemento)]);
   }
 
-  removeItem(key: string): void {
-    this.state.update((items) => items.filter((item) => this.keyOf(item) !== key));
+  remover(clave: string): void {
+    this.estado.update((elementos) => elementos.filter((elemento) => this.keyOf(elemento) !== clave));
   }
 
-  updateItem(key: string, partial: Partial<BreadcrumbItem>): void {
-    this.state.update((items) =>
-      items.map((item) =>
-        this.keyOf(item) === key ? this.normalize({ ...item, ...partial }) : item,
+  actualizar(clave: string, parcial: Partial<ElementoBreadcrumb>): void {
+    this.estado.update((elementos) =>
+      elementos.map((elemento) =>
+        this.keyOf(elemento) === clave ? this.normalizar({ ...elemento, ...parcial }) : elemento,
       ),
     );
   }
 
-  setVisible(key: string, visible: boolean): void {
-    this.updateItem(key, { visible });
+  configurarVisibilidad(clave: string, visible: boolean): void {
+    this.actualizar(clave, { visible });
   }
 
-  setDisabled(key: string, disabled: boolean): void {
-    this.updateItem(key, { disabled });
+  configurarDeshabilitacion(clave: string, deshabilitado: boolean): void {
+    this.actualizar(clave, { deshabilitado });
   }
 
-  lock(key: string): void {
-    this.setDisabled(key, true);
+  bloquear(clave: string): void {
+    this.configurarDeshabilitacion(clave, true);
   }
 
-  unlock(key: string): void {
-    this.setDisabled(key, false);
+  desbloquear(clave: string): void {
+    this.configurarDeshabilitacion(clave, false);
   }
 
-  clear(): void {
-    this.state.set([]);
+  limpiar(): void {
+    this.estado.set([]);
   }
 
-  setHome(item: BreadcrumbItem | null): void {
-    this.homeState.set(item ? this.normalize(item) : null);
+  configurarElementoInicio(item: ElementoBreadcrumb | null): void {
+    this.estadoInicio.set(item ? this.normalizar(item) : null);
   }
 
-  private toMenuItem(item: BreadcrumbItem): MenuItem {
-    const disabled = item.disabled === true;
+  private aElementoMenu(item: ElementoBreadcrumb): MenuItem {
+    const disabled = item.deshabilitado === true;
     return {
-      label: item.label,
-      icon: item.icon,
+      label: item.etiqueta,
+      icon: item.icono,
       disabled,
       ...(disabled
         ? {}
         : {
-            routerLink: item.route,
+            routerLink: item.ruta,
             url: item.url,
-            command: item.command ? () => item.command?.() : undefined,
+            command: item.accion ? () => item.accion?.() : undefined,
           }),
     };
   }
 
-  private keyOf(item: BreadcrumbItem): string {
-    return item.key ?? item.label;
+  private keyOf(item: ElementoBreadcrumb): string {
+    return item.llave ?? item.etiqueta;
   }
 
-  private normalize(item: BreadcrumbItem): BreadcrumbItem {
-    return { ...item, key: this.keyOf(item) };
+  private normalizar(elemento: ElementoBreadcrumb): ElementoBreadcrumb {
+    return { ...elemento, llave: this.keyOf(elemento) };
   }
 }

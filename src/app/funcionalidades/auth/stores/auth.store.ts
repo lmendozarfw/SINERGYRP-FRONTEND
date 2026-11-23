@@ -1,77 +1,77 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { computed, inject } from "@angular/core";
-import { AuthService } from "../servicios/auth.servicio";
-import { firstValueFrom } from "rxjs";
-import { LocalStorageService } from "../../../nucleo/servicios/storage.servicio";
-import { IPermissionAuth, IUserAuth } from "../modelos/auth";
+import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/storage.servicio";
+import { InicioSesionCasoUso, InicioSesionComando } from "../casos-uso/inicio-sesion.caso-uso";
+import { IMiInformacion } from "../modelos/auth";
 
-type AuthState = {
-  user: IUserAuth | null;
-  permissions: IPermissionAuth[] | null;
+type AutenticacionEstado = {
+  usuario: IMiInformacion | null;
+  permisos: string[] | null;
   token: string | null;
-  loading: boolean;
+  cargando: boolean;
   error: string | null;
 };
 
-export const AuthStore = signalStore(
+const AutenticacionEstadoInicial: AutenticacionEstado = {
+  usuario: null,
+  permisos: null,
+  token: null,
+  cargando: false,
+  error: null,
+};
+
+export const AutenticacionStore = signalStore(
+
   { providedIn: 'root' },
-  withState<AuthState>(() => {
-    const storageService = inject(LocalStorageService);
+
+  withState<AutenticacionEstado>(() => {
+    const almacenamientoServicio = inject(AlmacenamientoLocalServicio);
     return {
-      user: storageService.get<IUserAuth>('user'),
-      permissions: storageService.get<IPermissionAuth[]>('permissions') ?? null,
-      token: storageService.get<string>('access_token') ?? null,
-      loading: false,
+      usuario: almacenamientoServicio.obtener<IMiInformacion>('usuario'),
+      permisos: almacenamientoServicio.obtener<string[]>('permisos') ?? null,
+      token: almacenamientoServicio.obtener<string>('token_acceso') ?? null,
+      cargando: false,
       error: null,
     };
   }),
-  withComputed(({ user, permissions, token }) => ({
-    isAuthenticated: computed(() => !!user() && !!permissions() && !!token()),
+  withComputed(({ usuario: user, permisos, token }) => ({
+    isAuthenticated: computed(() => !!user() && !!permisos() && !!token()),
   })),
   withMethods(
     (
       store,
-      authService = inject(AuthService),
-      storageService = inject(LocalStorageService),
+      almacenamientoServicio = inject(AlmacenamientoLocalServicio),
+      iniciarSesionCasoUso = inject(InicioSesionCasoUso)
     ) => ({
-      setUser(user: IUserAuth) {
-        patchState(store, {
-          user,
-        });
-      },
 
-      setToken(token: string) {
+      almacenarToken(token: string) {
         patchState(store, { token });
       },
-      setPermissions(permissions: IPermissionAuth[]) {
-        patchState(store, { permissions });
-      },
-      logout() {
-        patchState(store, { user: null, token: null, permissions: null });
-        storageService.clear();
+
+      almacenarPermisos(permisos: string[]) {
+        patchState(store, { permisos });
       },
 
-      async login(username: string, password: string) {
+      cerrarSesion() {
+        patchState(store, AutenticacionEstadoInicial);
+        almacenamientoServicio.limpiar();
+      },
+
+      async inicioSesion(comando: InicioSesionComando) {
         patchState(store, {
-          loading: true,
+          cargando: true,
           error: null,
         });
 
         try {
-          const response = await firstValueFrom(
-            authService.login({
-              username,
-              password,
-            }),
-          );
-          this.setToken(response.token);
-          storageService.set('access_token', response.token);
+          const token = await iniciarSesionCasoUso.ejecutar(comando);
+          this.almacenarToken(token);
           patchState(store, {
-            loading: false,
+            cargando: false,
           });
         } catch (error: any) {
           patchState(store, {
-            loading: false,
+            cargando: false,
             error: error?.error?.mensaje || 'Usuario o contraseña incorrectos',
           });
         }
@@ -79,27 +79,27 @@ export const AuthStore = signalStore(
 
       async me() {
         patchState(store, {
-          loading: true,
+          cargando: true,
           error: null,
         });
 
         try {
-          const response = await firstValueFrom(authService.me());
-          console.log({response});
-          const user: IUserAuth = response.user;
+          // const response = await firstValueFrom(authService.me());
+          // console.log({response});
+          // const user: IUserAuth = response.user;
 
-          this.setUser(user);
-          this.setPermissions(response.permissions);
+          // this.setUser(user);
+          // this.setPermissions(response.permissions);
 
-          storageService.set('user', user);
-          storageService.set('permissions', response.permissions);
+          // storageService.set('user', user);
+          // storageService.set('permissions', response.permissions);
 
           patchState(store, {
-            loading: false,
+            cargando: false,
           });
         } catch (error: any) {
           patchState(store, {
-            loading: false,
+            cargando: false,
             error: error?.error?.mensaje || 'No se ha podido restaurar la sesión',
           });
         }
