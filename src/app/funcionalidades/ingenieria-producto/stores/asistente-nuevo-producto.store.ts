@@ -1,44 +1,40 @@
 import { Injectable, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-export interface OpcionSelect {
-  label: string;
-  value: string;
-}
+import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 
 @Injectable()
 export class AsistenteNuevoProductoStore {
-  readonly categorias: OpcionSelect[] = [
-    { label: 'Calzado', value: 'calzado' },
-    { label: 'Ropa', value: 'ropa' },
-    { label: 'Accesorios', value: 'accesorios' },
-    { label: 'Textiles', value: 'textiles' },
+  readonly categorias: IOpcionSelector[] = [
+    { etiqueta: 'Calzado', valor: 'calzado' },
+    { etiqueta: 'Ropa', valor: 'ropa' },
+    { etiqueta: 'Accesorios', valor: 'accesorios' },
+    { etiqueta: 'Textiles', valor: 'textiles' },
   ];
 
-  readonly marcas: OpcionSelect[] = [
-    { label: 'Marca propia', value: 'marca-propia' },
-    { label: 'Licencia', value: 'licencia' },
-    { label: 'Sin marca', value: 'sin-marca' },
+  readonly marcas: IOpcionSelector[] = [
+    { etiqueta: 'Marca propia', valor: 'marca-propia' },
+    { etiqueta: 'Licencia', valor: 'licencia' },
+    { etiqueta: 'Sin marca', valor: 'sin-marca' },
   ];
 
-  readonly lineas: OpcionSelect[] = [
-    { label: 'Casual', value: 'casual' },
-    { label: 'Formal', value: 'formal' },
-    { label: 'Deportiva', value: 'deportiva' },
-    { label: 'Outdoor', value: 'outdoor' },
+  readonly lineas: IOpcionSelector[] = [
+    { etiqueta: 'Casual', valor: 'casual' },
+    { etiqueta: 'Formal', valor: 'formal' },
+    { etiqueta: 'Deportiva', valor: 'deportiva' },
+    { etiqueta: 'Outdoor', valor: 'outdoor' },
   ];
 
-  readonly generos: OpcionSelect[] = [
-    { label: 'Dama', value: 'dama' },
-    { label: 'Caballero', value: 'caballero' },
-    { label: 'Unisex', value: 'unisex' },
-    { label: 'Infantil', value: 'infantil' },
+  readonly generos: IOpcionSelector[] = [
+    { etiqueta: 'Dama', valor: 'dama' },
+    { etiqueta: 'Caballero', valor: 'caballero' },
+    { etiqueta: 'Unisex', valor: 'unisex' },
+    { etiqueta: 'Infantil', valor: 'infantil' },
   ];
 
-  readonly estatusOpciones: OpcionSelect[] = [
-    { label: 'Borrador', value: 'borrador' },
-    { label: 'Activo', value: 'activo' },
-    { label: 'Inactivo', value: 'inactivo' },
+  readonly estatusOpciones: IOpcionSelector[] = [
+    { etiqueta: 'Borrador', valor: 'borrador' },
+    { etiqueta: 'Activo', valor: 'activo' },
+    { etiqueta: 'Inactivo', valor: 'inactivo' },
   ];
 
   readonly formularioModelo = new FormGroup({
@@ -108,7 +104,7 @@ export class AsistenteNuevoProductoStore {
     this.imagenes.set(archivos);
   }
 
-  private etiqueta(opciones: OpcionSelect[], valor: string): string {
-    return opciones.find((opcion) => opcion.value === valor)?.label ?? 'Sin definir';
+  private etiqueta(opciones: IOpcionSelector[], valor: string): string {
+    return opciones.find((opcion) => opcion.valor === valor)?.etiqueta ?? 'Sin definir';
   }
 }

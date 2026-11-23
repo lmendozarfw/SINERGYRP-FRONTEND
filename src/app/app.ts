@@ -10,5 +10,5 @@ import { ConfirmacionComponente } from './compartido/componentes/confirmacion/co
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('activo_fijo');
+  protected readonly title = signal('SINERGYRP');
 }

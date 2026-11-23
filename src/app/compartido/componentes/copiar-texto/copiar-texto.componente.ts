@@ -38,7 +38,7 @@ type VarianteCopiarTexto = 'mono' | 'nombre';
     </button>
   `,
 })
-export class CopiarTextoComponent implements OnDestroy {
+export class CopiarTextoComponente implements OnDestroy {
   readonly valor = input.required<string>();
   readonly etiqueta = input<string>('');
   readonly texto = input<string>();

@@ -1,6 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { DialogoConfirmacionServicio } from '@compartido/componentes/confirmacion/confirmacion.servicio';
+import { BreadcrumbServicio } from '@nucleo/servicios/breadcrumb.servicio';
+import { PIcon } from '@primeicons/angular';
 import { ButtonDirective } from 'primeng/button';
+import { ConfirmDialog } from 'primeng/confirmdialog';
 import { Drawer } from 'primeng/drawer';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
@@ -8,21 +12,13 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
-import { PIcon } from '@primeicons/angular';
-import { BarraAccionesMasivasComponente } from '../../../compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
-import { EtiquetaFormularioComponente } from '../../../compartido/componentes/form-label/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { EncabezadoPaginaComponente } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
-import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servicio';
-import { CopiarTextoComponent } from '../../../compartido/componentes/copiar-texto/copiar-texto.component';
+import { EncabezadoPaginaComponente } from '@compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
+import { CopiarTextoComponente } from '@compartido/componentes/copiar-texto/copiar-texto.componente';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
+import { BarraAccionesMasivasComponente } from '@compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
+import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 import { ICliente } from '../modelos/cliente';
-import { ConfirmDialog } from 'primeng/confirmdialog';
-import { DialogoConfirmacionServicio } from '../../../compartido/componentes/confirmacion/confirmacion.servicio';
-
-interface OpcionSelect {
-  label: string;
-  value: string;
-}
 
 @Component({
   selector: 'app-clientes-pagina',
@@ -35,15 +31,15 @@ interface OpcionSelect {
     InputText,
     Select,
     TableModule,
-    Tag,
-    BarraAccionesMasivasComponente,
-    EtiquetaFormularioComponente,
-    MensajeAyudaErrorComponente,
-    EncabezadoPaginaComponente,
-    CopiarTextoComponent,
     PIcon,
     ConfirmDialog,
-  ],
+    Tag,
+    EncabezadoPaginaComponente,
+    CopiarTextoComponente,
+    EtiquetaFormularioComponente,
+    MensajeAyudaErrorComponente,
+    BarraAccionesMasivasComponente
+],
   templateUrl: './clientes.pagina.html',
 })
 export class ClientesPagina {
@@ -53,33 +49,33 @@ export class ClientesPagina {
   readonly drawerVisible = signal(false);
   readonly seleccion = signal<ICliente[]>([]);
 
-  readonly opcionesTipoPersona: OpcionSelect[] = [
-    { label: 'Física', value: 'Física' },
-    { label: 'Moral', value: 'Moral' },
+  readonly opcionesTipoPersona: IOpcionSelector[] = [
+    { etiqueta: 'Física', valor: 'Física' },
+    { etiqueta: 'Moral', valor: 'Moral' },
   ];
-  readonly opcionesRegimen: OpcionSelect[] = [
-    { label: '601 · General de Ley Personas Morales', value: '601 · General' },
-    { label: '612 · Personas Físicas con Actividades Empresariales', value: '612 · PFAE' },
-    { label: '616 · Sin obligaciones fiscales', value: '616 · Sin obligaciones' },
+  readonly opcionesRegimen: IOpcionSelector[] = [
+    { etiqueta: '601 · General de Ley Personas Morales', valor: '601 · General' },
+    { etiqueta: '612 · Personas Físicas con Actividades Empresariales', valor: '612 · PFAE' },
+    { etiqueta: '616 · Sin obligaciones fiscales', valor: '616 · Sin obligaciones' },
   ];
-  readonly opcionesIva: OpcionSelect[] = [
-    { label: 'IVA 16%', value: 'IVA 16%' },
-    { label: 'IVA 8%', value: 'IVA 8%' },
-    { label: 'Exento', value: 'Exento' },
+  readonly opcionesIva: IOpcionSelector[] = [
+    { etiqueta: 'IVA 16%', valor: 'IVA 16%' },
+    { etiqueta: 'IVA 8%', valor: 'IVA 8%' },
+    { etiqueta: 'Exento', valor: 'Exento' },
   ];
-  readonly opcionesUsoCfdi: OpcionSelect[] = [
-    { label: 'G01 · Adquisición de mercancías', value: 'G01' },
-    { label: 'G03 · Gastos generales', value: 'G03' },
-    { label: 'I01 · Ingresos por ventas', value: 'I01' },
+  readonly opcionesUsoCfdi: IOpcionSelector[] = [
+    { etiqueta: 'G01 · Adquisición de mercancías', valor: 'G01' },
+    { etiqueta: 'G03 · Gastos generales', valor: 'G03' },
+    { etiqueta: 'I01 · Ingresos por ventas', valor: 'I01' },
   ];
-  readonly opcionesFormaPago: OpcionSelect[] = [
-    { label: '01 · Efectivo', value: '01 · Efectivo' },
-    { label: '03 · Transferencia electrónica', value: '03 · Transferencia' },
-    { label: '04 · Tarjeta de crédito', value: '04 · Tarjeta' },
+  readonly opcionesFormaPago: IOpcionSelector[] = [
+    { etiqueta: '01 · Efectivo', valor: '01 · Efectivo' },
+    { etiqueta: '03 · Transferencia electrónica', valor: '03 · Transferencia' },
+    { etiqueta: '04 · Tarjeta de crédito', valor: '04 · Tarjeta' },
   ];
-  readonly opcionesMetodoPago: OpcionSelect[] = [
-    { label: 'PUE · Pago en una sola exhibición', value: 'PUE' },
-    { label: 'PPD · Pago en parcialidades o diferido', value: 'PPD' },
+  readonly opcionesMetodoPago: IOpcionSelector[] = [
+    { etiqueta: 'PUE · Pago en una sola exhibición', valor: 'PUE' },
+    { etiqueta: 'PPD · Pago en parcialidades o diferido', valor: 'PPD' },
   ];
 
   readonly clientes: ICliente[] = [

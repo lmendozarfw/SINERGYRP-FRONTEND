@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { PIcon } from '@primeicons/angular';
-import { SidebarComponente } from '../componentes/sidebar/sidebar.component';
+import { SidebarComponente } from '../componentes/sidebar/sidebar.componente';
 import { BreadcrumbComponente } from '../componentes/breadcrumb/breadcrumb.componente';
 
 @Component({

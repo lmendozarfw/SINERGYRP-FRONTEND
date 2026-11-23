@@ -1,8 +1,8 @@
 import { inject, Injectable } from "@angular/core";
+import { ApiServicio } from "@nucleo/servicios/api.servicio";
 import { Observable } from "rxjs";
-import { ApiServicio } from "../../../nucleo/servicios/api.servicio";
-import { IInicioSesionRespuesta, IMiInformacion } from "../modelos/auth";
 import { InicioSesionComando } from "../casos-uso/inicio-sesion.caso-uso";
+import { IInicioSesionRespuesta, IMiInformacion } from "../modelos/auth";
 
 @Injectable({ providedIn: 'root' })
 export class AutenticacionServicio {

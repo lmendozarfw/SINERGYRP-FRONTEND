@@ -17,12 +17,12 @@ import { Select } from 'primeng/select';
 import {
   PIcon
 } from '@primeicons/angular';
-import { EtiquetaFormularioComponente } from '../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { QrScannerComponent } from '../../../../compartido/componentes/qr-scanner/qr-scanner.component';
-import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
-import { InicioSesionComando } from '../../casos-uso/inicio-sesion.caso-uso';
-import { AutenticacionStore } from '../../stores/autenticacion.store';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
+import { QrScannerComponente } from '@compartido/componentes/qr-scanner/qr-scanner.componente';
+import { AutenticacionStore } from '@funcionalidades/autenticacion/stores/autenticacion.store';
+import { AvisosServicio } from '@nucleo/servicios/aviso.servicio';
+import { InicioSesionComando } from '@funcionalidades/autenticacion/casos-uso/inicio-sesion.caso-uso';
 
 export interface ICredencialQR {
   usuario: string;
@@ -50,7 +50,7 @@ function convertirACredenciales(usuario: unknown, contrasena: unknown): ICredenc
     ReactiveFormsModule,
     EtiquetaFormularioComponente,
     MensajeAyudaErrorComponente,
-    QrScannerComponent,
+    QrScannerComponente,
     InputText,
     InputPassword,
     IconField,
@@ -61,13 +61,13 @@ function convertirACredenciales(usuario: unknown, contrasena: unknown): ICredenc
     PIcon
   ],
 })
-export class LoginPage {
+export class InicioSesionPagina {
   loginForm: FormGroup;
 
   authStore = inject(AutenticacionStore);
   rutas = inject(Router);
   private readonly avisos = inject(AvisosServicio);
-  private readonly qrScanner = viewChild(QrScannerComponent);
+  private readonly qrScanner = viewChild(QrScannerComponente);
 
   readonly empresas = [
     { label: 'Grupo Raudal', value: 'grupo-raudal' },

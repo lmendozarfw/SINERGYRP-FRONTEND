@@ -5,14 +5,14 @@ import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
 import { PIcon } from '@primeicons/angular';
 
-import { EtiquetaFormularioComponente } from '../../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '../../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import {
   IMaterialAsignado,
   IOpcionSelectSimple,
   IPiezaCombinacion,
   IVersionCombinacion,
 } from '../../../modelos/combinacion';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
 
 interface FilaMaterial {
   pieza: IPiezaCombinacion;
@@ -31,10 +31,10 @@ interface FilaMaterial {
     MensajeAyudaErrorComponente,
     PIcon,
   ],
-  templateUrl: './materiales-combinacion.component.html',
-  styleUrl: './materiales-combinacion.component.scss',
+  templateUrl: './materiales-combinacion.componente.html',
+  styleUrl: './materiales-combinacion.componente.scss',
 })
-export class MaterialesCombinacionComponent {
+export class MaterialesCombinacionComponente {
   readonly piezas = input.required<IPiezaCombinacion[]>();
   readonly materiales = input.required<IOpcionSelectSimple[]>();
   readonly codigo = input.required<string>();

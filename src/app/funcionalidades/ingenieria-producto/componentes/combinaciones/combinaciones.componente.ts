@@ -6,20 +6,13 @@ import { ButtonDirective } from 'primeng/button';
 import { SortIcon, Table, TableHeaderCheckbox, TableCheckbox } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { Drawer } from 'primeng/drawer';
-
-import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.servicio';
-import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
-import { BarraAccionesMasivasComponente } from '../../../../compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
-import {
-  IAtributoCombinacion,
-  ICombinacion,
-  IMaterialAsignado,
-  IOpcionSelectSimple,
-  IPiezaCombinacion,
-} from '../../modelos/combinacion';
-import { AtributosCombinacionComponent } from './atributos-combinacion/atributos-combinacion.component';
-import { MaterialesCombinacionComponent } from './materiales-combinacion/materiales-combinacion.component';
-import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.component';
+import { AtributosCombinacionComponente } from './atributos-combinacion/atributos-combinacion.componente';
+import { MaterialesCombinacionComponente } from './materiales-combinacion/materiales-combinacion.componente';
+import { BarraAccionesMasivasComponente } from '@compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
+import { BreadcrumbServicio } from '@nucleo/servicios/breadcrumb.servicio';
+import { AvisosServicio } from '@nucleo/servicios/aviso.servicio';
+import { IAtributoCombinacion, ICombinacion, IMaterialAsignado, IOpcionSelectSimple, IPiezaCombinacion } from '@funcionalidades/ingenieria-producto/modelos/combinacion';
+import { IPasoDrawer, PasosDrawerComponente } from './pasos-drawer/pasos-drawer.componente';
 @Component({
   selector: 'app-combinaciones',
   imports: [
@@ -33,21 +26,21 @@ import { PasoDrawer, PasosDrawerComponent } from './pasos-drawer/pasos-drawer.co
     Tag,
     Drawer,
     BarraAccionesMasivasComponente,
-    AtributosCombinacionComponent,
-    MaterialesCombinacionComponent,
-    PasosDrawerComponent,
+    AtributosCombinacionComponente,
+    MaterialesCombinacionComponente,
+    PasosDrawerComponente,
     PIcon
   ],
-  templateUrl: './combinaciones.component.html',
-  styleUrl: './combinaciones.component.scss',
+  templateUrl: './combinaciones.componente.html',
+  styleUrl: './combinaciones.componente.scss',
 })
-export class CombinacionesComponent {
+export class CombinacionesComponente {
   private readonly breadcrumb = inject(BreadcrumbServicio);
   private readonly avisos = inject(AvisosServicio);
 
-  private readonly pasoAtributos = viewChild(AtributosCombinacionComponent);
-  private readonly pasoMateriales = viewChild(MaterialesCombinacionComponent);
-  private readonly pasosDrawer = viewChild(PasosDrawerComponent);
+  private readonly pasoAtributos = viewChild(AtributosCombinacionComponente);
+  private readonly pasoMateriales = viewChild(MaterialesCombinacionComponente);
+  private readonly pasosDrawer = viewChild(PasosDrawerComponente);
 
   readonly drawerVisible = signal(false);
   readonly pasoActual = signal(1);
@@ -58,7 +51,7 @@ export class CombinacionesComponent {
   readonly combinaciones = signal<ICombinacion[]>([]);
   readonly combinacionEditando = signal<ICombinacion | null>(null);
 
-  readonly pasos: PasoDrawer[] = [
+  readonly pasos: IPasoDrawer[] = [
     { id: 1, titulo: 'Atributos', descripcion: 'Define la combinación' },
     { id: 2, titulo: 'Materiales', descripcion: 'Asigna por pieza' },
   ];

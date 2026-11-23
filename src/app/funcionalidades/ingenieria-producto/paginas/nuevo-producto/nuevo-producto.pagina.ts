@@ -1,18 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.servicio';
-import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
-import {
-  AsistentePasosComponente,
-  IPasoAsistente,
-} from '../../../../compartido/componentes/asistente-pasos/asistente-pasos.componente';
-import { AsistentePasosAccionesComponente } from '../../../../compartido/componentes/asistente-pasos-acciones/asistente-pasos-acciones.componente';
-import { EncabezadoPaginaComponente } from '../../../../compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
-import { DatosGeneralesComponent } from '../../componentes/datos-generales/datos-generales.component';
-import { CorridasEquivalenciasComponent } from '../../componentes/corridas-equivalencias/corridas-equivalencias.component';
-import { PiezasConsumosComponent } from '../../componentes/piezas-consumos/piezas-consumos.component';
-import { CombinacionesComponent } from '../../componentes/combinaciones/combinaciones.component';
-import { RevisionLiberacionComponent } from '../../componentes/revision-liberacion/revision-liberacion.component';
-import { AsistenteNuevoProductoStore } from '../../stores/asistente-nuevo-producto.store';
+import { AsistentePasosAccionesComponente } from '@compartido/componentes/asistente-pasos-acciones/asistente-pasos-acciones.componente';
+import { AsistentePasosComponente, IPasoAsistente } from '@compartido/componentes/asistente-pasos/asistente-pasos.componente';
+import { EncabezadoPaginaComponente } from '@compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
+import { CombinacionesComponente } from '@funcionalidades/ingenieria-producto/componentes/combinaciones/combinaciones.componente';
+import { CorridasEquivalenciasComponente } from '@funcionalidades/ingenieria-producto/componentes/corridas-equivalencias/corridas-equivalencias.componente';
+import { DatosGeneralesComponente } from '@funcionalidades/ingenieria-producto/componentes/datos-generales/datos-generales.componente';
+import { PiezasConsumosComponente } from '@funcionalidades/ingenieria-producto/componentes/piezas-consumos/piezas-consumos.componente';
+import { RevisionLiberacionComponente } from '@funcionalidades/ingenieria-producto/componentes/revision-liberacion/revision-liberacion.componente';
+import { AsistenteNuevoProductoStore } from '@funcionalidades/ingenieria-producto/stores/asistente-nuevo-producto.store';
+import { AvisosServicio } from '@nucleo/servicios/aviso.servicio';
+import { BreadcrumbServicio } from '@nucleo/servicios/breadcrumb.servicio';
 
 interface EncabezadoPaso {
   titulo: string;
@@ -25,11 +22,11 @@ interface EncabezadoPaso {
     AsistentePasosComponente,
     AsistentePasosAccionesComponente,
     EncabezadoPaginaComponente,
-    DatosGeneralesComponent,
-    CorridasEquivalenciasComponent,
-    PiezasConsumosComponent,
-    CombinacionesComponent,
-    RevisionLiberacionComponent,
+    DatosGeneralesComponente,
+    CorridasEquivalenciasComponente,
+    PiezasConsumosComponente,
+    CombinacionesComponente,
+    RevisionLiberacionComponente,
   ],
   providers: [AsistenteNuevoProductoStore],
   templateUrl: './nuevo-producto.pagina.html',

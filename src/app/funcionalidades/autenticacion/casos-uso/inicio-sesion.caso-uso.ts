@@ -1,8 +1,8 @@
 import { inject, Injectable } from "@angular/core";
-import { Comando } from "../../../nucleo/interfaces/comando.interface";
 import { AutenticacionServicio } from "../servicios/autenticacion.servicio";
-import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/almacenamiento.servicio";
 import { firstValueFrom } from "rxjs";
+import { Comando } from "@nucleo/interfaces/comando.interface";
+import { AlmacenamientoLocalServicio } from "@nucleo/servicios/almacenamiento.servicio";
 
 export interface InicioSesionComando {
     nombreUsuario: string;

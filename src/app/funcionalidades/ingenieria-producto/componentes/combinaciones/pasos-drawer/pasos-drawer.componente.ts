@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { StepperModule } from 'primeng/stepper';
 import { PIcon } from '@primeicons/angular';
 
-export interface PasoDrawer {
+export interface IPasoDrawer {
   id: number;
   titulo: string;
   descripcion: string;
@@ -13,11 +13,11 @@ export interface PasoDrawer {
   selector: 'app-pasos-drawer',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [StepperModule, PIcon],
-  templateUrl: './pasos-drawer.component.html',
-  styleUrl: './pasos-drawer.component.scss',
+  templateUrl: './pasos-drawer.componente.html',
+  styleUrl: './pasos-drawer.componente.scss',
 })
-export class PasosDrawerComponent {
-  readonly pasos = input.required<PasoDrawer[]>();
+export class PasosDrawerComponente {
+  readonly pasos = input.required<IPasoDrawer[]>();
   readonly pasoActivo = input.required<number>();
   readonly permitirNavegacionLibre = input(false);
 
@@ -32,7 +32,7 @@ export class PasosDrawerComponent {
     })),
   );
 
-  puedeSeleccionar(paso: PasoDrawer): boolean {
+  puedeSeleccionar(paso: IPasoDrawer): boolean {
     if (paso.bloqueado) {
       return false;
     }
@@ -74,7 +74,7 @@ export class PasosDrawerComponent {
     }
   }
 
-  irA(paso: PasoDrawer): void {
+  irA(paso: IPasoDrawer): void {
     if (this.puedeSeleccionar(paso)) {
       this.pasoActivoChange.emit(paso.id);
     }

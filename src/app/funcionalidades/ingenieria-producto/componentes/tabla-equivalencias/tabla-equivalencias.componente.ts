@@ -44,10 +44,10 @@ const TALLAS: TallaEquivalencia[] = [
     TableModule,
     PIcon,
   ],
-  templateUrl: './tabla-equivalencias.component.html',
-  styleUrl: './tabla-equivalencias.component.scss',
+  templateUrl: './tabla-equivalencias.componente.html',
+  styleUrl: './tabla-equivalencias.componente.scss',
 })
-export class TablaEquivalenciasComponent {
+export class TablaEquivalenciasComponente {
   readonly titulo = input('Tallas y equivalencias');
   readonly descripcion = input(
     'Valida las equivalencias con el catálogo de tu horma.',

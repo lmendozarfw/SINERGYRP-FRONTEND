@@ -19,8 +19,8 @@ interface ArchivoSeleccionado {
     selector: 'app-selector-imagen',
     standalone: true,
     imports: [CommonModule, ButtonModule],
-    templateUrl: './selector-imagen.component.html',
-    styleUrl: './selector-imagen.component.scss'
+    templateUrl: './selector-imagen.componente.html',
+    styleUrl: './selector-imagen.componente.scss'
 })
 export class SelectorImagenComponente implements OnDestroy {
     readonly textoPrincipal = input('Arrastra una imagen aquí');

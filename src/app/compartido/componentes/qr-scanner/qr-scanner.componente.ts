@@ -35,7 +35,7 @@ let instances = 0;
   `,
   imports: [PIcon]
 })
-export class QrScannerComponent implements AfterViewInit, OnDestroy {
+export class QrScannerComponente implements AfterViewInit, OnDestroy {
   @Input() size = 300;
   @Input() hint = 'Apunta el código QR';
   @Input() busy = false;

@@ -5,11 +5,11 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { Textarea } from 'primeng/textarea';
 import { PIcon } from '@primeicons/angular';
-import { EtiquetaFormularioComponente } from '../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { SelectorImagenComponente } from '../../../../compartido/componentes/selector-imagen/selector-imagen.component';
-import { TarjetaComponente } from '../../../../compartido/componentes/tarjeta/tarjeta.componente';
-import { AsistenteNuevoProductoStore } from '../../stores/asistente-nuevo-producto.store';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { TarjetaComponente } from '@compartido/componentes/tarjeta/tarjeta.componente';
+import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
+import { SelectorImagenComponente } from '@compartido/componentes/selector-imagen/selector-imagen.componente';
+import { AsistenteNuevoProductoStore } from '@funcionalidades/ingenieria-producto/stores/asistente-nuevo-producto.store';
 
 @Component({
   selector: 'app-datos-generales',
@@ -26,8 +26,8 @@ import { AsistenteNuevoProductoStore } from '../../stores/asistente-nuevo-produc
     MensajeAyudaErrorComponente,
     SelectorImagenComponente
   ],
-  templateUrl: './datos-generales.component.html',
+  templateUrl: './datos-generales.componente.html',
 })
-export class DatosGeneralesComponent {
+export class DatosGeneralesComponente {
   protected readonly store = inject(AsistenteNuevoProductoStore);
 }

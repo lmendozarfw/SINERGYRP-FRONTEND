@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { IErrorRespuesta } from "../interfaces/error-respuesta.interface";
 import { HttpErrorResponse } from "@angular/common/http";
+import { IErrorRespuesta } from "@nucleo/interfaces/error-respuesta.interface";
 
 @Injectable({ providedIn: 'root' })
 export class ManejadorErroresServicio {

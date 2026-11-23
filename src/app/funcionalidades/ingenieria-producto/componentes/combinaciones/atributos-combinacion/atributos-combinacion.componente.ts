@@ -2,18 +2,18 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
-import { EtiquetaFormularioComponente } from '../../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '../../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { IAtributoCombinacion, IAtributoOpcion } from '../../../modelos/combinacion';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
+import { IAtributoCombinacion, IAtributoOpcion } from '@funcionalidades/ingenieria-producto/modelos/combinacion';
 
 @Component({
   selector: 'app-atributos-combinacion',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, Select, Tag, EtiquetaFormularioComponente, MensajeAyudaErrorComponente],
-  templateUrl: './atributos-combinacion.component.html',
-  styleUrl: './atributos-combinacion.component.scss',
+  templateUrl: './atributos-combinacion.componente.html',
+  styleUrl: './atributos-combinacion.componente.scss',
 })
-export class AtributosCombinacionComponent {
+export class AtributosCombinacionComponente {
   readonly atributos = input.required<IAtributoCombinacion[]>();
   readonly valores = input.required<Record<string, string>>();
   readonly codigo = input.required<string>();

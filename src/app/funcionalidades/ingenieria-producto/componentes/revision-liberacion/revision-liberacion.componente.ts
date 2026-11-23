@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { PIcon } from '@primeicons/angular';
-
-import { TarjetaComponente } from '../../../../compartido/componentes/tarjeta/tarjeta.componente';
 import { AsistenteNuevoProductoStore } from '../../stores/asistente-nuevo-producto.store';
+import { TarjetaComponente } from '@compartido/componentes/tarjeta/tarjeta.componente';
 
 type EstadoValidacion = 'aprobada' | 'pendiente';
 
@@ -20,10 +19,10 @@ interface ValidacionArea {
 @Component({
   selector: 'app-revision-liberacion',
   imports: [PIcon, TarjetaComponente],
-  templateUrl: './revision-liberacion.component.html',
-  styleUrl: './revision-liberacion.component.scss',
+  templateUrl: './revision-liberacion.componente.html',
+  styleUrl: './revision-liberacion.componente.scss',
 })
-export class RevisionLiberacionComponent {
+export class RevisionLiberacionComponente {
 
   protected readonly store = inject(AsistenteNuevoProductoStore);
 

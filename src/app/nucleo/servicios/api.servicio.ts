@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '@entornos/environment.prod';
 
 function hacerParametrosHttp(parametros?: Record<string, string | number | boolean>): HttpParams {
   let parametrosHttp = new HttpParams();

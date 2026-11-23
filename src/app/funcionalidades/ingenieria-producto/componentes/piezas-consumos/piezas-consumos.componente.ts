@@ -13,10 +13,9 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { PIcon } from '@primeicons/angular';
-
-import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
-import { EtiquetaFormularioComponente } from '../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
+import { AvisosServicio } from '@nucleo/servicios/aviso.servicio';
 
 type ModoConsumo = 'general' | 'porTalla';
 
@@ -72,11 +71,11 @@ type ConsumoFormGroup = FormGroup<{
     MensajeAyudaErrorComponente,
     PIcon
   ],
-  templateUrl: './piezas-consumos.component.html',
-  styleUrl: './piezas-consumos.component.scss',
+  templateUrl: './piezas-consumos.componente.html',
+  styleUrl: './piezas-consumos.componente.scss',
   providers: [ConfirmationService],
 })
-export class PiezasConsumosComponent {
+export class PiezasConsumosComponente {
   private readonly avisos = inject(AvisosServicio);
   private readonly confirmationService = inject(ConfirmationService);
 

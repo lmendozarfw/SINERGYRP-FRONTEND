@@ -2,15 +2,14 @@ import { Component, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
-
-import { EtiquetaFormularioComponente } from '../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { TarjetaComponente } from '../../../../compartido/componentes/tarjeta/tarjeta.componente';
 import {
   SistemaEquivalencia,
-  TablaEquivalenciasComponent,
+  TablaEquivalenciasComponente,
   TallaEquivalencia,
-} from '../tabla-equivalencias/tabla-equivalencias.component';
+} from '../tabla-equivalencias/tabla-equivalencias.componente';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
+import { TarjetaComponente } from '@compartido/componentes/tarjeta/tarjeta.componente';
 
 interface CorridaOpcion {
   clave: string;
@@ -27,12 +26,12 @@ interface CorridaOpcion {
     EtiquetaFormularioComponente,
     MensajeAyudaErrorComponente,
     TarjetaComponente,
-    TablaEquivalenciasComponent,
+    TablaEquivalenciasComponente,
   ],
-  templateUrl: './corridas-equivalencias.component.html',
-  styleUrl: './corridas-equivalencias.component.scss',
+  templateUrl: './corridas-equivalencias.componente.html',
+  styleUrl: './corridas-equivalencias.componente.scss',
 })
-export class CorridasEquivalenciasComponent {
+export class CorridasEquivalenciasComponente {
   readonly sistemas: SistemaEquivalencia[] = [
     { clave: 'mx', nombre: 'México (MX)' },
     { clave: 'eu', nombre: 'Europa (EU)' },

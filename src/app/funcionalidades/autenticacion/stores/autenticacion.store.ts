@@ -1,9 +1,9 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { computed, inject } from "@angular/core";
-import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/almacenamiento.servicio";
 import { InicioSesionCasoUso, InicioSesionComando } from "../casos-uso/inicio-sesion.caso-uso";
 import { IMiInformacion } from "../modelos/auth";
-import { ManejadorErroresServicio } from "../../../nucleo/servicios/manejador-errores.servicio";
+import { AlmacenamientoLocalServicio } from "@nucleo/servicios/almacenamiento.servicio";
+import { ManejadorErroresServicio } from "@nucleo/servicios/manejador-errores.servicio";
 
 type AutenticacionEstado = {
   usuario: IMiInformacion | null;
