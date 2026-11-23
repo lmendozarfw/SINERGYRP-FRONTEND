@@ -269,6 +269,7 @@ export class SidebarComponente {
       etiqueta: 'Tesorería',
       icono: 'wallet',
       hijos: [
+        { etiqueta: 'Catálogos', icono: 'list', ruta: '/app/tesoreria/catalogos' },
         { etiqueta: 'Cuentas por cobrar', icono: 'wallet', ruta: '/app/cuentas-por-cobrar' },
         { etiqueta: 'Cuentas por pagar', icono: 'credit-card', ruta: '/app/cuentas-por-pagar' },
         { etiqueta: 'Bancos y conciliación', icono: 'credit-card', ruta: '/app/configuration' },

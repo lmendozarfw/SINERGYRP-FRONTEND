@@ -22,6 +22,15 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: 'tesoreria',
+        children: [
+          {
+            path: 'catalogos',
+            loadComponent: () => import('./funcionalidades/tesoreria/catalogos/paginas/catalogo.pagina').then(p => p.CatalogoPagina)
+          }
+        ]
+      },
+      {
         path: 'clientes',
         loadComponent: () =>
           import('./funcionalidades/tesoreria/clientes/paginas/clientes.pagina').then((p) => p.ClientesPagina),
