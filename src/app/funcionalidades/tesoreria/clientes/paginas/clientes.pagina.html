@@ -24,7 +24,7 @@
     </p-iconfield>
 
     <p-select
-      class="ds-clients-select w-[184px]! shrink-0"
+      class="w-[184px]! shrink-0"
       [options]="opcionesTipoPersona"
       optionLabel="etiqueta"
       optionValue="valor"
@@ -32,7 +32,7 @@
       aria-label="Filtrar por tipo de persona"
     />
     <p-select
-      class="ds-clients-select w-[184px]! shrink-0"
+      class="w-[184px]! shrink-0"
       [options]="opcionesRegimen"
       optionLabel="etiqueta"
       optionValue="value"
@@ -217,7 +217,6 @@
           </app-etiqueta-formulario>
           <p-select
             inputId="client-tipo-persona"
-            class="w-full"
             [options]="opcionesTipoPersona"
             optionLabel="etiqueta"
             optionValue="valor"
@@ -257,7 +256,6 @@
           <app-etiqueta-formulario para="client-tipo-iva">ID tipo de IVA</app-etiqueta-formulario>
           <p-select
             inputId="client-tipo-iva"
-            class="w-full"
             [options]="opcionesIva"
             optionLabel="etiqueta"
             optionValue="valor"
@@ -268,7 +266,6 @@
           <app-etiqueta-formulario para="client-uso-cfdi">ID uso de CFDI predeterminado</app-etiqueta-formulario>
           <p-select
             inputId="client-uso-cfdi"
-            class="w-full"
             [options]="opcionesUsoCfdi"
             optionLabel="etiqueta"
             optionValue="valor"
@@ -287,7 +284,6 @@
           >
           <p-select
             inputId="client-forma-pago"
-            class="w-full"
             [options]="opcionesFormaPago"
             optionLabel="etiqueta"
             optionValue="valor"
@@ -300,7 +296,6 @@
           >
           <p-select
             inputId="client-metodo-pago"
-            class="w-full"
             [options]="opcionesMetodoPago"
             optionLabel="etiqueta"
             optionValue="valor"
