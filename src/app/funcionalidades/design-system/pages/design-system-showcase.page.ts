@@ -9,7 +9,7 @@ import { InputText } from 'primeng/inputtext';
 import {
   PIcon,
 } from '@primeicons/angular';
-import { EtiquetaFormularioComponente } from '../../../compartido/componentes/form-label/etiqueta-formulario.componente';
+import { EtiquetaFormularioComponente } from '../../../compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
 import { EncabezadoPaginaComponente } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
 import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servicio';
 

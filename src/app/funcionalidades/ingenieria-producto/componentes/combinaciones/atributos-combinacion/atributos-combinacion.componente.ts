@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output, signal } f
 import { FormsModule } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
-import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
 import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
 import { IAtributoCombinacion, IAtributoOpcion } from '@funcionalidades/ingenieria-producto/modelos/combinacion';
 
@@ -39,7 +39,7 @@ export class AtributosCombinacionComponente {
     const valores = { ...this.valores() };
 
     if (opcion) {
-      valores[atributoId] = opcion.value;
+      valores[atributoId] = opcion.valor;
     } else {
       delete valores[atributoId];
     }
@@ -60,11 +60,11 @@ export class AtributosCombinacionComponente {
     this.intentoContinuar.set(false);
   }
 
-  private etiqueta(atributo: IAtributoCombinacion, value?: string): string {
-    if (!value) {
+  private etiqueta(atributo: IAtributoCombinacion, valor?: string): string {
+    if (!valor) {
       return 'Sin seleccionar';
     }
 
-    return atributo.opciones.find((opcion) => opcion.value === value)?.label ?? value;
+    return atributo.opciones.find((opcion) => opcion.valor === valor)?.etiqueta ?? valor;
   }
 }

@@ -7,12 +7,12 @@ import { PIcon } from '@primeicons/angular';
 
 import {
   IMaterialAsignado,
-  IOpcionSelectSimple,
   IPiezaCombinacion,
   IVersionCombinacion,
 } from '../../../modelos/combinacion';
-import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
 import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
+import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 
 interface FilaMaterial {
   pieza: IPiezaCombinacion;
@@ -36,7 +36,7 @@ interface FilaMaterial {
 })
 export class MaterialesCombinacionComponente {
   readonly piezas = input.required<IPiezaCombinacion[]>();
-  readonly materiales = input.required<IOpcionSelectSimple[]>();
+  readonly materiales = input.required<IOpcionSelector[]>();
   readonly codigo = input.required<string>();
   readonly versiones = input.required<IVersionCombinacion[]>();
 
@@ -88,7 +88,7 @@ export class MaterialesCombinacionComponente {
     this.intentoContinuar.set(false);
   }
 
-  etiquetaMaterial(value: string): string {
-    return this.materiales().find((material) => material.value === value)?.label ?? value;
+  etiquetaMaterial(valor: string): string {
+    return this.materiales().find((material) => material.valor === valor)?.etiqueta ?? valor;
   }
 }

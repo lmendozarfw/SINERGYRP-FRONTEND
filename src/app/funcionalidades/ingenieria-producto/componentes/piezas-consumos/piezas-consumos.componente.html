@@ -301,7 +301,7 @@
   [blockScroll]="true"
   (onHide)="alCerrarDrawer()"
 >
-  <form class="flex flex-col gap-6 p-6" [formGroup]="piezaForm" (ngSubmit)="guardarPieza()">
+  <form class="flex flex-col gap-6 p-6" [formGroup]="formularioPieza" (ngSubmit)="guardarPieza()">
     <section class="flex flex-col gap-4">
       <header class="flex flex-wrap items-start justify-between gap-4">
         <div>
@@ -399,8 +399,8 @@
             inputId="pieza-corrida"
             formControlName="corrida"
             [options]="opcionesCorrida"
-            optionLabel="label"
-            optionValue="value"
+            optionLabel="etiqueta"
+            optionValue="valor"
             placeholder="Selecciona una corrida"
             [fluid]="true"
           />
@@ -458,8 +458,8 @@
             inputId="pieza-modo-consumo"
             formControlName="modoConsumo"
             [options]="modosConsumo"
-            optionLabel="label"
-            optionValue="value"
+            optionLabel="etiqueta"
+            optionValue="valor"
             [fluid]="true"
           />
         </div>
@@ -508,8 +508,8 @@
               Consumo por talla
             </span>
             <span class="ds-meta">
-              {{ corridaNombre(piezaForm.controls.corrida.value) }} ·
-              {{ corridaDetalle(piezaForm.controls.corrida.value) }}
+              {{ corridaNombre(formularioPieza.controls.corrida.value) }} ·
+              {{ corridaDetalle(formularioPieza.controls.corrida.value) }}
             </span>
           </div>
 

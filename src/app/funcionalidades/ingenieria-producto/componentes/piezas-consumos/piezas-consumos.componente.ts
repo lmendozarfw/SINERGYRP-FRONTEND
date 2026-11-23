@@ -13,7 +13,7 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { PIcon } from '@primeicons/angular';
-import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
 import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
 import { AvisosServicio } from '@nucleo/servicios/aviso.servicio';
 
@@ -113,9 +113,9 @@ export class PiezasConsumosComponente {
     'Suaje contrafuerte',
   ];
 
-  readonly modosConsumo: { label: string; value: ModoConsumo }[] = [
-    { label: 'General', value: 'general' },
-    { label: 'Por talla', value: 'porTalla' },
+  readonly modosConsumo: { etiqueta: string; valor: ModoConsumo }[] = [
+    { etiqueta: 'General', valor: 'general' },
+    { etiqueta: 'Por talla', valor: 'porTalla' },
   ];
 
   readonly corridas: CorridaOpcion[] = [
@@ -145,7 +145,7 @@ export class PiezasConsumosComponente {
     },
   ];
 
-  readonly piezaForm = new FormGroup({
+  readonly formularioPieza = new FormGroup({
     nombre: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
@@ -199,15 +199,15 @@ export class PiezasConsumosComponente {
   consumosInvalidos = false;
 
   constructor() {
-    this.piezaForm.controls.modoConsumo.valueChanges
+    this.formularioPieza.controls.modoConsumo.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe((modo) => this.actualizarValidadoresConsumo(modo));
 
-    this.piezaForm.controls.requiereSuaje.valueChanges
+    this.formularioPieza.controls.requiereSuaje.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe((requiere) => this.actualizarValidadoresSuaje(requiere));
 
-    this.piezaForm.controls.corrida.valueChanges
+    this.formularioPieza.controls.corrida.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe((clave) => this.regenerarConsumos(clave));
 
@@ -226,22 +226,22 @@ export class PiezasConsumosComponente {
   }
 
   get modoConsumo(): ModoConsumo {
-    return this.piezaForm.controls.modoConsumo.value;
+    return this.formularioPieza.controls.modoConsumo.value;
   }
 
   get requiereSuaje(): boolean {
-    return this.piezaForm.controls.requiereSuaje.value;
+    return this.formularioPieza.controls.requiereSuaje.value;
   }
 
   get unidadSeleccionada(): string {
-    return this.piezaForm.controls.unidad.value || 'unidad';
+    return this.formularioPieza.controls.unidad.value || 'unidad';
   }
 
   abrirNuevaPieza(): void {
     this.piezaEnEdicion = null;
     this.mensajeValidacion = '';
     this.consumosInvalidos = false;
-    this.piezaForm.reset({
+    this.formularioPieza.reset({
       nombre: '',
       tipo: '',
       material: '',
@@ -262,7 +262,7 @@ export class PiezasConsumosComponente {
     this.piezaEnEdicion = pieza;
     this.mensajeValidacion = '';
     this.consumosInvalidos = false;
-    this.piezaForm.reset({
+    this.formularioPieza.reset({
       nombre: pieza.nombre,
       tipo: pieza.tipo,
       material: pieza.material,
@@ -290,10 +290,10 @@ export class PiezasConsumosComponente {
   }
 
   guardarPieza(): void {
-    this.piezaForm.markAllAsTouched();
+    this.formularioPieza.markAllAsTouched();
     this.mensajeValidacion = '';
 
-    if (this.piezaForm.invalid) {
+    if (this.formularioPieza.invalid) {
       this.mensajeValidacion = 'Revisa los campos marcados para continuar.';
       return;
     }
@@ -306,7 +306,7 @@ export class PiezasConsumosComponente {
     }
 
     this.consumosInvalidos = false;
-    const valores = this.piezaForm.getRawValue();
+    const valores = this.formularioPieza.getRawValue();
     const editando = this.piezaEnEdicion;
 
     const pieza: PiezaConsumo = {
@@ -362,7 +362,7 @@ export class PiezasConsumosComponente {
   }
 
   campoInvalido(nombre: string): boolean {
-    const control = this.piezaForm.get(nombre);
+    const control = this.formularioPieza.get(nombre);
     return !!control && control.invalid && (control.touched || control.dirty);
   }
 
@@ -375,7 +375,7 @@ export class PiezasConsumosComponente {
   }
 
   private actualizarValidadoresConsumo(modo: ModoConsumo): void {
-    const controles = this.piezaForm.controls;
+    const controles = this.formularioPieza.controls;
     const general = modo === 'general';
 
     if (general) {
@@ -391,7 +391,7 @@ export class PiezasConsumosComponente {
   }
 
   private actualizarValidadoresSuaje(requiere: boolean): void {
-    const control = this.piezaForm.controls.suaje;
+    const control = this.formularioPieza.controls.suaje;
 
     if (requiere) {
       control.setValidators(Validators.required);

@@ -1,6 +1,6 @@
 export interface IAtributoOpcion {
-  label: string;
-  value: string;
+  etiqueta: string;
+  valor: string;
   codigo: string;
 }
 
@@ -37,9 +37,4 @@ export interface ICombinacion {
   versiones: IVersionCombinacion[];
   fechaRegistro: Date;
   fechaModificacion: Date;
-}
-
-export interface IOpcionSelectSimple {
-  label: string;
-  value: string;
 }

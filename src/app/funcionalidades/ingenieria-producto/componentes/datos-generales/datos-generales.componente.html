@@ -32,7 +32,7 @@
                 <div class="ds-field">
                     <app-etiqueta-formulario para="modelo-estatus">Estatus</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-estatus" formControlName="estatus"
-                        [options]="store.estatusOpciones" optionLabel="label" optionValue="value" [fluid]="true" />
+                        [options]="store.estatusOpciones" optionLabel="etiqueta" optionValue="valor" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="El modelo puede iniciar como borrador."></app-mensaje-ayuda-error>
                 </div>
 
@@ -55,7 +55,7 @@
                 <div class="ds-field">
                     <app-etiqueta-formulario para="modelo-categoria" obligatorio>Categoría</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-categoria" formControlName="categoria"
-                        [options]="store.categorias" optionLabel="label" optionValue="value"
+                        [options]="store.categorias" optionLabel="etiqueta" optionValue="valor"
                         placeholder="Selecciona una categoría" [fluid]="true"
                         [class.p-invalid]="store.categoriaInvalida" />
                     <app-mensaje-ayuda-error [condicion]="store.categoriaInvalida"
@@ -66,7 +66,7 @@
                 <div class="ds-field">
                     <app-etiqueta-formulario para="modelo-marca">Marca</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-marca" formControlName="marca"
-                        [options]="store.marcas" optionLabel="label" optionValue="value"
+                        [options]="store.marcas" optionLabel="etiqueta" optionValue="valor"
                         placeholder="Selecciona una marca" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Marca o licencia asociada al modelo."></app-mensaje-ayuda-error>
                 </div>
@@ -74,7 +74,7 @@
                 <div class="ds-field">
                     <app-etiqueta-formulario para="modelo-linea">Línea</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-linea" formControlName="linea"
-                        [options]="store.lineas" optionLabel="label" optionValue="value"
+                        [options]="store.lineas" optionLabel="etiqueta" optionValue="valor"
                         placeholder="Selecciona una línea" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Línea comercial o colección del modelo."></app-mensaje-ayuda-error>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="ds-field">
                     <app-etiqueta-formulario para="modelo-genero">Género</app-etiqueta-formulario>
                     <p-select class="flex w-full" inputId="modelo-genero" formControlName="genero"
-                        [options]="store.generos" optionLabel="label" optionValue="value"
+                        [options]="store.generos" optionLabel="etiqueta" optionValue="valor"
                         placeholder="Selecciona un género" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Público objetivo del modelo."></app-mensaje-ayuda-error>
                 </div>

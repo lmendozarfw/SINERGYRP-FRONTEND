@@ -17,12 +17,13 @@ import { Select } from 'primeng/select';
 import {
   PIcon
 } from '@primeicons/angular';
-import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
 import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
 import { QrScannerComponente } from '@compartido/componentes/qr-scanner/qr-scanner.componente';
 import { AutenticacionStore } from '@funcionalidades/autenticacion/stores/autenticacion.store';
 import { AvisosServicio } from '@nucleo/servicios/aviso.servicio';
 import { InicioSesionComando } from '@funcionalidades/autenticacion/casos-uso/inicio-sesion.caso-uso';
+import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 
 export interface ICredencialQR {
   usuario: string;
@@ -69,11 +70,11 @@ export class InicioSesionPagina {
   private readonly avisos = inject(AvisosServicio);
   private readonly qrScanner = viewChild(QrScannerComponente);
 
-  readonly empresas = [
-    { label: 'Grupo Raudal', value: 'grupo-raudal' },
-    { label: 'Industrias del Norte', value: 'industrias-norte' },
-    { label: 'Comercial Delta', value: 'comercial-delta' },
-    { label: 'Organización Vertice', value: 'organizacion-vertice' },
+  readonly empresas: IOpcionSelector[] = [
+    { etiqueta: 'Grupo Raudal', valor: 'grupo-raudal' },
+    { etiqueta: 'Industrias del Norte', valor: 'industrias-norte' },
+    { etiqueta: 'Comercial Delta', valor: 'comercial-delta' },
+    { etiqueta: 'Organización Vertice', valor: 'organizacion-vertice' },
   ];
 
   readonly empresaControl = new FormControl('', [Validators.required]);

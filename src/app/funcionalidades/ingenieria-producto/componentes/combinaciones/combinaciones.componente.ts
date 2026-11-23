@@ -11,8 +11,9 @@ import { MaterialesCombinacionComponente } from './materiales-combinacion/materi
 import { BarraAccionesMasivasComponente } from '@compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
 import { BreadcrumbServicio } from '@nucleo/servicios/breadcrumb.servicio';
 import { AvisosServicio } from '@nucleo/servicios/aviso.servicio';
-import { IAtributoCombinacion, ICombinacion, IMaterialAsignado, IOpcionSelectSimple, IPiezaCombinacion } from '@funcionalidades/ingenieria-producto/modelos/combinacion';
+import { IAtributoCombinacion, ICombinacion, IMaterialAsignado, IPiezaCombinacion } from '@funcionalidades/ingenieria-producto/modelos/combinacion';
 import { IPasoDrawer, PasosDrawerComponente } from './pasos-drawer/pasos-drawer.componente';
+import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 @Component({
   selector: 'app-combinaciones',
   imports: [
@@ -61,40 +62,40 @@ export class CombinacionesComponente {
       id: 'color',
       nombre: 'Color',
       opciones: [
-        { label: 'Negro', value: 'NEG', codigo: 'NEG' },
-        { label: 'Blanco', value: 'BLA', codigo: 'BLA' },
-        { label: 'Azul marino', value: 'AZM', codigo: 'AZM' },
-        { label: 'Rojo', value: 'ROJ', codigo: 'ROJ' },
-        { label: 'Beige', value: 'BEI', codigo: 'BEI' },
+        { etiqueta: 'Negro', valor: 'NEG', codigo: 'NEG' },
+        { etiqueta: 'Blanco', valor: 'BLA', codigo: 'BLA' },
+        { etiqueta: 'Azul marino', valor: 'AZM', codigo: 'AZM' },
+        { etiqueta: 'Rojo', valor: 'ROJ', codigo: 'ROJ' },
+        { etiqueta: 'Beige', valor: 'BEI', codigo: 'BEI' },
       ],
     },
     {
       id: 'suela',
       nombre: 'Suela',
       opciones: [
-        { label: 'Caucho', value: 'CAU', codigo: 'CAU' },
-        { label: 'EVA', value: 'EVA', codigo: 'EVA' },
-        { label: 'Piel', value: 'PIE', codigo: 'PIE' },
-        { label: 'TPR', value: 'TPR', codigo: 'TPR' },
+        { etiqueta: 'Caucho', valor: 'CAU', codigo: 'CAU' },
+        { etiqueta: 'EVA', valor: 'EVA', codigo: 'EVA' },
+        { etiqueta: 'Piel', valor: 'PIE', codigo: 'PIE' },
+        { etiqueta: 'TPR', valor: 'TPR', codigo: 'TPR' },
       ],
     },
     {
       id: 'forro',
       nombre: 'Forro',
       opciones: [
-        { label: 'Textil', value: 'TXT', codigo: 'TXT' },
-        { label: 'Piel sintética', value: 'PSI', codigo: 'PSI' },
-        { label: 'Malla', value: 'MAL', codigo: 'MAL' },
+        { etiqueta: 'Textil', valor: 'TXT', codigo: 'TXT' },
+        { etiqueta: 'Piel sintética', valor: 'PSI', codigo: 'PSI' },
+        { etiqueta: 'Malla', valor: 'MAL', codigo: 'MAL' },
       ],
     },
     {
       id: 'herraje',
       nombre: 'Herraje',
       opciones: [
-        { label: 'Plata', value: 'PLA', codigo: 'PLA' },
-        { label: 'Oro', value: 'ORO', codigo: 'ORO' },
-        { label: 'Negro', value: 'NEG', codigo: 'NEG' },
-        { label: 'Sin herraje', value: 'NAD', codigo: 'NAD' },
+        { etiqueta: 'Plata', valor: 'PLA', codigo: 'PLA' },
+        { etiqueta: 'Oro', valor: 'ORO', codigo: 'ORO' },
+        { etiqueta: 'Negro', valor: 'NEG', codigo: 'NEG' },
+        { etiqueta: 'Sin herraje', valor: 'NAD', codigo: 'NAD' },
       ],
     },
   ];
@@ -108,26 +109,26 @@ export class CombinacionesComponente {
     { id: 'herraje', nombre: 'Herraje' },
   ];
 
-  readonly opcionesMateriales: IOpcionSelectSimple[] = [
-    { label: 'Piel vacuna', value: 'Piel vacuna' },
-    { label: 'Piel sintética', value: 'Piel sintética' },
-    { label: 'Textil', value: 'Textil' },
-    { label: 'EVA', value: 'EVA' },
-    { label: 'Caucho', value: 'Caucho' },
-    { label: 'Espuma', value: 'Espuma' },
-    { label: 'Cartón', value: 'Cartón' },
-    { label: 'Metal', value: 'Metal' },
+  readonly opcionesMateriales: IOpcionSelector[] = [
+    { etiqueta: 'Piel vacuna', valor: 'Piel vacuna' },
+    { etiqueta: 'Piel sintética', valor: 'Piel sintética' },
+    { etiqueta: 'Textil', valor: 'Textil' },
+    { etiqueta: 'EVA', valor: 'EVA' },
+    { etiqueta: 'Caucho', valor: 'Caucho' },
+    { etiqueta: 'Espuma', valor: 'Espuma' },
+    { etiqueta: 'Cartón', valor: 'Cartón' },
+    { etiqueta: 'Metal', valor: 'Metal' },
   ];
 
-  readonly opcionesFiltroAtributo: IOpcionSelectSimple[] = [
-    { label: 'Todas las combinaciones', value: 'todas' },
-    { label: 'Con versión activa', value: 'activas' },
+  readonly opcionesFiltroAtributo: IOpcionSelector[] = [
+    { etiqueta: 'Todas las combinaciones', valor: 'todas' },
+    { etiqueta: 'Con versión activa', valor: 'activas' },
   ];
 
   readonly codigoGenerado = computed(() => {
     const partes = this.atributos.map((atributo) => {
-      const value = this.valoresAtributos()[atributo.id];
-      return atributo.opciones.find((opcion) => opcion.value === value)?.codigo ?? '---';
+      const valor = this.valoresAtributos()[atributo.id];
+      return atributo.opciones.find((opcion) => opcion.valor === valor)?.codigo ?? '---';
     });
 
     return `RDX-${partes.join('-')}`;
@@ -245,7 +246,7 @@ export class CombinacionesComponente {
     for (const atributo of this.atributos) {
       const value = this.valoresAtributos()[atributo.id];
       etiquetas[atributo.id] =
-        atributo.opciones.find((opcion) => opcion.value === value)?.label ?? value;
+        atributo.opciones.find((opcion) => opcion.valor === value)?.etiqueta ?? value;
     }
 
     const version: ICombinacion['versiones'][number] = {

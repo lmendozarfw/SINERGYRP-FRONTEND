@@ -4,7 +4,7 @@
     icono="sitemap">
     <form
       class="grid grid-cols-3 gap-4 max-[1023px]:grid-cols-1"
-      [formGroup]="corridaForm"
+      [formGroup]="formularioCorrida"
       (submit)="$event.preventDefault()"
     >
       <div class="ds-field">
@@ -14,8 +14,8 @@
           inputId="corrida"
           formControlName="corrida"
           [options]="corridas"
-          optionLabel="label"
-          optionValue="clave"
+          optionLabel="etiqueta"
+          optionValue="valor"
           [fluid]="true"
         />
         <app-mensaje-ayuda-error mensajeAyuda="Rango de tallas que se fabricará para el modelo."></app-mensaje-ayuda-error>
@@ -42,8 +42,8 @@
           inputId="talla-base"
           formControlName="tallaBase"
           [options]="opcionesTallaBase"
-          optionLabel="label"
-          optionValue="value"
+          optionLabel="etiqueta"
+          optionValue="valor"
           [fluid]="true"
         />
         <app-mensaje-ayuda-error mensajeAyuda="Talla sobre la que se desarrolla la horma del modelo."></app-mensaje-ayuda-error>

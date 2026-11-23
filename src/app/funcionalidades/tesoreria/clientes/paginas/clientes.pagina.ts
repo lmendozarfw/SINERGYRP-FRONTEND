@@ -14,7 +14,7 @@ import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { EncabezadoPaginaComponente } from '@compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
 import { CopiarTextoComponente } from '@compartido/componentes/copiar-texto/copiar-texto.componente';
-import { EtiquetaFormularioComponente } from '@compartido/componentes/form-label/etiqueta-formulario.componente';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
 import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
 import { BarraAccionesMasivasComponente } from '@compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
 import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
