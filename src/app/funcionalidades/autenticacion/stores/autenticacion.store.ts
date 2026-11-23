@@ -3,6 +3,7 @@ import { computed, inject } from "@angular/core";
 import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/almacenamiento.servicio";
 import { InicioSesionCasoUso, InicioSesionComando } from "../casos-uso/inicio-sesion.caso-uso";
 import { IMiInformacion } from "../modelos/auth";
+import { ManejadorErroresServicio } from "../../../nucleo/servicios/manejador-errores.servicio";
 
 type AutenticacionEstado = {
   usuario: IMiInformacion | null;
@@ -41,7 +42,8 @@ export const AutenticacionStore = signalStore(
     (
       store,
       almacenamientoServicio = inject(AlmacenamientoLocalServicio),
-      iniciarSesionCasoUso = inject(InicioSesionCasoUso)
+      iniciarSesionCasoUso = inject(InicioSesionCasoUso),
+      manejadorErroresServicio = inject(ManejadorErroresServicio)
     ) => ({
 
       almacenarToken(token: string) {
@@ -69,10 +71,11 @@ export const AutenticacionStore = signalStore(
           patchState(store, {
             cargando: false,
           });
-        } catch (error: any) {
+        } catch (error: unknown) {
+          const respuesError = manejadorErroresServicio.interpretar(error);
           patchState(store, {
             cargando: false,
-            error: error?.error?.mensaje || 'Usuario o contraseña incorrectos',
+            error: respuesError.mensaje
           });
         }
       },
@@ -98,9 +101,10 @@ export const AutenticacionStore = signalStore(
             cargando: false,
           });
         } catch (error: any) {
+          const respuesError = manejadorErroresServicio.interpretar(error);
           patchState(store, {
             cargando: false,
-            error: error?.error?.mensaje || 'No se ha podido restaurar la sesión',
+            error: respuesError.mensaje
           });
         }
       },
