@@ -4,7 +4,7 @@ import { Select } from 'primeng/select';
 import { Tag } from 'primeng/tag';
 import { EtiquetaFormularioComponente } from '../../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
 import { MensajeAyudaErrorComponente } from '../../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
-import { AtributoCombinacion, AtributoOpcion } from '../../../modelos/combinacion';
+import { IAtributoCombinacion, IAtributoOpcion } from '../../../modelos/combinacion';
 
 @Component({
   selector: 'app-atributos-combinacion',
@@ -14,7 +14,7 @@ import { AtributoCombinacion, AtributoOpcion } from '../../../modelos/combinacio
   styleUrl: './atributos-combinacion.component.scss',
 })
 export class AtributosCombinacionComponent {
-  readonly atributos = input.required<AtributoCombinacion[]>();
+  readonly atributos = input.required<IAtributoCombinacion[]>();
   readonly valores = input.required<Record<string, string>>();
   readonly codigo = input.required<string>();
   readonly modeloBase = input<string>('RDX');
@@ -35,7 +35,7 @@ export class AtributosCombinacionComponent {
     })),
   );
 
-  seleccionar(atributoId: string, opcion: AtributoOpcion | null): void {
+  seleccionar(atributoId: string, opcion: IAtributoOpcion | null): void {
     const valores = { ...this.valores() };
 
     if (opcion) {
@@ -60,7 +60,7 @@ export class AtributosCombinacionComponent {
     this.intentoContinuar.set(false);
   }
 
-  private etiqueta(atributo: AtributoCombinacion, value?: string): string {
+  private etiqueta(atributo: IAtributoCombinacion, value?: string): string {
     if (!value) {
       return 'Sin seleccionar';
     }

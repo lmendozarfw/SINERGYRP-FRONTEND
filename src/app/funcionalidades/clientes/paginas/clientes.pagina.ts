@@ -15,18 +15,17 @@ import { MensajeAyudaErrorComponente } from '../../../compartido/componentes/mes
 import { EncabezadoPaginaComponente } from '../../../compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
 import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servicio';
 import { CopiarTextoComponent } from '../../../compartido/componentes/copiar-texto/copiar-texto.component';
-import { Cliente } from '../modelos/cliente';
+import { ICliente } from '../modelos/cliente';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { DialogoConfirmacionServicio } from '../../../compartido/componentes/confirmacion/confirmacion.servicio';
 
-interface SelectOption {
+interface OpcionSelect {
   label: string;
   value: string;
 }
 
 @Component({
-  selector: 'app-clients-page',
-  host: { class: 'block' },
+  selector: 'app-clientes-pagina',
   imports: [
     DecimalPipe,
     ButtonDirective,
@@ -47,43 +46,43 @@ interface SelectOption {
   ],
   templateUrl: './clientes.pagina.html',
 })
-export class ClientsPage {
+export class ClientesPagina {
   private readonly dialogoConfirmacion = inject(DialogoConfirmacionServicio);
   private readonly breadcrumb = inject(BreadcrumbServicio);
 
   readonly drawerVisible = signal(false);
-  readonly selectedClients = signal<Cliente[]>([]);
+  readonly seleccion = signal<ICliente[]>([]);
 
-  readonly tipoPersonaOptions: SelectOption[] = [
+  readonly opcionesTipoPersona: OpcionSelect[] = [
     { label: 'Física', value: 'Física' },
     { label: 'Moral', value: 'Moral' },
   ];
-  readonly regimenOptions: SelectOption[] = [
+  readonly opcionesRegimen: OpcionSelect[] = [
     { label: '601 · General de Ley Personas Morales', value: '601 · General' },
     { label: '612 · Personas Físicas con Actividades Empresariales', value: '612 · PFAE' },
     { label: '616 · Sin obligaciones fiscales', value: '616 · Sin obligaciones' },
   ];
-  readonly ivaOptions: SelectOption[] = [
+  readonly opcionesIva: OpcionSelect[] = [
     { label: 'IVA 16%', value: 'IVA 16%' },
     { label: 'IVA 8%', value: 'IVA 8%' },
     { label: 'Exento', value: 'Exento' },
   ];
-  readonly usoCfdiOptions: SelectOption[] = [
+  readonly opcionesUsoCfdi: OpcionSelect[] = [
     { label: 'G01 · Adquisición de mercancías', value: 'G01' },
     { label: 'G03 · Gastos generales', value: 'G03' },
     { label: 'I01 · Ingresos por ventas', value: 'I01' },
   ];
-  readonly formaPagoOptions: SelectOption[] = [
+  readonly opcionesFormaPago: OpcionSelect[] = [
     { label: '01 · Efectivo', value: '01 · Efectivo' },
     { label: '03 · Transferencia electrónica', value: '03 · Transferencia' },
     { label: '04 · Tarjeta de crédito', value: '04 · Tarjeta' },
   ];
-  readonly metodoPagoOptions: SelectOption[] = [
+  readonly opcionesMetodoPago: OpcionSelect[] = [
     { label: 'PUE · Pago en una sola exhibición', value: 'PUE' },
     { label: 'PPD · Pago en parcialidades o diferido', value: 'PPD' },
   ];
 
-  readonly clients: Cliente[] = [
+  readonly clientes: ICliente[] = [
     {
       nombre_razon_social: 'Grupo Industrial Raudal, S.A. de C.V.',
       nombre_comercial: 'Raudal',
@@ -190,15 +189,15 @@ export class ClientsPage {
     ]);
   }
 
-  openDrawer(): void {
+  abrirDrawer(): void {
     this.drawerVisible.set(true);
   }
 
-  clearSelection(): void {
-    this.selectedClients.set([]);
+  limpiarSeleccion(): void {
+    this.seleccion.set([]);
   }
 
-  onDelete(client?: Cliente): void {
+  eliminar(cliente?: ICliente): void {
     this.dialogoConfirmacion.mostrar({
       titulo: '¿Eliminar cliente?',
       mensaje: 'Esta acción eliminará el cliente seleccionado. ¿Deseas continuar?',

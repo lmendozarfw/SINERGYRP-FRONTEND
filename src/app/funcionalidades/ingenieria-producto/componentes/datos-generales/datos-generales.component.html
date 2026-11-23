@@ -1,4 +1,4 @@
-<form class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]" [formGroup]="store.modeloForm" (ngSubmit)="store.validarDatosGenerales()">
+<form class="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_360px]" [formGroup]="store.formularioModelo" (ngSubmit)="store.validarDatosGenerales()">
 
     <div class="flex min-w-0 flex-col gap-6">
 
@@ -107,10 +107,10 @@
                 <div class="flex items-baseline justify-between gap-4 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
                     <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Nombre</dt>
                     <dd class="m-0 text-right text-sm leading-5 wrap-anywhere"
-                        [class.text-ds-ink]="!!store.modeloForm.controls.nombre.value"
-                        [class.text-ds-muted]="!store.modeloForm.controls.nombre.value"
-                        [class.font-medium]="!!store.modeloForm.controls.nombre.value"
-                        [class.font-normal]="!store.modeloForm.controls.nombre.value">
+                        [class.text-ds-ink]="!!store.formularioModelo.controls.nombre.value"
+                        [class.text-ds-muted]="!store.formularioModelo.controls.nombre.value"
+                        [class.font-medium]="!!store.formularioModelo.controls.nombre.value"
+                        [class.font-normal]="!store.formularioModelo.controls.nombre.value">
                         {{ store.nombreResumen }}
                     </dd>
                 </div>

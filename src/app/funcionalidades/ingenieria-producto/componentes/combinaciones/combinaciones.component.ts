@@ -11,11 +11,11 @@ import { BreadcrumbServicio } from '../../../../nucleo/servicios/breadcrumb.serv
 import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
 import { BarraAccionesMasivasComponente } from '../../../../compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
 import {
-  AtributoCombinacion,
-  Combinacion,
-  MaterialAsignado,
-  OpcionSelectSimple,
-  PiezaCombinacion,
+  IAtributoCombinacion,
+  ICombinacion,
+  IMaterialAsignado,
+  IOpcionSelectSimple,
+  IPiezaCombinacion,
 } from '../../modelos/combinacion';
 import { AtributosCombinacionComponent } from './atributos-combinacion/atributos-combinacion.component';
 import { MaterialesCombinacionComponent } from './materiales-combinacion/materiales-combinacion.component';
@@ -45,25 +45,25 @@ export class CombinacionesComponent {
   private readonly breadcrumb = inject(BreadcrumbServicio);
   private readonly avisos = inject(AvisosServicio);
 
-  private readonly atributosStep = viewChild(AtributosCombinacionComponent);
-  private readonly materialesStep = viewChild(MaterialesCombinacionComponent);
+  private readonly pasoAtributos = viewChild(AtributosCombinacionComponent);
+  private readonly pasoMateriales = viewChild(MaterialesCombinacionComponent);
   private readonly pasosDrawer = viewChild(PasosDrawerComponent);
 
   readonly drawerVisible = signal(false);
   readonly pasoActual = signal(1);
-  readonly seleccion = signal<Combinacion[]>([]);
+  readonly seleccion = signal<ICombinacion[]>([]);
   readonly terminoBusqueda = signal('');
   readonly valoresAtributos = signal<Record<string, string>>({});
-  readonly materiales = signal<MaterialAsignado[]>([]);
-  readonly combinaciones = signal<Combinacion[]>([]);
-  readonly combinacionEditando = signal<Combinacion | null>(null);
+  readonly materiales = signal<IMaterialAsignado[]>([]);
+  readonly combinaciones = signal<ICombinacion[]>([]);
+  readonly combinacionEditando = signal<ICombinacion | null>(null);
 
   readonly pasos: PasoDrawer[] = [
     { id: 1, titulo: 'Atributos', descripcion: 'Define la combinación' },
     { id: 2, titulo: 'Materiales', descripcion: 'Asigna por pieza' },
   ];
 
-  readonly atributos: AtributoCombinacion[] = [
+  readonly atributos: IAtributoCombinacion[] = [
     {
       id: 'color',
       nombre: 'Color',
@@ -106,7 +106,7 @@ export class CombinacionesComponent {
     },
   ];
 
-  readonly piezas: PiezaCombinacion[] = [
+  readonly piezas: IPiezaCombinacion[] = [
     { id: 'corte', nombre: 'Corte principal' },
     { id: 'forro', nombre: 'Forro interior' },
     { id: 'plantilla', nombre: 'Plantilla' },
@@ -115,7 +115,7 @@ export class CombinacionesComponent {
     { id: 'herraje', nombre: 'Herraje' },
   ];
 
-  readonly opcionesMateriales: OpcionSelectSimple[] = [
+  readonly opcionesMateriales: IOpcionSelectSimple[] = [
     { label: 'Piel vacuna', value: 'Piel vacuna' },
     { label: 'Piel sintética', value: 'Piel sintética' },
     { label: 'Textil', value: 'Textil' },
@@ -126,7 +126,7 @@ export class CombinacionesComponent {
     { label: 'Metal', value: 'Metal' },
   ];
 
-  readonly opcionesFiltroAtributo: OpcionSelectSimple[] = [
+  readonly opcionesFiltroAtributo: IOpcionSelectSimple[] = [
     { label: 'Todas las combinaciones', value: 'todas' },
     { label: 'Con versión activa', value: 'activas' },
   ];
@@ -181,14 +181,14 @@ export class CombinacionesComponent {
     this.pasosDrawer()?.desmarcarDesde(1);
   }
 
-  actualizarMateriales(materiales: MaterialAsignado[]): void {
+  actualizarMateriales(materiales: IMaterialAsignado[]): void {
     this.materiales.set(materiales);
     this.pasosDrawer()?.desmarcarDesde(2);
   }
 
   continuar(): void {
     if (this.esPasoUno()) {
-      // if (!this.atributosStep()?.validar()) {
+      // if (!this.pasoAtributos()?.validar()) {
       //   return;
       // }
 
@@ -197,7 +197,7 @@ export class CombinacionesComponent {
       return;
     }
 
-    if (!this.materialesStep()?.validar()) {
+    if (!this.pasoMateriales()?.validar()) {
       return;
     }
 
@@ -212,7 +212,7 @@ export class CombinacionesComponent {
     this.pasoActual.set(1);
   }
 
-  editar(combinacion: Combinacion): void {
+  editar(combinacion: ICombinacion): void {
     this.reiniciarFormulario();
     this.combinacionEditando.set(combinacion);
     this.valoresAtributos.set({ ...combinacion.atributos });
@@ -227,17 +227,17 @@ export class CombinacionesComponent {
     this.seleccion.set([]);
   }
 
-  eliminar(combinacion: Combinacion): void {
+  eliminar(combinacion: ICombinacion): void {
     this.combinaciones.update((items) => items.filter((item) => item.id !== combinacion.id));
     this.seleccion.update((items) => items.filter((item) => item.id !== combinacion.id));
     this.avisos.informacion('Combinación eliminada', combinacion.codigo);
   }
 
-  etiquetaAtributo(combinacion: Combinacion, atributoId: string): string {
+  etiquetaAtributo(combinacion: ICombinacion, atributoId: string): string {
     return combinacion.etiquetaAtributos[atributoId] ?? '—';
   }
 
-  etiquetaMaterial(combinacion: Combinacion, piezaId: string): string {
+  etiquetaMaterial(combinacion: ICombinacion, piezaId: string): string {
     const material = combinacion.versiones[0]?.materiales.find(
       (item) => item.piezaId === piezaId,
     );
@@ -255,7 +255,7 @@ export class CombinacionesComponent {
         atributo.opciones.find((opcion) => opcion.value === value)?.label ?? value;
     }
 
-    const version: Combinacion['versiones'][number] = {
+    const version: ICombinacion['versiones'][number] = {
       id: `v-${ahora.getTime()}`,
       numero: (combinacionAnterior?.versiones.length ?? 0) + 1,
       materiales: this.materiales().map((material) => ({ ...material })),
@@ -283,7 +283,7 @@ export class CombinacionesComponent {
         `${this.codigoGenerado()} · Versión ${version.numero}`,
       );
     } else {
-      const combinacion: Combinacion = {
+      const combinacion: ICombinacion = {
         id: `c-${ahora.getTime()}`,
         codigo: this.codigoGenerado(),
         atributos: { ...this.valoresAtributos() },
@@ -307,8 +307,8 @@ export class CombinacionesComponent {
     this.valoresAtributos.set({});
     this.materiales.set([]);
     this.combinacionEditando.set(null);
-    this.atributosStep()?.reiniciarValidacion();
-    this.materialesStep()?.reiniciarValidacion();
+    this.pasoAtributos()?.reiniciarValidacion();
+    this.pasoMateriales()?.reiniciarValidacion();
     this.pasosDrawer()?.reiniciar();
   }
 }

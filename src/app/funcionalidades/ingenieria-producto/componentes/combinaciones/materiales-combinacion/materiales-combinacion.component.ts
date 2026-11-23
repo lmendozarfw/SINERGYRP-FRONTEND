@@ -8,14 +8,14 @@ import { PIcon } from '@primeicons/angular';
 import { EtiquetaFormularioComponente } from '../../../../../compartido/componentes/form-label/etiqueta-formulario.componente';
 import { MensajeAyudaErrorComponente } from '../../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import {
-  MaterialAsignado,
-  OpcionSelectSimple,
-  PiezaCombinacion,
-  VersionCombinacion,
+  IMaterialAsignado,
+  IOpcionSelectSimple,
+  IPiezaCombinacion,
+  IVersionCombinacion,
 } from '../../../modelos/combinacion';
 
 interface FilaMaterial {
-  pieza: PiezaCombinacion;
+  pieza: IPiezaCombinacion;
   material: string;
 }
 
@@ -35,12 +35,12 @@ interface FilaMaterial {
   styleUrl: './materiales-combinacion.component.scss',
 })
 export class MaterialesCombinacionComponent {
-  readonly piezas = input.required<PiezaCombinacion[]>();
-  readonly materiales = input.required<OpcionSelectSimple[]>();
+  readonly piezas = input.required<IPiezaCombinacion[]>();
+  readonly materiales = input.required<IOpcionSelectSimple[]>();
   readonly codigo = input.required<string>();
-  readonly versiones = input.required<VersionCombinacion[]>();
+  readonly versiones = input.required<IVersionCombinacion[]>();
 
-  readonly materialesChange = output<MaterialAsignado[]>();
+  readonly materialesChange = output<IMaterialAsignado[]>();
 
   readonly intentoContinuar = signal(false);
 

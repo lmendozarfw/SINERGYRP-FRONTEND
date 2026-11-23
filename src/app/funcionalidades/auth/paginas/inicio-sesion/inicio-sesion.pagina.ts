@@ -22,7 +22,7 @@ import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/
 import { QrScannerComponent } from '../../../../compartido/componentes/qr-scanner/qr-scanner.component';
 import { AvisosServicio } from '../../../../nucleo/servicios/aviso.servicio';
 import { InicioSesionComando } from '../../casos-uso/inicio-sesion.caso-uso';
-import { AutenticacionStore } from '../../stores/auth.store';
+import { AutenticacionStore } from '../../stores/autenticacion.store';
 
 export interface ICredencialQR {
   usuario: string;
@@ -44,7 +44,7 @@ function convertirACredenciales(usuario: unknown, contrasena: unknown): ICredenc
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './login.pagina.html',
+  templateUrl: './inicio-sesion.pagina.html',
   imports: [
     FormsModule,
     ReactiveFormsModule,

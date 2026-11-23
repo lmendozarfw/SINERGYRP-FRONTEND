@@ -5,14 +5,14 @@ import { IInicioSesionRespuesta, IMiInformacion } from "../modelos/auth";
 import { InicioSesionComando } from "../casos-uso/inicio-sesion.caso-uso";
 
 @Injectable({ providedIn: 'root' })
-export class AuthService {
+export class AutenticacionServicio {
     private api = inject(ApiServicio);
 
     iniciarSesion(request: InicioSesionComando): Observable<IInicioSesionRespuesta> {
         return this.api.post('Auth/Login', request);
     }
 
-    me(): Observable<IMiInformacion> {
+    miInformacion(): Observable<IMiInformacion> {
         return this.api.obtener('auth/Me');
     }
 }

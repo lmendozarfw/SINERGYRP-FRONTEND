@@ -1,6 +1,6 @@
 import { inject, Injectable } from "@angular/core";
 import { Comando } from "../../../nucleo/interfaces/comando.interface";
-import { AuthService } from "../servicios/auth.servicio";
+import { AutenticacionServicio } from "../servicios/autenticacion.servicio";
 import { AlmacenamientoLocalServicio } from "../../../nucleo/servicios/almacenamiento.servicio";
 import { firstValueFrom } from "rxjs";
 
@@ -11,7 +11,7 @@ export interface InicioSesionComando {
 
 @Injectable({ providedIn: 'root' })
 export class InicioSesionCasoUso implements Comando<InicioSesionComando, string> {
-    private readonly authService = inject(AuthService);
+    private readonly authService = inject(AutenticacionServicio);
     private readonly almacenamiento = inject(AlmacenamientoLocalServicio);
 
     async ejecutar(comando: InicioSesionComando): Promise<string> {

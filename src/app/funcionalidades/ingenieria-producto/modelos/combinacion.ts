@@ -1,45 +1,45 @@
-export interface AtributoOpcion {
+export interface IAtributoOpcion {
   label: string;
   value: string;
   codigo: string;
 }
 
-export interface AtributoCombinacion {
+export interface IAtributoCombinacion {
   id: string;
   nombre: string;
-  opciones: AtributoOpcion[];
+  opciones: IAtributoOpcion[];
 }
 
-export interface PiezaCombinacion {
+export interface IPiezaCombinacion {
   id: string;
   nombre: string;
 }
 
-export interface MaterialAsignado {
+export interface IMaterialAsignado {
   piezaId: string;
   piezaNombre: string;
   material: string;
 }
 
-export interface VersionCombinacion {
+export interface IVersionCombinacion {
   id: string;
   numero: number;
-  materiales: MaterialAsignado[];
+  materiales: IMaterialAsignado[];
   fechaRegistro: Date;
 }
 
-export interface Combinacion {
+export interface ICombinacion {
   id: string;
   codigo: string;
   atributos: Record<string, string>;
   etiquetaAtributos: Record<string, string>;
   versionActual: number;
-  versiones: VersionCombinacion[];
+  versiones: IVersionCombinacion[];
   fechaRegistro: Date;
   fechaModificacion: Date;
 }
 
-export interface OpcionSelectSimple {
+export interface IOpcionSelectSimple {
   label: string;
   value: string;
 }

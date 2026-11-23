@@ -1,29 +1,29 @@
-<section class="ds-combinacion-step">
-  <header class="ds-combinacion-step__header">
-    <h3 class="ds-combinacion-step__title">Materiales por pieza</h3>
-    <p class="ds-combinacion-step__description">
+<section class="flex flex-col gap-6">
+  <header class="flex flex-col gap-1">
+    <h3 class="text-[15px] font-semibold leading-[22px] text-ds-ink">Materiales por pieza</h3>
+    <p class="text-[13px] leading-5 text-ds-muted">
       Asigna el material de cada pieza. Al guardar se creará la versión
       <strong>V{{ proximaVersion() }}</strong> de la combinación.
     </p>
   </header>
 
-  <div class="ds-materiales-resumen">
-    <div class="ds-materiales-resumen__icono">
+  <div class="flex items-center gap-3 rounded-[var(--ds-radius-card)] border border-ds-line bg-ds-canvas-strong px-4 py-3.5">
+    <div class="flex size-9 shrink-0 items-center justify-center rounded-[var(--ds-radius-input)] bg-ds-primary-soft text-ds-primary">
       <svg pIcon="th-large" [size]="18"></svg>
     </div>
     <div class="min-w-0">
-      <span class="ds-materiales-resumen__label">Combinación</span>
-      <span class="ds-materiales-resumen__codigo">{{ codigo() }}</span>
+      <span class="block text-[11px] font-semibold uppercase leading-4 tracking-[0.04em] text-ds-muted">Combinación</span>
+      <span class="block wrap-anywhere font-mono text-sm font-semibold tracking-[0.04em] text-ds-ink">{{ codigo() }}</span>
     </div>
     <p-tag [value]="'Versión ' + proximaVersion()" [severity]="hayVersiones() ? 'info' : 'success'" />
   </div>
 
   @if (hayVersiones()) {
-    <div class="ds-materiales-versiones">
-      <span class="ds-materiales-versiones__titulo">Historial de versiones</span>
-      <div class="ds-materiales-versiones__lista">
+    <div class="flex flex-col gap-2">
+      <span class="text-[11px] font-semibold uppercase leading-4 tracking-[0.04em] text-ds-muted">Historial de versiones</span>
+      <div class="flex flex-wrap gap-2">
         @for (version of versiones(); track version.id) {
-          <span class="ds-materiales-versiones__item">
+          <span class="rounded-full border border-ds-line bg-ds-surface px-2.5 py-1 text-xs leading-[18px] text-ds-muted">
             V{{ version.numero }} · {{ version.fechaRegistro | date: 'dd/MM/yyyy HH:mm' }}
           </span>
         }
@@ -31,14 +31,14 @@
     </div>
   }
 
-  <div class="ds-materiales-lista">
+  <div class="flex flex-col divide-y divide-ds-line overflow-hidden rounded-[var(--ds-radius-card)] border border-ds-line">
     @for (fila of filas(); track fila.pieza.id) {
-      <div class="ds-materiales-fila">
-        <div class="ds-materiales-fila__pieza">
-          <span class="ds-materiales-fila__nombre">{{ fila.pieza.nombre }}</span>
-          <span class="ds-materiales-fila__id">{{ fila.pieza.id }}</span>
+      <div class="flex items-center justify-between gap-4 bg-ds-surface p-3 max-sm:gap-3">
+        <div class="flex flex-col gap-0.5">
+          <span class="text-sm font-semibold leading-5 text-ds-ink">{{ fila.pieza.nombre }}</span>
+          <span class="text-xs leading-[18px] text-ds-muted">{{ fila.pieza.id }}</span>
         </div>
-        <div class="ds-field ds-materiales-fila__campo min-w-1/2">
+        <div class="ds-field min-w-1/2">
           <app-etiqueta-formulario [para]="'material-' + fila.pieza.id" [obligatorio]="true">
             Material
           </app-etiqueta-formulario>
@@ -62,11 +62,11 @@
   </div>
 
   @if (todosAsignados()) {
-    <div class="ds-materiales-confirmacion">
-      <span class="ds-materiales-confirmacion__titulo">Resumen de la versión V{{ proximaVersion() }}</span>
-      <div class="ds-materiales-confirmacion__lista">
+    <div class="flex flex-col gap-2 rounded-[var(--ds-radius-card)] border border-ds-primary bg-ds-primary-soft px-4 py-3.5">
+      <span class="text-[13px] font-semibold leading-5 text-ds-primary-strong">Resumen de la versión V{{ proximaVersion() }}</span>
+      <div class="flex flex-col gap-1">
         @for (fila of filas(); track fila.pieza.id) {
-          <span class="ds-materiales-confirmacion__item">
+          <span class="text-xs leading-[18px] text-ds-ink">
             <strong>{{ fila.pieza.nombre }}:</strong> {{ etiquetaMaterial(fila.material) }}
           </span>
         }

@@ -1,17 +1,17 @@
-<section class="ds-card ds-tabla-card">
-  <header class="ds-tabla-header">
+<section class="ds-card flex flex-col gap-6">
+  <header class="flex flex-wrap items-start justify-between gap-4">
     <div class="min-w-0">
       <div class="flex flex-wrap items-center gap-3">
-        <span class="ds-tabla-header__icon">
+        <span class="flex size-9 shrink-0 items-center justify-center rounded-[var(--ds-radius-input)] bg-ds-primary-soft text-ds-primary">
           <svg pIcon="table" [size]="18"></svg>
         </span>
         <h3 class="ds-title-card">{{ titulo() }}</h3>
-        <span class="ds-tabla-count">{{ tallas().length }} tallas</span>
+        <span class="inline-flex h-6 items-center rounded-full border border-ds-line bg-ds-canvas-strong px-2.5 text-xs font-semibold leading-[18px] text-ds-muted">{{ tallas().length }} tallas</span>
       </div>
-      <p class="ds-body ds-tabla-header__subtitle">{{ descripcion() }}</p>
+      <p class="ds-body mt-2 text-ds-muted">{{ descripcion() }}</p>
     </div>
 
-    <div class="ds-tabla-header__actions">
+    <div class="flex flex-wrap gap-2">
       <button type="button" pButton class="ds-button ds-button--secondary ds-button--compact">
         <svg pIcon="plus" [size]="16"></svg>
         <span>Añadir sistema</span>
@@ -27,15 +27,18 @@
   >
     <ng-template #header>
       <tr>
-        <th class="ds-table__th ds-tabla-sistema-col">Sistema</th>
+        <th class="ds-table__th ds-tabla-sistema-col min-w-[180px]!">Sistema</th>
         @for (talla of tallas(); track talla.id) {
-          <th class="ds-table__th ds-tabla-col" [class.ds-tabla-col--base]="esTallaBase(talla)">
-            <span class="ds-tabla-col__valor">{{ valorTalla(talla) }}</span>
-            <span class="ds-tabla-col__sistema">{{ sistemaPrincipalNombre }}</span>
+          <th
+            class="ds-table__th ds-tabla-col min-w-[88px]! text-center! align-middle! [&.ds-tabla-col--base]:bg-[var(--ds-action-100)]! [&.ds-tabla-col--base_.ds-tabla-col\_\_valor]:text-ds-primary-strong!"
+            [class.ds-tabla-col--base]="esTallaBase(talla)"
+          >
+            <span class="ds-tabla-col__valor block text-sm font-semibold leading-5 text-ds-ink tabular-nums">{{ valorTalla(talla) }}</span>
+            <span class="ds-tabla-col__sistema block text-[11px] font-normal leading-4 text-ds-muted">{{ sistemaPrincipalNombre }}</span>
             @if (esTallaBase(talla)) {
-              <span class="ds-tabla-badge">Base</span>
+              <span class="ds-tabla-badge inline-flex items-center whitespace-nowrap rounded-full bg-ds-primary-soft px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-ds-primary-strong">Base</span>
             }
-            <span class="ds-tabla-col__activa">
+            <span class="ds-tabla-col__activa mt-1.5 flex justify-center">
               <p-checkbox
                 class="ds-checkbox"
                 [binary]="true"
@@ -53,24 +56,24 @@
     <ng-template #body let-sistema>
       <tr>
         <td class="ds-table__td">
-          <div class="ds-tabla-sistema">
-            <span class="ds-tabla-sistema__nombre">{{ sistema.nombre }}</span>
+          <div class="ds-tabla-sistema flex flex-wrap items-center gap-2">
+            <span class="ds-tabla-sistema__nombre text-sm font-semibold leading-5 text-ds-ink">{{ sistema.nombre }}</span>
             @if (esSistemaPrincipal(sistema.clave)) {
-              <span class="ds-tabla-badge">Principal</span>
+              <span class="ds-tabla-badge inline-flex items-center whitespace-nowrap rounded-full bg-ds-primary px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-ds-on-primary">Principal</span>
             }
           </div>
         </td>
 
         @for (talla of tallas(); track talla.id) {
           <td
-            class="ds-table__td"
+            class="ds-table__td [&.ds-tabla-col--base]:bg-[var(--ds-action-100)]! [&.ds-tabla-col--inactiva_.ds-tabla-input]:opacity-55!"
             [class.ds-tabla-col--base]="esTallaBase(talla)"
             [class.ds-tabla-col--inactiva]="!talla.activa"
           >
             <input
               pInputText
               type="text"
-              class="ds-tabla-input"
+              class="ds-tabla-input h-[var(--ds-control-height-sm)]! px-2.5! tabular-nums! [&.ds-tabla-input--principal]:border-[var(--ds-action-200)]! [&.ds-tabla-input--principal]:bg-ds-primary-soft! [&.ds-tabla-input--principal]:text-ds-primary-strong! [&.ds-tabla-input--principal]:font-semibold!"
               [class.ds-tabla-input--principal]="esSistemaPrincipal(sistema.clave)"
               [readonly]="esSistemaPrincipal(sistema.clave)"
               [disabled]="!talla.activa"
@@ -82,21 +85,21 @@
     </ng-template>
   </p-table>
 
-  <footer class="ds-tabla-footer">
-    <div class="ds-tabla-footer__resumen">
+  <footer class="flex flex-col gap-2">
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-ds-line pt-4 max-sm:flex-col max-sm:items-start">
       <button type="button" pButton class="ds-button ds-button--text ds-button--compact">
         <svg pIcon="plus" [size]="18"></svg>
         <span>Añadir talla</span>
       </button>
 
-      <div class="ds-tabla-footer__meta">
+      <div class="flex flex-wrap items-center gap-1.5 text-xs leading-[18px] text-ds-muted">
         <span>{{ cantidadTallasActivas }} tallas activas</span>
         <span aria-hidden="true">·</span>
         <span>{{ cantidadSistemasEquivalencia }} sistemas de equivalencia</span>
       </div>
     </div>
 
-    <p class="ds-meta ds-tabla-footer__nota">
+    <p class="ds-meta m-0">
       Desactiva las tallas que no se fabricarán. La talla base debe permanecer activa.
     </p>
   </footer>

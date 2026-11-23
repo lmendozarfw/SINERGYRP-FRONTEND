@@ -7,7 +7,7 @@ export interface OpcionSelect {
 }
 
 @Injectable()
-export class NewProductWizardStore {
+export class AsistenteNuevoProductoStore {
   readonly categorias: OpcionSelect[] = [
     { label: 'Calzado', value: 'calzado' },
     { label: 'Ropa', value: 'ropa' },
@@ -41,7 +41,7 @@ export class NewProductWizardStore {
     { label: 'Inactivo', value: 'inactivo' },
   ];
 
-  readonly modeloForm = new FormGroup({
+  readonly formularioModelo = new FormGroup({
     codigo: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
@@ -65,39 +65,39 @@ export class NewProductWizardStore {
   readonly imagenes = signal<File[]>([]);
 
   get codigoInvalido(): boolean {
-    const control = this.modeloForm.controls.codigo;
+    const control = this.formularioModelo.controls.codigo;
     return control.invalid && (control.touched || control.dirty);
   }
 
   get nombreInvalido(): boolean {
-    const control = this.modeloForm.controls.nombre;
+    const control = this.formularioModelo.controls.nombre;
     return control.invalid && (control.touched || control.dirty);
   }
 
   get categoriaInvalida(): boolean {
-    const control = this.modeloForm.controls.categoria;
+    const control = this.formularioModelo.controls.categoria;
     return control.invalid && (control.touched || control.dirty);
   }
 
   get nombreResumen(): string {
-    return this.modeloForm.controls.nombre.value.trim() || 'Sin nombre todavía';
+    return this.formularioModelo.controls.nombre.value.trim() || 'Sin nombre todavía';
   }
 
   get categoriaResumen(): string {
-    return this.etiqueta(this.categorias, this.modeloForm.controls.categoria.value);
+    return this.etiqueta(this.categorias, this.formularioModelo.controls.categoria.value);
   }
 
   get lineaResumen(): string {
-    return this.etiqueta(this.lineas, this.modeloForm.controls.linea.value);
+    return this.etiqueta(this.lineas, this.formularioModelo.controls.linea.value);
   }
 
   get estadoResumen(): string {
-    return this.etiqueta(this.estatusOpciones, this.modeloForm.controls.estatus.value);
+    return this.etiqueta(this.estatusOpciones, this.formularioModelo.controls.estatus.value);
   }
 
   validarDatosGenerales(): boolean {
-    if (this.modeloForm.invalid) {
-      this.modeloForm.markAllAsTouched();
+    if (this.formularioModelo.invalid) {
+      this.formularioModelo.markAllAsTouched();
       return false;
     }
 

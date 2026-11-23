@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { PIcon } from '@primeicons/angular';
 
 import { TarjetaComponente } from '../../../../compartido/componentes/tarjeta/tarjeta.componente';
-import { NewProductWizardStore } from '../../stores/asistente-nuevo-producto.store';
+import { AsistenteNuevoProductoStore } from '../../stores/asistente-nuevo-producto.store';
 
 type EstadoValidacion = 'aprobada' | 'pendiente';
 
@@ -25,7 +25,7 @@ interface ValidacionArea {
 })
 export class RevisionLiberacionComponent {
 
-  protected readonly store = inject(NewProductWizardStore);
+  protected readonly store = inject(AsistenteNuevoProductoStore);
 
   protected readonly totalCombinaciones = 8;
 
@@ -78,6 +78,6 @@ export class RevisionLiberacionComponent {
   }
 
   protected get codigoModelo(): string {
-    return this.store.modeloForm.controls.codigo.value || '—';
+    return this.store.formularioModelo.controls.codigo.value || '—';
   }
 }

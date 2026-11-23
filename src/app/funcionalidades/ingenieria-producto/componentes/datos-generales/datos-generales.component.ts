@@ -9,7 +9,7 @@ import { EtiquetaFormularioComponente } from '../../../../compartido/componentes
 import { MensajeAyudaErrorComponente } from '../../../../compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.component';
 import { SelectorImagenComponente } from '../../../../compartido/componentes/selector-imagen/selector-imagen.component';
 import { TarjetaComponente } from '../../../../compartido/componentes/tarjeta/tarjeta.componente';
-import { NewProductWizardStore } from '../../stores/asistente-nuevo-producto.store';
+import { AsistenteNuevoProductoStore } from '../../stores/asistente-nuevo-producto.store';
 
 @Component({
   selector: 'app-datos-generales',
@@ -21,13 +21,13 @@ import { NewProductWizardStore } from '../../stores/asistente-nuevo-producto.sto
     Select,
     DatePicker,
     EtiquetaFormularioComponente,
-    SelectorImagenComponente,
     PIcon,
     TarjetaComponente,
     MensajeAyudaErrorComponente,
+    SelectorImagenComponente
   ],
   templateUrl: './datos-generales.component.html',
 })
 export class DatosGeneralesComponent {
-  protected readonly store = inject(NewProductWizardStore);
+  protected readonly store = inject(AsistenteNuevoProductoStore);
 }

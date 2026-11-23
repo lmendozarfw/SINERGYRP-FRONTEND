@@ -73,20 +73,20 @@
           <p-table-checkbox [value]="combinacion" [index]="i" ariaLabel="Seleccionar combinación" />
         </td>
         <td class="ds-table__td">
-          <span class="ds-combinaciones-codigo">{{ combinacion.codigo }}</span>
+          <span class="font-mono text-[13px] font-semibold tracking-[0.03em] text-ds-ink">{{ combinacion.codigo }}</span>
         </td>
         <td class="ds-table__td">
-          <div class="ds-combinaciones-atributos">
+          <div class="flex flex-wrap gap-1.5">
             @for (atributo of atributos; track atributo.id) {
-            <span class="ds-combinaciones-atributo">
-              <span class="ds-combinaciones-atributo__nombre">{{ atributo.nombre }}</span>
-              <span class="ds-combinaciones-atributo__valor">{{ etiquetaAtributo(combinacion, atributo.id) }}</span>
+            <span class="inline-flex items-center gap-[5px] rounded-full bg-ds-canvas-strong px-[9px] py-[3px] text-[11px] leading-[17px]">
+              <span class="font-semibold text-ds-muted">{{ atributo.nombre }}</span>
+              <span class="text-ds-ink">{{ etiquetaAtributo(combinacion, atributo.id) }}</span>
             </span>
             }
           </div>
         </td>
         <td class="ds-table__td">
-          <span class="ds-combinaciones-version">V{{ combinacion.versionActual }}</span>
+          <span class="text-[13px] font-semibold text-ds-primary-strong">V{{ combinacion.versionActual }}</span>
         </td>
         <td class="ds-table__td">
           <p-tag value="Activa" severity="success" />
@@ -121,12 +121,13 @@
   </p-table>
 </div>
 
-<p-drawer [(visible)]="drawerVisible" position="right" styleClass="ds-client-drawer ds-combinaciones-drawer"
+<p-drawer [(visible)]="drawerVisible" position="right"
+  styleClass="ds-client-drawer ds-combinaciones-drawer w-[min(720px,100vw)]! [&_.p-drawer-content]:flex! [&_.p-drawer-content]:flex-col!"
   [header]="combinacionEditando() ? 'Editar combinación' : 'Nueva combinación'" [modal]="true" [dismissible]="true"
   [closeOnEscape]="true" [blockScroll]="true">
   <app-pasos-drawer [pasos]="pasos" [pasoActivo]="pasoActual()" (pasoActivoChange)="cambiarPaso($event)" />
 
-  <div class="ds-combinaciones-drawer__content">
+  <div class="p-6">
     @if (esPasoUno()) {
     <app-atributos-combinacion [atributos]="atributos" [valores]="valoresAtributos()" [codigo]="codigoGenerado()"
       (valoresChange)="actualizarValores($event)" />

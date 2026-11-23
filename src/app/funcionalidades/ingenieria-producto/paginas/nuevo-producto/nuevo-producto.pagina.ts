@@ -12,7 +12,7 @@ import { CorridasEquivalenciasComponent } from '../../componentes/corridas-equiv
 import { PiezasConsumosComponent } from '../../componentes/piezas-consumos/piezas-consumos.component';
 import { CombinacionesComponent } from '../../componentes/combinaciones/combinaciones.component';
 import { RevisionLiberacionComponent } from '../../componentes/revision-liberacion/revision-liberacion.component';
-import { NewProductWizardStore } from '../../stores/asistente-nuevo-producto.store';
+import { AsistenteNuevoProductoStore } from '../../stores/asistente-nuevo-producto.store';
 
 interface EncabezadoPaso {
   titulo: string;
@@ -31,13 +31,13 @@ interface EncabezadoPaso {
     CombinacionesComponent,
     RevisionLiberacionComponent,
   ],
-  providers: [NewProductWizardStore],
+  providers: [AsistenteNuevoProductoStore],
   templateUrl: './nuevo-producto.pagina.html',
 })
-export class NewProductPage {
+export class NuevoProductoPagina {
   private readonly breadcrumb = inject(BreadcrumbServicio);
   private readonly avisos = inject(AvisosServicio);
-  private readonly wizard = inject(NewProductWizardStore);
+  private readonly wizard = inject(AsistenteNuevoProductoStore);
 
   readonly pasos: IPasoAsistente[] = [
     { id: 1, titulo: 'Datos generales' },

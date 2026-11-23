@@ -3,7 +3,7 @@
     titulo="Clientes"
     descripcion="Consulta la información fiscal y comercial de tus clientes, y administra sus condiciones de crédito desde un solo lugar."
   >
-    <button type="button" pButton class="ds-button" (click)="openDrawer()">
+    <button type="button" pButton class="ds-button" (click)="abrirDrawer()">
       <svg pIcon="plus" [size]="16"></svg>
       Nuevo cliente
     </button>
@@ -25,7 +25,7 @@
 
     <p-select
       class="ds-clients-select w-[184px]! shrink-0"
-      [options]="tipoPersonaOptions"
+      [options]="opcionesTipoPersona"
       optionLabel="label"
       optionValue="value"
       placeholder="Tipo de persona"
@@ -33,7 +33,7 @@
     />
     <p-select
       class="ds-clients-select w-[184px]! shrink-0"
-      [options]="regimenOptions"
+      [options]="opcionesRegimen"
       optionLabel="label"
       optionValue="value"
       placeholder="Régimen fiscal"
@@ -48,11 +48,11 @@
   <section class="ds-card overflow-hidden p-0!">
     <p-table
       styleClass="ds-table"
-      [value]="clients"
+      [value]="clientes"
       dataKey="rfc"
       selectionMode="multiple"
-      [selection]="selectedClients()"
-      (selectionChange)="selectedClients.set($event)"
+      [selection]="seleccion()"
+      (selectionChange)="seleccion.set($event)"
       [paginator]="true"
       [rows]="6"
       [rowsPerPageOptions]="[6, 12, 24]"
@@ -100,45 +100,45 @@
         </tr>
       </ng-template>
 
-      <ng-template #body let-client let-i="index">
+      <ng-template #body let-cliente let-i="index">
         <tr>
           <td class="ds-table__td--check">
-            <p-table-checkbox [value]="client" [index]="i" ariaLabel="Seleccionar cliente" />
+            <p-table-checkbox [value]="cliente" [index]="i" ariaLabel="Seleccionar cliente" />
           </td>
           <td>
             <div class="flex min-w-[240px] items-center gap-3">
               <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ds-navy text-sm font-semibold text-ds-on-primary">
-                {{ client.nombre_razon_social.charAt(0) }}
+                {{ cliente.nombre_razon_social.charAt(0) }}
               </span>
               <span class="min-w-0">
                 <app-copiar-texto
-                  [valor]="client.nombre_razon_social"
+                  [valor]="cliente.nombre_razon_social"
                   etiqueta="Cliente"
                   variante="nombre"
                 />
-                <span class="block text-xs leading-[18px] text-ds-muted">{{ client.nombre_comercial }}</span>
+                <span class="block text-xs leading-[18px] text-ds-muted">{{ cliente.nombre_comercial }}</span>
               </span>
             </div>
           </td>
           <td>
-            <app-copiar-texto [valor]="client.rfc" etiqueta="RFC" />
+            <app-copiar-texto [valor]="cliente.rfc" etiqueta="RFC" />
           </td>
           <td>
             <p-tag
-              [value]="client.tipo_persona"
-              [severity]="client.tipo_persona === 'Moral' ? 'info' : 'success'"
+              [value]="cliente.tipo_persona"
+              [severity]="cliente.tipo_persona === 'Moral' ? 'info' : 'success'"
             />
           </td>
           <td>
-            <span class="block text-xs leading-[18px] text-ds-muted">{{ client.id_regimen_fiscal }}</span>
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ cliente.id_regimen_fiscal }}</span>
           </td>
           <td class="text-right!">
             <span class="text-sm font-semibold tabular-nums text-ds-ink">
-              {{ '$' + (client.limite_credito | number: '1.0-0') }}
+              {{ '$' + (cliente.limite_credito | number: '1.0-0') }}
             </span>
           </td>
           <td class="text-right!">
-            <span class="block text-xs leading-[18px] text-ds-muted">{{ client.dias_credito }}</span>
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ cliente.dias_credito }}</span>
           </td>
           <td class="text-right!">
             <div class="flex justify-end gap-1">
@@ -154,7 +154,7 @@
               </button>
               <button type="button"
                 class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-danger-line hover:bg-ds-danger-soft hover:text-ds-danger focus-visible:shadow-ds-focus focus-visible:outline-none"
-                aria-label="Eliminar cliente" (click)="onDelete(client)">
+                aria-label="Eliminar cliente" (click)="eliminar(cliente)">
                 <svg pIcon="trash" [size]="15"></svg>
               </button>
             </div>
@@ -216,7 +216,7 @@
           <p-select
             inputId="client-tipo-persona"
             class="w-full"
-            [options]="tipoPersonaOptions"
+            [options]="opcionesTipoPersona"
             optionLabel="label"
             optionValue="value"
             placeholder="Selecciona una opción"
@@ -245,7 +245,7 @@
           <p-select
             inputId="client-regimen-fiscal"
             class="w-full"
-            [options]="regimenOptions"
+            [options]="opcionesRegimen"
             optionLabel="label"
             optionValue="value"
             placeholder="Selecciona una opción"
@@ -256,7 +256,7 @@
           <p-select
             inputId="client-tipo-iva"
             class="w-full"
-            [options]="ivaOptions"
+            [options]="opcionesIva"
             optionLabel="label"
             optionValue="value"
             placeholder="Selecciona una opción"
@@ -267,7 +267,7 @@
           <p-select
             inputId="client-uso-cfdi"
             class="w-full"
-            [options]="usoCfdiOptions"
+            [options]="opcionesUsoCfdi"
             optionLabel="label"
             optionValue="value"
             placeholder="Selecciona una opción"
@@ -286,7 +286,7 @@
           <p-select
             inputId="client-forma-pago"
             class="w-full"
-            [options]="formaPagoOptions"
+            [options]="opcionesFormaPago"
             optionLabel="label"
             optionValue="value"
             placeholder="Selecciona una opción"
@@ -299,7 +299,7 @@
           <p-select
             inputId="client-metodo-pago"
             class="w-full"
-            [options]="metodoPagoOptions"
+            [options]="opcionesMetodoPago"
             optionLabel="label"
             optionValue="value"
             placeholder="Selecciona una opción"
@@ -356,11 +356,11 @@
   </ng-template>
 </p-drawer>
 
-@if (selectedClients().length > 0) {
+@if (seleccion().length > 0) {
   <app-barra-acciones-masivas
-    [cantidad]="selectedClients().length"
-    (limpiar)="clearSelection()"
-    (eliminar)="clearSelection()"
+    [cantidad]="seleccion().length"
+    (limpiar)="limpiarSeleccion()"
+    (eliminar)="limpiarSeleccion()"
   />
 }
 

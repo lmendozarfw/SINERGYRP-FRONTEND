@@ -1,56 +1,56 @@
-<section class="ds-revision">
+<section class="flex flex-col gap-6">
 
-    <div class="ds-card ds-revision__resumen">
+    <div class="ds-card flex flex-col gap-5">
 
-        <header class="ds-revision__cabecera">
-            <span class="ds-revision__icono">
+        <header class="flex items-start gap-3">
+            <span class="flex size-9 shrink-0 items-center justify-center rounded-[var(--ds-radius-input)] bg-ds-primary-soft text-ds-primary">
                 <svg pIcon="check-circle" [size]="20"></svg>
             </span>
             <div class="min-w-0">
                 <div class="flex flex-wrap items-center gap-2.5">
                     <h3 class="ds-title-card">Revisión y liberación</h3>
-                    <span class="ds-revision__badge ds-revision__badge--proceso">En validación</span>
+                    <span class="inline-flex shrink-0 items-center gap-[5px] rounded-full border border-[var(--ds-action-200)] bg-ds-primary-soft px-[9px] py-[3px] text-xs font-semibold leading-4 text-ds-primary-strong">En validación</span>
                 </div>
-                <p class="ds-body ds-revision__subtitulo">
+                <p class="ds-body mt-1 text-ds-muted">
                     El modelo y sus combinaciones están en revisión. Consulta el estado de cada área antes de la liberación.
                 </p>
             </div>
         </header>
 
-        <div class="ds-revision__avance">
+        <div class="flex flex-col gap-2.5 rounded-[var(--ds-radius-input)] border border-ds-line bg-ds-canvas px-4 py-3.5">
             <div class="flex flex-wrap items-baseline justify-between gap-2">
-                <span class="ds-revision__avance-titulo">
+                <span class="text-sm font-semibold leading-5 text-ds-ink">
                     {{ aprobadas }} de {{ validaciones.length }} áreas validadas
                 </span>
-                <span class="ds-revision__avance-detalle">Pendiente: {{ areaPendiente }}</span>
+                <span class="text-xs leading-[18px] text-ds-muted">Pendiente: {{ areaPendiente }}</span>
             </div>
             <div
-                class="ds-revision__barra"
+                class="h-1.5 w-full overflow-hidden rounded-full bg-ds-line"
                 role="progressbar"
                 [attr.aria-valuenow]="aprobadas"
                 [attr.aria-valuemin]="0"
                 [attr.aria-valuemax]="validaciones.length"
                 [attr.aria-label]="aprobadas + ' de ' + validaciones.length + ' áreas validadas'"
             >
-                <span [style.width.%]="progreso"></span>
+                <span class="block h-full rounded-[inherit] bg-ds-primary [transition:width_200ms_ease]" [style.width.%]="progreso"></span>
             </div>
         </div>
 
     </div>
 
-    <div class="ds-revision__layout">
+    <div class="grid grid-cols-[minmax(0,1fr)_340px] items-start gap-6 max-[1023px]:grid-cols-1">
 
-        <div class="ds-revision__main">
+        <div class="flex min-w-0 flex-col gap-6">
 
             <app-tarjeta titulo="Validaciones por área"
                 descripcion="Cada área deja constancia de su revisión. El modelo se libera cuando todas estén aprobadas."
                 icono="users">
-                <ol class="ds-revision__lista">
+                <ol class="m-0 flex list-none flex-col p-0">
                     @for (validacion of validaciones; track validacion.id) {
-                    <li class="ds-revision__area">
+                    <li class="relative flex gap-3.5 pb-5 last:pb-0 [&:not(:last-child)]:before:absolute [&:not(:last-child)]:before:top-11 [&:not(:last-child)]:before:bottom-0.5 [&:not(:last-child)]:before:left-[17px] [&:not(:last-child)]:before:w-px [&:not(:last-child)]:before:bg-ds-line [&:not(:last-child)]:before:content-['']">
                         <span
-                            class="ds-revision__marcador"
-                            [class.ds-revision__marcador--pendiente]="validacion.estado === 'pendiente'"
+                            class="relative z-[1] flex size-9 shrink-0 items-center justify-center rounded-full border border-ds-success-line bg-ds-success-soft text-ds-success data-[estado=pendiente]:border-ds-warning-line data-[estado=pendiente]:bg-ds-warning-soft data-[estado=pendiente]:text-ds-warning"
+                            [attr.data-estado]="validacion.estado"
                         >
                             @if (validacion.estado === 'aprobada') {
                                 <svg pIcon="check" [size]="18"></svg>
@@ -59,16 +59,15 @@
                             }
                         </span>
 
-                        <div class="ds-revision__area-contenido">
+                        <div class="min-w-0 flex-1">
                             <div class="flex flex-wrap items-start justify-between gap-2">
                                 <div class="min-w-0">
-                                    <h4 class="ds-revision__area-nombre">{{ validacion.area }}</h4>
-                                    <p class="ds-revision__area-detalle">{{ validacion.detalle }}</p>
+                                    <h4 class="m-0 text-[15px] font-semibold leading-[22px] text-ds-ink">{{ validacion.area }}</h4>
+                                    <p class="mt-0.5 text-xs leading-[18px] text-ds-muted">{{ validacion.detalle }}</p>
                                 </div>
                                 <span
-                                    class="ds-revision__badge"
-                                    [class.ds-revision__badge--aprobada]="validacion.estado === 'aprobada'"
-                                    [class.ds-revision__badge--pendiente]="validacion.estado === 'pendiente'"
+                                    class="inline-flex shrink-0 items-center gap-[5px] rounded-full border border-ds-line bg-ds-canvas px-[9px] py-[3px] text-xs font-semibold leading-4 text-ds-muted data-[estado=aprobada]:border-ds-success-line data-[estado=aprobada]:bg-ds-success-soft data-[estado=aprobada]:text-ds-success data-[estado=pendiente]:border-ds-warning-line data-[estado=pendiente]:bg-ds-warning-soft data-[estado=pendiente]:text-ds-warning"
+                                    [attr.data-estado]="validacion.estado"
                                 >
                                     @if (validacion.estado === 'aprobada') {
                                         <svg pIcon="check" [size]="13"></svg>
@@ -80,7 +79,7 @@
                                 </span>
                             </div>
 
-                            <p class="ds-revision__comentario">{{ validacion.comentario }}</p>
+                            <p class="mt-2.5 text-sm leading-[22px] text-ds-ink">{{ validacion.comentario }}</p>
 
                             <div class="mt-2.5 flex flex-wrap gap-x-4 gap-y-1.5">
                                 <span class="inline-flex items-center gap-1.5 text-xs text-ds-muted">
@@ -100,34 +99,34 @@
 
         </div>
 
-        <aside class="ds-revision__aside">
+        <aside class="flex min-w-0 flex-col gap-6">
 
             <app-tarjeta titulo="Modelo en revisión" descripcion="Información registrada en el asistente."
                 icono="tags">
-                <dl class="ds-revision__detalles">
-                    <div class="ds-revision__detalle">
-                        <dt>Código</dt>
-                        <dd>{{ codigoModelo }}</dd>
+                <dl class="m-0 flex flex-col">
+                    <div class="flex items-baseline justify-between gap-3 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                        <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Código</dt>
+                        <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">{{ codigoModelo }}</dd>
                     </div>
-                    <div class="ds-revision__detalle">
-                        <dt>Nombre</dt>
-                        <dd>{{ store.nombreResumen }}</dd>
+                    <div class="flex items-baseline justify-between gap-3 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                        <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Nombre</dt>
+                        <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">{{ store.nombreResumen }}</dd>
                     </div>
-                    <div class="ds-revision__detalle">
-                        <dt>Categoría</dt>
-                        <dd>{{ store.categoriaResumen }}</dd>
+                    <div class="flex items-baseline justify-between gap-3 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                        <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Categoría</dt>
+                        <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">{{ store.categoriaResumen }}</dd>
                     </div>
-                    <div class="ds-revision__detalle">
-                        <dt>Línea</dt>
-                        <dd>{{ store.lineaResumen }}</dd>
+                    <div class="flex items-baseline justify-between gap-3 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                        <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Línea</dt>
+                        <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">{{ store.lineaResumen }}</dd>
                     </div>
-                    <div class="ds-revision__detalle">
-                        <dt>Combinaciones</dt>
-                        <dd>{{ totalCombinaciones }} registradas</dd>
+                    <div class="flex items-baseline justify-between gap-3 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                        <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Combinaciones</dt>
+                        <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">{{ totalCombinaciones }} registradas</dd>
                     </div>
-                    <div class="ds-revision__detalle">
-                        <dt>Versión</dt>
-                        <dd>v1.0</dd>
+                    <div class="flex items-baseline justify-between gap-3 border-b border-ds-line py-2.5 first:pt-0 last:border-b-0 last:pb-0">
+                        <dt class="text-xs font-semibold uppercase leading-[18px] tracking-[0.04em] text-ds-muted">Versión</dt>
+                        <dd class="m-0 text-right text-sm font-medium leading-5 text-ds-ink wrap-anywhere">v1.0</dd>
                     </div>
                 </dl>
             </app-tarjeta>
@@ -135,8 +134,8 @@
             <div class="ds-alert ds-alert--warning ds-revision__alerta">
                 <svg pIcon="info-circle" [size]="18" class="shrink-0"></svg>
                 <div class="flex flex-col gap-0.5">
-                    <span class="ds-revision__alerta-titulo">Liberación pendiente</span>
-                    <span class="ds-revision__alerta-texto">
+                    <span class="text-sm font-semibold leading-5">Liberación pendiente</span>
+                    <span class="text-xs leading-[18px] opacity-[0.85]">
                         Falta la validación de {{ areaPendiente }}. El modelo se liberará cuando todas las áreas estén aprobadas.
                     </span>
                 </div>

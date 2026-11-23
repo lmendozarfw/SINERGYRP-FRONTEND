@@ -8,7 +8,7 @@ export const routes: Routes = [
       {
         path: 'inicio-sesion',
         loadComponent: () =>
-          import('./funcionalidades/auth/paginas/login/login.pagina').then((p) => p.LoginPage),
+          import('./funcionalidades/auth/paginas/inicio-sesion/inicio-sesion.pagina').then((p) => p.LoginPage),
       },
     ],
   },
@@ -24,19 +24,19 @@ export const routes: Routes = [
       {
         path: 'clientes',
         loadComponent: () =>
-          import('./funcionalidades/clientes/paginas/clientes.pagina').then((p) => p.ClientsPage),
+          import('./funcionalidades/clientes/paginas/clientes.pagina').then((p) => p.ClientesPagina),
       },
       {
         path: 'ingenieria-producto/nuevo-producto',
         loadComponent: () =>
           import('./funcionalidades/ingenieria-producto/paginas/nuevo-producto/nuevo-producto.pagina').then(
-            (p) => p.NewProductPage,
+            (p) => p.NuevoProductoPagina,
           ),
       },
     ],
   },
   {
-    path: 'sistem-diseno',
+    path: 'sistema-diseno',
     loadComponent: () =>
       import('./funcionalidades/design-system/pages/design-system-showcase.page').then(
         (p) => p.DesignSystemShowcasePage,
