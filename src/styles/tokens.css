@@ -152,6 +152,10 @@
   --ds-control-height: 44px;
   --ds-control-height-sm: 36px;
   --ds-control-height-lg: 48px;
+  --ds-control-padding-inline: 12px;
+  --ds-control-padding-block: 10px;
+  --ds-control-font-size: 14px;
+  --ds-control-line-height: 22px;
 }
 
 @theme inline {

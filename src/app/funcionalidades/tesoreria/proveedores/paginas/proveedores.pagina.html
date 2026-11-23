@@ -1,0 +1,433 @@
+<div class="flex flex-col gap-6">
+  <app-encabezado-pagina
+    titulo="Proveedores"
+    descripcion="Consulta la información fiscal, comercial y contable de tus proveedores, y administra sus condiciones de crédito desde un solo lugar."
+  >
+    <button type="button" pButton (click)="abrirDrawer()">
+      <svg pIcon="plus" [size]="16"></svg>
+      Nuevo proveedor
+    </button>
+  </app-encabezado-pagina>
+
+  <div class="mt-8 flex flex-nowrap items-center gap-2">
+    <p-iconfield iconPosition="left" class="w-auto min-w-[220px] grow basis-[280px]">
+      <p-inputicon>
+        <svg pIcon="search" [size]="16"></svg>
+      </p-inputicon>
+      <input
+        pInputText
+        type="text"
+        class="ds-input"
+        placeholder="Buscar por nombre, código o RFC"
+        aria-label="Buscar proveedores"
+      />
+    </p-iconfield>
+
+    <p-select
+      class="w-[184px]! shrink-0"
+      [options]="opcionesTipoPersona"
+      optionLabel="etiqueta"
+      optionValue="valor"
+      placeholder="Tipo de persona"
+      aria-label="Filtrar por tipo de persona"
+    />
+    <p-select
+      class="w-[184px]! shrink-0"
+      [options]="opcionesRegimen"
+      optionLabel="etiqueta"
+      optionValue="valor"
+      placeholder="Régimen fiscal"
+      aria-label="Filtrar por régimen fiscal"
+    />
+    <div class="shrink-0">
+      <button type="button" pButton variant="outlined">
+        <svg pIcon="filter" [size]="14"></svg>
+        Filtros
+      </button>
+    </div>
+  </div>
+
+  <section class="ds-card overflow-hidden p-0!">
+    <p-table
+      styleClass="ds-table"
+      [value]="proveedores"
+      dataKey="rfc"
+      selectionMode="multiple"
+      [selection]="seleccion()"
+      (selectionChange)="seleccion.set($event)"
+      [paginator]="true"
+      [rows]="6"
+      [rowsPerPageOptions]="[6, 12, 24]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} proveedores"
+      [scrollable]="true"
+    >
+      <ng-template #header>
+        <tr>
+          <th class="ds-table__th--check" class="w-[40px] min-w-[40px]">
+            <p-table-header-checkbox ariaLabel="Seleccionar todos los proveedores" />
+          </th>
+          <th pSortableColumn="nombreRazonSocial" class="w-[300px] min-w-[300px]">
+            <span class="inline-flex items-center gap-1.5">
+              Proveedor
+              <p-sorticon field="nombreRazonSocial" />
+            </span>
+          </th>
+          <th pSortableColumn="rfc" class="w-[150px] min-w-[150px]">
+            <span class="inline-flex items-center gap-1.5">
+              RFC
+              <p-sorticon field="rfc" />
+            </span>
+          </th>
+          <th pSortableColumn="tipoPersona" class="w-[160px] min-w-[160px]">
+            <span class="inline-flex items-center gap-1.5">
+              Tipo de persona
+              <p-sorticon field="tipoPersona" />
+            </span>
+          </th>
+          <th class="w-[190px] min-w-[190px]">Régimen fiscal</th>
+          <th pSortableColumn="estado" class="w-[130px] min-w-[130px]">
+            <span class="inline-flex items-center gap-1.5">
+              Estado
+              <p-sorticon field="estado" />
+            </span>
+          </th>
+          <th pSortableColumn="limiteCredito" class="w-[175px] min-w-[175px] text-right!">
+            <span class="inline-flex items-center gap-1.5">
+              Límite de crédito
+              <p-sorticon field="limiteCredito" />
+            </span>
+          </th>
+          <th pSortableColumn="diasCredito" class="w-[90px] min-w-[90px] text-right!">
+            <span class="inline-flex items-center gap-1.5">
+              Días
+              <p-sorticon field="diasCredito" />
+            </span>
+          </th>
+          <th class="w-[140px] min-w-[140px] text-right!">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template #body let-proveedor let-i="index">
+        <tr>
+          <td class="ds-table__td--check">
+            <p-table-checkbox [value]="proveedor" [index]="i" ariaLabel="Seleccionar proveedor" />
+          </td>
+          <td>
+            <div class="flex min-w-[240px] items-center gap-3">
+              <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ds-navy text-sm font-semibold text-ds-on-primary">
+                {{ proveedor.nombreRazonSocial.charAt(0) }}
+              </span>
+              <span class="min-w-0">
+                <app-copiar-texto
+                  [valor]="proveedor.nombreRazonSocial"
+                  etiqueta="Proveedor"
+                  variante="nombre"
+                />
+                <span class="block text-xs leading-[18px] text-ds-muted">
+                  {{ proveedor.codigo }} · {{ proveedor.nombreComercial }}
+                </span>
+              </span>
+            </div>
+          </td>
+          <td>
+            <app-copiar-texto [valor]="proveedor.rfc" etiqueta="RFC" />
+          </td>
+          <td>
+            <p-tag
+              [value]="proveedor.tipoPersona"
+              [severity]="proveedor.tipoPersona === 'Moral' ? 'info' : 'success'"
+            />
+          </td>
+          <td>
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ proveedor.idRegimentFiscal }}</span>
+          </td>
+          <td>
+            <p-tag
+              [value]="proveedor.estado"
+              [severity]="severidadEstado(proveedor.estado)"
+            />
+          </td>
+          <td class="text-right!">
+            <span class="text-sm font-semibold tabular-nums text-ds-ink">
+              {{ '$' + (proveedor.limiteCredito | number: '1.0-0') }}
+            </span>
+          </td>
+          <td class="text-right!">
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ proveedor.diasCredito }}</span>
+          </td>
+          <td class="text-right!">
+            <div class="flex justify-end gap-1">
+              <button type="button"
+                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
+                aria-label="Ver proveedor">
+                <svg pIcon="eye" [size]="15"></svg>
+              </button>
+              <button type="button"
+                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
+                aria-label="Editar proveedor">
+                <svg pIcon="pencil" [size]="15"></svg>
+              </button>
+              <button type="button"
+                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-danger-line hover:bg-ds-danger-soft hover:text-ds-danger focus-visible:shadow-ds-focus focus-visible:outline-none"
+                aria-label="Eliminar proveedor" (click)="eliminar(proveedor)">
+                <svg pIcon="trash" [size]="15"></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="9" class="p-8 text-center text-sm text-ds-muted">
+            No hay proveedores que coincidan con los filtros seleccionados.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
+</div>
+
+<p-drawer
+  [(visible)]="drawerVisible"
+  position="right"
+  styleClass="ds-client-drawer"
+  header="Nuevo proveedor"
+  [modal]="true"
+  [dismissible]="true"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+>
+  <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault()">
+    <section>
+      <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Datos generales</h3>
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-codigo" [obligatorio]="true">Código</app-etiqueta-formulario>
+          <input
+            id="provider-codigo"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. PROV-001"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-estado" [obligatorio]="true">Estado</app-etiqueta-formulario>
+          <p-select
+            inputId="provider-estado"
+            class="w-full"
+            [options]="opcionesEstado"
+            optionLabel="etiqueta"
+            optionValue="valor"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-razon-social" [obligatorio]="true">
+            Nombre o razón social
+          </app-etiqueta-formulario>
+          <input
+            id="provider-razon-social"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. Grupo Industrial Raudal, S.A. de C.V."
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-nombre-comercial">Nombre comercial</app-etiqueta-formulario>
+          <input
+            id="provider-nombre-comercial"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. Raudal"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-tipo-persona" [obligatorio]="true">
+            Tipo de persona
+          </app-etiqueta-formulario>
+          <p-select
+            inputId="provider-tipo-persona"
+            [options]="opcionesTipoPersona"
+            optionLabel="etiqueta"
+            optionValue="valor"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-rfc" [obligatorio]="true">RFC</app-etiqueta-formulario>
+          <input
+            id="provider-rfc"
+            pInputText
+            type="text"
+            class="ds-input uppercase"
+            placeholder="Ej. RIR240315AB1"
+            maxlength="13"
+          />
+          <app-mensaje-ayuda-error mensajeAyuda="Registro Federal de Contribuyentes."></app-mensaje-ayuda-error>
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-identificador-fiscal">
+            Identificador fiscal extranjero
+          </app-etiqueta-formulario>
+          <input
+            id="provider-identificador-fiscal"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. IDF-88231"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-fecha-alta">Fecha de alta</app-etiqueta-formulario>
+          <input
+            id="provider-fecha-alta"
+            pInputText
+            type="date"
+            class="ds-input"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-ds-line pt-6">
+      <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Configuración fiscal</h3>
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-regimen-fiscal">ID régimen fiscal</app-etiqueta-formulario>
+          <p-select
+            inputId="provider-regimen-fiscal"
+            class="w-full"
+            [options]="opcionesRegimen"
+            optionLabel="etiqueta"
+            optionValue="valor"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-cuenta-contable">Cuenta contable</app-etiqueta-formulario>
+          <input
+            id="provider-cuenta-contable"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. 2010 · Proveedores nacionales"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-moneda">ID moneda predeterminada</app-etiqueta-formulario>
+          <p-select
+            inputId="provider-moneda"
+            [options]="opcionesMoneda"
+            optionLabel="etiqueta"
+            optionValue="valor"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-forma-pago">
+            ID forma de pago predeterminada
+          </app-etiqueta-formulario>
+          <p-select
+            inputId="provider-forma-pago"
+            [options]="opcionesFormaPago"
+            optionLabel="etiqueta"
+            optionValue="valor"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-metodo-pago">
+            ID método de pago predeterminado
+          </app-etiqueta-formulario>
+          <p-select
+            inputId="provider-metodo-pago"
+            [options]="opcionesMetodoPago"
+            optionLabel="etiqueta"
+            optionValue="valor"
+            placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field col-span-full">
+          <label
+            class="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-ds-ink"
+            for="provider-contrarecibo"
+          >
+            <input
+              id="provider-contrarecibo"
+              type="checkbox"
+              class="size-4 cursor-pointer accent-ds-primary"
+            />
+            <span>El proveedor requiere pago con contrarecibo</span>
+          </label>
+          <app-mensaje-ayuda-error mensajeAyuda="Indica si los pagos se gestionan mediante contrarecibo."></app-mensaje-ayuda-error>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-ds-line pt-6">
+      <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Condiciones comerciales</h3>
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-limite-credito">Límite de crédito</app-etiqueta-formulario>
+          <input
+            id="provider-limite-credito"
+            pInputText
+            type="text"
+            class="ds-input"
+            inputmode="decimal"
+            placeholder="0.00"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="provider-dias-credito">Días de crédito</app-etiqueta-formulario>
+          <input
+            id="provider-dias-credito"
+            pInputText
+            type="number"
+            class="ds-input"
+            placeholder="0"
+            min="0"
+          />
+        </div>
+        <div class="ds-field col-span-full">
+          <app-etiqueta-formulario para="provider-observaciones">Observaciones</app-etiqueta-formulario>
+          <textarea
+            id="provider-observaciones"
+            pInputText
+            rows="4"
+            class="ds-input h-auto! min-h-24! resize-y! px-3! py-2.5!"
+            placeholder="Notas internas sobre el proveedor…"
+          ></textarea>
+        </div>
+      </div>
+    </section>
+  </form>
+
+  <ng-template #footer>
+    <div class="flex justify-end gap-2">
+      <button
+        type="button"
+        pButton
+        variant="outlined"
+        (click)="drawerVisible.set(false)"
+      >
+        Cancelar
+      </button>
+      <button type="button" pButton>Guardar proveedor</button>
+    </div>
+  </ng-template>
+</p-drawer>
+
+@if (seleccion().length > 0) {
+  <app-barra-acciones-masivas
+    [cantidad]="seleccion().length"
+    sustantivo="proveedor"
+    (limpiar)="limpiarSeleccion()"
+    (eliminar)="limpiarSeleccion()"
+  />
+}

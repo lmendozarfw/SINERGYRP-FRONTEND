@@ -1,10 +1,15 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
+import { BarraAccionesMasivasComponente } from '@compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
+import { CopiarTextoComponente } from '@compartido/componentes/copiar-texto/copiar-texto.componente';
 import { DialogoConfirmacionServicio } from '@compartido/componentes/confirmacion/confirmacion.servicio';
+import { EncabezadoPaginaComponente } from '@compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
+import { EtiquetaFormularioComponente } from '@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
+import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
+import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 import { BreadcrumbServicio } from '@nucleo/servicios/breadcrumb.servicio';
 import { PIcon } from '@primeicons/angular';
 import { ButtonDirective } from 'primeng/button';
-import { ConfirmDialog } from 'primeng/confirmdialog';
 import { Drawer } from 'primeng/drawer';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
@@ -12,12 +17,6 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
-import { EncabezadoPaginaComponente } from '@compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
-import { CopiarTextoComponente } from '@compartido/componentes/copiar-texto/copiar-texto.componente';
-import { EtiquetaFormularioComponente } from '@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
-import { BarraAccionesMasivasComponente } from '@compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
-import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 import { ICliente } from '../modelos/cliente';
 
 @Component({
@@ -32,14 +31,13 @@ import { ICliente } from '../modelos/cliente';
     Select,
     TableModule,
     PIcon,
-    ConfirmDialog,
     Tag,
     EncabezadoPaginaComponente,
     CopiarTextoComponente,
     EtiquetaFormularioComponente,
     MensajeAyudaErrorComponente,
-    BarraAccionesMasivasComponente
-],
+    BarraAccionesMasivasComponente,
+  ],
   templateUrl: './clientes.pagina.html',
 })
 export class ClientesPagina {
@@ -57,6 +55,11 @@ export class ClientesPagina {
     { etiqueta: '601 · General de Ley Personas Morales', valor: '601 · General' },
     { etiqueta: '612 · Personas Físicas con Actividades Empresariales', valor: '612 · PFAE' },
     { etiqueta: '616 · Sin obligaciones fiscales', valor: '616 · Sin obligaciones' },
+  ];
+  readonly opcionesEstado: IOpcionSelector[] = [
+    { etiqueta: 'Activo', valor: 'activo' },
+    { etiqueta: 'En revisión', valor: 'en revisión' },
+    { etiqueta: 'Inactivo', valor: 'inactivo' },
   ];
   readonly opcionesIva: IOpcionSelector[] = [
     { etiqueta: 'IVA 16%', valor: 'IVA 16%' },
@@ -80,109 +83,184 @@ export class ClientesPagina {
 
   readonly clientes: ICliente[] = [
     {
-      nombre_razon_social: 'Grupo Industrial Raudal, S.A. de C.V.',
-      nombre_comercial: 'Raudal',
-      tipo_persona: 'Moral',
+      id: 1,
+      idOrganizacion: 1,
+      codigo: 'CLI-001',
+      estadoCliente: 'activo',
+      fechaAlta: new Date('2023-02-15T00:00:00'),
+      nombreRazonSocial: 'Grupo Industrial Raudal, S.A. de C.V.',
+      nombreComercial: 'Raudal',
+      tipoPersona: 'Moral',
       rfc: 'RIR240315AB1',
-      id_regimen_fiscal: '601 · General',
-      id_tipo_iva: 'IVA 16%',
-      id_uso_cfdi_predeterminado: 'G03',
-      id_forma_pago_predeterminada: '03 · Transferencia',
-      id_metodo_pago_predeterminado: 'PPD',
-      limite_credito: 150000,
-      dias_credito: 30,
+      identificadorFiscalExtranjero: '',
+      idRegimenFiscal: '601 · General',
+      idTipoIva: 'IVA 16%',
+      cuentaContable: '1010 · Clientes nacionales',
+      idUsoCfdiPredeterminado: 'G03',
+      idFormaPagoPredeterminada: '03 · Transferencia',
+      idMetodoPagoPredeterminado: 'PPD',
+      limiteCredito: 150000,
+      diasCredito: 30,
       observaciones: 'Cliente preferente con facturación mensual.',
+      creadoEn: new Date('2023-02-15T00:00:00'),
+      actualizadoEn: new Date('2026-01-20T00:00:00'),
     },
     {
-      nombre_razon_social: 'Comercializadora Nova, S. de R.L. de C.V.',
-      nombre_comercial: 'Nova',
-      tipo_persona: 'Moral',
+      id: 2,
+      idOrganizacion: 1,
+      codigo: 'CLI-002',
+      estadoCliente: 'activo',
+      fechaAlta: new Date('2022-08-03T00:00:00'),
+      nombreRazonSocial: 'Comercializadora Nova, S. de R.L. de C.V.',
+      nombreComercial: 'Nova',
+      tipoPersona: 'Moral',
       rfc: 'CNO890412H23',
-      id_regimen_fiscal: '601 · General',
-      id_tipo_iva: 'IVA 16%',
-      id_uso_cfdi_predeterminado: 'G01',
-      id_forma_pago_predeterminada: '03 · Transferencia',
-      id_metodo_pago_predeterminado: 'PUE',
-      limite_credito: 85000,
-      dias_credito: 15,
+      identificadorFiscalExtranjero: '',
+      idRegimenFiscal: '601 · General',
+      idTipoIva: 'IVA 16%',
+      cuentaContable: '1010 · Clientes nacionales',
+      idUsoCfdiPredeterminado: 'G01',
+      idFormaPagoPredeterminada: '03 · Transferencia',
+      idMetodoPagoPredeterminado: 'PUE',
+      limiteCredito: 85000,
+      diasCredito: 15,
       observaciones: 'Solicita factura por cada pedido.',
+      creadoEn: new Date('2022-08-03T00:00:00'),
+      actualizadoEn: new Date('2025-11-04T00:00:00'),
     },
     {
-      nombre_razon_social: 'Laura Gutiérrez Méndez',
-      nombre_comercial: 'Estudio Gutiérrez',
-      tipo_persona: 'Física',
+      id: 3,
+      idOrganizacion: 1,
+      codigo: 'CLI-003',
+      estadoCliente: 'activo',
+      fechaAlta: new Date('2024-01-10T00:00:00'),
+      nombreRazonSocial: 'Laura Gutiérrez Méndez',
+      nombreComercial: 'Estudio Gutiérrez',
+      tipoPersona: 'Física',
       rfc: 'GUML850921E45',
-      id_regimen_fiscal: '612 · PFAE',
-      id_tipo_iva: 'IVA 16%',
-      id_uso_cfdi_predeterminado: 'G03',
-      id_forma_pago_predeterminada: '04 · Tarjeta',
-      id_metodo_pago_predeterminado: 'PUE',
-      limite_credito: 25000,
-      dias_credito: 0,
+      identificadorFiscalExtranjero: '',
+      idRegimenFiscal: '612 · PFAE',
+      idTipoIva: 'IVA 16%',
+      cuentaContable: '1011 · Clientes de servicios',
+      idUsoCfdiPredeterminado: 'G03',
+      idFormaPagoPredeterminada: '04 · Tarjeta',
+      idMetodoPagoPredeterminado: 'PUE',
+      limiteCredito: 25000,
+      diasCredito: 0,
       observaciones: 'Pago de contado por defecto.',
+      creadoEn: new Date('2024-01-10T00:00:00'),
+      actualizadoEn: new Date('2025-09-18T00:00:00'),
     },
     {
-      nombre_razon_social: 'Manufacturas del Norte, S.A. de C.V.',
-      nombre_comercial: 'Man Norte',
-      tipo_persona: 'Moral',
+      id: 4,
+      idOrganizacion: 1,
+      codigo: 'CLI-004',
+      estadoCliente: 'activo',
+      fechaAlta: new Date('2021-05-22T00:00:00'),
+      nombreRazonSocial: 'Manufacturas del Norte, S.A. de C.V.',
+      nombreComercial: 'Man Norte',
+      tipoPersona: 'Moral',
       rfc: 'MNO750618K12',
-      id_regimen_fiscal: '601 · General',
-      id_tipo_iva: 'IVA 16%',
-      id_uso_cfdi_predeterminado: 'G01',
-      id_forma_pago_predeterminada: '03 · Transferencia',
-      id_metodo_pago_predeterminado: 'PPD',
-      limite_credito: 220000,
-      dias_credito: 45,
+      identificadorFiscalExtranjero: '',
+      idRegimenFiscal: '601 · General',
+      idTipoIva: 'IVA 16%',
+      cuentaContable: '1010 · Clientes nacionales',
+      idUsoCfdiPredeterminado: 'G01',
+      idFormaPagoPredeterminada: '03 · Transferencia',
+      idMetodoPagoPredeterminado: 'PPD',
+      limiteCredito: 220000,
+      diasCredito: 45,
       observaciones: 'Requiere orden de compra para cada entrega.',
+      creadoEn: new Date('2021-05-22T00:00:00'),
+      actualizadoEn: new Date('2026-02-11T00:00:00'),
     },
     {
-      nombre_razon_social: 'Servicios Profesionales Ámbar, S.C.',
-      nombre_comercial: 'Ámbar',
-      tipo_persona: 'Moral',
+      id: 5,
+      idOrganizacion: 1,
+      codigo: 'CLI-005',
+      estadoCliente: 'inactivo',
+      fechaAlta: new Date('2020-11-02T00:00:00'),
+      nombreRazonSocial: 'Servicios Profesionales Ámbar, S.C.',
+      nombreComercial: 'Ámbar',
+      tipoPersona: 'Moral',
       rfc: 'SPA910203R77',
-      id_regimen_fiscal: '601 · General',
-      id_tipo_iva: 'Exento',
-      id_uso_cfdi_predeterminado: 'G03',
-      id_forma_pago_predeterminada: '03 · Transferencia',
-      id_metodo_pago_predeterminado: 'PUE',
-      limite_credito: 0,
-      dias_credito: 0,
+      identificadorFiscalExtranjero: '',
+      idRegimenFiscal: '601 · General',
+      idTipoIva: 'Exento',
+      cuentaContable: '1011 · Clientes de servicios',
+      idUsoCfdiPredeterminado: 'G03',
+      idFormaPagoPredeterminada: '03 · Transferencia',
+      idMetodoPagoPredeterminado: 'PUE',
+      limiteCredito: 0,
+      diasCredito: 0,
       observaciones: 'Sin línea de crédito autorizada.',
+      creadoEn: new Date('2020-11-02T00:00:00'),
+      actualizadoEn: new Date('2025-03-29T00:00:00'),
     },
     {
-      nombre_razon_social: 'Fernando Ríos Castro',
-      nombre_comercial: 'Ríos y Asociados',
-      tipo_persona: 'Física',
+      id: 6,
+      idOrganizacion: 1,
+      codigo: 'CLI-006',
+      estadoCliente: 'activo',
+      fechaAlta: new Date('2025-04-17T00:00:00'),
+      nombreRazonSocial: 'Fernando Ríos Castro',
+      nombreComercial: 'Ríos y Asociados',
+      tipoPersona: 'Física',
       rfc: 'RICF790114M31',
-      id_regimen_fiscal: '612 · PFAE',
-      id_tipo_iva: 'IVA 8%',
-      id_uso_cfdi_predeterminado: 'G03',
-      id_forma_pago_predeterminada: '01 · Efectivo',
-      id_metodo_pago_predeterminado: 'PUE',
-      limite_credito: 12000,
-      dias_credito: 8,
+      identificadorFiscalExtranjero: '',
+      idRegimenFiscal: '612 · PFAE',
+      idTipoIva: 'IVA 8%',
+      cuentaContable: '1011 · Clientes de servicios',
+      idUsoCfdiPredeterminado: 'G03',
+      idFormaPagoPredeterminada: '01 · Efectivo',
+      idMetodoPagoPredeterminado: 'PUE',
+      limiteCredito: 12000,
+      diasCredito: 8,
       observaciones: 'Contacto principal: fernando.rios@example.com.',
+      creadoEn: new Date('2025-04-17T00:00:00'),
+      actualizadoEn: new Date('2025-12-06T00:00:00'),
     },
     {
-      nombre_razon_social: 'Distribuidora Solstice, S.A. de C.V.',
-      nombre_comercial: 'Solstice',
-      tipo_persona: 'Moral',
+      id: 7,
+      idOrganizacion: 1,
+      codigo: 'CLI-007',
+      estadoCliente: 'en revisión',
+      fechaAlta: new Date('2026-03-08T00:00:00'),
+      nombreRazonSocial: 'Distribuidora Solstice, S.A. de C.V.',
+      nombreComercial: 'Solstice',
+      tipoPersona: 'Moral',
       rfc: 'DSO160902TQ8',
-      id_regimen_fiscal: '616 · Sin obligaciones',
-      id_tipo_iva: 'Exento',
-      id_uso_cfdi_predeterminado: 'I01',
-      id_forma_pago_predeterminada: '03 · Transferencia',
-      id_metodo_pago_predeterminado: 'PUE',
-      limite_credito: 60000,
-      dias_credito: 20,
+      identificadorFiscalExtranjero: 'IDF-44710',
+      idRegimenFiscal: '616 · Sin obligaciones',
+      idTipoIva: 'Exento',
+      cuentaContable: '1010 · Clientes nacionales',
+      idUsoCfdiPredeterminado: 'I01',
+      idFormaPagoPredeterminada: '03 · Transferencia',
+      idMetodoPagoPredeterminado: 'PUE',
+      limiteCredito: 60000,
+      diasCredito: 20,
       observaciones: 'Facturación electrónica pendiente de validación.',
+      creadoEn: new Date('2026-03-08T00:00:00'),
+      actualizadoEn: new Date('2026-03-15T00:00:00'),
     },
   ];
 
   constructor() {
     this.breadcrumb.configurar([
-      { llave: 'clients', etiqueta: 'Clientes', ruta: '/app/clients', deshabilitado: true },
+      {
+        llave: 'clients',
+        etiqueta: 'Clientes',
+        ruta: '/app/clientes',
+        deshabilitado: true,
+      },
     ]);
+  }
+
+  severidadEstado(estado: string): 'success' | 'warn' | 'danger' {
+    if (estado === 'activo') {
+      return 'success';
+    }
+    return estado === 'inactivo' ? 'danger' : 'warn';
   }
 
   abrirDrawer(): void {
@@ -200,10 +278,9 @@ export class ClientesPagina {
       tipo: 'peligro',
       textoAceptar: 'Eliminar',
       textoCancelar: 'Cancelar',
-
       alConfirmar: () => {
-        console.log('Eliminado');
-      }
+        console.log('Eliminado', cliente?.codigo);
+      },
     });
   }
 }

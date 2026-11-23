@@ -18,7 +18,7 @@ import { PIcon } from '@primeicons/angular';
           class="flex h-7 min-w-7 items-center justify-center rounded-full bg-ds-primary px-2 text-[13px] font-semibold tabular-nums text-ds-on-primary"
         >{{ cantidad() }}</span>
         <span class="text-[13px] font-medium text-ds-on-navy-78 max-sm:hidden">
-          {{ cantidad() === 1 ? 'cliente seleccionado' : 'clientes seleccionados' }}
+          {{ cantidad() === 1 ? sustantivo() + ' seleccionado' : sustantivo() + 's seleccionados' }}
         </span>
       </div>
 
@@ -28,7 +28,7 @@ import { PIcon } from '@primeicons/angular';
         <button
           type="button"
           class="barra-acciones-masivas__accion px-2.5 text-ds-on-navy-82 hover:bg-ds-on-navy-10 hover:text-ds-on-navy max-sm:w-8.5 max-sm:px-0"
-          aria-label="Editar clientes seleccionados"
+          aria-label="Editar {{ sustantivo() }}s seleccionados"
           (click)="editar.emit()"
         >
           <svg pIcon="pencil" [size]="16"></svg>
@@ -37,7 +37,7 @@ import { PIcon } from '@primeicons/angular';
         <button
           type="button"
           class="barra-acciones-masivas__accion px-2.5 text-ds-on-navy-82 hover:bg-ds-on-navy-10 hover:text-ds-on-navy max-sm:w-8.5 max-sm:px-0"
-          aria-label="Exportar clientes seleccionados"
+          aria-label="Exportar {{ sustantivo() }}s seleccionados"
           (click)="exportar.emit()"
         >
           <svg pIcon="download" [size]="16"></svg>
@@ -46,7 +46,7 @@ import { PIcon } from '@primeicons/angular';
         <button
           type="button"
           class="barra-acciones-masivas__accion px-2.5 text-ds-danger-45 hover:bg-ds-danger-18 hover:text-ds-danger-25 max-sm:w-8.5 max-sm:px-0"
-          aria-label="Eliminar clientes seleccionados"
+          aria-label="Eliminar {{ sustantivo() }}s seleccionados"
           (click)="eliminar.emit()"
         >
           <svg pIcon="trash" [size]="16"></svg>
@@ -110,6 +110,7 @@ import { PIcon } from '@primeicons/angular';
 })
 export class BarraAccionesMasivasComponente {
   readonly cantidad = input.required<number>();
+  readonly sustantivo = input<string>('cliente');
 
   readonly editar = output<void>();
   readonly exportar = output<void>();

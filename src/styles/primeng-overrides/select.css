@@ -1,4 +1,4 @@
-.ds-clients-select.p-select,
+.ds-select.p-select,
 .ds-client-form .p-select {
   width: 100%;
   min-height: var(--ds-control-height);
@@ -7,20 +7,20 @@
   background: var(--ds-bg-raised);
 }
 
-.ds-clients-select.p-select:hover,
+.ds-select.p-select:hover,
 .ds-client-form .p-select:hover {
   border-color: var(--ds-ink-soft);
 }
 
-.ds-clients-select.p-select.p-focus,
+.ds-select.p-select.p-focus,
 .ds-client-form .p-select.p-focus {
   border-color: var(--ds-primary);
   box-shadow: var(--ds-focus-shadow);
 }
 
-.ds-clients-select.p-select .p-select-label,
+.ds-select.p-select .p-select-label,
 .ds-client-form .p-select .p-select-label {
-  padding: 10px 12px;
-  font-size: 14px;
-  line-height: 22px;
+  padding: var(--ds-control-padding-block) var(--ds-control-padding-inline);
+  font-size: var(--ds-control-font-size);
+  line-height: var(--ds-control-line-height);
 }

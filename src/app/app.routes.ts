@@ -27,6 +27,11 @@ export const routes: Routes = [
           import('./funcionalidades/tesoreria/clientes/paginas/clientes.pagina').then((p) => p.ClientesPagina),
       },
       {
+        path: 'proveedores',
+        loadComponent: () =>
+          import('./funcionalidades/tesoreria/proveedores/paginas/proveedores.pagina').then(p => p.ProveedoresPagina)
+      },
+      {
         path: 'ingenieria-producto/nuevo-producto',
         loadComponent: () =>
           import('./funcionalidades/ingenieria-producto/paginas/nuevo-producto/nuevo-producto.pagina').then(

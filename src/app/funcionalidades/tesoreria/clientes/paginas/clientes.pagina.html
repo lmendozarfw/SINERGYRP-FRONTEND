@@ -18,7 +18,7 @@
         pInputText
         type="text"
         class="ds-input"
-        placeholder="Buscar por nombre o RFC"
+        placeholder="Buscar por nombre, código o RFC"
         aria-label="Buscar clientes"
       />
     </p-iconfield>
@@ -67,10 +67,10 @@
           <th class="ds-table__th--check" class="w-[40px] min-w-[40px]">
             <p-table-header-checkbox ariaLabel="Seleccionar todos los clientes" />
           </th>
-          <th pSortableColumn="nombre_razon_social" class="w-[300px] min-w-[300px]">
+          <th pSortableColumn="nombreRazonSocial" class="w-[300px] min-w-[300px]">
             <span class="inline-flex items-center gap-1.5">
               Cliente
-              <p-sorticon field="nombre_razon_social" />
+              <p-sorticon field="nombreRazonSocial" />
             </span>
           </th>
           <th pSortableColumn="rfc" class="w-[150px] min-w-[150px]">
@@ -79,23 +79,29 @@
               <p-sorticon field="rfc" />
             </span>
           </th>
-          <th pSortableColumn="tipo_persona" class="w-[160px] min-w-[160px]">
+          <th pSortableColumn="tipoPersona" class="w-[160px] min-w-[160px]">
             <span class="inline-flex items-center gap-1.5">
               Tipo de persona
-              <p-sorticon field="tipo_persona" />
+              <p-sorticon field="tipoPersona" />
             </span>
           </th>
           <th class="w-[190px] min-w-[190px]">Régimen fiscal</th>
-          <th pSortableColumn="limite_credito" class="w-[175px] min-w-[175px] text-right!">
+          <th pSortableColumn="estadoCliente" class="w-[130px] min-w-[130px]">
             <span class="inline-flex items-center gap-1.5">
-              Límite de crédito
-              <p-sorticon field="limite_credito" />
+              Estado
+              <p-sorticon field="estadoCliente" />
             </span>
           </th>
-          <th pSortableColumn="dias_credito" class="w-[90px] min-w-[90px] text-right!">
+          <th pSortableColumn="limiteCredito" class="w-[175px] min-w-[175px] text-right!">
+            <span class="inline-flex items-center gap-1.5">
+              Límite de crédito
+              <p-sorticon field="limiteCredito" />
+            </span>
+          </th>
+          <th pSortableColumn="diasCredito" class="w-[90px] min-w-[90px] text-right!">
             <span class="inline-flex items-center gap-1.5">
               Días
-              <p-sorticon field="dias_credito" />
+              <p-sorticon field="diasCredito" />
             </span>
           </th>
           <th class="w-[140px] min-w-[140px] text-right!">Acciones</th>
@@ -110,15 +116,17 @@
           <td>
             <div class="flex min-w-[240px] items-center gap-3">
               <span class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ds-navy text-sm font-semibold text-ds-on-primary">
-                {{ cliente.nombre_razon_social.charAt(0) }}
+                {{ cliente.nombreRazonSocial.charAt(0) }}
               </span>
               <span class="min-w-0">
                 <app-copiar-texto
-                  [valor]="cliente.nombre_razon_social"
+                  [valor]="cliente.nombreRazonSocial"
                   etiqueta="Cliente"
                   variante="nombre"
                 />
-                <span class="block text-xs leading-[18px] text-ds-muted">{{ cliente.nombre_comercial }}</span>
+                <span class="block text-xs leading-[18px] text-ds-muted">
+                  {{ cliente.codigo }} · {{ cliente.nombreComercial }}
+                </span>
               </span>
             </div>
           </td>
@@ -127,20 +135,23 @@
           </td>
           <td>
             <p-tag
-              [value]="cliente.tipo_persona"
-              [severity]="cliente.tipo_persona === 'Moral' ? 'info' : 'success'"
+              [value]="cliente.tipoPersona"
+              [severity]="cliente.tipoPersona === 'Moral' ? 'info' : 'success'"
             />
           </td>
           <td>
-            <span class="block text-xs leading-[18px] text-ds-muted">{{ cliente.id_regimen_fiscal }}</span>
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ cliente.idRegimenFiscal }}</span>
+          </td>
+          <td>
+            <p-tag [value]="cliente.estadoCliente" [severity]="severidadEstado(cliente.estadoCliente)" />
           </td>
           <td class="text-right!">
             <span class="text-sm font-semibold tabular-nums text-ds-ink">
-              {{ '$' + (cliente.limite_credito | number: '1.0-0') }}
+              {{ '$' + (cliente.limiteCredito | number: '1.0-0') }}
             </span>
           </td>
           <td class="text-right!">
-            <span class="block text-xs leading-[18px] text-ds-muted">{{ cliente.dias_credito }}</span>
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ cliente.diasCredito }}</span>
           </td>
           <td class="text-right!">
             <div class="flex justify-end gap-1">
@@ -166,7 +177,7 @@
 
       <ng-template #emptymessage>
         <tr>
-          <td colspan="8" class="p-8 text-center text-sm text-ds-muted">
+          <td colspan="9" class="p-8 text-center text-sm text-ds-muted">
             No hay clientes que coincidan con los filtros seleccionados.
           </td>
         </tr>
@@ -189,6 +200,29 @@
     <section>
       <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Datos generales</h3>
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div class="ds-field">
+          <app-etiqueta-formulario para="client-codigo" [obligatorio]="true">Código</app-etiqueta-formulario>
+          <input
+            id="client-codigo"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. CLI-001"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="client-estado" [obligatorio]="true">
+            Estado del cliente
+          </app-etiqueta-formulario>
+          <p-select
+            inputId="client-estado"
+            class="w-full"
+            [options]="opcionesEstado"
+            optionLabel="etiqueta"
+            optionValue="valor"
+            placeholder="Selecciona una opción"
+          />
+        </div>
         <div class="ds-field">
           <app-etiqueta-formulario para="client-razon-social" [obligatorio]="true">
             Nombre o razón social
@@ -235,6 +269,27 @@
           />
           <app-mensaje-ayuda-error mensajeAyuda="Registro Federal de Contribuyentes."></app-mensaje-ayuda-error>
         </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="client-identificador-fiscal">
+            Identificador fiscal extranjero
+          </app-etiqueta-formulario>
+          <input
+            id="client-identificador-fiscal"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. IDF-44710"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="client-fecha-alta">Fecha de alta</app-etiqueta-formulario>
+          <input
+            id="client-fecha-alta"
+            pInputText
+            type="date"
+            class="ds-input"
+          />
+        </div>
       </div>
     </section>
 
@@ -250,6 +305,16 @@
             optionLabel="etiqueta"
             optionValue="valor"
             placeholder="Selecciona una opción"
+          />
+        </div>
+        <div class="ds-field">
+          <app-etiqueta-formulario para="client-cuenta-contable">Cuenta contable</app-etiqueta-formulario>
+          <input
+            id="client-cuenta-contable"
+            pInputText
+            type="text"
+            class="ds-input"
+            placeholder="Ej. 1010 · Clientes nacionales"
           />
         </div>
         <div class="ds-field">
@@ -360,5 +425,3 @@
     (eliminar)="limpiarSeleccion()"
   />
 }
-
-<p-confirmdialog />

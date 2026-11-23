@@ -24,14 +24,14 @@ textarea[pInputText],
 .ds-input.p-inputtext {
   width: 100%;
   height: var(--ds-control-height);
-  padding: 0 12px;
+  padding: 0 var(--ds-control-padding-inline);
   border: 1px solid var(--ds-border);
   border-radius: var(--ds-radius-input);
   background: var(--ds-bg-raised);
   color: var(--ds-text);
   font-family: inherit;
-  font-size: 14px;
-  line-height: 22px;
+  font-size: var(--ds-control-font-size);
+  line-height: var(--ds-control-line-height);
   outline: none;
   transition:
     border-color 150ms ease,
