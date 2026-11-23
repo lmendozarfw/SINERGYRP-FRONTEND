@@ -113,14 +113,15 @@
         <button
           type="button"
           pButton
-          class="ds-button ds-button--text ds-button--compact"
+          variant="text"
+          size="small"
           (click)="recoverPassword()"
         >
           ¿Olvidaste tu contraseña?
         </button>
       </div>
 
-      <button pButton type="submit" class="ds-button w-full">
+      <button pButton type="submit" fluid>
         <span class="flex items-center justify-center gap-2">
           @if (authStore.cargando()) {
             <svg pIcon="spinner" [spin]="true" [size]="16"></svg>
@@ -135,7 +136,7 @@
 
   <div class="ds-divider"></div>
 
-  <button type="button" pButton class="ds-button ds-button--secondary w-full" (click)="toggleMode()">
+  <button type="button" pButton variant="outlined" fluid (click)="toggleMode()">
     @if (mode() === 'qr') {
       <svg pIcon="pencil" [size]="16"></svg>
     } @else {

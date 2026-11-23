@@ -36,7 +36,7 @@ import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servici
           descripcion="Referencia visual de la paleta, tipografía y componentes. Usa Tab para ver el anillo de foco."
           nivel="h1"
         >
-          <a routerLink="/auth/login" pButton class="ds-button ds-button--secondary">Ir al login</a>
+          <a routerLink="/auth/login" pButton variant="outlined">Ir al login</a>
         </app-encabezado-pagina>
 
         <section class="flex flex-col gap-4">
@@ -91,12 +91,12 @@ import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servici
         <section class="flex flex-col gap-4">
           <h2 class="ds-title-section">3. Botones</h2>
           <div class="ds-card flex flex-wrap items-center gap-3">
-            <button pButton class="ds-button">Primario</button>
-            <button pButton class="ds-button ds-button--secondary">Secundario</button>
-            <button pButton class="ds-button ds-button--text">Texto</button>
-            <button pButton class="ds-button ds-button--compact">Compacto · 36px</button>
-            <button pButton class="ds-button ds-button--wide">Amplio · 48px</button>
-            <button pButton class="ds-button" disabled>Deshabilitado</button>
+            <button pButton>Primario · 44px</button>
+            <button pButton variant="outlined">Secundario</button>
+            <button pButton variant="text">Texto</button>
+            <button pButton size="small">Compacto · 36px</button>
+            <button pButton size="large">Amplio · 48px</button>
+            <button pButton disabled>Deshabilitado</button>
           </div>
         </section>
 
@@ -164,7 +164,7 @@ import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servici
                 Las cards usan bordes sutiles, radio de 12 px y padding interno de 24 px.
               </p>
               <div class="mt-4 flex justify-end">
-                <button pButton class="ds-button ds-button--text">Ver detalle</button>
+                <button pButton variant="text">Ver detalle</button>
               </div>
             </p-card>
             <div class="ds-card">

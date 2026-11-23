@@ -21,11 +21,12 @@
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-2 max-sm:w-full">
+    <div class="flex flex-wrap gap-2 max-sm:w-full max-sm:[&>button]:w-full">
       <button
         type="button"
         pButton
-        class="ds-button ds-button--secondary ds-button--compact max-sm:w-full"
+        variant="outlined"
+        size="small"
         (click)="abrirNuevaPieza()"
       >
         <svg pIcon="plus" [size]="16"></svg>
@@ -606,10 +607,10 @@
 
   <ng-template #footer>
     <div class="flex justify-end gap-2">
-      <button type="button" pButton class="ds-button ds-button--secondary" (click)="cerrarDrawer()">
+      <button type="button" pButton variant="outlined" (click)="cerrarDrawer()">
         Cancelar
       </button>
-      <button type="button" pButton class="ds-button" (click)="guardarPieza()">
+      <button type="button" pButton (click)="guardarPieza()">
         {{ piezaEnEdicion ? 'Guardar cambios' : 'Agregar pieza' }}
       </button>
     </div>

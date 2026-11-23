@@ -12,8 +12,8 @@
             <span class="text-xs font-medium text-ds-ink">{{ textoVacioPrincipal }}</span>
             <span class="text-[11px] text-ds-muted">{{ textoVacioSecundario }}</span>
 
-            <button type="button" pButton size="small" severity="secondary" [outlined]="true"
-                [disabled]="deshabilitado()" class="!text-xs !px-3 !py-1.5 !bg-ds-surface"
+            <button type="button" pButton variant="outlined" size="small"
+                [disabled]="deshabilitado()"
                 (click)="abrirSelector(inputArchivo)">{{ textoVacioBoton }}</button>
 
             <span class="text-[10px] text-ds-ink-soft">
@@ -40,11 +40,11 @@
             </div>
 
             <div class="flex items-center gap-2">
-                <button type="button" pButton size="small" severity="secondary" [outlined]="true"
+                <button type="button" pButton variant="outlined" size="small"
                     [disabled]="deshabilitado()" (click)="abrirSelector(inputArchivo)">
                     <i class="pi pi-refresh"></i> Reemplazar
                 </button>
-                <button type="button" pButton size="small" severity="danger" [text]="true"
+                <button type="button" pButton variant="text" size="small" severity="danger"
                     [disabled]="deshabilitado()" (click)="eliminarImagen()">
                     <i class="pi pi-trash"></i> Eliminar
                 </button>
@@ -90,7 +90,7 @@
                     }
                 </span>
 
-                <button type="button" pButton size="small" severity="secondary" [outlined]="true"
+                <button type="button" pButton variant="outlined" size="small"
                     [disabled]="deshabilitado() || alcanzoMaximo" (click)="abrirSelector(inputArchivo)">
                     <i class="pi pi-plus"></i> {{ textoBotonAgregar() }}
                 </button>

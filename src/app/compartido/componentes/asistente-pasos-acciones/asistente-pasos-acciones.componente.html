@@ -5,7 +5,7 @@
         <button
             type="button"
             pButton
-            class="ds-button ds-button--text"
+            variant="text"
             [disabled]="guardando()"
             (click)="guardarBorrador.emit()"
         >
@@ -43,12 +43,12 @@
             }
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 max-sm:[&>button]:flex-1">
             @if (puedeRegresar()) {
                 <button
                     type="button"
                     pButton
-                    class="ds-button ds-button--secondary max-sm:flex-1"
+                    variant="outlined"
                     [disabled]="guardando()"
                     (click)="regresar.emit()"
                 >
@@ -60,7 +60,6 @@
             <button
                 type="button"
                 pButton
-                class="ds-button max-sm:flex-1"
                 [disabled]="!puedeContinuar() || guardando()"
                 (click)="continuar.emit()"
             >

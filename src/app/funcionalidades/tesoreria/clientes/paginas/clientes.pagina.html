@@ -3,7 +3,7 @@
     titulo="Clientes"
     descripcion="Consulta la información fiscal y comercial de tus clientes, y administra sus condiciones de crédito desde un solo lugar."
   >
-    <button type="button" pButton class="ds-button" (click)="abrirDrawer()">
+    <button type="button" pButton (click)="abrirDrawer()">
       <svg pIcon="plus" [size]="16"></svg>
       Nuevo cliente
     </button>
@@ -39,10 +39,12 @@
       placeholder="Régimen fiscal"
       aria-label="Filtrar por régimen fiscal"
     />
-    <button type="button" pButton class="ds-button ds-button--secondary shrink-0">
-      <svg pIcon="filter" [size]="14"></svg>
-      Filtros
-    </button>
+    <div class="shrink-0">
+      <button type="button" pButton variant="outlined">
+        <svg pIcon="filter" [size]="14"></svg>
+        Filtros
+      </button>
+    </div>
   </div>
 
   <section class="ds-card overflow-hidden p-0!">
@@ -346,12 +348,12 @@
       <button
         type="button"
         pButton
-        class="ds-button ds-button--secondary"
+        variant="outlined"
         (click)="drawerVisible.set(false)"
       >
         Cancelar
       </button>
-      <button type="button" pButton class="ds-button">Guardar cliente</button>
+      <button type="button" pButton>Guardar cliente</button>
     </div>
   </ng-template>
 </p-drawer>

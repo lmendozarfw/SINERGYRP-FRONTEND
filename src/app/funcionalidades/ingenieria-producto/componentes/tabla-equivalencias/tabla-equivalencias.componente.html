@@ -12,7 +12,7 @@
     </div>
 
     <div class="flex flex-wrap gap-2">
-      <button type="button" pButton class="ds-button ds-button--secondary ds-button--compact">
+      <button type="button" pButton variant="outlined" size="small">
         <svg pIcon="plus" [size]="16"></svg>
         <span>Añadir sistema</span>
       </button>
@@ -27,18 +27,18 @@
   >
     <ng-template #header>
       <tr>
-        <th class="ds-table__th ds-tabla-sistema-col min-w-[180px]!">Sistema</th>
+        <th class="min-w-[180px]!">Sistema</th>
         @for (talla of tallas(); track talla.id) {
           <th
             class="ds-table__th ds-tabla-col min-w-[88px]! text-center! align-middle! [&.ds-tabla-col--base]:bg-ds-action-100! [&.ds-tabla-col--base_.ds-tabla-col\_\_valor]:text-ds-primary-strong!"
             [class.ds-tabla-col--base]="esTallaBase(talla)"
           >
-            <span class="ds-tabla-col__valor block text-sm font-semibold leading-5 text-ds-ink tabular-nums">{{ valorTalla(talla) }}</span>
-            <span class="ds-tabla-col__sistema block text-[11px] font-normal leading-4 text-ds-muted">{{ sistemaPrincipalNombre }}</span>
+            <span class="block text-sm font-semibold leading-5 text-ds-ink tabular-nums">{{ valorTalla(talla) }}</span>
+            <span class="block text-[11px] font-normal leading-4 text-ds-muted">{{ sistemaPrincipalNombre }}</span>
             @if (esTallaBase(talla)) {
               <span class="ds-tabla-badge inline-flex items-center whitespace-nowrap rounded-full bg-ds-primary-soft px-2 py-0.5 text-[11px] font-semibold leading-[18px] text-ds-primary-strong">Base</span>
             }
-            <span class="ds-tabla-col__activa mt-1.5 flex justify-center">
+            <span class="mt-1.5 flex justify-center">
               <p-checkbox
                 class="ds-checkbox"
                 [binary]="true"
@@ -55,7 +55,7 @@
 
     <ng-template #body let-sistema>
       <tr>
-        <td class="ds-table__td">
+        <td>
           <div class="ds-tabla-sistema flex flex-wrap items-center gap-2">
             <span class="ds-tabla-sistema__nombre text-sm font-semibold leading-5 text-ds-ink">{{ sistema.nombre }}</span>
             @if (esSistemaPrincipal(sistema.clave)) {
@@ -66,7 +66,7 @@
 
         @for (talla of tallas(); track talla.id) {
           <td
-            class="ds-table__td [&.ds-tabla-col--base]:bg-ds-action-100! [&.ds-tabla-col--inactiva_.ds-tabla-input]:opacity-55!"
+            class="[&.ds-tabla-col--base]:bg-ds-action-100! [&.ds-tabla-col--inactiva_.ds-tabla-input]:opacity-55!"
             [class.ds-tabla-col--base]="esTallaBase(talla)"
             [class.ds-tabla-col--inactiva]="!talla.activa"
           >
@@ -87,7 +87,7 @@
 
   <footer class="flex flex-col gap-2">
     <div class="flex flex-wrap items-center justify-between gap-3 border-t border-ds-line pt-4 max-sm:flex-col max-sm:items-start">
-      <button type="button" pButton class="ds-button ds-button--text ds-button--compact">
+      <button type="button" pButton variant="text" size="small">
         <svg pIcon="plus" [size]="18"></svg>
         <span>Añadir talla</span>
       </button>

@@ -50,10 +50,12 @@ import { BreadcrumbComponente } from '../componentes/breadcrumb/breadcrumb.compo
             class="flex h-12 shrink-0 items-center gap-2 border-b border-ds-line bg-ds-surface px-3 lg:px-4"
           >
             <button
+              type="button"
               pButton
+              variant="text"
+              size="small"
               pSidebarTrigger
               target="mobile-nav"
-              class="ds-button ds-button--text ds-button--compact"
               [attr.aria-label]="sidebarOpen() ? 'Cerrar menú' : 'Abrir menú'"
             >
               @if (isMobile()) {

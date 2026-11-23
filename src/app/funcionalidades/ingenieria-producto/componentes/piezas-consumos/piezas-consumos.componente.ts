@@ -352,8 +352,8 @@ export class PiezasConsumosComponente {
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Eliminar',
       rejectLabel: 'Cancelar',
-      acceptButtonStyleClass: 'ds-button ds-button--compact',
-      rejectButtonStyleClass: 'ds-button ds-button--secondary ds-button--compact',
+      acceptButtonProps: { size: 'small' },
+      rejectButtonProps: { variant: 'outlined', size: 'small' },
       accept: () => {
         this.piezasState.update((piezas) => piezas.filter((item) => item.id !== pieza.id));
         this.avisos.informacion('Pieza eliminada', `"${pieza.nombre}" se quitó de la lista.`);

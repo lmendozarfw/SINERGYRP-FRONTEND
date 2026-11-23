@@ -124,12 +124,24 @@ Todos los componentes se basan en **PrimeNG** y se personalizan con Tailwind + C
 
 ### 5.1 Botones (`button con directiva pButton`)
 
-- Altura: **44 px**
+- Tamaño por defecto: **44 px**. No se usa ninguna clase para definirlo.
+- Solo se cambia el tamaño mediante el atributo `size` de PrimeNG:
+
+| `size`            | Altura | Uso                                  |
+|-------------------|--------|--------------------------------------|
+| *(sin atributo)*  | 44 px  | Estándar (por defecto)               |
+| `small`           | 36 px  | Compacto, tablas y acciones secundarias |
+| `large`           | 48 px  | Amplio, acciones destacadas          |
+
+- La variante se define con `variant`, no con clases:
+  - *(sin `variant`)* → **Primario**, fondo `blue-600`, texto blanco
+  - `variant="outlined"` → **Secundario**, borde + texto `blue-600`, fondo transparente
+  - `variant="text"` → **Texto**, solo texto `blue-600`, sin borde ni fondo
+  - `variant="link"` → **Enlace**, solo texto subrayable
+- `severity` se reserva para significado semántico (por ejemplo, `severity="danger"`).
+- `fluid` ocupa todo el ancho disponible.
+- Los botones no llevan clases, salvo casos especiales de layout.
 - Una sola acción primaria por contexto.
-- Variantes:
-  - **Primario** → fondo `blue-600`, texto blanco
-  - **Secundario** → borde + texto `blue-600` / fondo transparente
-  - **Texto** → solo texto `blue-600`, sin borde ni fondo
 
 **Estados obligatorios a diseñar:**
 - Normal
@@ -140,8 +152,12 @@ Todos los componentes se basan en **PrimeNG** y se personalizan con Tailwind + C
 ```html
 <!-- Ejemplo de uso -->
 <button pButton>Guardar cambios</button>
-<button pButton variant="outlined">Reject</button>
-<button type="button" pButton link>Link</button>
+<button pButton variant="outlined">Cancelar</button>
+<button pButton variant="text">Ver detalle</button>
+<button pButton variant="link">Ayuda</button>
+<button pButton size="small">Añadir</button>
+<button pButton size="large">Continuar</button>
+<button pButton fluid>Iniciar sesión</button>
 ```
 
 ### 5.2 Inputs (`input con directiva pInput` / `input con directiva pInputPassword`)
@@ -237,7 +253,7 @@ Usar para:
 
 | Patrón                      | Implementación                                      |
 |-----------------------------|-----------------------------------------------------|
-| Acción primaria             | Solo un `p-button` primario por vista/contexto      |
+| Acción primaria             | Solo un `button pButton` primario por vista/contexto |
 | Feedback de estado          | Color semántico + texto descriptivo                 |
 | Focus visible               | Anillo o borde azul claro en todos los controles    |
 | Validación de formularios   | Mensaje de error debajo del campo + borde rojo      |
@@ -253,7 +269,7 @@ Cuando generes o modifiques UI:
 1. **Colores** → Usa solo la paleta definida (navy-950, blue-600, slate-*).
 2. **Tipografía** → Inter, tamaños de la escala, pesos Regular / Medium / Semibold.
 3. **Espaciado** → Múltiplos de 4 px (preferiblemente 8, 12, 16, 24, 32).
-4. **Componentes** → Prioriza PrimeNG (`p-button`, `p-inputtext`, `p-card`, `p-panelmenu`, `p-checkbox`…).
+4. **Componentes** → Prioriza PrimeNG (`button pButton`, `input pInputText`, `p-card`, `p-panelmenu`, `p-checkbox`…).
 5. **Estados** → Siempre diseñar Normal / Hover / Focus / Disabled / Error.
 6. **Accesibilidad** → Nunca comunicar estado solo con color; incluir texto.
 7. **Tema** → Light theme por defecto. Sidebar oscuro (navy) es la excepción intencional.

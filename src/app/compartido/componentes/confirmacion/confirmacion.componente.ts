@@ -7,7 +7,7 @@ import { PIcon } from '@primeicons/angular';
 @Component({
     selector: 'app-confirmacion',
     standalone: true,
-    imports: [ConfirmDialog, PIcon],
+    imports: [ConfirmDialog, PIcon, ButtonDirective],
     templateUrl: './confirmacion.componente.html',
     styleUrl: './confirmacion.componente.scss',
 })

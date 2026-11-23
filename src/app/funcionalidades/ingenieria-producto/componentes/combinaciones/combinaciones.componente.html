@@ -17,7 +17,7 @@
     </div>
 
     <div class="flex flex-wrap gap-2 max-sm:w-full">
-      <button type="button" pButton class="ds-button" (click)="abrirDrawer()">
+      <button type="button" pButton (click)="abrirDrawer()">
         <svg pIcon="plus" [size]="16"></svg>
         Nueva combinación
       </button>
@@ -140,12 +140,12 @@
   <ng-template #footer>
     <div class="ds-client-drawer__footer flex justify-end gap-4">
       @if (!esPasoUno()) {
-      <button type="button" pButton class="ds-button ds-button--secondary" [disabled]="esPasoUno()" (click)="regresar()">
+      <button type="button" pButton variant="outlined" [disabled]="esPasoUno()" (click)="regresar()">
         <svg pIcon="arrow-left" [size]="14"></svg>
         Anterior
       </button>
       }
-      <button type="button" pButton class="ds-button" (click)="continuar()">
+      <button type="button" pButton (click)="continuar()">
         {{ esUltimoPaso() ? (combinacionEditando() ? 'Crear versión' : 'Crear combinación') : 'Continuar' }}
         @if (esUltimoPaso()) {
         <svg pIcon="check" [size]="14"></svg>
