@@ -1,0 +1,125 @@
+<div class="overflow-x-auto rounded-lg border border-ds-line bg-ds-surface">
+    <p-table [value]="filas()" dataKey="id" [unstyled]="true"
+        tableStyleClass="w-full min-w-[760px] border-collapse text-sm">
+        <ng-template #header>
+            <tr class="border-b border-ds-line bg-ds-canvas-strong">
+                <th class="px-4 py-3 align-middle text-left">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Código de país</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. MX</span>
+                </th>
+                <th class="px-4 py-3 align-middle text-left">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Nombre</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. México</span>
+                </th>
+                <th class="w-[190px] px-4 py-3 align-middle text-left">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Código de moneda</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. MXN</span>
+                </th>
+                <th class="w-[190px] px-4 py-3 align-middle text-right">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Acciones</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Guarda o elimina</span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-fila>
+            @if (fila.esNueva) {
+                <tr class="border-b border-ds-line bg-ds-canvas-strong">
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText [formField]="fila.formulario.codigoPais" type="text" placeholder="Ej. MX" fluid />
+                        @if (mensajeError(fila.formulario.codigoPais); as mensaje) {
+                            <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                        }
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText [formField]="fila.formulario.nombre" type="text" placeholder="Ej. México" fluid />
+                        @if (mensajeError(fila.formulario.nombre); as mensaje) {
+                            <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                        }
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText [formField]="fila.formulario.codigoMoneda" type="text" placeholder="Ej. MXN" fluid />
+                        @if (mensajeError(fila.formulario.codigoMoneda); as mensaje) {
+                            <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                        }
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <button pButton type="button" (click)="guardarPais()">Guardar país</button>
+                        </div>
+                    </td>
+                </tr>
+            } @else {
+                <tr class="border-b border-ds-line transition-colors last:border-b-0 hover:bg-ds-canvas">
+                    <td [pEditableColumn]="fila" pEditableColumnField="codigoPais" class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText [formField]="fila.formulario.codigoPais" type="text" fluid />
+                                @if (mensajeError(fila.formulario.codigoPais); as mensaje) {
+                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                                }
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="font-medium text-ds-ink">{{ fila.formulario.codigoPais().value() }}</span>
+                                @if (mensajeError(fila.formulario.codigoPais); as mensaje) {
+                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                                }
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="nombre" class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText [formField]="fila.formulario.nombre" type="text" fluid />
+                                @if (mensajeError(fila.formulario.nombre); as mensaje) {
+                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                                }
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="text-ds-ink">{{ fila.formulario.nombre().value() }}</span>
+                                @if (mensajeError(fila.formulario.nombre); as mensaje) {
+                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                                }
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="codigoMoneda" class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText [formField]="fila.formulario.codigoMoneda" type="text" fluid />
+                                @if (mensajeError(fila.formulario.codigoMoneda); as mensaje) {
+                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                                }
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="text-ds-ink-soft">{{ fila.formulario.codigoMoneda().value() }}</span>
+                                @if (mensajeError(fila.formulario.codigoMoneda); as mensaje) {
+                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
+                                }
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle text-right">
+                        <div class="flex justify-end gap-1">
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Guardar cambios de ' + fila.codigoPais" (click)="guardarCambios(fila)">
+                                <svg pIcon="check" [size]="15"></svg>
+                            </button>
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-danger-line hover:bg-ds-danger-soft hover:text-ds-danger focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Eliminar ' + fila.codigoPais" (click)="eliminarPais(fila)">
+                                <svg pIcon="trash" [size]="15"></svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </ng-template>
+    </p-table>
+
+    @if (!paises().length) {
+        <div class="border-t border-ds-line px-4 py-8 text-center text-sm text-ds-muted">
+            No hay países registrados. Usa la primera fila para agregar uno.
+        </div>
+    }
+</div>

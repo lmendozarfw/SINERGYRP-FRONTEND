@@ -1,0 +1,235 @@
+<div class="bienvenida-pagina mx-auto w-full max-w-[1180px] pb-4">
+  <section
+    class="bienvenida-hero relative isolate overflow-hidden rounded-[20px] px-6 py-8 text-ds-on-navy sm:px-10 sm:py-10"
+  >
+    <span class="bienvenida-hero__orb bienvenida-hero__orb--uno" aria-hidden="true"></span>
+    <span class="bienvenida-hero__orb bienvenida-hero__orb--dos" aria-hidden="true"></span>
+
+    <div class="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-2xl">
+        <h1
+          class="mt-4 font-display text-[32px] leading-[1.12] font-semibold tracking-[-0.02em] sm:text-[42px]"
+        >
+          {{ saludo }}<br />
+          <span class="text-[#bfdbfe]">Todo listo para empezar.</span>
+        </h1>
+        <p class="mt-4 max-w-xl text-sm leading-6 text-ds-on-navy-78 sm:text-[15px]">
+          Esta es tu puerta de entrada a SINERGYRP. Elige una tarea, revisa los primeros pasos o toma
+          un consejo antes de sumergirte en tus operaciones.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a routerLink="/app/clientes" pButton class="gap-2">
+            <svg pIcon="users" [size]="16"></svg>
+            Ver clientes
+          </a>
+          <a
+            routerLink="/app/ingenieria-producto/nuevo-producto"
+            class="inline-flex h-11 items-center gap-2 rounded-ds-button border border-[rgba(255,255,255,0.25)] px-4 text-sm font-medium text-ds-on-navy transition-colors hover:bg-[rgba(255,255,255,0.1)] focus-visible:shadow-ds-focus focus-visible:outline-none"
+          >
+            <svg pIcon="plus" [size]="16"></svg>
+            Nuevo producto
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="bienvenida-fecha flex min-w-[210px] items-center gap-3 self-start rounded-xl px-4 py-3 backdrop-blur-sm lg:self-end"
+      >
+        <span
+          class="flex size-9 items-center justify-center rounded-lg bg-[rgba(255,255,255,0.1)] text-ds-on-navy"
+        >
+          <svg pIcon="calendar" [size]="17"></svg>
+        </span>
+        <span>
+          <span
+            class="block text-[10px] font-semibold tracking-[0.16em] text-ds-on-navy-60 uppercase"
+            >Hoy</span
+          >
+          <span class="mt-0.5 block text-sm font-medium capitalize">{{ fecha }}</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-7">
+    <div class="flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <h2 class="ds-title-section">Empieza por aquí</h2>
+        <p class="ds-meta mt-1">Accesos rápidos a las áreas que más usas.</p>
+      </div>
+      <span class="ds-meta hidden sm:block">Elige y continúa donde quieras</span>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      @for (acceso of accesos; track acceso.ruta) {
+        <a
+          [routerLink]="acceso.ruta"
+          class="bienvenida-acceso group flex items-start gap-3 rounded-xl border border-ds-line bg-ds-surface p-4 focus-visible:shadow-ds-focus focus-visible:outline-none"
+        >
+          <span
+            class="flex size-10 shrink-0 items-center justify-center rounded-lg"
+            [class]="acceso.tono"
+          >
+            <svg [pIcon]="acceso.icono" [size]="19"></svg>
+          </span>
+          <span class="min-w-0 flex-1">
+            <span class="block text-sm font-semibold text-ds-ink">{{ acceso.titulo }}</span>
+            <span class="mt-1 block text-xs leading-5 text-ds-muted">
+              {{ acceso.descripcion }}
+            </span>
+          </span>
+          <svg
+            pIcon="arrow-up-right"
+            [size]="15"
+            class="mt-1 shrink-0 text-ds-line-strong transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ds-primary"
+          ></svg>
+        </a>
+      }
+    </div>
+  </section>
+
+  <div class="mt-7 grid gap-5 xl:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
+    <section class="ds-card">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span
+              class="flex size-8 items-center justify-center rounded-lg bg-ds-primary-soft text-ds-primary"
+            >
+              <svg pIcon="list-check" [size]="16"></svg>
+            </span>
+            <h3 class="text-base font-semibold text-ds-ink">Primeros pasos</h3>
+          </div>
+          <p class="ds-meta mt-2">Una lista de recorridos para tomarle confianza al sistema.</p>
+        </div>
+      </div>
+
+      <div class="mt-5 flex flex-col gap-2">
+        @for (paso of pasos; track paso.id) {
+          <div
+            class="bienvenida-paso flex items-start gap-2 rounded-xl border border-transparent p-3"
+          >
+            <button
+              type="button"
+              class="flex min-w-0 flex-1 items-start gap-3 text-left focus-visible:shadow-ds-focus focus-visible:outline-none"
+              (click)="alternarPaso(paso.id)"
+            >
+              <span
+                class="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border text-xs font-semibold transition-colors"
+              >
+                {{ $index + 1 }}
+              </span>
+              <span class="min-w-0 flex-1">
+                <span
+                  class="block text-sm font-medium text-ds-ink"
+                >
+                  {{ paso.titulo }}
+                </span>
+                <span class="mt-0.5 block text-xs leading-5 text-ds-muted">
+                  {{ paso.descripcion }}
+                </span>
+              </span>
+            </button>
+          </div>
+        }
+      </div>
+    </section>
+
+    <div class="flex flex-col gap-5">
+      <section class="relative overflow-hidden rounded-2xl border border-ds-warning-line bg-ds-warning-soft p-5">
+        <span class="bienvenida-consejo__glow" aria-hidden="true"></span>
+        <div class="relative">
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <span
+                class="flex size-8 items-center justify-center rounded-lg bg-[rgba(255,255,255,0.7)] text-ds-warning"
+              >
+                <svg pIcon="lightbulb" [size]="16"></svg>
+              </span>
+              <h3 class="text-sm font-semibold text-ds-ink">Consejo del día</h3>
+            </div>
+            <span class="ds-meta">{{ indiceConsejo() + 1 }} / {{ consejos.length }}</span>
+          </div>
+
+          <p class="mt-4 font-display text-lg leading-7 font-semibold text-ds-ink">
+            {{ consejoActual().titulo }}
+          </p>
+          <p class="mt-2 text-sm leading-6 text-ds-muted">{{ consejoActual().texto }}</p>
+
+          <div class="mt-5 flex items-center justify-between gap-3">
+            <button
+              type="button"
+              pButton
+              variant="text"
+              size="small"
+              class="gap-2"
+              (click)="siguienteConsejo()"
+            >
+              Ver otro consejo
+              <svg pIcon="refresh" [size]="14"></svg>
+            </button>
+            <div class="flex gap-1.5" aria-hidden="true">
+              @for (consejo of consejos; track $index) {
+                <span
+                  class="size-1.5 rounded-full transition-colors"
+                  [class.bg-ds-warning]="$index === indiceConsejo()"
+                  [class.bg-ds-line-strong]="$index !== indiceConsejo()"
+                ></span>
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ds-card">
+        <div class="flex items-center gap-2">
+          <span
+            class="flex size-8 items-center justify-center rounded-lg bg-ds-action-50 text-ds-primary"
+          >
+            <svg pIcon="info-circle" [size]="16"></svg>
+          </span>
+          <h3 class="text-sm font-semibold text-ds-ink">Bueno saberlo</h3>
+        </div>
+        <ul class="mt-4 flex flex-col gap-3">
+          <li class="flex gap-2.5 text-sm leading-5 text-ds-muted">
+            <svg pIcon="check-circle" [size]="15" class="mt-0.5 shrink-0 text-ds-success"></svg>
+            <span>El menú lateral se colapsa cuando necesitas más espacio.</span>
+          </li>
+          <li class="flex gap-2.5 text-sm leading-5 text-ds-muted">
+            <svg pIcon="check-circle" [size]="15" class="mt-0.5 shrink-0 text-ds-success"></svg>
+            <span>Los formularios te indican qué falta antes de guardar.</span>
+          </li>
+          <li class="flex gap-2.5 text-sm leading-5 text-ds-muted">
+            <svg pIcon="check-circle" [size]="15" class="mt-0.5 shrink-0 text-ds-success"></svg>
+            <span>Puedes regresar a esta pantalla desde Inicio cuando quieras.</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <section
+    class="mt-5 flex flex-col gap-3 rounded-2xl border border-ds-line bg-ds-surface p-5 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <div class="flex items-start gap-3">
+      <span
+        class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ds-navy text-ds-on-navy"
+      >
+        <svg pIcon="sparkles" [size]="17"></svg>
+      </span>
+      <div>
+        <p class="text-sm font-semibold text-ds-ink">Una entrada más suave</p>
+        <p class="ds-meta mt-1">
+          Cada inicio de sesión te recibe aquí. Tu trabajo sigue estando a un clic de distancia.
+        </p>
+      </div>
+    </div>
+    <span
+      class="shrink-0 self-start rounded-full bg-ds-primary-soft px-3 py-1 text-xs font-medium text-ds-primary sm:self-auto"
+    >
+      Recién llegado
+    </span>
+  </section>
+
+  <p class="mt-8 text-center text-xs text-ds-muted">SINERGYRP · Espacio corporativo Raudal</p>
+</div>

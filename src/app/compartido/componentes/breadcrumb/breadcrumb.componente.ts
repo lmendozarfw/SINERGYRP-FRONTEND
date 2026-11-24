@@ -8,7 +8,7 @@ import { BreadcrumbServicio } from '../../../nucleo/servicios/breadcrumb.servici
   template: `
     <p-breadcrumb
       styleClass="ds-breadcrumb"
-      [model]="breadcrumb.menuItems()"
+      [model]="breadcrumb.menuItems().length > 0 ? breadcrumb.menuItems() : undefined"
       [home]="breadcrumb.inicioMenu()"
       homeAriaLabel="Ir al inicio"
     />

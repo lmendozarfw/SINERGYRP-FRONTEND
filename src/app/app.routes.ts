@@ -18,8 +18,15 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'clientes',
+        redirectTo: 'inicio',
         pathMatch: 'full',
+      },
+      {
+        path: 'inicio',
+        loadComponent: () =>
+          import('./funcionalidades/bienvenida/paginas/bienvenida/bienvenida.pagina').then(
+            (p) => p.BienvenidaPagina,
+          ),
       },
       {
         path: 'tesoreria',

@@ -5,6 +5,7 @@ import { Menu } from 'primeng/menu';
 import { PIcon } from '@primeicons/angular';
 
 interface ElementoNavegacion {
+  id?: string;
   etiqueta: string;
   icono: string;
   ruta?: string;
@@ -34,7 +35,7 @@ interface AccionUsuario extends MenuItem {
   host: { class: 'block h-full' },
   imports: [Menu, PIcon],
   template: `
-    <div class="flex h-full w-full flex-col border-r border-ds-navy-line bg-ds-navy text-ds-on-navy">
+    <div id="sidebarMenu" class="flex h-full w-full flex-col border-r border-ds-navy-line bg-ds-navy text-ds-on-navy">
       <div class="flex items-center gap-3 border-b border-ds-navy-line py-6"
         [class.px-4]="!estaContraido()" [class.px-2]="estaContraido()"
         [class.justify-center]="estaContraido()">
@@ -65,6 +66,7 @@ interface AccionUsuario extends MenuItem {
           >
             <ng-template #item let-item>
               <button
+                [id]="item.id"
                 type="button"
                 class="ds-menu-item"
                 [class.ds-menu-item--active]="espacioTrabajoSeleccionado() === item.etiqueta"
@@ -96,6 +98,7 @@ interface AccionUsuario extends MenuItem {
           @for (elemento of seccion.elementos; track elemento.etiqueta) {
             @if (elemento.hijos?.length) {
               <button
+                [id]="elemento.id"
                 type="button"
                 class="flex h-11 w-full items-center gap-3 rounded-md border-0 bg-transparent text-left text-sm font-medium text-ds-navy-muted transition-colors hover:bg-ds-navy-hover hover:text-ds-on-navy focus-visible:shadow-ds-focus focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-ds-on-primary data-[active=true]:hover:bg-ds-primary-hover"
                 [class.px-3]="!estaContraido()" [class.px-0]="estaContraido()"
@@ -208,8 +211,9 @@ export class SidebarComponente {
   readonly elementosExpandidos = signal<ReadonlySet<string>>(new Set<string>());
 
   readonly elementosPrincipales: ElementoNavegacion[] = [
-    { etiqueta: 'Inicio', icono: 'home', ruta: '/app/configuration' },
+    { id: "inicio", etiqueta: 'Inicio', icono: 'home', ruta: '/app/inicio' },
     {
+      id: "ventasPedidos",
       etiqueta: 'Ventas y pedidos',
       icono: 'shopping-cart',
       hijos: [

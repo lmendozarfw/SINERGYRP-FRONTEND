@@ -13,3 +13,4 @@
 @import './styles/primeng-overrides/select.css';
 @import './styles/primeng-overrides/table.css';
 @import './styles/primeng-overrides/drawer.css';
+@import "driver.js/dist/driver.css";

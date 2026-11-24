@@ -21,6 +21,7 @@
     "@primeuix/themes": "^3.0.1",
     "@sentry/angular": "^11.16.0",
     "@swimlane/ngx-charts": "^25.0.2",
+    "driver.js": "^1.14.0",
     "html5-qrcode": "^2.3.8",
     "ngx-timeago": "^4.1.0",
     "primeng": "^22.1.2",

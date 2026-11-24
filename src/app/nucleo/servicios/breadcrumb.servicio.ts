@@ -18,7 +18,7 @@ export class BreadcrumbServicio {
   private readonly estadoInicio = signal<ElementoBreadcrumb | null>({
     llave: 'home',
     etiqueta: '',
-    ruta: '/app/clientes',
+    ruta: '/app/inicio',
   });
 
   readonly items = this.estado.asReadonly();

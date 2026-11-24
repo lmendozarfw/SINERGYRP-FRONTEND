@@ -194,6 +194,6 @@ export class InicioSesionPagina {
     //   return;
     // }
 
-    await this.rutas.navigate(['/app/clientes']);
+    await this.rutas.navigate(['/app/inicio']);
   }
 }
