@@ -1,0 +1,155 @@
+<div class="overflow-x-auto rounded-lg border border-ds-line bg-ds-surface">
+    <p-table [value]="filas()" dataKey="id" [unstyled]="true"
+        tableStyleClass="w-full min-w-[760px] border-collapse text-sm">
+        <ng-template #header>
+            <tr class="border-b border-ds-line bg-ds-canvas-strong">
+                <th class="px-4 py-3 align-middle text-left">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Código</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. MXN</span>
+                </th>
+                <th class="px-4 py-3 align-middle text-left">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Nombre</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. Peso mexicano</span>
+                </th>
+                <th class="w-[150px] px-4 py-3 align-middle text-left">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Decimales</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">De 0 a 6</span>
+                </th>
+                <th class="w-[170px] px-4 py-3 align-middle text-left">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Activa</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Selecciona un estado</span>
+                </th>
+                <th class="w-[190px] px-4 py-3 align-middle text-right">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Acciones</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Guarda o elimina</span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-fila>
+            @if (fila.esNueva) {
+                <tr [formGroup]="fila.formulario" class="border-b border-ds-line bg-ds-canvas-strong">
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText formControlName="codigo" type="text" placeholder="Ej. MXN" fluid class="w-full" />
+                        @if (esInvalido(fila.formulario, 'codigo')) {
+                            <small class="mt-1 block text-xs text-ds-danger">Ingresa de 2 a 5 letras.</small>
+                        }
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText formControlName="nombre" type="text" placeholder="Ej. Peso mexicano" fluid class="w-full" />
+                        @if (esInvalido(fila.formulario, 'nombre')) {
+                            <small class="mt-1 block text-xs text-ds-danger">Ingresa al menos 2 caracteres.</small>
+                        }
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <p-inputnumber formControlName="decimales" fluid placeholder="Ej. 2" [min]="0" [max]="6" class="w-full" />
+                        @if (esInvalido(fila.formulario, 'decimales')) {
+                            <small class="mt-1 block text-xs text-ds-danger">Indica entre 0 y 6 decimales.</small>
+                        }
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <p-select formControlName="activa" fluid class="w-full" [options]="estadosMoneda"
+                            optionLabel="label" optionValue="value" placeholder="Selecciona un estado" />
+                        @if (esInvalido(fila.formulario, 'activa')) {
+                            <small class="mt-1 block text-xs text-ds-danger">Selecciona si la moneda está activa.</small>
+                        }
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <button pButton type="button" label="Guardar registro" icon="pi pi-check"
+                                 (click)="guardarMoneda()">Guardar moneda</button>
+                        </div>
+                    </td>
+                </tr>
+            } @else {
+                <tr [formGroup]="fila.formulario" class="border-b border-ds-line transition-colors last:border-b-0 hover:bg-ds-canvas">
+                    <td [pEditableColumn]="fila" pEditableColumnField="codigo" class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText formControlName="codigo" type="text" fluid class="w-full" />
+                                @if (esInvalido(fila.formulario, 'codigo')) {
+                                    <small class="mt-1 block text-xs text-ds-danger">De 2 a 5 letras.</small>
+                                }
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="font-medium text-ds-ink">{{ fila.formulario.get('codigo')?.value }}</span>
+                                @if (esInvalido(fila.formulario, 'codigo')) {
+                                    <small class="mt-1 block text-xs text-ds-danger">De 2 a 5 letras.</small>
+                                }
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="nombre" class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText formControlName="nombre" type="text" fluid class="w-full" />
+                                @if (esInvalido(fila.formulario, 'nombre')) {
+                                    <small class="mt-1 block text-xs text-ds-danger">Al menos 2 caracteres.</small>
+                                }
+                            </ng-template>
+                            <ng-template #output>
+                                <p-tag [value]="fila.formulario.get('nombre')?.value" severity="secondary" />
+                                @if (esInvalido(fila.formulario, 'nombre')) {
+                                    <small class="mt-1 block text-xs text-ds-danger">Al menos 2 caracteres.</small>
+                                }
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="decimales" class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <p-inputnumber formControlName="decimales" fluid [min]="0" [max]="6" class="w-full" />
+                                @if (esInvalido(fila.formulario, 'decimales')) {
+                                    <small class="mt-1 block text-xs text-ds-danger">Entre 0 y 6 decimales.</small>
+                                }
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="text-ds-ink-soft">{{ fila.formulario.get('decimales')?.value }}</span>
+                                @if (esInvalido(fila.formulario, 'decimales')) {
+                                    <small class="mt-1 block text-xs text-ds-danger">Entre 0 y 6 decimales.</small>
+                                }
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="activa" class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <p-select formControlName="activa" fluid class="w-full" [options]="estadosMoneda"
+                                    optionLabel="label" optionValue="value" placeholder="Selecciona un estado" />
+                                @if (esInvalido(fila.formulario, 'activa')) {
+                                    <small class="mt-1 block text-xs text-ds-danger">Selecciona si la moneda está activa.</small>
+                                }
+                            </ng-template>
+                            <ng-template #output>
+                                <p-tag [value]="fila.formulario.get('activa')?.value ? 'Sí' : 'No'"
+                                    [severity]="fila.formulario.get('activa')?.value ? 'success' : 'danger'" />
+                                @if (esInvalido(fila.formulario, 'activa')) {
+                                    <small class="mt-1 block text-xs text-ds-danger">Selecciona si la moneda está activa.</small>
+                                }
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle text-right">
+                        <div class="flex justify-end gap-1">
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Guardar cambios de ' + fila.codigo" (click)="guardarCambios(fila)">
+                                <svg pIcon="check" [size]="15"></svg>
+                            </button>
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-danger-line hover:bg-ds-danger-soft hover:text-ds-danger focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Eliminar ' + fila.codigo" (click)="eliminarMoneda(fila)">
+                                <svg pIcon="trash" [size]="15"></svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </ng-template>
+    </p-table>
+
+    @if (!monedas().length) {
+        <div class="border-t border-ds-line px-4 py-8 text-center text-sm text-ds-muted">
+            No hay monedas registradas. Usa la primera fila para agregar una.
+        </div>
+    }
+</div>
