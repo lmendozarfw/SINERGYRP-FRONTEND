@@ -7,10 +7,11 @@ import { Table, EditableColumn, CellEditor } from "primeng/table";
 import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { PIcon } from '@primeicons/angular';
 import { ButtonDirective } from "primeng/button";
+import { Select } from "primeng/select";
 
 @Component({
     selector: 'app-catalogo-estados',
-    imports: [CatalogoVacioComponente, Table, MensajeAyudaErrorComponente, EditableColumn, CellEditor, FormField, PIcon, ButtonDirective],
+    imports: [CatalogoVacioComponente, Table, MensajeAyudaErrorComponente, EditableColumn, CellEditor, FormField, PIcon, ButtonDirective, Select],
     templateUrl: './catalogo-estados.componente.html'
 })
 export class CatalogoEstadosComponente {
@@ -25,6 +26,10 @@ export class CatalogoEstadosComponente {
         { id: 0, ...ESTADO_VACIO, formulario: this.formulario, esNueva: true },
         ... this.estados().map(fila => ({ ...fila, esNueva: false }))
     ]);
+    readonly paises = [
+        { label: 'México', value: 1 },
+        { label: 'Estados unidos de Ámerica', value: 2 }
+    ];
     constructor() { }
 
     private crearFormulario(estado?: IEstado): FieldTree<IEstado> {
