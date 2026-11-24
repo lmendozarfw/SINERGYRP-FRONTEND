@@ -9,6 +9,7 @@ import { CellEditor, EditableColumn, Table } from "primeng/table";
 import { Tag } from "primeng/tag";
 import { CatalogoVacioComponente } from "../catalogo-vacio/catalogo-vacio.componente";
 import { IFilaMoneda, IFilaVistaMoneda, IMoneda, MONEDA_VACIA } from "../../modelos/moneda.interface";
+import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 
 @Component({
     selector: 'app-catalogo-monedas',
@@ -21,6 +22,7 @@ import { IFilaMoneda, IFilaVistaMoneda, IMoneda, MONEDA_VACIA } from "../../mode
         FormField,
         InputNumber,
         InputText,
+        MensajeAyudaErrorComponente,
         PIcon,
         Select,
         Table,

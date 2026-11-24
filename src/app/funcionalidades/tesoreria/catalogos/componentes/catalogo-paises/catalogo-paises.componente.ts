@@ -5,18 +5,20 @@ import { ButtonDirective } from "primeng/button";
 import { InputText } from "primeng/inputtext";
 import { CellEditor, EditableColumn, Table } from "primeng/table";
 import { IFilaPais, IFilaVistaPais, IPais, PAIS_VACIO } from "../../modelos/pais.interface";
+import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 
 @Component({
     selector: 'app-catalogo-paises',
     imports: [
-        ButtonDirective, 
-        CellEditor, 
-        EditableColumn, 
-        FormField, 
-        InputText, 
-        PIcon, 
-        Table
-    ],
+    ButtonDirective,
+    CellEditor,
+    EditableColumn,
+    FormField,
+    InputText,
+    PIcon,
+    Table,
+    MensajeAyudaErrorComponente
+],
     templateUrl: './catalogo-paises.componente.html'
 })
 export class CatalogoPaisesComponente {
@@ -29,7 +31,7 @@ export class CatalogoPaisesComponente {
         this.crearFila(1, { codigoPais: 'MX', nombre: 'México', codigoMoneda: 'MXN' }),
         this.crearFila(2, { codigoPais: 'EEUU', nombre: 'Estados unidos de Ámerica', codigoMoneda: 'USD' })
     ]);
-    
+
     protected readonly filas = computed<IFilaVistaPais[]>(() => [
         { id: 0, ...PAIS_VACIO, formulario: this.formulario, esNueva: true },
         ...this.paises().map(pais => ({ ...pais, esNueva: false }))

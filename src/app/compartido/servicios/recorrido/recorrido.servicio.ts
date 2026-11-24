@@ -24,7 +24,11 @@ export class RecorridoServicio {
       animate: true,
       allowClose: true,
       showButtons: ['previous', 'next', 'close'],
-      steps: pasosDriver
+      steps: pasosDriver,
+      nextBtnText: "Siguiente",
+      prevBtnText: "Anterior",
+      closeBtnLabel: "Cancelar",
+      doneBtnText: "Aceptar"
     });
 
     recorrido.drive();
