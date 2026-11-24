@@ -3,23 +3,23 @@
         tableStyleClass="w-full min-w-[760px] border-collapse text-sm">
         <ng-template #header>
             <tr class="border-b border-ds-line bg-ds-canvas-strong">
-                <th class="px-4 py-3 align-middle text-left">
+                <th class="px-4 py-3 align-middle text-left w-[200px] min-w-[200px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Código</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. MXN</span>
                 </th>
-                <th class="px-4 py-3 align-middle text-left">
+                <th class="px-4 py-3 align-middle text-left w-[200px] min-w-[200px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Nombre</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. Peso mexicano</span>
                 </th>
-                <th class="w-[150px] px-4 py-3 align-middle text-left">
+                <th class="w-[150px] px-4 py-3 align-middle text-left w-[200px] min-w-[200px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Decimales</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">De 0 a 6</span>
                 </th>
-                <th class="w-[170px] px-4 py-3 align-middle text-left">
+                <th class="w-[170px] px-4 py-3 align-middle text-left w-[200px] min-w-[200px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Activa</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Selecciona un estado</span>
                 </th>
-                <th class="w-[190px] px-4 py-3 align-middle text-right">
+                <th class="w-[190px] px-4 py-3 align-middle text-right w-[200px] min-w-[200px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Acciones</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Guarda o elimina</span>
                 </th>
@@ -113,7 +113,7 @@
                                     [campo]="fila.formulario.activa"></app-mensaje-ayuda-error>
                             </ng-template>
                             <ng-template #output>
-                                <p-tag [value]="fila.formulario.activa().value() ? 'Sí' : 'No'"
+                                <p-tag class="min-w-16" [value]="fila.formulario.activa().value() ? 'Sí' : 'No'"
                                     [severity]="fila.formulario.activa().value() ? 'success' : 'danger'" />
                             </ng-template>
                         </p-cell-editor>
