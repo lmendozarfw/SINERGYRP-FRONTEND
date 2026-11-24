@@ -72,9 +72,6 @@
                             </ng-template>
                             <ng-template #output>
                                 <span class="font-medium text-ds-ink">{{ fila.formulario.codigo().value() }}</span>
-                                @if (mensajeError(fila.formulario.codigo); as mensaje) {
-                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
-                                }
                             </ng-template>
                         </p-cell-editor>
                     </td>
@@ -88,9 +85,6 @@
                             </ng-template>
                             <ng-template #output>
                                 <span class="text-ds-ink">{{ fila.formulario.nombre().value() }}</span>
-                                @if (mensajeError(fila.formulario.nombre); as mensaje) {
-                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
-                                }
                             </ng-template>
                         </p-cell-editor>
                     </td>
@@ -105,9 +99,6 @@
                             </ng-template>
                             <ng-template #output>
                                 <span class="text-ds-ink-soft">{{ fila.formulario.decimales().value() }}</span>
-                                @if (mensajeError(fila.formulario.decimales); as mensaje) {
-                                    <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
-                                }
                             </ng-template>
                         </p-cell-editor>
                     </td>

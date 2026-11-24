@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { driver, DriveStep } from 'driver.js';
+import { AdvanceOn, driver, DriveStep } from 'driver.js';
 import { IPasoRecorrido } from './paso-recorrido';
 
 @Injectable({
@@ -15,7 +15,8 @@ export class RecorridoServicio {
         description: paso.descripcion,
         side: paso.posicion ?? 'bottom'
       },
-      advanceOn: paso.avanzarAlHacerClic ? 'click' : undefined,
+      advanceOn: this.construirAvanceCuando(paso.avanzaCuando), 
+      advanceDelay: paso.retrasoAvance,
       waitForElement: paso.esperarElemento
     }));
 
@@ -32,5 +33,23 @@ export class RecorridoServicio {
     });
 
     recorrido.drive();
+  }
+
+  construirAvanceCuando(avanzaCuando: IPasoRecorrido['avanzaCuando']): AdvanceOn {
+    if (avanzaCuando === null || avanzaCuando === undefined) {
+      return false;
+    }
+    if (typeof avanzaCuando === 'boolean') {
+      return avanzaCuando ? 'click' : false;
+    }
+    if (typeof avanzaCuando === 'string' || Array.isArray(avanzaCuando)) {
+      return avanzaCuando;
+    }
+    const {evento, condicion, estricto} = avanzaCuando;
+    return {
+      event: evento,
+      when: condicion ? (elemento: Element, paso: any) => condicion(elemento, paso) : undefined,
+      strict: estricto
+    }
   }
 }

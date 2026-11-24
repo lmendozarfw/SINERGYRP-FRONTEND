@@ -58,7 +58,7 @@
                 </td>
                 <td class="h-[60px] px-4 py-3 align-middle text-right">
                     <div class="flex items-center justify-end gap-2">
-                        <button pButton type="button" (click)="guardarPais()">Guardar país</button>
+                        <button pButton type="button" fluid (click)="guardarPais()">Guardar país</button>
                     </div>
                 </td>
             </tr>
@@ -77,9 +77,6 @@
                         </ng-template>
                         <ng-template #output>
                             <span class="font-medium text-ds-ink">{{ fila.formulario.codigoPais().value() }}</span>
-                            @if (mensajeError(fila.formulario.codigoPais); as mensaje) {
-                            <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
-                            }
                         </ng-template>
                     </p-cell-editor>
                 </td>
@@ -96,9 +93,6 @@
                         </ng-template>
                         <ng-template #output>
                             <span class="text-ds-ink">{{ fila.formulario.nombre().value() }}</span>
-                            @if (mensajeError(fila.formulario.nombre); as mensaje) {
-                            <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
-                            }
                         </ng-template>
                     </p-cell-editor>
                 </td>
@@ -115,9 +109,6 @@
                         </ng-template>
                         <ng-template #output>
                             <span class="text-ds-ink-soft">{{ fila.formulario.codigoMoneda().value() }}</span>
-                            @if (mensajeError(fila.formulario.codigoMoneda); as mensaje) {
-                            <small class="mt-1 block text-xs text-ds-danger">{{ mensaje }}</small>
-                            }
                         </ng-template>
                     </p-cell-editor>
                 </td>

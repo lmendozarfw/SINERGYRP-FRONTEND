@@ -122,6 +122,7 @@ interface AccionUsuario extends MenuItem {
                 <div class="ml-9 flex flex-col gap-0.5 border-l border-ds-navy-line pl-3">
                   @for (hijo of elemento.hijos; track hijo.etiqueta) {
                     <button
+                      [id]="hijo.id"
                       type="button"
                       class="flex h-9 w-full items-center gap-2 rounded-md border-0 bg-transparent px-3 text-left text-xs font-medium text-ds-navy-muted transition-colors hover:bg-ds-navy-hover hover:text-ds-on-navy focus-visible:shadow-ds-focus focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-ds-on-primary data-[active=true]:hover:bg-ds-primary-hover"
                       [attr.data-active]="elementoActivo() === hijo.etiqueta ? 'true' : null"
@@ -217,7 +218,7 @@ export class SidebarComponente {
       etiqueta: 'Ventas y pedidos',
       icono: 'shopping-cart',
       hijos: [
-        { etiqueta: 'Pedidos', icono: 'receipt', ruta: '/app/configuration' },
+        { id: "pedidos", etiqueta: 'Pedidos', icono: 'receipt', ruta: '/app/configuration' },
         { etiqueta: 'Cotizaciones', icono: 'file', ruta: '/app/configuration' },
         { etiqueta: 'Clientes', icono: 'users', ruta: '/app/clientes' },
         { etiqueta: 'Facturación', icono: 'file', ruta: '/app/clientes' },

@@ -10,6 +10,7 @@ export const CONOCER_MENU: IPasoRecorrido[] = [
     {
         titulo: "Agrupaciones",
         descripcion: "Da clic en alguna agrupación para poder ver las opciones",
+        avanzaCuando: "click",
         elemento: "#ventasPedidos",
         avanzarAlHacerClic: false
     }

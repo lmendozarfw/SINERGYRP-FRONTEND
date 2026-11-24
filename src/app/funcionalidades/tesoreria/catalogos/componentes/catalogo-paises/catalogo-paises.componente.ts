@@ -39,16 +39,6 @@ export class CatalogoPaisesComponente {
 
     private siguienteId = 3;
 
-    campoInvalido<T>(campo: FieldTree<T>): boolean {
-        const estado = campo();
-        return (estado.touched() || estado.dirty()) && estado.invalid();
-    }
-
-    mensajeError<T>(campo: FieldTree<T>): string | null {
-        if (!this.campoInvalido(campo)) return null;
-        return campo().errors()[0]?.message ?? 'Revisa este campo.';
-    }
-
     guardarPais(): void {
         this.formulario().markAsTouched();
         if (this.formulario().invalid()) return;

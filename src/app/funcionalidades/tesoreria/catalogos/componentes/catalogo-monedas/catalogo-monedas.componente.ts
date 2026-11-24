@@ -49,16 +49,6 @@ export class CatalogoMonedasComponente {
 
     private siguienteId = 4;
 
-    campoInvalido<T>(campo: FieldTree<T>): boolean {
-        const estado = campo();
-        return (estado.touched() || estado.dirty()) && estado.invalid();
-    }
-
-    mensajeError<T>(campo: FieldTree<T>): string | null {
-        if (!this.campoInvalido(campo)) return null;
-        return campo().errors()[0]?.message ?? 'Revisa este campo.';
-    }
-
     guardarMoneda(): void {
         this.formulario().markAsTouched();
         if (this.formulario().invalid()) return;

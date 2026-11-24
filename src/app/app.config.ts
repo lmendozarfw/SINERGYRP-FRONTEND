@@ -1,4 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
+import { provideSignalFormsConfig } from '@angular/forms/signals';
+import { NG_STATUS_CLASSES } from '@angular/forms/signals/compat';
 import { ApplicationConfig, ErrorHandler, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, Router } from '@angular/router';
 import { routes } from './app.routes';
@@ -117,6 +119,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
     provideRouter(routes),
+    provideSignalFormsConfig({ classes: NG_STATUS_CLASSES }),
     providePrimeNG({
       theme: {
         preset: AppTheme,
