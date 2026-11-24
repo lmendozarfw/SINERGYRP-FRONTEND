@@ -6,6 +6,7 @@ import { InputText } from "primeng/inputtext";
 import { CellEditor, EditableColumn, Table } from "primeng/table";
 import { IFilaPais, IFilaVistaPais, IPais, PAIS_VACIO } from "../../modelos/pais.interface";
 import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
+import { CatalogoVacioComponente } from "../catalogo-vacio/catalogo-vacio.componente";
 
 @Component({
     selector: 'app-catalogo-paises',
@@ -17,7 +18,8 @@ import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayud
     InputText,
     PIcon,
     Table,
-    MensajeAyudaErrorComponente
+    MensajeAyudaErrorComponente,
+    CatalogoVacioComponente
 ],
     templateUrl: './catalogo-paises.componente.html'
 })

@@ -31,32 +31,32 @@
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.codigo"
                             [class.p-invalid]="codigoError.errorVisible()" type="text" placeholder="Ej. MXN" fluid
-                            class="w-full" />
+                             />
                         <app-mensaje-ayuda-error #codigoError [campo]="fila.formulario.codigo"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.nombre"
                             [class.p-invalid]="nombreError.errorVisible()" type="text" placeholder="Ej. Peso mexicano"
-                            fluid class="w-full" />
+                            fluid  />
                         <app-mensaje-ayuda-error #nombreError [campo]="fila.formulario.nombre"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <p-inputnumber [formField]="fila.formulario.decimales"
-                            [class.p-invalid]="decimalesError.errorVisible()" fluid placeholder="Ej. 2" [min]="0"
-                            [max]="6" class="w-full" />
+                            [invalid]="decimalesError.errorVisible()" fluid placeholder="Ej. 2" [min]="0"
+                            [max]="6"  />
                         <app-mensaje-ayuda-error #decimalesError
                             [campo]="fila.formulario.decimales"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <p-select [formField]="fila.formulario.activa"
-                            [class.p-invalid]="activaError.errorVisible()" fluid class="w-full"
+                            [class.p-invalid]="activaError.errorVisible()" fluid 
                             [options]="estadosMoneda" optionLabel="label" optionValue="value"
                             placeholder="Selecciona un estado" />
                         <app-mensaje-ayuda-error #activaError [campo]="fila.formulario.activa"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <button pButton type="button" (click)="guardarMoneda()">Guardar moneda</button>
+                            <button pButton type="button" fluid (click)="guardarMoneda()">Guardar moneda</button>
                         </div>
                     </td>
                 </tr>
@@ -66,7 +66,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.codigo"
-                                    [class.p-invalid]="codigoEdicionError.errorVisible()" type="text" fluid class="w-full" />
+                                    [class.p-invalid]="codigoEdicionError.errorVisible()" type="text" fluid  />
                                 <app-mensaje-ayuda-error #codigoEdicionError
                                     [campo]="fila.formulario.codigo"></app-mensaje-ayuda-error>
                             </ng-template>
@@ -79,7 +79,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.nombre"
-                                    [class.p-invalid]="nombreEdicionError.errorVisible()" type="text" fluid class="w-full" />
+                                    [class.p-invalid]="nombreEdicionError.errorVisible()" type="text" fluid  />
                                 <app-mensaje-ayuda-error #nombreEdicionError
                                     [campo]="fila.formulario.nombre"></app-mensaje-ayuda-error>
                             </ng-template>
@@ -93,7 +93,7 @@
                             <ng-template #input>
                                 <p-inputnumber [formField]="fila.formulario.decimales"
                                     [class.p-invalid]="decimalesEdicionError.errorVisible()" fluid [min]="0" [max]="6"
-                                    class="w-full" />
+                                     />
                                 <app-mensaje-ayuda-error #decimalesEdicionError
                                     [campo]="fila.formulario.decimales"></app-mensaje-ayuda-error>
                             </ng-template>
@@ -106,7 +106,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <p-select [formField]="fila.formulario.activa"
-                                    [class.p-invalid]="activaEdicionError.errorVisible()" fluid class="w-full"
+                                    [class.p-invalid]="activaEdicionError.errorVisible()" fluid 
                                     [options]="estadosMoneda" optionLabel="label" optionValue="value"
                                     placeholder="Selecciona un estado" />
                                 <app-mensaje-ayuda-error #activaEdicionError

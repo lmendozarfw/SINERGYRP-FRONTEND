@@ -132,8 +132,8 @@
     </p-table>
 
     @if (!paises().length) {
-    <div class="border-t border-ds-line px-4 py-8 text-center text-sm text-ds-muted">
-        No hay países registrados. Usa la primera fila para agregar uno.
-    </div>
+        <div class="border-t border-ds-line p-4">
+            <app-catalogo-vacio titulo="paises" descripcion="Usa la primera fila para agregar un registro." />
+        </div>
     }
 </div>
