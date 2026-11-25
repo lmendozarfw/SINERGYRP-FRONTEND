@@ -350,6 +350,11 @@ export class SidebarComponente {
           icono: 'building',
           ruta: '/app/configuracion/unidades-negocio',
         },
+        {
+          etiqueta: 'Emisores fiscales',
+          icono: 'bell',
+          ruta: '/app/configuracion/emisores-fiscales',
+        },
       ],
     },
     { etiqueta: 'Componentes', icono: 'question-circle', ruta: '/design-system' },

@@ -12,9 +12,13 @@ import { PIcon } from '@primeicons/angular';
       >
         <div class="relative z-10 flex items-center gap-3">
           <div
-            class="flex size-10 items-center justify-center rounded-lg bg-ds-primary text-base font-semibold text-ds-on-primary"
+            class="flex size-10 items-center justify-center rounded-lg bg-ds-primary/10"
           >
-            S
+            <img
+              src="assets/imagenes/isotipo-sinergy.png"
+              alt="Sinergy"
+              class="size-8 shrink-0 object-contain"
+            />
           </div>
           <div>
             <p class="text-sm font-semibold">SINERGYRP</p>
@@ -23,9 +27,7 @@ import { PIcon } from '@primeicons/angular';
         </div>
 
         <div class="relative z-10 max-w-lg">
-          <h1 class="ds-display mb-2">Tu empresa.</h1>
-          <h1 class="ds-display mb-2">Conectada.</h1>
-          <h1 class="ds-display">Bajo control.</h1>
+          <h1 class="ds-display mb-2">Tu empresa conectada y bajo control</h1>
           <p class="ds-body mt-6 text-ds-on-navy/70!">
 Una visión integral para tomar mejores decisiones
 y avanzar con confianza.          </p>

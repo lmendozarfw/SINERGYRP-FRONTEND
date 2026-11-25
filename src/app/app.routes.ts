@@ -48,8 +48,15 @@ export const routes: Routes = [
           {
             path: 'unidades-negocio',
             loadComponent: () =>
-              import('./funcionalidades/configuracion/paginas/unidades-negocio.pagina').then(
+              import('./funcionalidades/configuracion/paginas/unidades-negocio/unidades-negocio.pagina').then(
                 (p) => p.UnidadesNegocioPagina,
+              ),
+          },
+          {
+            path: 'emisores-fiscales',
+            loadComponent: () =>
+              import('./funcionalidades/configuracion/paginas/emisores-fiscales/emisores-fiscales.pagina').then(
+                (p) => p.EmisoresFiscalesPagina,
               ),
           },
         ],

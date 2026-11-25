@@ -1,0 +1,208 @@
+<div class="overflow-x-auto rounded-lg border border-ds-line bg-ds-surface">
+    <p-table [value]="filas()" dataKey="id" [unstyled]="true"
+        tableStyleClass="w-full min-w-[1180px] border-collapse text-sm">
+        <ng-template #header>
+            <tr class="border-b border-ds-line bg-ds-canvas-strong">
+                <th class="w-[200px] px-4 py-3 align-middle text-left min-w-[200px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Unidad de negocio</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Selecciona una unidad</span>
+                </th>
+                <th class="w-[250px] px-4 py-3 align-middle text-left min-w-[250px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Régimen fiscal</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Selecciona un régimen</span>
+                </th>
+                <th class="w-[200px] px-4 py-3 align-middle text-left min-w-[200px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">RFC</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. MELL940512GT6</span>
+                </th>
+                <th class="px-4 py-3 align-middle text-left min-w-[200px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Razón social</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. Rudal</span>
+                </th>
+                <th class="w-[170px] px-4 py-3 align-middle text-left min-w-[170px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Código postal</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. 37295</span>
+                </th>
+                <th class="w-[130px] px-4 py-3 align-middle text-left min-w-[130px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Activo</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Sí o no</span>
+                </th>
+                <th class="w-[180px] px-4 py-3 align-middle text-right min-w-[180px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Acciones</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Guarda o elimina</span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-fila>
+            @if (fila.esNueva) {
+                <tr class="border-b border-ds-line bg-ds-canvas-strong">
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <p-select [formField]="fila.formulario.idUnidadNegocio"
+                            [class.p-invalid]="idUnidadNegocioError.errorVisible()" fluid
+                            [options]="unidadesNegocioOpciones" optionLabel="label" optionValue="value"
+                            placeholder="Selecciona una unidad" />
+                        <app-mensaje-ayuda-error #idUnidadNegocioError
+                            [campo]="fila.formulario.idUnidadNegocio"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <p-select [formField]="fila.formulario.idRegimenFiscal"
+                            [class.p-invalid]="idRegimenFiscalError.errorVisible()" fluid
+                            [options]="regimenesFiscales" optionLabel="label" optionValue="value"
+                            placeholder="Selecciona un régimen" />
+                        <app-mensaje-ayuda-error #idRegimenFiscalError
+                            [campo]="fila.formulario.idRegimenFiscal"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText [formField]="fila.formulario.rfc"
+                            [class.p-invalid]="rfcError.errorVisible()" type="text" placeholder="Ej. MELL940512GT6"
+                            fluid />
+                        <app-mensaje-ayuda-error #rfcError [campo]="fila.formulario.rfc"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText [formField]="fila.formulario.razonSocial"
+                            [class.p-invalid]="razonSocialError.errorVisible()" type="text" placeholder="Ej. Rudal"
+                            fluid />
+                        <app-mensaje-ayuda-error #razonSocialError
+                            [campo]="fila.formulario.razonSocial"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText [formField]="fila.formulario.codigoPostalExpedicion"
+                            [class.p-invalid]="codigoPostalError.errorVisible()" type="text" placeholder="Ej. 37295"
+                            fluid />
+                        <app-mensaje-ayuda-error #codigoPostalError
+                            [campo]="fila.formulario.codigoPostalExpedicion"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <p-select [formField]="fila.formulario.activo" [class.p-invalid]="activoError.errorVisible()"
+                            fluid [options]="estadosEmisor" optionLabel="label" optionValue="value"
+                            placeholder="Selecciona" />
+                        <app-mensaje-ayuda-error #activoError [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <button pButton type="button" fluid (click)="guardar()">Guardar emisor</button>
+                        </div>
+                    </td>
+                </tr>
+            } @else {
+                <tr class="border-b border-ds-line transition-colors last:border-b-0 hover:bg-ds-canvas">
+                    <td [pEditableColumn]="fila" pEditableColumnField="idUnidadNegocio"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <p-select [formField]="fila.formulario.idUnidadNegocio"
+                                    [class.p-invalid]="idUnidadNegocioEdicionError.errorVisible()" fluid
+                                    [options]="unidadesNegocioOpciones" optionLabel="label" optionValue="value"
+                                    placeholder="Selecciona una unidad" />
+                                <app-mensaje-ayuda-error #idUnidadNegocioEdicionError
+                                    [campo]="fila.formulario.idUnidadNegocio"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <span
+                                    class="text-ds-ink">{{ obtenerNombreUnidadNegocio(fila.formulario.idUnidadNegocio().value()) }}</span>
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="idRegimenFiscal"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <p-select [formField]="fila.formulario.idRegimenFiscal"
+                                    [class.p-invalid]="idRegimenFiscalEdicionError.errorVisible()" fluid
+                                    [options]="regimenesFiscales" optionLabel="label" optionValue="value"
+                                    placeholder="Selecciona un régimen" />
+                                <app-mensaje-ayuda-error #idRegimenFiscalEdicionError
+                                    [campo]="fila.formulario.idRegimenFiscal"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <span
+                                    class="text-ds-ink">{{ obtenerNombreRegimenFiscal(fila.formulario.idRegimenFiscal().value()) }}</span>
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="rfc"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText [formField]="fila.formulario.rfc"
+                                    [class.p-invalid]="rfcEdicionError.errorVisible()" type="text" fluid />
+                                <app-mensaje-ayuda-error #rfcEdicionError
+                                    [campo]="fila.formulario.rfc"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="font-medium text-ds-ink">{{ fila.formulario.rfc().value() }}</span>
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="razonSocial"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText [formField]="fila.formulario.razonSocial"
+                                    [class.p-invalid]="razonSocialEdicionError.errorVisible()" type="text" fluid />
+                                <app-mensaje-ayuda-error #razonSocialEdicionError
+                                    [campo]="fila.formulario.razonSocial"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="text-ds-ink">{{ fila.formulario.razonSocial().value() }}</span>
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="codigoPostalExpedicion"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText [formField]="fila.formulario.codigoPostalExpedicion"
+                                    [class.p-invalid]="codigoPostalEdicionError.errorVisible()" type="text" fluid />
+                                <app-mensaje-ayuda-error #codigoPostalEdicionError
+                                    [campo]="fila.formulario.codigoPostalExpedicion"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="text-ds-ink-soft">{{ fila.formulario.codigoPostalExpedicion().value() }}</span>
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="activo"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <p-select [formField]="fila.formulario.activo"
+                                    [class.p-invalid]="activoEdicionError.errorVisible()" fluid
+                                    [options]="estadosEmisor" optionLabel="label" optionValue="value"
+                                    placeholder="Selecciona" />
+                                <app-mensaje-ayuda-error #activoEdicionError
+                                    [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <p-tag class="min-w-14" [value]="fila.formulario.activo().value() ? 'Sí' : 'No'"
+                                    [severity]="fila.formulario.activo().value() ? 'success' : 'danger'" />
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle text-right">
+                        <div class="flex justify-end gap-1">
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Guardar cambios de ' + fila.formulario.rfc().value()"
+                                (click)="guardarCambios(fila)">
+                                <svg pIcon="check" [size]="15"></svg>
+                            </button>
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-danger-line hover:bg-ds-danger-soft hover:text-ds-danger focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Eliminar ' + fila.formulario.rfc().value()"
+                                (click)="eliminarEmisorFiscal(fila)">
+                                <svg pIcon="trash" [size]="15"></svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </ng-template>
+    </p-table>
+
+    @if (!unidadesNegocio().length) {
+        <div class="border-t border-ds-line p-4">
+            <app-catalogo-vacio titulo="emisores fiscales" descripcion="Usa la primera fila para agregar un registro." />
+        </div>
+    }
+</div>

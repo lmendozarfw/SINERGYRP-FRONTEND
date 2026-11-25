@@ -1,17 +1,17 @@
 import { Component, inject } from "@angular/core";
 import { EncabezadoPaginaComponente } from "@compartido/componentes/encabezado-pagina/encabezado-pagina.componente";
 import { BreadcrumbServicio } from "@nucleo/servicios/breadcrumb.servicio";
-import { CatalogoUnidadesNegocioComponente } from "../componentes/catalogo-unidades-negocio/catalogo-unidades-negocio.componente";
+import { CatalogoEmisoresFiscalesComponente } from "@funcionalidades/configuracion/componentes/catalogo-emisores-fiscales/catalogo-emisores-fiscales.componente";
 
 @Component({
-    selector: 'app-unidades-negocio-pagina',
-    templateUrl: './unidades-negocio.pagina.html',
+    selector: 'app-emisores-fiscales-pagina',
+    templateUrl: './emisores-fiscales.pagina.html',
     imports: [
-        CatalogoUnidadesNegocioComponente,
-        EncabezadoPaginaComponente
-    ]
+    EncabezadoPaginaComponente,
+    CatalogoEmisoresFiscalesComponente
+]
 })
-export class UnidadesNegocioPagina {
+export class EmisoresFiscalesPagina {
     private readonly breadcrumbServicio = inject(BreadcrumbServicio);
 
     constructor() {
@@ -22,8 +22,8 @@ export class UnidadesNegocioPagina {
                 ruta: '/app/configuracion'
             },
             {
-                etiqueta: 'Unidades de negocio',
-                llave: 'unidades-negocio',
+                etiqueta: 'Emisores fiscales',
+                llave: 'emisores-fiscales',
                 deshabilitado: true
             }
         ]);
