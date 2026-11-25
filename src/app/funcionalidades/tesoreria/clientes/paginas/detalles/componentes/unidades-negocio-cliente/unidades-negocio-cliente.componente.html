@@ -1,0 +1,89 @@
+﻿<div class="flex flex-col gap-5 p-6">
+  <div class="flex items-center justify-between gap-4 border-b border-ds-line pb-4">
+    <div>
+      <p class="text-sm font-semibold text-ds-ink">Unidades de negocio</p>
+      <p class="text-xs text-ds-muted">Unidades asociadas y su vigencia.</p>
+    </div>
+    <button pButton type="button" size="small" (click)="abrirNuevo()"><svg pIcon="plus" [size]="14"></svg>Agregar</button>
+  </div>
+
+  @if (unidades().length) {
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
+      @for (unidad of unidades(); track unidad.id) {
+        <article class="group flex flex-col rounded-lg border border-ds-line bg-ds-surface p-4 transition-colors hover:border-ds-primary-soft hover:bg-ds-canvas/40">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex min-w-0 items-center gap-3">
+              <span class="flex size-9 shrink-0 items-center justify-center rounded-md bg-ds-canvas-strong text-ds-muted ring-1 ring-ds-line">
+                <svg pIcon="sitemap" [size]="16"></svg>
+              </span>
+              <div class="min-w-0">
+                <div class="flex items-center gap-2">
+                  <p class="truncate text-sm font-semibold text-ds-ink">{{ obtenerNombreUnidad(unidad.idUnidadNegocio) }}</p>
+                  @if (unidad.esPrincipal) {
+                    <span class="inline-flex items-center rounded-full bg-ds-primary-soft px-2 py-0.5 text-[11px] font-medium text-ds-primary">Principal</span>
+                  }
+                </div>
+                <p class="text-xs text-ds-muted">Unidad #{{ unidad.idUnidadNegocio ?? '—' }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-2 gap-3 border-t border-ds-line pt-3 text-[13px]">
+            <div>
+              <p class="text-[11px] uppercase tracking-wide text-ds-muted">Inicio</p>
+              <p class="mt-0.5 font-medium text-ds-ink">{{ unidad.fechaInicio | date:'dd/MM/yyyy' }}</p>
+            </div>
+            <div>
+              <p class="text-[11px] uppercase tracking-wide text-ds-muted">Fin</p>
+              <p class="mt-0.5 font-medium text-ds-ink">{{ unidad.fechaFin ? (unidad.fechaFin | date:'dd/MM/yyyy') : 'Vigente' }}</p>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-end gap-1 border-t border-ds-line pt-3">
+            <button type="button" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-primary-soft hover:text-ds-primary" (click)="editar(unidad)">
+              <svg pIcon="pencil" [size]="13"></svg>Editar
+            </button>
+            <button type="button" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-danger-soft hover:text-ds-danger" (click)="eliminar(unidad)">
+              <svg pIcon="trash" [size]="13"></svg>Eliminar
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="rounded-lg border border-dashed border-ds-line bg-ds-canvas px-6 py-10 text-center">
+      <div class="mx-auto mb-3 flex size-10 items-center justify-center rounded-full bg-ds-canvas-strong text-ds-muted"><svg pIcon="sitemap" [size]="18"></svg></div>
+      <p class="text-sm font-medium text-ds-ink">No hay unidades de negocio registradas</p>
+      <p class="mt-1 text-xs text-ds-muted">Agrega una unidad para asociarla al cliente.</p>
+    </div>
+  }
+</div>
+
+<p-drawer [visible]="drawerVisible()" (visibleChange)="drawerVisible.set($event)" position="right" [header]="tituloDrawer()" styleClass="!w-full md:!w-[480px]">
+  <form class="flex flex-col gap-4 pt-2" (submit)="$event.preventDefault(); guardar()">
+    <div class="ds-field">
+      <app-etiqueta-formulario para="un-id" [obligatorio]="true">Unidad de negocio</app-etiqueta-formulario>
+      <p-select inputId="un-id" [formField]="formulario.idUnidadNegocio" fluid [options]="opcionesUnidadNegocio" optionLabel="label" optionValue="value" placeholder="Selecciona una unidad" />
+      <app-mensaje-ayuda-error [campo]="formulario.idUnidadNegocio"></app-mensaje-ayuda-error>
+    </div>
+    <div class="ds-field">
+      <app-etiqueta-formulario para="un-principal">¿Es principal?</app-etiqueta-formulario>
+      <p-select inputId="un-principal" [formField]="formulario.esPrincipal" fluid [options]="opcionesPrincipal" optionLabel="label" optionValue="value" />
+    </div>
+    <div class="ds-field">
+      <app-etiqueta-formulario para="un-inicio" [obligatorio]="true">Fecha inicio</app-etiqueta-formulario>
+      <p-datepicker inputId="un-inicio" [formField]="formulario.fechaInicio" fluid dateFormat="dd/mm/yy" placeholder="Selecciona fecha" />
+      <app-mensaje-ayuda-error [campo]="formulario.fechaInicio"></app-mensaje-ayuda-error>
+    </div>
+    <div class="ds-field">
+      <app-etiqueta-formulario para="un-fin">Fecha fin</app-etiqueta-formulario>
+      <p-datepicker inputId="un-fin" [formField]="formulario.fechaFin" fluid dateFormat="dd/mm/yy" [showClear]="true" placeholder="Selecciona fecha" />
+    </div>
+  </form>
+  <ng-template #footer>
+    <div class="flex justify-end gap-2">
+      <button pButton type="button" variant="outlined" (click)="cerrarDrawer()">Cancelar</button>
+      <button pButton type="button" (click)="guardar()">Guardar</button>
+    </div>
+  </ng-template>
+</p-drawer>

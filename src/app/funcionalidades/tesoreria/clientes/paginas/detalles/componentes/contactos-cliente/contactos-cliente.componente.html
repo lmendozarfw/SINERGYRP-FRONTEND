@@ -1,0 +1,71 @@
+﻿<div class="flex flex-col gap-5 p-6">
+  <div class="flex items-center justify-between gap-4 border-b border-ds-line pb-4">
+    <div>
+      <p class="text-sm font-semibold text-ds-ink">Contactos</p>
+      <p class="text-xs text-ds-muted">Personas de contacto asociadas al cliente.</p>
+    </div>
+    <button pButton type="button" size="small" (click)="abrirNuevo()"><svg pIcon="plus" [size]="14"></svg>Agregar</button>
+  </div>
+
+  @if (contactos().length) {
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
+      @for (item of contactos(); track item.id) {
+        <article class="group flex flex-col rounded-lg border border-ds-line bg-ds-surface p-4 transition-colors hover:border-ds-primary-soft hover:bg-ds-canvas/40">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex min-w-0 items-center gap-3">
+              <span class="flex size-9 shrink-0 items-center justify-center rounded-md bg-ds-canvas-strong text-ds-muted ring-1 ring-ds-line">
+                <svg pIcon="user" [size]="16"></svg>
+              </span>
+              <div class="min-w-0">
+                <div class="flex items-center gap-2">
+                  <p class="truncate text-sm font-semibold text-ds-ink">{{ item.nombre }}</p>
+                  @if (item.esPrincipal) {
+                    <span class="inline-flex items-center rounded-full bg-ds-primary-soft px-2 py-0.5 text-[11px] font-medium text-ds-primary">Principal</span>
+                  }
+                </div>
+                <p class="truncate text-xs text-ds-muted">{{ item.puesto || 'Sin puesto' }}{{ item.tipoContacto ? ' · ' + item.tipoContacto : '' }}</p>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-[11px] font-medium" [class]="item.activo ? 'bg-ds-success-soft text-ds-success' : 'bg-ds-canvas-strong text-ds-muted'">
+              <span class="size-1.5 rounded-full" [class]="item.activo ? 'bg-ds-success' : 'bg-ds-muted'"></span>
+              {{ item.activo ? 'Activo' : 'Inactivo' }}
+            </span>
+          </div>
+
+          <div class="mt-4 flex flex-col gap-2 border-t border-ds-line pt-3 text-[13px]">
+            <div class="flex items-center gap-2 text-ds-muted"><svg pIcon="phone" [size]="13"></svg><span class="truncate text-ds-ink">{{ item.telefono || 'Sin teléfono' }}</span></div>
+            <div class="flex items-center gap-2 text-ds-muted"><svg pIcon="envelope" [size]="13"></svg><span class="truncate text-ds-ink">{{ item.email || 'Sin correo' }}</span></div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-end gap-1 border-t border-ds-line pt-3">
+            <button type="button" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-primary-soft hover:text-ds-primary" (click)="editar(item)">
+              <svg pIcon="pencil" [size]="13"></svg>Editar
+            </button>
+            <button type="button" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-danger-soft hover:text-ds-danger" (click)="eliminar(item)">
+              <svg pIcon="trash" [size]="13"></svg>Eliminar
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="rounded-lg border border-dashed border-ds-line bg-ds-canvas px-6 py-10 text-center">
+      <div class="mx-auto mb-3 flex size-10 items-center justify-center rounded-full bg-ds-canvas-strong text-ds-muted"><svg pIcon="users" [size]="18"></svg></div>
+      <p class="text-sm font-medium text-ds-ink">No hay contactos registrados</p>
+      <p class="mt-1 text-xs text-ds-muted">Agrega un contacto para el cliente.</p>
+    </div>
+  }
+</div>
+
+<p-drawer [visible]="drawerVisible()" (visibleChange)="drawerVisible.set($event)" position="right" [header]="tituloDrawer()" styleClass="!w-full md:!w-[480px]">
+  <form class="flex flex-col gap-4 pt-2" (submit)="$event.preventDefault(); guardar()">
+    <div class="ds-field"><app-etiqueta-formulario para="con-nombre" [obligatorio]="true">Nombre</app-etiqueta-formulario><input id="con-nombre" pInputText [formField]="formulario.nombre" fluid /><app-mensaje-ayuda-error [campo]="formulario.nombre"></app-mensaje-ayuda-error></div>
+    <div class="ds-field"><app-etiqueta-formulario para="con-puesto">Puesto</app-etiqueta-formulario><input id="con-puesto" pInputText [formField]="formulario.puesto" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="con-tipo">Tipo de contacto</app-etiqueta-formulario><p-select inputId="con-tipo" [formField]="formulario.tipoContacto" fluid [options]="opcionesTipoContacto" optionLabel="label" optionValue="value" placeholder="Selecciona" /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="con-tel">Teléfono</app-etiqueta-formulario><input id="con-tel" pInputText [formField]="formulario.telefono" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="con-email">Email</app-etiqueta-formulario><input id="con-email" pInputText [formField]="formulario.email" type="email" fluid /><app-mensaje-ayuda-error [campo]="formulario.email"></app-mensaje-ayuda-error></div>
+    <div class="ds-field"><app-etiqueta-formulario para="con-principal">Principal</app-etiqueta-formulario><p-select inputId="con-principal" [formField]="formulario.esPrincipal" fluid [options]="opcionesSiNo" optionLabel="label" optionValue="value" /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="con-activo">Activo</app-etiqueta-formulario><p-select inputId="con-activo" [formField]="formulario.activo" fluid [options]="opcionesSiNo" optionLabel="label" optionValue="value" /></div>
+  </form>
+  <ng-template #footer><div class="flex justify-end gap-2"><button pButton type="button" variant="outlined" (click)="cerrarDrawer()">Cancelar</button><button pButton type="button" (click)="guardar()">Guardar</button></div></ng-template>
+</p-drawer>

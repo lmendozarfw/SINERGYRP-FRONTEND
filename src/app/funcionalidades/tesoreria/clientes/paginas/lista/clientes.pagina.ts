@@ -4,13 +4,10 @@ import { BarraAccionesMasivasComponente } from '@compartido/componentes/barra-ac
 import { CopiarTextoComponente } from '@compartido/componentes/copiar-texto/copiar-texto.componente';
 import { DialogoConfirmacionServicio } from '@compartido/componentes/confirmacion/confirmacion.servicio';
 import { EncabezadoPaginaComponente } from '@compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
-import { EtiquetaFormularioComponente } from '@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente';
-import { MensajeAyudaErrorComponente } from '@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente';
 import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 import { BreadcrumbServicio } from '@nucleo/servicios/breadcrumb.servicio';
 import { PIcon } from '@primeicons/angular';
 import { ButtonDirective } from 'primeng/button';
-import { Drawer } from 'primeng/drawer';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
@@ -18,13 +15,13 @@ import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { ICliente } from '../../modelos/cliente';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clientes-pagina',
   imports: [
     DecimalPipe,
     ButtonDirective,
-    Drawer,
     IconField,
     InputIcon,
     InputText,
@@ -34,13 +31,12 @@ import { ICliente } from '../../modelos/cliente';
     Tag,
     EncabezadoPaginaComponente,
     CopiarTextoComponente,
-    EtiquetaFormularioComponente,
-    MensajeAyudaErrorComponente,
     BarraAccionesMasivasComponente,
   ],
   templateUrl: './clientes.pagina.html',
 })
 export class ClientesPagina {
+  private readonly rutas = inject(Router);
   private readonly dialogoConfirmacion = inject(DialogoConfirmacionServicio);
   private readonly breadcrumb = inject(BreadcrumbServicio);
 
@@ -263,8 +259,8 @@ export class ClientesPagina {
     return estado === 'inactivo' ? 'danger' : 'warn';
   }
 
-  abrirDrawer(): void {
-    this.drawerVisible.set(true);
+  irACrearCliente(): void {
+    this.rutas.navigate(['app', 'clientes', '1']);
   }
 
   limpiarSeleccion(): void {

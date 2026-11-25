@@ -1,0 +1,105 @@
+﻿<div class="flex flex-col gap-5 p-6">
+  <div class="flex items-center justify-between gap-4 border-b border-ds-line pb-4">
+    <div>
+      <p class="text-sm font-semibold text-ds-ink">Cuentas bancarias</p>
+      <p class="text-xs text-ds-muted">Tarjetas bancarias registradas para el cliente.</p>
+    </div>
+    <button pButton type="button" size="small" (click)="abrirNuevo()"><svg pIcon="plus"
+        [size]="14"></svg>Agregar</button>
+  </div>
+
+  @if (cuentas().length) {
+  <div class="grid grid-cols-1 gap-5 xl:grid-cols-2">
+    @for (cuenta of cuentas(); track cuenta.id) {
+    <div class="flex flex-col gap-3">
+      <app-tarjeta-credito [banco]="cuenta.banco" [titular]="cuenta.titularCuenta!" [esSoloLectura]="false"
+        [activo]="cuenta.activa" [moneda]="'MXN'" [numeroCuenta]="cuenta.numeroCuenta!"></app-tarjeta-credito>
+
+      <div class="flex items-center justify-between gap-3 px-1">
+        <div class="min-w-0 text-xs text-ds-muted">
+          <span class="truncate">{{ cuenta.nombreCuenta || 'Sin nombre de cuenta' }}</span>
+          @if (cuenta.clabe) { <span class="ml-2 font-mono text-[11px]">CLABE · {{ cuenta.clabe }}</span> }
+        </div>
+        <div class="flex shrink-0 items-center gap-1">
+          <button type="button"
+            class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-primary-soft hover:text-ds-primary"
+            (click)="editar(cuenta)"><svg pIcon="pencil" [size]="13"></svg>Editar</button>
+          <button type="button"
+            class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-danger-soft hover:text-ds-danger"
+            (click)="eliminar(cuenta)"><svg pIcon="trash" [size]="13"></svg>Eliminar</button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <div class="rounded-lg border border-dashed border-ds-line bg-ds-canvas px-6 py-10 text-center">
+    <div class="mx-auto mb-3 flex size-10 items-center justify-center rounded-full bg-ds-canvas-strong text-ds-muted">
+      <svg pIcon="credit-card" [size]="18"></svg>
+    </div>
+    <p class="text-sm font-medium text-ds-ink">No hay cuentas bancarias registradas</p>
+    <p class="mt-1 text-xs text-ds-muted">Agrega una cuenta bancaria para el cliente.</p>
+  </div>
+  }
+</div>
+
+<p-drawer [visible]="drawerVisible()" (visibleChange)="drawerVisible.set($event)" position="right"
+  [header]="tituloDrawer()" styleClass="!w-full md:!w-[560px]">
+  <div class="flex flex-col gap-5 pt-2">
+
+    <app-tarjeta-credito [banco]="formulario.banco().value()" [titular]="formulario.titularCuenta().value()!"
+      [esSoloLectura]="false" [activo]="formulario.activa().value()" [moneda]="'MXN'"
+      [numeroCuenta]="formulario.numeroCuenta().value()"></app-tarjeta-credito>
+
+    <form class="grid grid-cols-1 gap-4 md:grid-cols-2" (submit)="$event.preventDefault(); guardar()">
+      <div class="ds-field md:col-span-2">
+        <app-etiqueta-formulario para="banco" [obligatorio]="true">Banco</app-etiqueta-formulario>
+        <p-select inputId="banco" [formField]="formulario.banco" fluid [options]="opcionesBanco" optionLabel="label"
+          optionValue="value" placeholder="Selecciona banco" />
+        <app-mensaje-ayuda-error [campo]="formulario.banco"></app-mensaje-ayuda-error>
+      </div>
+
+      <div class="ds-field">
+        <app-etiqueta-formulario para="nombre">Nombre cuenta</app-etiqueta-formulario>
+        <input id="nombre" pInputText [formField]="formulario.nombreCuenta" fluid />
+      </div>
+
+      <div class="ds-field">
+        <app-etiqueta-formulario para="titular">Titular</app-etiqueta-formulario>
+        <input id="titular" pInputText [formField]="formulario.titularCuenta" fluid />
+      </div>
+
+      <div class="ds-field">
+        <app-etiqueta-formulario para="num">Número de cuenta</app-etiqueta-formulario>
+        <input id="num" pInputText [formField]="formulario.numeroCuenta" fluid />
+      </div>
+
+      <div class="ds-field">
+        <app-etiqueta-formulario para="clabe">CLABE</app-etiqueta-formulario>
+        <input id="clabe" pInputText [formField]="formulario.clabe" fluid />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="moneda">Moneda</app-etiqueta-formulario>
+        <p-select inputId="moneda" [formField]="formulario.idMoneda" fluid [options]="opcionesMoneda"
+          optionLabel="label" optionValue="value" placeholder="Selecciona" />
+      </div>
+
+      <div class="ds-field">
+        <app-etiqueta-formulario para="activa">Activa</app-etiqueta-formulario>
+        <p-select inputId="activa" [formField]="formulario.activa" fluid [options]="opcionesSiNo" optionLabel="label"
+          optionValue="value" />
+      </div>
+
+      <div class="ds-field md:col-span-2">
+        <app-etiqueta-formulario para="observaciones">Observaciones</app-etiqueta-formulario>
+        <input id="observaciones" pInputText [formField]="formulario.observaciones" fluid />
+      </div>
+    </form>
+  </div>
+  <ng-template #footer>
+    <div class="flex justify-end gap-2">
+      <button pButton type="button" variant="outlined" (click)="cerrarDrawer()">Cancelar</button>
+      <button pButton type="button" (click)="guardar()">Guardar</button>
+    </div>
+  </ng-template>
+</p-drawer>

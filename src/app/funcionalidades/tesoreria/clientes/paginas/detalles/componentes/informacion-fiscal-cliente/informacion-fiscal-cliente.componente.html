@@ -1,0 +1,23 @@
+﻿<form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault(); guardar()">
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div class="ds-field">
+      <app-etiqueta-formulario para="client-regimen-fiscal">ID régimen fiscal</app-etiqueta-formulario>
+      <p-select inputId="client-regimen-fiscal" [formField]="formulario.idRegimenFiscal" class="w-full" [options]="opcionesRegimen" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+    </div>
+    <div class="ds-field">
+      <app-etiqueta-formulario para="client-cuenta-contable">Cuenta contable</app-etiqueta-formulario>
+      <input id="client-cuenta-contable" pInputText [formField]="formulario.cuentaContable" type="text" class="ds-input" placeholder="Ej. 1010 · Clientes nacionales" />
+    </div>
+    <div class="ds-field">
+      <app-etiqueta-formulario para="client-tipo-iva">ID tipo de IVA</app-etiqueta-formulario>
+      <p-select inputId="client-tipo-iva" [formField]="formulario.idTipoIva" [options]="opcionesIva" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+    </div>
+    <div class="ds-field col-span-full">
+      <app-etiqueta-formulario para="client-uso-cfdi">ID uso de CFDI predeterminado</app-etiqueta-formulario>
+      <p-select inputId="client-uso-cfdi" [formField]="formulario.idUsoCfdiPredeterminado" [options]="opcionesUsoCfdi" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+    </div>
+  </div>
+  <div class="flex justify-end">
+    <button pButton type="submit">Guardar información fiscal</button>
+  </div>
+</form>

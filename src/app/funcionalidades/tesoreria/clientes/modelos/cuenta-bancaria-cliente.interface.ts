@@ -3,25 +3,25 @@ import { FieldTree } from "@angular/forms/signals";
 export interface ICuentaBancariaCliente {
     idCliente: number | null;
     banco: string;
-    nombreCuenta: string | null;
-    titularCuenta: string | null;
-    numeroCuenta: string | null;
-    clabe: string | null;
+    nombreCuenta: string;
+    titularCuenta: string;
+    numeroCuenta: string;
+    clabe: string;
     idMoneda: number | null;
     activa: boolean;
-    observaciones: string | null;
+    observaciones: string;
 }
 
 export const CUENTA_BANCARIA_CLIENTE_VACIA: ICuentaBancariaCliente = {
     idCliente: null,
     banco: '',
-    nombreCuenta: null,
-    titularCuenta: null,
-    numeroCuenta: null,
-    clabe: null,
+    nombreCuenta: '',
+    titularCuenta: '',
+    numeroCuenta: '',
+    clabe: '',
     idMoneda: null,
     activa: true,
-    observaciones: null
+    observaciones: ''
 };
 
 export interface IFilaCuentaBancariaCliente extends ICuentaBancariaCliente {
