@@ -341,7 +341,17 @@ export class SidebarComponente {
   ];
 
   readonly elementosSecundarios: ElementoNavegacion[] = [
-    { etiqueta: 'Configuración', icono: 'cog', ruta: '/app/configuration' },
+    {
+      etiqueta: 'Configuración',
+      icono: 'cog',
+      hijos: [
+        {
+          etiqueta: 'Unidades de negocio',
+          icono: 'building',
+          ruta: '/app/configuracion/unidades-negocio',
+        },
+      ],
+    },
     { etiqueta: 'Componentes', icono: 'question-circle', ruta: '/design-system' },
     { etiqueta: 'Ayuda', icono: 'question-circle', ruta: '/design-system' },
   ];
@@ -415,7 +425,7 @@ export class SidebarComponente {
     switch (accion.clave) {
       case 'perfil':
       case 'configuracion':
-        void this.router.navigateByUrl('/app/configuration');
+        void this.router.navigateByUrl('/app/configuracion');
         break;
       case 'ayuda':
         void this.router.navigateByUrl('/design-system');

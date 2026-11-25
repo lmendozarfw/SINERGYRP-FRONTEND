@@ -38,9 +38,31 @@ export const routes: Routes = [
         ]
       },
       {
+        path: 'configuracion',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./funcionalidades/configuracion/paginas/configuracion.pagina').then((p) => p.ConfiguracionPagina),
+          },
+          {
+            path: 'unidades-negocio',
+            loadComponent: () =>
+              import('./funcionalidades/configuracion/paginas/unidades-negocio.pagina').then(
+                (p) => p.UnidadesNegocioPagina,
+              ),
+          },
+        ],
+      },
+      {
         path: 'clientes',
         loadComponent: () =>
-          import('./funcionalidades/tesoreria/clientes/paginas/clientes.pagina').then((p) => p.ClientesPagina),
+          import('./funcionalidades/tesoreria/clientes/paginas/lista/clientes.pagina').then((p) => p.ClientesPagina),
+      },
+      {
+        path: 'clientes/:id',
+        loadComponent: () =>
+          import('./funcionalidades/tesoreria/clientes/paginas/detalles/detalle-cliente.pagina').then((p) => p.DetalleClientePagina),
       },
       {
         path: 'proveedores',

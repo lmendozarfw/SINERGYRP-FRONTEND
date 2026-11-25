@@ -9,12 +9,9 @@ import { CatalogoPaisesComponente } from "../componentes/catalogo-paises/catalog
 import { CatalogoEstadosComponente } from "../componentes/catalogo-estados/catalogo-estados.componente";
 import { CatalogoMunicipiosComponente } from "../componentes/catalogo-municipios/catalogo-municipios.componente";
 import { CatalogoRegimenesFiscalesComponente } from "../componentes/catalogo-regimenes-fiscales/catalogo-regimenes-fiscales.componente";
-
-interface Catalogo {
-    valor: string;
-    titulo: string;
-    descripcion: string;
-}
+import { CatalogoProductosServiciosComponente } from "../componentes/catalogo-productos-servicios/catalogo-productos-servicios.componente";
+import { CatalogoUsosCfdiComponente } from "../componentes/catalogo-usos-cfdi/catalogo-usos-cfdi.componente";
+import { IPestanaComponente } from "@compartido/interfaces/pestana-componente.interface";
 
 @Component({
     selector: 'app-catalogo-pagina',
@@ -28,13 +25,15 @@ interface Catalogo {
         CatalogoPaisesComponente,
         CatalogoEstadosComponente,
         CatalogoMunicipiosComponente,
-        CatalogoRegimenesFiscalesComponente
+        CatalogoRegimenesFiscalesComponente,
+        CatalogoProductosServiciosComponente,
+        CatalogoUsosCfdiComponente
     ]
 })
 export class CatalogoPagina {
     private readonly breadcrumbServicio = inject(BreadcrumbServicio);
 
-    readonly catalogos: Catalogo[] = [
+    readonly catalogos: IPestanaComponente[] = [
         { valor: '0', titulo: 'Monedas', descripcion: 'Administra las divisas disponibles para operaciones de tesorería, su número de decimales y su vigencia.' },
         { valor: '1', titulo: 'Métodos de pago', descripcion: 'Configura los medios con los que se realizan cobros y pagos: transferencia, tarjeta, efectivo y otros.' },
         { valor: '2', titulo: 'Formas de pago', descripcion: 'Define las condiciones comerciales de cobro y pago, como contado, crédito o parcialidades.' },
@@ -42,6 +41,8 @@ export class CatalogoPagina {
         { valor: '4', titulo: 'Estados', descripcion: 'Administra los estados o entidades federativas relacionados a cada país.' },
         { valor: '5', titulo: 'Municipios', descripcion: 'Gestiona los municipios o alcaldías disponibles para cada estado.' },
         { valor: '6', titulo: 'Regímenes fiscales del SAT', descripcion: 'Consulta y mantén los regímenes fiscales utilizados en la facturación electrónica.' },
+        { valor: '7', titulo: 'Productos y servicios del SAT', descripcion: 'Administra los códigos de productos y servicios utilizados en la facturación electrónica.' },
+        { valor: '8', titulo: 'Usos de CFDI del SAT', descripcion: 'Administra los usos de CFDI permitidos en la facturación electrónica.' },
     ];
 
     readonly pestanaActiva = signal('0');

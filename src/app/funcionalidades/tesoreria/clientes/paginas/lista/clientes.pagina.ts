@@ -17,7 +17,7 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
-import { ICliente } from '../modelos/cliente';
+import { ICliente } from '../../modelos/cliente';
 
 @Component({
   selector: 'app-clientes-pagina',

@@ -2,16 +2,16 @@ import { Component, computed, signal } from "@angular/core";
 import { CatalogoVacioComponente } from "../catalogo-vacio/catalogo-vacio.componente";
 import { ESTADO_VACIO, IEstado, IFilaEstado, IFilaVistaEstado } from "../../modelos/estado.interface";
 import { FieldTree, form, minLength, pattern, required, FormField } from "@angular/forms/signals";
-import { IPais } from "../../modelos/pais.interface";
 import { Table, EditableColumn, CellEditor } from "primeng/table";
 import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { PIcon } from '@primeicons/angular';
 import { ButtonDirective } from "primeng/button";
+import { InputText } from "primeng/inputtext";
 import { Select } from "primeng/select";
 
 @Component({
     selector: 'app-catalogo-estados',
-    imports: [CatalogoVacioComponente, Table, MensajeAyudaErrorComponente, EditableColumn, CellEditor, FormField, PIcon, ButtonDirective, Select],
+    imports: [CatalogoVacioComponente, Table, MensajeAyudaErrorComponente, EditableColumn, CellEditor, FormField, PIcon, ButtonDirective, InputText, Select],
     templateUrl: './catalogo-estados.componente.html'
 })
 export class CatalogoEstadosComponente {
@@ -30,7 +30,35 @@ export class CatalogoEstadosComponente {
         { label: 'México', value: 1 },
         { label: 'Estados unidos de Ámerica', value: 2 }
     ];
-    constructor() { }
+
+    private siguienteId = 2;
+
+    guardarEstado(): void {
+        this.formulario().markAsTouched();
+        if (this.formulario().invalid()) return;
+
+        const valores = this.obtenerValores(this.formulario);
+        this.estados.update(estados => [this.crearFila(this.siguienteId++, valores), ...estados]);
+        this.reiniciarFormulario(this.formulario);
+    }
+
+    guardarCambios(estado: IFilaEstado): void {
+        estado.formulario().markAsTouched();
+        if (estado.formulario().invalid()) return;
+
+        this.estados.update(estados => estados.map(item =>
+            item.id === estado.id ? { ...item, ...this.obtenerValores(estado.formulario) } : item
+        ));
+        estado.formulario().reset();
+    }
+
+    eliminarEstado(estado: IFilaEstado): void {
+        this.estados.update(estados => estados.filter(item => item.id !== estado.id));
+    }
+
+    obtenerNombrePais(idPais: number | null): string {
+        return this.paises.find(pais => pais.value === idPais)?.label ?? 'Sin país';
+    }
 
     private crearFormulario(estado?: IEstado): FieldTree<IEstado> {
         const modelo = signal<IEstado>({ ...ESTADO_VACIO, ...estado });
@@ -45,5 +73,18 @@ export class CatalogoEstadosComponente {
 
     private crearFila(id: number, estado: IEstado): IFilaEstado {
         return { id, ...estado, formulario: this.crearFormulario(estado) };
+    }
+
+    private obtenerValores(formulario: FieldTree<IEstado>): IEstado {
+        const idPais = formulario.idPais().value();
+        return {
+            idPais: typeof idPais === 'number' ? idPais : null,
+            codigoEstado: String(formulario.codigoEstado().value() ?? '').trim().toUpperCase(),
+            nombre: String(formulario.nombre().value() ?? '').trim()
+        };
+    }
+
+    private reiniciarFormulario(formulario: FieldTree<IEstado>): void {
+        formulario().reset({ ...ESTADO_VACIO });
     }
 }

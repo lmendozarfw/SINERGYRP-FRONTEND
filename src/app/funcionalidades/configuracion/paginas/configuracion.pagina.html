@@ -1,0 +1,20 @@
+<div class="flex flex-col gap-6">
+    <app-encabezado-pagina titulo="Configuración"
+        descripcion="Gestiona la configuración base de la organización."></app-encabezado-pagina>
+
+    <section class="rounded-lg border border-ds-line bg-ds-surface p-4">
+        <p class="m-0 text-[11px] font-semibold tracking-[0.08em] text-ds-muted uppercase">Secciones</p>
+        <div class="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <a routerLink="/app/configuracion/unidades-negocio"
+                class="flex items-start gap-3 rounded-lg border border-ds-line bg-ds-canvas p-4 text-ds-ink no-underline transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft focus-visible:shadow-ds-focus focus-visible:outline-none">
+                <span class="flex size-9 shrink-0 items-center justify-center rounded-md bg-ds-primary-soft text-ds-primary">
+                    <svg pIcon="building" [size]="18"></svg>
+                </span>
+                <span class="min-w-0">
+                    <span class="block text-sm font-semibold">Unidades de negocio</span>
+                    <span class="mt-0.5 block text-xs leading-5 text-ds-muted">Administra las unidades de negocio de la organización.</span>
+                </span>
+            </a>
+        </div>
+    </section>
+</div>

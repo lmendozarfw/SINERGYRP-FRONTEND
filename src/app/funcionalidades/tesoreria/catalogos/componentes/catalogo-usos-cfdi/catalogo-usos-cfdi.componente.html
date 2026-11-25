@@ -1,0 +1,176 @@
+<div class="overflow-x-auto rounded-lg border border-ds-line bg-ds-surface">
+    <p-table [value]="filas()" dataKey="id" [unstyled]="true"
+        tableStyleClass="w-full min-w-[1100px] border-collapse text-sm">
+        <ng-template #header>
+            <tr class="border-b border-ds-line bg-ds-canvas-strong">
+                <th class="w-[120px] px-4 py-3 align-middle text-left min-w-[120px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Código</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. G01</span>
+                </th>
+                <th class="px-4 py-3 align-middle text-left min-w-[260px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Descripción</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. Adquisición de mercancías</span>
+                </th>
+                <th class="w-[150px] px-4 py-3 align-middle text-left min-w-[150px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Persona física</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Sí o no</span>
+                </th>
+                <th class="w-[150px] px-4 py-3 align-middle text-left min-w-[150px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Persona moral</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Sí o no</span>
+                </th>
+                <th class="w-[140px] px-4 py-3 align-middle text-left min-w-[140px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Activo</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Sí o no</span>
+                </th>
+                <th class="w-[190px] px-4 py-3 align-middle text-right min-w-[190px]">
+                    <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Acciones</span>
+                    <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Guarda o elimina</span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-fila>
+            @if (fila.esNueva) {
+                <tr class="border-b border-ds-line bg-ds-canvas-strong">
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText [formField]="fila.formulario.codigo"
+                            [class.p-invalid]="codigoError.errorVisible()" type="text" placeholder="Ej. G01" fluid />
+                        <app-mensaje-ayuda-error #codigoError [campo]="fila.formulario.codigo"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <input pInputText [formField]="fila.formulario.descripcion"
+                            [class.p-invalid]="descripcionError.errorVisible()" type="text"
+                            placeholder="Ej. Adquisición de mercancías" fluid />
+                        <app-mensaje-ayuda-error #descripcionError
+                            [campo]="fila.formulario.descripcion"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <p-select [formField]="fila.formulario.aplicaPersonaFisica"
+                            [class.p-invalid]="fisicaError.errorVisible()" fluid [options]="siNo"
+                            optionLabel="label" optionValue="value" placeholder="Selecciona" />
+                        <app-mensaje-ayuda-error #fisicaError
+                            [campo]="fila.formulario.aplicaPersonaFisica"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <p-select [formField]="fila.formulario.aplicaPersonaMoral"
+                            [class.p-invalid]="moralError.errorVisible()" fluid [options]="siNo"
+                            optionLabel="label" optionValue="value" placeholder="Selecciona" />
+                        <app-mensaje-ayuda-error #moralError
+                            [campo]="fila.formulario.aplicaPersonaMoral"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle">
+                        <p-select [formField]="fila.formulario.activo" [class.p-invalid]="activoError.errorVisible()"
+                            fluid [options]="siNo" optionLabel="label" optionValue="value" placeholder="Selecciona" />
+                        <app-mensaje-ayuda-error #activoError [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <button pButton type="button" fluid (click)="guardarUsoCfdi()">Guardar uso de CFDI</button>
+                        </div>
+                    </td>
+                </tr>
+            } @else {
+                <tr class="border-b border-ds-line transition-colors last:border-b-0 hover:bg-ds-canvas">
+                    <td [pEditableColumn]="fila" pEditableColumnField="codigo"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText [formField]="fila.formulario.codigo"
+                                    [class.p-invalid]="codigoEdicionError.errorVisible()" type="text" fluid />
+                                <app-mensaje-ayuda-error #codigoEdicionError
+                                    [campo]="fila.formulario.codigo"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="font-medium text-ds-ink">{{ fila.formulario.codigo().value() }}</span>
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="descripcion"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <input pInputText [formField]="fila.formulario.descripcion"
+                                    [class.p-invalid]="descripcionEdicionError.errorVisible()" type="text" fluid />
+                                <app-mensaje-ayuda-error #descripcionEdicionError
+                                    [campo]="fila.formulario.descripcion"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <span class="text-ds-ink">{{ fila.formulario.descripcion().value() }}</span>
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="aplicaPersonaFisica"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <p-select [formField]="fila.formulario.aplicaPersonaFisica"
+                                    [class.p-invalid]="fisicaEdicionError.errorVisible()" fluid [options]="siNo"
+                                    optionLabel="label" optionValue="value" placeholder="Selecciona" />
+                                <app-mensaje-ayuda-error #fisicaEdicionError
+                                    [campo]="fila.formulario.aplicaPersonaFisica"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <p-tag class="min-w-14"
+                                    [value]="fila.formulario.aplicaPersonaFisica().value() ? 'Sí' : 'No'"
+                                    [severity]="fila.formulario.aplicaPersonaFisica().value() ? 'success' : 'danger'" />
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="aplicaPersonaMoral"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <p-select [formField]="fila.formulario.aplicaPersonaMoral"
+                                    [class.p-invalid]="moralEdicionError.errorVisible()" fluid [options]="siNo"
+                                    optionLabel="label" optionValue="value" placeholder="Selecciona" />
+                                <app-mensaje-ayuda-error #moralEdicionError
+                                    [campo]="fila.formulario.aplicaPersonaMoral"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <p-tag class="min-w-14"
+                                    [value]="fila.formulario.aplicaPersonaMoral().value() ? 'Sí' : 'No'"
+                                    [severity]="fila.formulario.aplicaPersonaMoral().value() ? 'success' : 'danger'" />
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td [pEditableColumn]="fila" pEditableColumnField="activo"
+                        class="h-[60px] cursor-text px-4 py-3 align-middle">
+                        <p-cell-editor>
+                            <ng-template #input>
+                                <p-select [formField]="fila.formulario.activo"
+                                    [class.p-invalid]="activoEdicionError.errorVisible()" fluid [options]="siNo"
+                                    optionLabel="label" optionValue="value" placeholder="Selecciona" />
+                                <app-mensaje-ayuda-error #activoEdicionError
+                                    [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>
+                            </ng-template>
+                            <ng-template #output>
+                                <p-tag class="min-w-14" [value]="fila.formulario.activo().value() ? 'Sí' : 'No'"
+                                    [severity]="fila.formulario.activo().value() ? 'success' : 'danger'" />
+                            </ng-template>
+                        </p-cell-editor>
+                    </td>
+                    <td class="h-[60px] px-4 py-3 align-middle text-right">
+                        <div class="flex justify-end gap-1">
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Guardar cambios de ' + fila.codigo" (click)="guardarCambios(fila)">
+                                <svg pIcon="check" [size]="15"></svg>
+                            </button>
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-danger-line hover:bg-ds-danger-soft hover:text-ds-danger focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Eliminar ' + fila.codigo" (click)="eliminarUsoCfdi(fila)">
+                                <svg pIcon="trash" [size]="15"></svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </ng-template>
+    </p-table>
+
+    @if (!usosCfdi().length) {
+        <div class="border-t border-ds-line p-4">
+            <app-catalogo-vacio titulo="usos de CFDI" descripcion="Usa la primera fila para agregar un registro." />
+        </div>
+    }
+</div>

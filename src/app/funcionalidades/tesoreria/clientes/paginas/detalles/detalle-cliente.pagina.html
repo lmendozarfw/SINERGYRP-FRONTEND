@@ -1,0 +1,141 @@
+<div class="flex flex-col gap-6">
+  <app-encabezado-pagina titulo="Grupo industrial de caja S.A. de C.V."
+    descripcion="Gestiona la información de tu cliente, desde sus contactos hasta sus cuentas bancarias.">
+  </app-encabezado-pagina>
+
+
+  <p-tabs lazy [value]="pestanaActiva()" (valueChange)="cambiarPestana($event)">
+    <p-tablist>
+      @for (pestana of pestanas; track pestana.valor) {
+      <p-tab [value]="pestana.valor">
+        <p>{{ pestana.titulo }}</p>
+        @if (pestana.valor === '0') {
+          <small class="ds-meta text-ds-warning!">Información pendiente</small>
+        }
+      </p-tab>
+      }
+    </p-tablist>
+    <p-tabpanels>
+      @for (pestana of pestanas; track pestana.valor) {
+      <p-tabpanel [value]="pestana.valor">
+        @switch (pestana.valor) {
+        @case ('0') {
+        <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault()">
+          <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-codigo" [obligatorio]="true">Código</app-etiqueta-formulario>
+              <input id="client-codigo" pInputText type="text" class="ds-input" placeholder="Ej. CLI-001" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-estado" [obligatorio]="true">
+                Estado del cliente
+              </app-etiqueta-formulario>
+              <p-select inputId="client-estado" class="w-full" [options]="opcionesEstado" optionLabel="etiqueta"
+                optionValue="valor" placeholder="Selecciona una opción" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-razon-social" [obligatorio]="true">
+                Nombre o razón social
+              </app-etiqueta-formulario>
+              <input id="client-razon-social" pInputText type="text" class="ds-input"
+                placeholder="Ej. Grupo Industrial Raudal, S.A. de C.V." />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-nombre-comercial">Nombre comercial</app-etiqueta-formulario>
+              <input id="client-nombre-comercial" pInputText type="text" class="ds-input" placeholder="Ej. Raudal" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-tipo-persona" [obligatorio]="true">
+                Tipo de persona
+              </app-etiqueta-formulario>
+              <p-select inputId="client-tipo-persona" [options]="opcionesTipoPersona" optionLabel="etiqueta"
+                optionValue="valor" placeholder="Selecciona una opción" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-rfc" [obligatorio]="true">RFC</app-etiqueta-formulario>
+              <input id="client-rfc" pInputText type="text" class="ds-input uppercase" placeholder="Ej. RIR240315AB1"
+                maxlength="13" />
+              <app-mensaje-ayuda-error mensajeAyuda="Registro Federal de Contribuyentes."></app-mensaje-ayuda-error>
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-identificador-fiscal">
+                Identificador fiscal extranjero
+              </app-etiqueta-formulario>
+              <input id="client-identificador-fiscal" pInputText type="text" class="ds-input"
+                placeholder="Ej. IDF-44710" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-fecha-alta">Fecha de alta</app-etiqueta-formulario>
+              <input id="client-fecha-alta" pInputText type="date" class="ds-input" />
+            </div>
+          </div>
+        </form>
+        }
+        @case ('1') {
+        <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault()">
+          <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-regimen-fiscal">ID régimen fiscal</app-etiqueta-formulario>
+              <p-select inputId="client-regimen-fiscal" class="w-full" [options]="opcionesRegimen"
+                optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-cuenta-contable">Cuenta contable</app-etiqueta-formulario>
+              <input id="client-cuenta-contable" pInputText type="text" class="ds-input"
+                placeholder="Ej. 1010 · Clientes nacionales" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-tipo-iva">ID tipo de IVA</app-etiqueta-formulario>
+              <p-select inputId="client-tipo-iva" [options]="opcionesIva" optionLabel="etiqueta" optionValue="valor"
+                placeholder="Selecciona una opción" />
+            </div>
+            <div class="ds-field col-span-full">
+              <app-etiqueta-formulario para="client-uso-cfdi">ID uso de CFDI predeterminado</app-etiqueta-formulario>
+              <p-select inputId="client-uso-cfdi" [options]="opcionesUsoCfdi" optionLabel="etiqueta" optionValue="valor"
+                placeholder="Selecciona una opción" />
+            </div>
+          </div>
+        </form>
+        }
+        @case ('2') {
+        <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault()">
+          <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-forma-pago">ID forma de pago
+                predeterminada</app-etiqueta-formulario>
+              <p-select inputId="client-forma-pago" [options]="opcionesFormaPago" optionLabel="etiqueta"
+                optionValue="valor" placeholder="Selecciona una opción" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-metodo-pago">ID método de pago
+                predeterminado</app-etiqueta-formulario>
+              <p-select inputId="client-metodo-pago" [options]="opcionesMetodoPago" optionLabel="etiqueta"
+                optionValue="valor" placeholder="Selecciona una opción" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-limite-credito">Límite de crédito</app-etiqueta-formulario>
+              <input id="client-limite-credito" pInputText type="text" class="ds-input" inputmode="decimal"
+                placeholder="0.00" />
+            </div>
+            <div class="ds-field">
+              <app-etiqueta-formulario para="client-dias-credito">Días de crédito</app-etiqueta-formulario>
+              <input id="client-dias-credito" pInputText type="number" class="ds-input" placeholder="0" min="0" />
+            </div>
+            <div class="ds-field col-span-full">
+              <app-etiqueta-formulario para="client-observaciones">Observaciones</app-etiqueta-formulario>
+              <textarea id="client-observaciones" pInputText rows="4"
+                class="ds-input h-auto! min-h-24! resize-y! px-3! py-2.5!"
+                placeholder="Notas internas sobre el cliente…"></textarea>
+            </div>
+          </div>
+        </form>
+        }
+        @case ('3') {
+        3
+        }
+        }
+      </p-tabpanel>
+      }
+    </p-tabpanels>
+  </p-tabs>
+</div>

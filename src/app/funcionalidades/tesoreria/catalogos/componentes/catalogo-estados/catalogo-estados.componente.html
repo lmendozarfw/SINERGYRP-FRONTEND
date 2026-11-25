@@ -45,7 +45,7 @@
                 </td>
                 <td class="h-[60px] px-4 py-3 align-middle text-right">
                     <div class="flex items-center justify-end gap-2">
-                        <button pButton type="button" fluid>Guardar estado</button>
+                        <button pButton type="button" fluid (click)="guardarEstado()">Guardar estado</button>
                     </div>
                 </td>
             </tr>
@@ -63,7 +63,7 @@
                                 [campo]="fila.formulario.idPais"></app-mensaje-ayuda-error>
                         </ng-template>
                         <ng-template #output>
-                            <span class="font-medium text-ds-ink">{{ fila.formulario.idPais().value() }}</span>
+                            <span class="font-medium text-ds-ink">{{ obtenerNombrePais(fila.formulario.idPais().value()) }}</span>
                         </ng-template>
                     </p-cell-editor>
                 </td>
@@ -99,12 +99,12 @@
                     <div class="flex justify-end gap-1">
                         <button type="button"
                             class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
-                            [attr.aria-label]="'Guardar cambios de ' + fila.idPais">
+                            [attr.aria-label]="'Guardar cambios de ' + fila.nombre" (click)="guardarCambios(fila)">
                             <svg pIcon="check" [size]="15"></svg>
                         </button>
                         <button type="button"
                             class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-danger-line hover:bg-ds-danger-soft hover:text-ds-danger focus-visible:shadow-ds-focus focus-visible:outline-none"
-                            [attr.aria-label]="'Eliminar ' + fila.idPais">
+                            [attr.aria-label]="'Eliminar ' + fila.nombre" (click)="eliminarEstado(fila)">
                             <svg pIcon="trash" [size]="15"></svg>
                         </button>
                     </div>
