@@ -37,7 +37,7 @@
                             [campo]="fila.formulario.descripcion"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-select [formField]="fila.formulario.activo"
+                        <p-select appendTo="body" [formField]="fila.formulario.activo"
                             [class.p-invalid]="activoError.errorVisible()" fluid [options]="estatus"
                             optionLabel="label" optionValue="value" placeholder="Selecciona un estado" />
                         <app-mensaje-ayuda-error #activoError [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>
@@ -82,7 +82,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-select [formField]="fila.formulario.activo"
+                                <p-select appendTo="body" [formField]="fila.formulario.activo"
                                     [class.p-invalid]="activoEdicionError.errorVisible()" fluid [options]="estatus"
                                     optionLabel="label" optionValue="value" placeholder="Selecciona un estado" />
                                 <app-mensaje-ayuda-error #activoEdicionError

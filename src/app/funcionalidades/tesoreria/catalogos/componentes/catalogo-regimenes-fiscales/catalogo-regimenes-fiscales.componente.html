@@ -45,21 +45,21 @@
                             [campo]="fila.formulario.descripcion"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-select [formField]="fila.formulario.aplicaPersonaFisica"
+                        <p-select appendTo="body" [formField]="fila.formulario.aplicaPersonaFisica"
                             [class.p-invalid]="fisicaError.errorVisible()" fluid [options]="siNo"
                             optionLabel="label" optionValue="value" placeholder="Selecciona" />
                         <app-mensaje-ayuda-error #fisicaError
                             [campo]="fila.formulario.aplicaPersonaFisica"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-select [formField]="fila.formulario.aplicaPersonaMoral"
+                        <p-select appendTo="body" [formField]="fila.formulario.aplicaPersonaMoral"
                             [class.p-invalid]="moralError.errorVisible()" fluid [options]="siNo"
                             optionLabel="label" optionValue="value" placeholder="Selecciona" />
                         <app-mensaje-ayuda-error #moralError
                             [campo]="fila.formulario.aplicaPersonaMoral"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-select [formField]="fila.formulario.activo" [class.p-invalid]="activoError.errorVisible()"
+                        <p-select appendTo="body" [formField]="fila.formulario.activo" [class.p-invalid]="activoError.errorVisible()"
                             fluid [options]="siNo" optionLabel="label" optionValue="value" placeholder="Selecciona" />
                         <app-mensaje-ayuda-error #activoError [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>
                     </td>
@@ -103,7 +103,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-select [formField]="fila.formulario.aplicaPersonaFisica"
+                                <p-select appendTo="body" [formField]="fila.formulario.aplicaPersonaFisica"
                                     [class.p-invalid]="fisicaEdicionError.errorVisible()" fluid [options]="siNo"
                                     optionLabel="label" optionValue="value" placeholder="Selecciona" />
                                 <app-mensaje-ayuda-error #fisicaEdicionError
@@ -120,7 +120,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-select [formField]="fila.formulario.aplicaPersonaMoral"
+                                <p-select appendTo="body" [formField]="fila.formulario.aplicaPersonaMoral"
                                     [class.p-invalid]="moralEdicionError.errorVisible()" fluid [options]="siNo"
                                     optionLabel="label" optionValue="value" placeholder="Selecciona" />
                                 <app-mensaje-ayuda-error #moralEdicionError
@@ -137,7 +137,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-select [formField]="fila.formulario.activo"
+                                <p-select appendTo="body" [formField]="fila.formulario.activo"
                                     [class.p-invalid]="activoEdicionError.errorVisible()" fluid [options]="siNo"
                                     optionLabel="label" optionValue="value" placeholder="Selecciona" />
                                 <app-mensaje-ayuda-error #activoEdicionError

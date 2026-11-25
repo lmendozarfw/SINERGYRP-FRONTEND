@@ -54,7 +54,7 @@
     <form class="grid grid-cols-1 gap-4 md:grid-cols-2" (submit)="$event.preventDefault(); guardar()">
       <div class="ds-field md:col-span-2">
         <app-etiqueta-formulario para="banco" [obligatorio]="true">Banco</app-etiqueta-formulario>
-        <p-select inputId="banco" [formField]="formulario.banco" fluid [options]="opcionesBanco" optionLabel="label"
+        <p-select appendTo="body" inputId="banco" [formField]="formulario.banco" fluid [options]="opcionesBanco" optionLabel="label"
           optionValue="value" placeholder="Selecciona banco" />
         <app-mensaje-ayuda-error [campo]="formulario.banco"></app-mensaje-ayuda-error>
       </div>
@@ -80,13 +80,13 @@
       </div>
       <div class="ds-field">
         <app-etiqueta-formulario para="moneda">Moneda</app-etiqueta-formulario>
-        <p-select inputId="moneda" [formField]="formulario.idMoneda" fluid [options]="opcionesMoneda"
+        <p-select appendTo="body" inputId="moneda" [formField]="formulario.idMoneda" fluid [options]="opcionesMoneda"
           optionLabel="label" optionValue="value" placeholder="Selecciona" />
       </div>
 
       <div class="ds-field">
         <app-etiqueta-formulario para="activa">Activa</app-etiqueta-formulario>
-        <p-select inputId="activa" [formField]="formulario.activa" fluid [options]="opcionesSiNo" optionLabel="label"
+        <p-select appendTo="body" inputId="activa" [formField]="formulario.activa" fluid [options]="opcionesSiNo" optionLabel="label"
           optionValue="value" />
       </div>
 

@@ -24,6 +24,7 @@
     </p-iconfield>
 
     <p-select
+      appendTo="body"
       class="w-[184px]! shrink-0"
       [options]="opcionesTipoPersona"
       optionLabel="etiqueta"
@@ -32,6 +33,7 @@
       aria-label="Filtrar por tipo de persona"
     />
     <p-select
+      appendTo="body"
       class="w-[184px]! shrink-0"
       [options]="opcionesRegimen"
       optionLabel="etiqueta"
@@ -216,6 +218,7 @@
         <div class="ds-field">
           <app-etiqueta-formulario para="provider-estado" [obligatorio]="true">Estado</app-etiqueta-formulario>
           <p-select
+            appendTo="body"
             inputId="provider-estado"
             class="w-full"
             [options]="opcionesEstado"
@@ -251,6 +254,7 @@
             Tipo de persona
           </app-etiqueta-formulario>
           <p-select
+            appendTo="body"
             inputId="provider-tipo-persona"
             [options]="opcionesTipoPersona"
             optionLabel="etiqueta"
@@ -300,6 +304,7 @@
         <div class="ds-field">
           <app-etiqueta-formulario para="provider-regimen-fiscal">ID régimen fiscal</app-etiqueta-formulario>
           <p-select
+            appendTo="body"
             inputId="provider-regimen-fiscal"
             class="w-full"
             [options]="opcionesRegimen"
@@ -321,6 +326,7 @@
         <div class="ds-field">
           <app-etiqueta-formulario para="provider-moneda">ID moneda predeterminada</app-etiqueta-formulario>
           <p-select
+            appendTo="body"
             inputId="provider-moneda"
             [options]="opcionesMoneda"
             optionLabel="etiqueta"
@@ -333,6 +339,7 @@
             ID forma de pago predeterminada
           </app-etiqueta-formulario>
           <p-select
+            appendTo="body"
             inputId="provider-forma-pago"
             [options]="opcionesFormaPago"
             optionLabel="etiqueta"
@@ -345,6 +352,7 @@
             ID método de pago predeterminado
           </app-etiqueta-formulario>
           <p-select
+            appendTo="body"
             inputId="provider-metodo-pago"
             [options]="opcionesMetodoPago"
             optionLabel="etiqueta"

@@ -2,11 +2,11 @@
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
     <div class="ds-field">
       <app-etiqueta-formulario para="client-forma-pago">ID forma de pago predeterminada</app-etiqueta-formulario>
-      <p-select inputId="client-forma-pago" [formField]="formulario.idFormaPagoPredeterminada" [options]="opcionesFormaPago" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      <p-select appendTo="body" inputId="client-forma-pago" [formField]="formulario.idFormaPagoPredeterminada" [options]="opcionesFormaPago" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="client-metodo-pago">ID método de pago predeterminado</app-etiqueta-formulario>
-      <p-select inputId="client-metodo-pago" [formField]="formulario.idMetodoPagoPredeterminado" [options]="opcionesMetodoPago" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      <p-select appendTo="body" inputId="client-metodo-pago" [formField]="formulario.idMetodoPagoPredeterminado" [options]="opcionesMetodoPago" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="client-limite-credito">Límite de crédito</app-etiqueta-formulario>

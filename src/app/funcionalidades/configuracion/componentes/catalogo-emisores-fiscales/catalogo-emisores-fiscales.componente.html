@@ -37,7 +37,7 @@
             @if (fila.esNueva) {
                 <tr class="border-b border-ds-line bg-ds-canvas-strong">
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-select [formField]="fila.formulario.idUnidadNegocio"
+                        <p-select appendTo="body" [formField]="fila.formulario.idUnidadNegocio"
                             [class.p-invalid]="idUnidadNegocioError.errorVisible()" fluid
                             [options]="unidadesNegocioOpciones" optionLabel="label" optionValue="value"
                             placeholder="Selecciona una unidad" />
@@ -45,7 +45,7 @@
                             [campo]="fila.formulario.idUnidadNegocio"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-select [formField]="fila.formulario.idRegimenFiscal"
+                        <p-select appendTo="body" [formField]="fila.formulario.idRegimenFiscal"
                             [class.p-invalid]="idRegimenFiscalError.errorVisible()" fluid
                             [options]="regimenesFiscales" optionLabel="label" optionValue="value"
                             placeholder="Selecciona un régimen" />
@@ -73,7 +73,7 @@
                             [campo]="fila.formulario.codigoPostalExpedicion"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-select [formField]="fila.formulario.activo" [class.p-invalid]="activoError.errorVisible()"
+                        <p-select appendTo="body" [formField]="fila.formulario.activo" [class.p-invalid]="activoError.errorVisible()"
                             fluid [options]="estadosEmisor" optionLabel="label" optionValue="value"
                             placeholder="Selecciona" />
                         <app-mensaje-ayuda-error #activoError [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>
@@ -90,7 +90,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-select [formField]="fila.formulario.idUnidadNegocio"
+                                <p-select appendTo="body" [formField]="fila.formulario.idUnidadNegocio"
                                     [class.p-invalid]="idUnidadNegocioEdicionError.errorVisible()" fluid
                                     [options]="unidadesNegocioOpciones" optionLabel="label" optionValue="value"
                                     placeholder="Selecciona una unidad" />
@@ -107,7 +107,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-select [formField]="fila.formulario.idRegimenFiscal"
+                                <p-select appendTo="body" [formField]="fila.formulario.idRegimenFiscal"
                                     [class.p-invalid]="idRegimenFiscalEdicionError.errorVisible()" fluid
                                     [options]="regimenesFiscales" optionLabel="label" optionValue="value"
                                     placeholder="Selecciona un régimen" />
@@ -166,7 +166,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-select [formField]="fila.formulario.activo"
+                                <p-select appendTo="body" [formField]="fila.formulario.activo"
                                     [class.p-invalid]="activoEdicionError.errorVisible()" fluid
                                     [options]="estadosEmisor" optionLabel="label" optionValue="value"
                                     placeholder="Selecciona" />

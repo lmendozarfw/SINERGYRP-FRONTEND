@@ -21,6 +21,7 @@
           {{ atributo.nombre }}
         </app-etiqueta-formulario>
         <p-select
+        appendTo="body"
           [inputId]="'atributo-' + atributo.id"
           [options]="atributo.opciones"
           optionLabel="etiqueta"

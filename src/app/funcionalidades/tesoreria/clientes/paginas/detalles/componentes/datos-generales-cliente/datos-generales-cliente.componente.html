@@ -7,7 +7,7 @@
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="client-estado" [obligatorio]="true">Estado del cliente</app-etiqueta-formulario>
-      <p-select inputId="client-estado" [formField]="formulario.estadoCliente" class="w-full" [options]="opcionesEstado" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      <p-select appendTo="body" inputId="client-estado" [formField]="formulario.estadoCliente" class="w-full" [options]="opcionesEstado" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
       <app-mensaje-ayuda-error [campo]="formulario.estadoCliente"></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">
@@ -21,7 +21,7 @@
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="client-tipo-persona" [obligatorio]="true">Tipo de persona</app-etiqueta-formulario>
-      <p-select inputId="client-tipo-persona" [formField]="formulario.tipoPersona" [options]="opcionesTipoPersona" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      <p-select appendTo="body" inputId="client-tipo-persona" [formField]="formulario.tipoPersona" [options]="opcionesTipoPersona" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
       <app-mensaje-ayuda-error [campo]="formulario.tipoPersona"></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">

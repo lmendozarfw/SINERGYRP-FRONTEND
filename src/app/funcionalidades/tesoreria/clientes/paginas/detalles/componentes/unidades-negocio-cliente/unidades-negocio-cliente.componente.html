@@ -63,12 +63,12 @@
   <form class="flex flex-col gap-4 pt-2" (submit)="$event.preventDefault(); guardar()">
     <div class="ds-field">
       <app-etiqueta-formulario para="un-id" [obligatorio]="true">Unidad de negocio</app-etiqueta-formulario>
-      <p-select inputId="un-id" [formField]="formulario.idUnidadNegocio" fluid [options]="opcionesUnidadNegocio" optionLabel="label" optionValue="value" placeholder="Selecciona una unidad" />
+      <p-select appendTo="body" inputId="un-id" [formField]="formulario.idUnidadNegocio" fluid [options]="opcionesUnidadNegocio" optionLabel="label" optionValue="value" placeholder="Selecciona una unidad" />
       <app-mensaje-ayuda-error [campo]="formulario.idUnidadNegocio"></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="un-principal">¿Es principal?</app-etiqueta-formulario>
-      <p-select inputId="un-principal" [formField]="formulario.esPrincipal" fluid [options]="opcionesPrincipal" optionLabel="label" optionValue="value" />
+      <p-select appendTo="body" inputId="un-principal" [formField]="formulario.esPrincipal" fluid [options]="opcionesPrincipal" optionLabel="label" optionValue="value" />
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="un-inicio" [obligatorio]="true">Fecha inicio</app-etiqueta-formulario>

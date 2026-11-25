@@ -35,7 +35,7 @@
                         <app-mensaje-ayuda-error #nombreError [campo]="fila.formulario.nombre"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-select [formField]="fila.formulario.activa"
+                        <p-select appendTo="body" [formField]="fila.formulario.activa"
                             [class.p-invalid]="activaError.errorVisible()" fluid [options]="estadosUnidad"
                             optionLabel="label" optionValue="value" placeholder="Selecciona un estado" />
                         <app-mensaje-ayuda-error #activaError [campo]="fila.formulario.activa"></app-mensaje-ayuda-error>
@@ -77,7 +77,7 @@
                     <td [pEditableColumn]="fila" pEditableColumnField="activa" class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-select [formField]="fila.formulario.activa"
+                                <p-select appendTo="body" [formField]="fila.formulario.activa"
                                     [class.p-invalid]="activaEdicionError.errorVisible()" fluid
                                     [options]="estadosUnidad" optionLabel="label" optionValue="value"
                                     placeholder="Selecciona un estado" />
