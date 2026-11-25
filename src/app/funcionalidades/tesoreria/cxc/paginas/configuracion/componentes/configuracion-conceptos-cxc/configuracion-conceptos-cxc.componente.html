@@ -1,0 +1,252 @@
+<div class="flex flex-col gap-5">
+    <div class="flex flex-nowrap items-center gap-2">
+        <p-iconfield iconPosition="left" class="w-auto min-w-[220px] grow basis-[280px]">
+            <p-inputicon>
+                <svg pIcon="search" [size]="16"></svg>
+            </p-inputicon>
+            <input pInputText type="text" class="ds-input" [value]="busqueda()"
+                (input)="busqueda.set($any($event.target).value)" placeholder="Buscar por código, descripción o cuenta"
+                aria-label="Buscar conceptos" />
+        </p-iconfield>
+
+        <p-select appendTo="body" class="w-[184px]! shrink-0" [options]="tiposDocumento" optionLabel="etiqueta"
+            optionValue="valor" [(ngModel)]="filtroTipoDocumento" [ngModelOptions]="{ standalone: true }"
+            placeholder="Tipo de documento" aria-label="Filtrar por tipo de documento" />
+
+        <p-select appendTo="body" class="w-[150px]! shrink-0" [options]="naturalezas" optionLabel="etiqueta"
+            optionValue="valor" [(ngModel)]="filtroNaturaleza" [ngModelOptions]="{ standalone: true }"
+            placeholder="Naturaleza" aria-label="Filtrar por naturaleza" />
+
+        <p-select appendTo="body" class="w-[140px]! shrink-0" [options]="estatus" optionLabel="etiqueta"
+            optionValue="valor" [(ngModel)]="filtroActivo" [ngModelOptions]="{ standalone: true }"
+            placeholder="Estatus" aria-label="Filtrar por estatus" />
+
+        <div class="shrink-0">
+            <button type="button" pButton variant="outlined" (click)="limpiarFiltros()">
+                <svg pIcon="filter" [size]="14"></svg>
+                Limpiar
+            </button>
+        </div>
+    </div>
+
+    <section class="ds-card overflow-hidden p-0!">
+        <p-table styleClass="ds-table" [value]="conceptosFiltrados()" dataKey="id" selectionMode="multiple"
+            [selection]="seleccion()" (selectionChange)="seleccion.set($event)" [paginator]="true" [rows]="6"
+            [rowsPerPageOptions]="[6, 12, 24]" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} conceptos" [scrollable]="true">
+            <ng-template #header>
+                <tr>
+                    <th class="ds-table__th--check" class="w-[40px] min-w-[40px]">
+                        <p-table-header-checkbox ariaLabel="Seleccionar todos los conceptos" />
+                    </th>
+                    <th pSortableColumn="codigo" class="w-[140px] min-w-[140px]">
+                        <span class="inline-flex items-center gap-1.5">
+                            Código
+                            <p-sorticon field="codigo" />
+                        </span>
+                    </th>
+                    <th pSortableColumn="descripcion" class="w-[280px] min-w-[280px]">
+                        <span class="inline-flex items-center gap-1.5">
+                            Descripción
+                            <p-sorticon field="descripcion" />
+                        </span>
+                    </th>
+                    <th pSortableColumn="tipoDocumento" class="w-[160px] min-w-[160px]">
+                        <span class="inline-flex items-center gap-1.5">
+                            Documento
+                            <p-sorticon field="tipoDocumento" />
+                        </span>
+                    </th>
+                    <th pSortableColumn="naturaleza" class="w-[110px] min-w-[110px]">
+                        <span class="inline-flex items-center gap-1.5">
+                            Naturaleza
+                            <p-sorticon field="naturaleza" />
+                        </span>
+                    </th>
+                    <th class="w-[110px] min-w-[110px]">Timbrado</th>
+                    <th class="w-[170px] min-w-[170px]">Cuenta contable</th>
+                    <th pSortableColumn="activo" class="w-[110px] min-w-[110px]">
+                        <span class="inline-flex items-center gap-1.5">
+                            Estatus
+                            <p-sorticon field="activo" />
+                        </span>
+                    </th>
+                    <th class="w-[110px] min-w-[110px] text-right!">Acciones</th>
+                </tr>
+            </ng-template>
+
+            <ng-template #body let-concepto let-i="index">
+                <tr>
+                    <td class="ds-table__td--check">
+                        <p-table-checkbox [value]="concepto" [index]="i" ariaLabel="Seleccionar concepto" />
+                    </td>
+                    <td>
+                        <app-copiar-texto [valor]="concepto.codigo" etiqueta="Código" />
+                    </td>
+                    <td>
+                        <span class="block text-sm leading-5 text-ds-ink">{{ concepto.descripcion }}</span>
+                        <span class="block text-xs leading-[18px] text-ds-muted">
+                            {{ concepto.esFiscal ? 'Fiscal' : 'No fiscal' }}
+                        </span>
+                    </td>
+                    <td>
+                        <p-tag [value]="obtenerEtiquetaTipoDocumento(concepto.tipoDocumento)" severity="info" />
+                    </td>
+                    <td>
+                        <p-tag [value]="obtenerEtiquetaNaturaleza(concepto.naturaleza)"
+                            [severity]="severidadNaturaleza(concepto.naturaleza)" />
+                    </td>
+                    <td>
+                        <p-tag [value]="concepto.requiereTimbrado ? 'Sí' : 'No'"
+                            [severity]="concepto.requiereTimbrado ? 'success' : 'info'" />
+                    </td>
+                    <td>
+                        <span class="block font-mono text-xs leading-[18px] text-ds-ink">
+                            {{ concepto.cuentaContableCodigo || '—' }}
+                        </span>
+                        @if (concepto.polizaSeleccionada) {
+                            <span class="block text-xs leading-[18px] text-ds-muted">
+                                Póliza {{ concepto.polizaSeleccionada }}
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        <p-tag [value]="concepto.activo ? 'Activo' : 'Inactivo'"
+                            [severity]="concepto.activo ? 'success' : 'danger'" />
+                    </td>
+                    <td class="text-right!">
+                        <div class="flex justify-end gap-1">
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Editar ' + concepto.codigo" (click)="editar(concepto)">
+                                <svg pIcon="pencil" [size]="15"></svg>
+                            </button>
+                            <button type="button"
+                                class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-danger-line hover:bg-ds-danger-soft hover:text-ds-danger focus-visible:shadow-ds-focus focus-visible:outline-none"
+                                [attr.aria-label]="'Eliminar ' + concepto.codigo" (click)="eliminar(concepto)">
+                                <svg pIcon="trash" [size]="15"></svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template #emptymessage>
+                <tr>
+                    <td colspan="9" class="p-8 text-center text-sm text-ds-muted">
+                        No hay conceptos que coincidan con los filtros seleccionados.
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </section>
+</div>
+
+<p-drawer [visible]="drawerVisible()" (visibleChange)="drawerVisible.set($event)" position="right"
+    [header]="tituloDrawer()" styleClass="ds-client-drawer" [modal]="true" [dismissible]="true"
+    [closeOnEscape]="true" [blockScroll]="true">
+    <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault(); guardar()">
+        <section>
+            <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Identificación</h3>
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div class="ds-field">
+                    <app-etiqueta-formulario para="concepto-codigo" [obligatorio]="true">Código</app-etiqueta-formulario>
+                    <input id="concepto-codigo" pInputText [formField]="formulario.codigo" type="text" class="ds-input"
+                        placeholder="Ej. FAC-CAR" />
+                    <app-mensaje-ayuda-error [campo]="formulario.codigo" />
+                    @if (codigoDuplicado()) {
+                        <span class="ds-field-error mt-1">Ya existe un concepto con este código.</span>
+                    }
+                </div>
+                <div class="ds-field">
+                    <app-etiqueta-formulario para="concepto-tipo" [obligatorio]="true">Tipo de documento</app-etiqueta-formulario>
+                    <p-select appendTo="body" inputId="concepto-tipo" [formField]="formulario.tipoDocumento" fluid
+                        [options]="tiposDocumento" optionLabel="etiqueta" optionValue="valor"
+                        placeholder="Selecciona un documento" />
+                    <app-mensaje-ayuda-error [campo]="formulario.tipoDocumento" />
+                </div>
+                <div class="ds-field">
+                    <app-etiqueta-formulario para="concepto-naturaleza" [obligatorio]="true">Naturaleza</app-etiqueta-formulario>
+                    <p-select appendTo="body" inputId="concepto-naturaleza" [formField]="formulario.naturaleza" fluid
+                        [options]="naturalezas" optionLabel="etiqueta" optionValue="valor"
+                        placeholder="Selecciona una naturaleza" />
+                    <app-mensaje-ayuda-error [campo]="formulario.naturaleza" />
+                </div>
+                <div class="ds-field lg:col-span-2">
+                    <app-etiqueta-formulario para="concepto-descripcion" [obligatorio]="true">Descripción</app-etiqueta-formulario>
+                    <textarea id="concepto-descripcion" pInputText [formField]="formulario.descripcion" rows="3"
+                        class="ds-input h-auto! min-h-24! resize-y! px-3! py-2.5!"
+                        placeholder="Describe el movimiento que representa el concepto…"></textarea>
+                    <app-mensaje-ayuda-error [campo]="formulario.descripcion" />
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Información contable</h3>
+            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div class="ds-field">
+                    <app-etiqueta-formulario para="concepto-cuenta">Cuenta contable</app-etiqueta-formulario>
+                    <input id="concepto-cuenta" pInputText [formField]="formulario.cuentaContableCodigo" type="text"
+                        class="ds-input font-mono" placeholder="Ej. 4010" />
+                    <app-mensaje-ayuda-error [campo]="formulario.cuentaContableCodigo"
+                        mensajeAyuda="Cuenta utilizada por el concepto." />
+                </div>
+                <div class="ds-field">
+                    <app-etiqueta-formulario para="concepto-poliza">Póliza seleccionada</app-etiqueta-formulario>
+                    <input id="concepto-poliza" pInputText [formField]="formulario.polizaSeleccionada" type="text"
+                        class="ds-input font-mono" placeholder="Ej. POL-FAC" />
+                    <app-mensaje-ayuda-error [campo]="formulario.polizaSeleccionada"
+                        mensajeAyuda="Equivale a PolSec del catálogo original." />
+                </div>
+                <div class="ds-field lg:col-span-2">
+                    <app-etiqueta-formulario para="concepto-reemplazo">Cuenta contable de reemplazo</app-etiqueta-formulario>
+                    <input id="concepto-reemplazo" pInputText [formField]="formulario.cuentaContableReemplazo" type="text"
+                        class="ds-input font-mono" placeholder="Ej. 4010" />
+                    <app-mensaje-ayuda-error [campo]="formulario.cuentaContableReemplazo"
+                        mensajeAyuda="Equivale a CtaCont del catálogo original." />
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Opciones</h3>
+            <div class="grid grid-cols-1 gap-3">
+                <div class="flex items-start gap-3 rounded-lg border border-ds-line bg-ds-canvas px-4 py-3.5">
+                    <p-checkbox [formField]="formulario.requiereTimbrado" [binary]="true"
+                        inputId="concepto-timbrado" />
+                    <div class="min-w-0">
+                        <label class="ds-label cursor-pointer" for="concepto-timbrado">Requiere timbrado</label>
+                        <p class="m-0 mt-0.5 text-xs leading-5 text-ds-muted">Genera CFDI al registrar el movimiento.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 rounded-lg border border-ds-line bg-ds-canvas px-4 py-3.5">
+                    <p-checkbox [formField]="formulario.esFiscal" [binary]="true" inputId="concepto-fiscal" />
+                    <div class="min-w-0">
+                        <label class="ds-label cursor-pointer" for="concepto-fiscal">Es fiscal</label>
+                        <p class="m-0 mt-0.5 text-xs leading-5 text-ds-muted">El concepto se considera en reportes fiscales.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 rounded-lg border border-ds-line bg-ds-canvas px-4 py-3.5">
+                    <p-checkbox [formField]="formulario.activo" [binary]="true" inputId="concepto-activo" />
+                    <div class="min-w-0">
+                        <label class="ds-label cursor-pointer" for="concepto-activo">Activo</label>
+                        <p class="m-0 mt-0.5 text-xs leading-5 text-ds-muted">Disponible para nuevos movimientos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+
+    <ng-template #footer>
+        <div class="flex justify-end gap-2">
+            <button pButton type="button" variant="outlined" (click)="cerrarDrawer()">Cancelar</button>
+            <button pButton type="button" (click)="guardar()">Guardar concepto</button>
+        </div>
+    </ng-template>
+</p-drawer>
+
+@if (seleccion().length > 0) {
+    <app-barra-acciones-masivas [cantidad]="seleccion().length" sustantivo="concepto"
+        (editar)="editar(seleccion()[0])" (limpiar)="limpiarSeleccion()" (eliminar)="eliminarSeleccion()" />
+}

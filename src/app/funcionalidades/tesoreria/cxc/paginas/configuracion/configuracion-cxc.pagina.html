@@ -1,0 +1,37 @@
+<div class="flex flex-col gap-6">
+    <app-encabezado-pagina titulo="Configuración de cuentas por cobrar"
+        descripcion="Gestiona las cuentas de la empresa, conceptos y folios."></app-encabezado-pagina>
+
+    <section class="rounded-lg border border-ds-line bg-ds-surface p-4">
+        <h2 class="m-0 mt-1 text-base font-semibold text-ds-ink">{{ catalogoActual().titulo }}</h2>
+        <p class="m-0 mt-1 text-sm leading-5 text-ds-muted">{{ catalogoActual().descripcion }}</p>
+    </section>
+
+    <p-tabs lazy [value]="pestanaActiva()" (valueChange)="cambiarPestana($event)">
+        <p-tablist>
+            @for (catalogo of catalogos; track catalogo.valor) {
+                <p-tab [value]="catalogo.valor">{{ catalogo.titulo }}</p-tab>
+            }
+        </p-tablist>
+        <p-tabpanels>
+            @for (catalogo of catalogos; track catalogo.valor) {
+                <p-tabpanel [value]="catalogo.valor">
+                    @switch (catalogo.valor) {
+                        @case ('0') {
+                            <app-configuracion-general-cxc />
+                        }
+                        @case ('1') {
+                            <app-configuracion-conceptos-cxc />
+                        }
+                        @case ('2') {
+                            <app-configuracion-cuentas-bancarias-cxc />
+                        }
+                        @case ('3') {
+                            <app-configuracion-folios-cxc />
+                        }
+                    }
+                </p-tabpanel>
+            }
+        </p-tabpanels>
+    </p-tabs>
+</div>

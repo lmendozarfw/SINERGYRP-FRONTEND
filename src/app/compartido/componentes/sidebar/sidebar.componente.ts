@@ -275,12 +275,25 @@ export class SidebarComponente {
       icono: 'wallet',
       hijos: [
         { etiqueta: 'Catálogos', icono: 'list', ruta: '/app/tesoreria/catalogos' },
-        { etiqueta: 'Cuentas por cobrar', icono: 'wallet', ruta: '/app/cuentas-por-cobrar' },
-        { etiqueta: 'Cuentas por pagar', icono: 'credit-card', ruta: '/app/cuentas-por-pagar' },
-        { etiqueta: 'Bancos y conciliación', icono: 'credit-card', ruta: '/app/configuration' },
-        { etiqueta: 'Pagos y cobros', icono: 'money-bill', ruta: '/app/configuration' },
+      ],
+    },
+    {
+      etiqueta: 'Cuentas por cobrar',
+      icono: 'credit-card',
+      hijos: [
+        { etiqueta: 'Configuración', icono: 'cog', ruta: '/app/tesoreria/cuentas-por-cobrar/configuracion' },
+        { etiqueta: 'Cobros', icono: 'money-bill', ruta: '/app/configuration' },
         { etiqueta: 'Facturas', icono: 'receipt', ruta: '/app/clientes' },
-        { etiqueta: 'Aplicaciones de cobros', icono: 'credit-card', ruta: '/app/clientes' },
+        { etiqueta: 'Aplicaciones de cobros', icono: 'credit-card', ruta: '' },
+      ],
+    },
+    {
+      etiqueta: 'Cuentas por pagar',
+      icono: 'credit-card',
+      hijos: [
+        { etiqueta: 'Configuración', icono: 'cog', ruta: '/app/tesoreria/cuentas-por-pagar/configuracion' },
+        { etiqueta: 'Pagos', icono: 'money-bill', ruta: '' },
+        { etiqueta: 'Aplicaciones de pagos', icono: 'credit-card', ruta: '' },
       ],
     },
     {

@@ -34,6 +34,15 @@ export const routes: Routes = [
           {
             path: 'catalogos',
             loadComponent: () => import('./funcionalidades/tesoreria/catalogos/paginas/catalogo.pagina').then(p => p.CatalogoPagina)
+          },
+          {
+            path: 'cuentas-por-cobrar',
+            children: [
+              {
+                path: 'configuracion',
+                loadComponent: () => import('./funcionalidades/tesoreria/cxc/paginas/configuracion/configuracion-cxc.pagina').then(p => p.ConfiguracionCxcPagina)
+              }
+            ]
           }
         ]
       },

@@ -1,0 +1,37 @@
+<form class="flex flex-col gap-5" (submit)="$event.preventDefault(); guardar()">
+  <app-tarjeta titulo="Moneda y vencimientos" descripcion="Define la moneda base y la tolerancia permitida en los vencimientos."
+    icono="pi-calendar-clock">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div class="ds-field">
+        <app-etiqueta-formulario para="config-moneda-base" [obligatorio]="true">Moneda base</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="config-moneda-base" [formField]="formulario.idMonedaBase" fluid
+          [options]="opcionesMoneda" optionLabel="etiqueta" optionValue="valor"
+          placeholder="Selecciona la moneda base" />
+        <app-mensaje-ayuda-error [campo]="formulario.idMonedaBase"></app-mensaje-ayuda-error>
+      </div>
+
+      <div class="ds-field">
+        <app-etiqueta-formulario para="config-dias-tolerancia" [obligatorio]="true">Días de tolerancia al vencimiento</app-etiqueta-formulario>
+        <p-inputnumber inputId="config-dias-tolerancia" [formField]="formulario.diasToleranciaVencimiento" fluid
+          [min]="0" [useGrouping]="false" placeholder="0" />
+        <app-mensaje-ayuda-error [campo]="formulario.diasToleranciaVencimiento"></app-mensaje-ayuda-error>
+      </div>
+    </div>
+  </app-tarjeta>
+
+  <app-tarjeta titulo="Reglas de pago" descripcion="Controla cómo se aplican los pagos a los saldos pendientes."
+    icono="pi-shield">
+    <label class="flex cursor-pointer items-start gap-3" for="config-permitir-mayor-saldo">
+      <p-checkbox [formField]="formulario.permitirPagoMayorSaldo" [binary]="true"
+        inputId="config-permitir-mayor-saldo" />
+      <span class="flex flex-col gap-1">
+        <span class="text-sm font-medium text-ds-ink">Permitir pago mayor al saldo</span>
+        <span class="text-xs leading-5 text-ds-muted">Cuando está activo, el sistema acepta pagos que exceden el saldo del documento y registra el excedente como acreditación.</span>
+      </span>
+    </label>
+  </app-tarjeta>
+
+  <div class="flex justify-end">
+    <button pButton type="submit" size="small">Guardar cambios</button>
+  </div>
+</form>
