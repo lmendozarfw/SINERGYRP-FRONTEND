@@ -1,0 +1,205 @@
+<section class="ds-card p-6">
+  <header class="flex flex-wrap items-start justify-between gap-3">
+    <div>
+      <p class="ds-meta uppercase tracking-widest">1 · Identificación</p>
+      <h2 class="mt-1 font-[var(--ds-font-display)] text-[18px] font-semibold leading-[26px] text-ds-ink">
+        Datos generales
+      </h2>
+      <p class="mt-0.5 max-w-[620px] text-[13px] leading-5 text-ds-muted">
+        Selecciona el cliente y el esquema fiscal con el que se emitirá el comprobante.
+      </p>
+    </div>
+  </header>
+
+  <div class="mt-6 grid grid-cols-1 gap-x-5 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
+    <div class="ds-field md:col-span-2 lg:col-span-2">
+      <app-etiqueta-formulario para="factura-cliente" [obligatorio]="true">
+        Cliente
+      </app-etiqueta-formulario>
+      <p-select
+        appendTo="body"
+        inputId="factura-cliente"
+        class="h-ds-control w-full"
+        [options]="clientes()"
+        optionLabel="etiqueta"
+        optionValue="valor"
+        placeholder="Selecciona un cliente"
+        [ngModel]="datos().idCliente"
+        (ngModelChange)="clienteChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario [obligatorio]="true">Serie y folio</app-etiqueta-formulario>
+      <div class="flex h-ds-control items-center rounded-ds-input bg-ds-canvas-strong p-1">
+        <app-copiar-texto [valor]="datos().serie + ' ' + datos().folio" etiqueta="Serie y folio" />
+      </div>
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-fecha" [obligatorio]="true">
+        Fecha de emisión
+      </app-etiqueta-formulario>
+      <p-datepicker
+        appendTo="body"
+        inputId="factura-fecha"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+        iconDisplay="input"
+        [ngModel]="datos().fechaDocumento"
+        (ngModelChange)="fechaDocumentoChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-vencimiento">Vencimiento</app-etiqueta-formulario>
+      <p-datepicker
+        appendTo="body"
+        inputId="factura-vencimiento"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+        iconDisplay="input"
+        [ngModel]="datos().fechaVencimiento"
+        (ngModelChange)="fechaVencimientoChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-moneda" [obligatorio]="true">Moneda</app-etiqueta-formulario>
+      <p-select
+        appendTo="body"
+        inputId="factura-moneda"
+        class="w-full"
+        [options]="opcionesMoneda()"
+        optionLabel="etiqueta"
+        optionValue="valor"
+        [ngModel]="datos().moneda"
+        (ngModelChange)="monedaChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-tipo-cambio">Tipo de cambio</app-etiqueta-formulario>
+      <p-inputnumber
+        inputId="factura-tipo-cambio"
+        mode="decimal"
+        [minFractionDigits]="4"
+        [maxFractionDigits]="4"
+        [min]="0"
+        [disabled]="datos().moneda === 'MXN'"
+        [ngModel]="datos().tipoCambio"
+        (ngModelChange)="tipoCambioChange.emit($event ?? 1)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <span class="ds-field-help">
+        {{ datos().moneda === 'MXN' ? 'La moneda base es MXN.' : 'Se usa para convertir al importe en moneda base.' }}
+      </span>
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-metodo-pago" [obligatorio]="true">
+        Método de pago
+      </app-etiqueta-formulario>
+      <p-select
+        appendTo="body"
+        inputId="factura-metodo-pago"
+        class="w-full"
+        [options]="opcionesMetodoPago()"
+        optionLabel="etiqueta"
+        optionValue="valor"
+        [ngModel]="datos().metodoPago"
+        (ngModelChange)="metodoPagoChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-forma-pago" [obligatorio]="true">
+        Forma de pago
+      </app-etiqueta-formulario>
+      <p-select
+        appendTo="body"
+        inputId="factura-forma-pago"
+        class="w-full"
+        [options]="opcionesFormaPago()"
+        optionLabel="etiqueta"
+        optionValue="valor"
+        [disabled]="esPPD()"
+        [ngModel]="datos().formaPago"
+        (ngModelChange)="formaPagoChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      @if (esPPD()) {
+        <span class="ds-field-help">En PPD se registra como «99 · Por definir».</span>
+      }
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-uso-cfdi" [obligatorio]="true">
+        Uso de CFDI
+      </app-etiqueta-formulario>
+      <p-select
+        appendTo="body"
+        inputId="factura-uso-cfdi"
+        class="w-full"
+        [options]="opcionesUsoCfdi()"
+        optionLabel="etiqueta"
+        optionValue="valor"
+        [ngModel]="datos().usoCfdi"
+        (ngModelChange)="usoCfdiChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-exportacion">Exportación</app-etiqueta-formulario>
+      <p-select
+        appendTo="body"
+        inputId="factura-exportacion"
+        class="w-full"
+        [options]="opcionesExportacion()"
+        optionLabel="etiqueta"
+        optionValue="valor"
+        [ngModel]="datos().exportacion"
+        (ngModelChange)="exportacionChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+
+    <div class="ds-field">
+      <app-etiqueta-formulario para="factura-cp" [obligatorio]="true">
+        Lugar de expedición
+      </app-etiqueta-formulario>
+      <input
+        id="factura-cp"
+        pInputText
+        type="text"
+        inputmode="numeric"
+        class="ds-input"
+        maxlength="5"
+        placeholder="06600"
+        [ngModel]="datos().lugarExpedicion"
+        (ngModelChange)="lugarExpedicionChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+
+    <div class="ds-field md:col-span-2 lg:col-span-3">
+      <app-etiqueta-formulario para="factura-observaciones">Observaciones</app-etiqueta-formulario>
+      <textarea
+        id="factura-observaciones"
+        pTextarea
+        rows="2"
+        class="ds-input min-h-20! resize-y"
+        placeholder="Notas internas o instrucciones para el cliente"
+        [ngModel]="datos().observaciones"
+        (ngModelChange)="observacionesChange.emit($event)"
+        [ngModelOptions]="{ standalone: true }"
+      ></textarea>
+    </div>
+  </div>
+</section>

@@ -41,6 +41,14 @@ export const routes: Routes = [
               {
                 path: 'configuracion',
                 loadComponent: () => import('./funcionalidades/tesoreria/cxc/paginas/configuracion/configuracion-cxc.pagina').then(p => p.ConfiguracionCxcPagina)
+              },
+              {
+                path: 'documentos/nueva-factura',
+                loadComponent: () => import('./funcionalidades/tesoreria/cxc/paginas/crear-factura/crear-factura-cxc.pagina').then(p => p.CrearFacturaCxcPagina)
+              },
+              {
+                path: 'documentos',
+                loadComponent: () => import('./funcionalidades/tesoreria/cxc/paginas/documentos/documentos-cxc.pagina').then(p => p.DocumentosCxcPagina)
               }
             ]
           }

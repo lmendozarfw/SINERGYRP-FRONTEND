@@ -260,9 +260,10 @@ export class SidebarComponente {
       ruta: '',
       hijos: [
         { etiqueta: 'Configuración', icono: 'cog', ruta: '/app/tesoreria/cuentas-por-cobrar/configuracion' },
+        { etiqueta: 'Documentos', icono: 'file', ruta: '/app/tesoreria/cuentas-por-cobrar/documentos' },
         { etiqueta: 'Clientes', icono: 'users', ruta: '/app/clientes' },
         { etiqueta: 'Cobros', icono: 'money-bill', ruta: '' },
-        { etiqueta: 'Facturas', icono: 'receipt', ruta: '/app/clientes' },
+        { etiqueta: 'Nueva factura', icono: 'receipt', ruta: '/app/tesoreria/cuentas-por-cobrar/documentos/nueva-factura' },
         { etiqueta: 'Aplicaciones de cobros', icono: 'credit-card', ruta: '' },
       ],
     },

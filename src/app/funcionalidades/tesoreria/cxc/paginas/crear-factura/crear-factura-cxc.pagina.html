@@ -1,0 +1,97 @@
+<div class="factura-page flex max-w-[1600px] flex-col gap-6">
+  <app-encabezado-pagina
+    eyebrow="Cuentas por cobrar"
+    titulo="Nueva factura"
+    descripcion="Captura una factura con sus partidas, descuentos e impuestos. Guarda primero en borrador; el timbrado se realiza después."
+    nivel="h1"
+  >
+    <div class="flex shrink-0 flex-wrap items-center gap-2">
+      <button type="button" pButton variant="outlined" (click)="cancelar()">
+        <svg pIcon="times" [size]="14"></svg>
+        Cancelar
+      </button>
+      <button type="button" pButton (click)="guardar()" [disabled]="!puedeGuardar()">
+        <svg pIcon="save" [size]="14"></svg>
+        Guardar borrador
+      </button>
+    </div>
+  </app-encabezado-pagina>
+
+  <div class="flex min-w-0 flex-col gap-6">
+    <app-factura-datos-generales
+      class="block"
+      [datos]="formulario()"
+      [clientes]="clientes"
+      [opcionesMoneda]="opcionesMoneda"
+      [opcionesFormaPago]="opcionesFormaPago"
+      [opcionesMetodoPago]="opcionesMetodoPago"
+      [opcionesUsoCfdi]="opcionesUsoCfdi"
+      [opcionesExportacion]="opcionesExportacion"
+      (clienteChange)="seleccionarCliente($event)"
+      (metodoPagoChange)="cambiarMetodoPago($event)"
+      (monedaChange)="cambiarMoneda($event)"
+      (tipoCambioChange)="tipoCambio.set($event)"
+      (fechaDocumentoChange)="cambiarFechaDocumento($event)"
+      (fechaVencimientoChange)="fechaVencimiento.set($event)"
+      (formaPagoChange)="formaPago.set($event)"
+      (usoCfdiChange)="usoCfdi.set($event)"
+      (exportacionChange)="exportacion.set($event)"
+      (lugarExpedicionChange)="lugarExpedicion.set($event)"
+      (observacionesChange)="observaciones.set($event)"
+    />
+
+    <app-factura-partidas
+      class="block"
+      [partidas]="partidasCalculadas()"
+      [opcionesProducto]="opcionesProducto"
+      [opcionesUnidad]="opcionesUnidad"
+      [opcionesTipoDescuento]="opcionesTipoDescuento"
+      [opcionesObjetoImp]="opcionesObjetoImp"
+      (agregarPartida)="agregarPartida()"
+      (duplicarPartida)="duplicarPartida($event)"
+      (eliminarPartida)="eliminarPartida($event)"
+      (abrirImpuestos)="abrirImpuestos($event)"
+      (productoChange)="alCambiarProducto($event)"
+      (tipoDescuentoChange)="cambiarTipoDescuento($event)"
+      (objetoImpChange)="cambiarObjetoImp($event)"
+      (partidaChange)="actualizarPartidaDesdeVista($event)"
+    />
+
+    <section class="ds-card">
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <app-factura-flujo-fiscal
+          class="block"
+          [esPPD]="esPPD()"
+          [aviso]="avisoFiscal()"
+          [parcialidad]="parcialidad()"
+          [formaPago]="formaPago()"
+          [metodoPago]="metodoPago()"
+          [usoCfdi]="usoCfdi()"
+          [exportacion]="exportacion()"
+        />
+        <app-factura-validacion class="block" [errores]="errores()" />
+      </div>
+    </section>
+
+    <app-factura-resumen
+      class="sticky bottom-0 z-30 block overflow-x-auto rounded-xl border border-ds-line bg-ds-surface px-5 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)]"
+      [resumen]="resumen()"
+      [moneda]="moneda()"
+      [cantidadPartidas]="partidas().length"
+    />
+  </div>
+</div>
+
+<app-factura-impuestos-drawer
+  class="block"
+  [visible]="drawerVisible()"
+  (visibleChange)="drawerVisible.set($event)"
+  [partida]="partidaImpuestos()"
+  [moneda]="moneda()"
+  [opcionesImpuesto]="opcionesImpuesto"
+  [opcionesTipoFactor]="opcionesTipoFactor"
+  (agregarImpuesto)="agregarImpuesto()"
+  (impuestoChange)="actualizarImpuestoDesdeVista($event)"
+  (eliminarImpuesto)="eliminarImpuesto($event)"
+  (cerrar)="cerrarImpuestos()"
+/>

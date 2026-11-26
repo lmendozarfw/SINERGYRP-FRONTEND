@@ -8,8 +8,8 @@ import { DialogoConfirmacionServicio } from "@compartido/componentes/confirmacio
 import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente";
 import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import {
-    CONCEPTO_MOVIMIENTO_CXC_VACIO,
-    IConceptoMovimientoCxc,
+    CONCEPTO_MOVIMIENTO_CXC_FORMULARIO_VACIO,
+    IConceptoMovimientoCxcFormulario,
     IConceptoMovimientoCxcItem
 } from "@funcionalidades/tesoreria/cxc/modelos/concepto-movimiento-cxc.interface";
 import { ButtonDirective } from "primeng/button";
@@ -64,7 +64,7 @@ export class ConfiguracionConceptosCxcComponente {
         { etiqueta: 'Inactivo', valor: false }
     ];
 
-    protected readonly formulario: FieldTree<IConceptoMovimientoCxc> = this.crearFormulario();
+    protected readonly formulario: FieldTree<IConceptoMovimientoCxcFormulario> = this.crearFormulario();
     protected readonly conceptos = signal<IConceptoMovimientoCxcItem[]>([
         this.crearItem(1, { codigo: 'FAC-CAR', descripcion: 'Cargo por factura emitida', tipoDocumento: 'factura', naturaleza: 'cargo', requiereTimbrado: true, cuentaContableCodigo: '4010', polizaSeleccionada: 'POL-FAC', cuentaContableReemplazo: '', activo: true, esFiscal: true }),
         this.crearItem(2, { codigo: 'PAG-ABO', descripcion: 'Abono por pago recibido', tipoDocumento: 'pago', naturaleza: 'abono', requiereTimbrado: false, cuentaContableCodigo: '1010', polizaSeleccionada: '', cuentaContableReemplazo: '', activo: true, esFiscal: false }),
@@ -192,8 +192,8 @@ export class ConfiguracionConceptosCxcComponente {
         return valor === 'cargo' ? 'info' : 'success';
     }
 
-    private crearFormulario(): FieldTree<IConceptoMovimientoCxc> {
-        const modelo = signal<IConceptoMovimientoCxc>({ ...CONCEPTO_MOVIMIENTO_CXC_VACIO });
+    private crearFormulario(): FieldTree<IConceptoMovimientoCxcFormulario> {
+        const modelo = signal<IConceptoMovimientoCxcFormulario>({ ...CONCEPTO_MOVIMIENTO_CXC_FORMULARIO_VACIO });
         return form(modelo, (campo) => {
             required(campo.codigo, { message: 'El código es obligatorio.' });
             maxLength(campo.codigo, 30, { message: 'Usa máximo 30 caracteres.' });
@@ -207,11 +207,11 @@ export class ConfiguracionConceptosCxcComponente {
         });
     }
 
-    private crearItem(id: number, valores: Omit<IConceptoMovimientoCxc, 'id' | 'idOrganizacion'>): IConceptoMovimientoCxcItem {
+    private crearItem(id: number, valores: Omit<IConceptoMovimientoCxcFormulario, 'id' | 'idOrganizacion'>): IConceptoMovimientoCxcItem {
         return { ...valores, id, idOrganizacion: this.idOrganizacionActual };
     }
 
-    private obtenerValores(formulario: FieldTree<IConceptoMovimientoCxc>): IConceptoMovimientoCxc {
+    private obtenerValores(formulario: FieldTree<IConceptoMovimientoCxcFormulario>): IConceptoMovimientoCxcFormulario {
         return {
             idOrganizacion: this.idOrganizacionActual,
             codigo: String(formulario.codigo().value() ?? '').trim().toUpperCase(),
@@ -232,7 +232,7 @@ export class ConfiguracionConceptosCxcComponente {
         return String(valor).trim();
     }
 
-    private reiniciarFormulario(formulario: FieldTree<IConceptoMovimientoCxc>): void {
-        formulario().reset({ ...CONCEPTO_MOVIMIENTO_CXC_VACIO });
+    private reiniciarFormulario(formulario: FieldTree<IConceptoMovimientoCxcFormulario>): void {
+        formulario().reset({ ...CONCEPTO_MOVIMIENTO_CXC_FORMULARIO_VACIO });
     }
 }

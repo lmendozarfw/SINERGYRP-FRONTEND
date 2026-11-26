@@ -1,0 +1,157 @@
+<p-drawer
+  [visible]="visible()"
+  (visibleChange)="alCambiarVisible($event)"
+  position="right"
+  header="Impuestos de la partida"
+  styleClass="factura-impuestos-drawer w-[min(560px,100vw)]!"
+  [modal]="true"
+  [dismissible]="true"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+>
+  @if (partida(); as partida) {
+    <div class="factura-drawer">
+      <div class="ds-alert ds-alert--info">
+        <svg pIcon="info-circle" [size]="17" class="mt-0.5 shrink-0"></svg>
+        <p class="text-[13px] leading-5">
+          Base sugerida: {{ partida.subtotal - partida.descuento | number: '1.2-2' }} {{ moneda() }}.
+          Puedes ajustarla por impuesto si la operación lo requiere.
+        </p>
+      </div>
+
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <p class="text-sm font-semibold text-ds-ink">Desglose fiscal</p>
+          <p class="text-xs text-ds-muted">{{ partida.concepto || 'Partida sin concepto' }}</p>
+        </div>
+        <button type="button" pButton (click)="agregarImpuesto.emit()">
+          <svg pIcon="plus" [size]="14"></svg>
+          Agregar impuesto
+        </button>
+      </div>
+
+      @for (impuesto of partida.impuestos; track impuesto.id; let indice = $index) {
+        <article class="factura-impuesto">
+          <div class="factura-impuesto__barra">
+            <span class="text-sm font-semibold text-ds-ink">Impuesto {{ indice + 1 }}</span>
+            <button
+              type="button"
+              class="ds-icon-button ds-icon-button--danger"
+              [attr.aria-label]="'Eliminar impuesto ' + (indice + 1)"
+              title="Eliminar impuesto"
+              (click)="eliminarImpuesto.emit(impuesto.id)"
+            >
+              <svg pIcon="trash" [size]="15"></svg>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="ds-field">
+              <app-etiqueta-formulario [para]="'impuesto-sat-' + impuesto.id">Impuesto</app-etiqueta-formulario>
+              <p-select
+                appendTo="body"
+                [inputId]="'impuesto-sat-' + impuesto.id"
+                class="w-full"
+                [options]="opcionesImpuesto()"
+                optionLabel="etiqueta"
+                optionValue="valor"
+                [ngModel]="impuesto.impuestoSat"
+                (ngModelChange)="cambiarValor(impuesto, 'impuestoSat', $event)"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+
+            <div class="ds-field">
+              <app-etiqueta-formulario [para]="'impuesto-factor-' + impuesto.id">Tipo de factor</app-etiqueta-formulario>
+              <p-select
+                appendTo="body"
+                [inputId]="'impuesto-factor-' + impuesto.id"
+                class="w-full"
+                [options]="opcionesTipoFactor()"
+                optionLabel="etiqueta"
+                optionValue="valor"
+                [ngModel]="impuesto.tipoFactor"
+                (ngModelChange)="cambiarValor(impuesto, 'tipoFactor', $event)"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+
+            <div class="ds-field">
+              <app-etiqueta-formulario [para]="'impuesto-tasa-' + impuesto.id">Tasa o cuota</app-etiqueta-formulario>
+              <p-inputnumber
+                [inputId]="'impuesto-tasa-' + impuesto.id"
+                mode="decimal"
+                suffix="%"
+                [min]="0"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="6"
+                [disabled]="impuesto.tipoFactor !== 'Tasa'"
+                [ngModel]="impuesto.tasaOCuota ?? 0"
+                (ngModelChange)="cambiarValor(impuesto, 'tasaOCuota', $event ?? 0)"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <span class="ds-field-help">
+                {{ impuesto.tipoFactor === 'Tasa' ? 'Ej. 16% para IVA general.' : 'Solo aplica con factor Tasa.' }}
+              </span>
+            </div>
+
+            <div class="ds-field">
+              <app-etiqueta-formulario [para]="'impuesto-base-' + impuesto.id">Base</app-etiqueta-formulario>
+              <p-inputnumber
+                [inputId]="'impuesto-base-' + impuesto.id"
+                mode="decimal"
+                [min]="0"
+                [minFractionDigits]="2"
+                [maxFractionDigits]="4"
+                [ngModel]="impuesto.base"
+                (ngModelChange)="cambiarValor(impuesto, 'base', $event ?? 0)"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+
+            <div class="ds-field sm:col-span-2">
+              <div class="flex h-10 items-center gap-2">
+                <p-checkbox
+                  [inputId]="'impuesto-retencion-' + impuesto.id"
+                  [binary]="true"
+                  [ngModel]="impuesto.esRetencion"
+                  (ngModelChange)="cambiarValor(impuesto, 'esRetencion', $event)"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+                <label class="text-sm text-ds-ink" [for]="'impuesto-retencion-' + impuesto.id">
+                  Es retención (se resta del total)
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="factura-impuesto__importe">
+            <span>Importe calculado</span>
+            <strong>{{ impuesto.importe ?? 0 | number: '1.2-2' }}</strong>
+          </div>
+        </article>
+      } @empty {
+        <p class="rounded-lg border border-dashed border-ds-line px-4 py-8 text-center text-sm text-ds-muted">
+          Esta partida aún no tiene impuestos. Agrega uno para desglosarlo en el CFDI.
+        </p>
+      }
+
+      <div class="factura-drawer__pie">
+        <div>
+          <span class="block text-xs text-ds-muted">Trasladados</span>
+          <strong class="tabular-nums text-ds-ink">{{ partida.impuestosTrasladados | number: '1.2-2' }}</strong>
+        </div>
+        <div>
+          <span class="block text-xs text-ds-muted">Retenidos</span>
+          <strong class="tabular-nums text-ds-ink">{{ partida.impuestosRetenidos | number: '1.2-2' }}</strong>
+        </div>
+        <div>
+          <span class="block text-xs text-ds-muted">Total partida</span>
+          <strong class="tabular-nums text-ds-ink">{{ partida.total | number: '1.2-2' }}</strong>
+        </div>
+      </div>
+
+      <button type="button" pButton class="self-end" (click)="cerrarDrawer()">Listo</button>
+    </div>
+  }
+</p-drawer>

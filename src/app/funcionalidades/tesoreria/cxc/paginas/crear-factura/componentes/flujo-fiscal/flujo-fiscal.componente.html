@@ -1,0 +1,63 @@
+<section class="p-6">
+  <div class="flex items-center gap-3">
+    <p class="ds-meta uppercase tracking-widest">3 · Flujo fiscal</p>
+    <span class="h-px flex-1 bg-ds-line"></span>
+    <p-tag
+      [value]="esPPD() ? 'PPD · Parcialidades' : 'PUE · Una exhibición'"
+      [severity]="esPPD() ? 'warn' : 'success'"
+    />
+  </div>
+  <h2 class="mt-2 font-[var(--ds-font-display)] text-[18px] font-semibold leading-[26px] text-ds-ink">
+    {{ aviso().titulo }}
+  </h2>
+
+  <div class="ds-alert ds-alert--info mt-4" [class.ds-alert--warning]="esPPD()">
+    <svg pIcon="info-circle" [size]="17" class="mt-0.5 shrink-0"></svg>
+    <p class="text-[13px] leading-5">{{ aviso().detalle }}</p>
+  </div>
+
+  @if (esPPD()) {
+    <div class="mt-5 grid grid-cols-2 gap-3">
+      <div class="ds-field">
+        <app-etiqueta-formulario para="factura-parcialidad">Parcialidad</app-etiqueta-formulario>
+        <input
+          id="factura-parcialidad"
+          pInputText
+          type="text"
+          class="ds-input"
+          [value]="parcialidad().numero"
+          readonly
+        />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="factura-saldo-insoluto">Saldo insoluto</app-etiqueta-formulario>
+        <input
+          id="factura-saldo-insoluto"
+          pInputText
+          type="text"
+          class="ds-input"
+          [value]="parcialidad().saldoInsoluto | number: '1.2-2'"
+          readonly
+        />
+      </div>
+    </div>
+    <p class="ds-field-help mt-3">
+      Estos datos se usarán al aplicar cada cobro con su complemento de recepción de pagos.
+    </p>
+  } @else {
+    <dl class="mt-5 flex flex-col gap-2 text-sm">
+      <div class="flex justify-between gap-3">
+        <dt class="text-ds-muted">Forma de pago</dt>
+        <dd class="font-medium text-ds-ink">{{ formaPago() }} · {{ metodoPago() }}</dd>
+      </div>
+      <div class="flex justify-between gap-3">
+        <dt class="text-ds-muted">Uso de CFDI</dt>
+        <dd class="font-medium text-ds-ink">{{ usoCfdi() }}</dd>
+      </div>
+      <div class="flex justify-between gap-3">
+        <dt class="text-ds-muted">Exportación</dt>
+        <dd class="font-medium text-ds-ink">{{ exportacion() }}</dd>
+      </div>
+    </dl>
+  }
+</section>

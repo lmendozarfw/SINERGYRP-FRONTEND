@@ -1,0 +1,25 @@
+<section class="border-t border-ds-line rounded-ds-card bg-ds-canvas-strong p-6 md:border-l md:border-t-0">
+  <div class="flex items-center gap-3">
+    <p class="ds-meta uppercase tracking-widest text-ds-danger!">Validación</p>
+    <span class="h-px flex-1 bg-ds-line"></span>
+    <p-tag
+      [value]="errores().length ? errores().length + ' pendientes' : 'Sin pendientes'"
+      [severity]="errores().length ? 'danger' : 'success'"
+    />
+  </div>
+  <h2 class="mt-2 font-[var(--ds-font-display)] text-[18px] font-semibold leading-[26px] text-ds-ink">
+    {{ errores().length ? 'Pendientes por resolver' : 'Listo para guardar' }}
+  </h2>
+
+  @if (errores().length) {
+    <ul class="mt-4 flex list-disc flex-col gap-1 pl-5 text-[13px] leading-5 text-ds-muted">
+      @for (error of errores(); track error) {
+        <li>{{ error }}</li>
+      }
+    </ul>
+  } @else {
+    <p class="mt-4 text-[13px] leading-5 text-ds-muted">
+      No hay campos pendientes. Puedes guardar el borrador cuando lo desees.
+    </p>
+  }
+</section>

@@ -1,3 +1,10 @@
+/* 
+
+  EN ESTE ARCHIVO SE DEFINEN LAS TIPOGRAFIAS A UTILIZAR Y SE DEFINEN VARIABLES PARA EL SISTEMA DE DISEÑO Y PARA USARLAS
+  FACILMENTE CON TAILWINDCSS, TAMBIÉN SE DEFINEN EN FORMA DE CLASES UTILITARIAS.
+
+*/
+
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -94,6 +101,7 @@
   --ds-success: #15803d;
   --ds-warning: #b45309;
   --ds-danger: #dc2626;
+  --ds-accent: #800080;
 
   --ds-action-50: color-mix(in srgb, var(--ds-action) 5%, white);
   --ds-action-100: color-mix(in srgb, var(--ds-action) 10%, white);
@@ -130,6 +138,8 @@
   --ds-danger-18: color-mix(in srgb, var(--ds-danger) 18%, transparent);
   --ds-danger-25: color-mix(in srgb, var(--ds-danger) 25%, white);
   --ds-danger-45: color-mix(in srgb, var(--ds-danger) 45%, white);
+  --ds-accent-soft: color-mix(in srgb, var(--ds-accent) 8%, white);
+  --ds-accent-line: color-mix(in srgb, var(--ds-accent) 28%, white);
 
   --ds-text: var(--ds-ink);
   --ds-text-muted: var(--ds-ink-muted);
@@ -213,6 +223,9 @@
   --color-ds-danger-25: var(--ds-danger-25);
   --color-ds-danger-45: var(--ds-danger-45);
   --color-ds-focus: var(--ds-focus-ring);
+  --color-ds-accent: var(--ds-accent);
+  --color-ds-accent-soft: var(--ds-accent-soft);
+  --color-ds-accent-line: var(--ds-accent-line);
 
   --shadow-ds-focus: var(--ds-focus-shadow);
   --shadow-ds-floating: var(--ds-shadow-floating);
@@ -224,4 +237,6 @@
   --radius-ds-input: var(--ds-radius-input);
   --radius-ds-card: var(--ds-radius-card);
   --radius-ds-toolbar: var(--ds-radius-toolbar);
+
+  --height-ds-control: var(--ds-control-height);
 }

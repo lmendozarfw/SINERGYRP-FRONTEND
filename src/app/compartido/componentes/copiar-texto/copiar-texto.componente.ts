@@ -13,6 +13,7 @@ type VarianteCopiarTexto = 'mono' | 'nombre';
     <button
       type="button"
       pButton
+      fluid
       [pButtonUnstyled]="true"
       class="group inline-flex max-w-full cursor-pointer items-center gap-1.5 rounded-md border border-transparent bg-transparent px-1.5 py-1 text-left transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary-strong focus-visible:shadow-ds-focus focus-visible:outline-none"
       [class]="claseTexto()"

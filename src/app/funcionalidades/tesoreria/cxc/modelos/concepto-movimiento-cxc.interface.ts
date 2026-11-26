@@ -6,9 +6,6 @@ export interface IConceptoMovimientoCxc {
     tipoDocumento: string;
     naturaleza: string;
     requiereTimbrado: boolean;
-    cuentaContableCodigo: string;
-    polizaSeleccionada: string;
-    cuentaContableReemplazo: string;
     activo: boolean;
     esFiscal: boolean;
 }
@@ -20,13 +17,23 @@ export const CONCEPTO_MOVIMIENTO_CXC_VACIO: IConceptoMovimientoCxc = {
     tipoDocumento: '',
     naturaleza: '',
     requiereTimbrado: false,
-    cuentaContableCodigo: '',
-    polizaSeleccionada: '',
-    cuentaContableReemplazo: '',
     activo: true,
     esFiscal: false
 };
 
-export interface IConceptoMovimientoCxcItem extends IConceptoMovimientoCxc {
+export interface IConceptoMovimientoCxcFormulario extends IConceptoMovimientoCxc {
+    cuentaContableCodigo: string;
+    polizaSeleccionada: string;
+    cuentaContableReemplazo: string;
+}
+
+export const CONCEPTO_MOVIMIENTO_CXC_FORMULARIO_VACIO: IConceptoMovimientoCxcFormulario = {
+    ...CONCEPTO_MOVIMIENTO_CXC_VACIO,
+    cuentaContableCodigo: '',
+    polizaSeleccionada: '',
+    cuentaContableReemplazo: ''
+};
+
+export interface IConceptoMovimientoCxcItem extends IConceptoMovimientoCxcFormulario {
     id: number;
 }

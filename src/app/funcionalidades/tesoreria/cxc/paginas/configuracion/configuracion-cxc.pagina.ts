@@ -3,6 +3,7 @@ import { EncabezadoPaginaComponente } from "@compartido/componentes/encabezado-p
 import { BreadcrumbServicio } from "@nucleo/servicios/breadcrumb.servicio";
 import { TabsModule } from 'primeng/tabs';
 import { IPestanaComponente } from "@compartido/interfaces/pestana-componente.interface";
+import { ConfiguracionClasificacionClientesComponente } from "./componentes/configuracion-clasificacion-clientes/configuracion-clasificacion-clientes.componente";
 import { ConfiguracionConceptosCxcComponente } from "./componentes/configuracion-conceptos-cxc/configuracion-conceptos-cxc.componente";
 import { ConfiguracionCuentasBancariasCxcComponente } from "./componentes/configuracion-cuentas-bancarias-cxc/configuracion-cuentas-bancarias-cxc.componente";
 import { ConfiguracionGeneralCxcComponente } from "./componentes/configuracion-generales-cxc/configuracion-generales-cxc.componente";
@@ -11,6 +12,7 @@ import { ConfiguracionGeneralCxcComponente } from "./componentes/configuracion-g
     selector: 'app-configuracion-cxc-pagina',
     templateUrl: './configuracion-cxc.pagina.html',
     imports: [
+        ConfiguracionClasificacionClientesComponente,
         ConfiguracionConceptosCxcComponente,
         ConfiguracionCuentasBancariasCxcComponente,
         ConfiguracionGeneralCxcComponente,
@@ -25,6 +27,7 @@ export class ConfiguracionCxcPagina {
         { valor: '0', titulo: 'Configuración general', descripcion: 'Define la moneda base, la tolerancia de vencimientos y las reglas de cobro de la organización.' },
         { valor: '1', titulo: 'Conceptos de movimientos', descripcion: 'Administra los cargos y abonos, su cuenta contable y las reglas de timbrado de cada documento.' },
         { valor: '2', titulo: 'Cuentas bancarias', descripcion: 'Administra las cuentas bancarias de la organización para recibir los cobros.' },
+        { valor: '3', titulo: 'Clasificación de clientes', descripcion: 'Administra las clasificaciones de los clientes para su uso en cuentas por cobrar.' },
     ];
 
     readonly pestanaActiva = signal('0');

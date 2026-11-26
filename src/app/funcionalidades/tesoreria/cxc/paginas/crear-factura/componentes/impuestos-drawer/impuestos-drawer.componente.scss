@@ -1,0 +1,76 @@
+:host {
+  display: block;
+}
+
+.factura-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+
+  &__pie {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 16px;
+    border-radius: var(--ds-radius-input);
+    background: var(--ds-primary-soft);
+  }
+}
+
+.factura-impuesto {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-card);
+  background: var(--ds-bg-raised);
+
+  &__barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ds-border);
+  }
+
+  &__importe {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--ds-radius-input);
+    background: var(--ds-canvas-strong);
+    font-size: 13px;
+    color: var(--ds-text-muted);
+
+    strong {
+      font-size: 16px;
+      font-variant-numeric: tabular-nums;
+      color: var(--ds-text);
+    }
+  }
+}
+
+:host ::ng-deep .factura-impuestos-drawer {
+  .p-drawer-content {
+    padding: 0;
+  }
+
+  .p-drawer-header {
+    border-bottom: 1px solid var(--ds-border);
+  }
+}
+
+@media (max-width: 640px) {
+  .factura-drawer {
+    padding: 16px;
+  }
+
+  .factura-drawer__pie {
+    grid-template-columns: 1fr;
+  }
+}
