@@ -19,7 +19,12 @@
         <div class="flex items-center justify-between gap-3 px-1">
           <div class="min-w-0 text-xs text-ds-muted">
             <span class="truncate">{{ cuenta.nombreCuenta || 'Sin nombre de cuenta' }}</span>
-            @if (cuenta.clabe) { <span class="ml-2 font-mono text-[11px]">CLABE · {{ cuenta.clabe }}</span> }
+            @if (cuenta.clabe) { 
+              CLABE · <app-copiar-texto [etiqueta]="'CLABE'" [valor]="cuenta.clabe"></app-copiar-texto>
+            }
+            @if (cuenta.swift) { 
+              SWIFT · <app-copiar-texto [etiqueta]="'SWIFT'" [valor]="cuenta.swift"></app-copiar-texto>
+            }
           </div>
           <div class="flex shrink-0 items-center gap-1">
             <button type="button"
@@ -54,11 +59,17 @@
       [numeroCuenta]="formulario.numeroCuenta().value()"></app-tarjeta-credito>
 
     <form class="ds-client-form grid grid-cols-1 gap-4 md:grid-cols-2" (submit)="$event.preventDefault(); guardar()">
-      <div class="ds-field md:col-span-2">
+      <div class="ds-field">
         <app-etiqueta-formulario para="banco" [obligatorio]="true">Banco</app-etiqueta-formulario>
         <p-select appendTo="body" inputId="banco" [formField]="formulario.banco" fluid [options]="opcionesBanco" optionLabel="label"
           optionValue="value" placeholder="Selecciona banco" />
         <app-mensaje-ayuda-error [campo]="formulario.banco"></app-mensaje-ayuda-error>
+      </div>
+
+      <div class="ds-field">
+        <app-etiqueta-formulario para="swift">Código SWIFT</app-etiqueta-formulario>
+        <input id="swift" class="ds-input" pInputText [formField]="formulario.swift" fluid />
+        <app-mensaje-ayuda-error [campo]="formulario.swift"></app-mensaje-ayuda-error>
       </div>
 
       <div class="ds-field">

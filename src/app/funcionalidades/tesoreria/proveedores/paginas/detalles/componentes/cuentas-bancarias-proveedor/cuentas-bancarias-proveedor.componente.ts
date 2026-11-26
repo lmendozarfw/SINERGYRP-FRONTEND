@@ -9,11 +9,13 @@ import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-f
 import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { CUENTA_BANCARIA_PROVEEDOR_VACIA, ICuentaBancariaProveedor, IFilaCuentaBancariaProveedor } from "../../../../modelos/cuenta-bancaria-proveedor.interface";
 import { TarjetaCreditoComponente } from "@compartido/componentes/tarjeta-credito/tarjeta-credito.componente";
+import { EXPRESION_REGULAR_SWIFT } from "@compartido/constantes/expresion-rgular-swift";
+import { CopiarTextoComponente } from "@compartido/componentes/copiar-texto/copiar-texto.componente";
 
 @Component({
     selector: 'app-cuentas-bancarias-proveedor',
     templateUrl: './cuentas-bancarias-proveedor.componente.html',
-    imports: [ButtonDirective, Drawer, EtiquetaFormularioComponente, FormField, InputText, MensajeAyudaErrorComponente, PIcon, Select, TarjetaCreditoComponente]
+    imports: [ButtonDirective, Drawer, EtiquetaFormularioComponente, FormField, InputText, MensajeAyudaErrorComponente, PIcon, Select, TarjetaCreditoComponente, CopiarTextoComponente]
 })
 export class CuentasBancariasProveedorComponente {
     private readonly injector = inject(Injector);
@@ -84,6 +86,7 @@ export class CuentasBancariasProveedorComponente {
             required(campo.banco, { message: 'El banco es obligatorio.' });
             required(campo.idMoneda, { message: 'La moneda es obligatoria.' });
             pattern(campo.numeroCuenta, /^[0-9]{16}$/, { message: 'Deben ser 16 números.' });
+            pattern(campo.swift, EXPRESION_REGULAR_SWIFT, { message: 'Debe ser de 8 a 11 caracteres.'})
         }, { injector: this.injector });
     }
 
@@ -98,7 +101,8 @@ export class CuentasBancariasProveedorComponente {
             clabe: String(formulario.clabe().value()),
             idMoneda: typeof idMoneda === 'number' ? idMoneda : null,
             activa: formulario.activa().value() === true,
-            observaciones: String(formulario.observaciones().value())
+            observaciones: String(formulario.observaciones().value()),
+            swift: String(formulario.swift?.().value() ?? '').trim()
         };
     }
 
@@ -112,7 +116,8 @@ export class CuentasBancariasProveedorComponente {
             clabe: cuenta.clabe ?? '',
             idMoneda: cuenta.idMoneda ?? null,
             activa: cuenta.activa === true,
-            observaciones: cuenta.observaciones ?? ''
+            observaciones: cuenta.observaciones ?? '',
+            swift: cuenta.swift ?? ''
         };
     }
 

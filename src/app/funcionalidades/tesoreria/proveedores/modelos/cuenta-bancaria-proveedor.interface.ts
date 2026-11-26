@@ -10,6 +10,7 @@ export interface ICuentaBancariaProveedor {
     idMoneda: number | null;
     activa: boolean;
     observaciones: string;
+    swift: string;
 }
 
 export const CUENTA_BANCARIA_PROVEEDOR_VACIA: ICuentaBancariaProveedor = {
@@ -21,7 +22,8 @@ export const CUENTA_BANCARIA_PROVEEDOR_VACIA: ICuentaBancariaProveedor = {
     clabe: '',
     idMoneda: null,
     activa: true,
-    observaciones: ''
+    observaciones: '',
+    swift: ''
 };
 
 export interface IFilaCuentaBancariaProveedor extends ICuentaBancariaProveedor {
