@@ -1,0 +1,22 @@
+<section class="ds-card overflow-hidden p-0!">
+  <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault(); guardar()">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-regimen-fiscal">ID régimen fiscal</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="prov-regimen-fiscal" [formField]="formulario.idRegimenFiscal" class="w-full" [options]="opcionesRegimen" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-tipo-iva">ID tipo de IVA</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="prov-tipo-iva" [formField]="formulario.idTipoIva" [options]="opcionesIva" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      </div>
+      <div class="ds-field col-span-full">
+        <app-etiqueta-formulario para="prov-cuenta-contable">Cuenta contable</app-etiqueta-formulario>
+        <input id="prov-cuenta-contable" pInputText [formField]="formulario.cuentaContable" type="text" class="ds-input" placeholder="Ej. 2010 · Proveedores nacionales" />
+        <app-mensaje-ayuda-error [campo]="formulario.cuentaContable" mensajeAyuda="Cuenta contable utilizada para el registro de las operaciones con el proveedor."></app-mensaje-ayuda-error>
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <button pButton type="submit">Guardar información fiscal</button>
+    </div>
+  </form>
+</section>

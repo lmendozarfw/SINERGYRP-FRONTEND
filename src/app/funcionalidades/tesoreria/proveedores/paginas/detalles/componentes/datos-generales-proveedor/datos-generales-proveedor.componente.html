@@ -1,0 +1,46 @@
+<section class="ds-card overflow-hidden p-0!">
+  <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault(); guardar()">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-codigo" [obligatorio]="true">Código</app-etiqueta-formulario>
+        <input id="prov-codigo" pInputText [formField]="formulario.codigo" type="text" class="ds-input" placeholder="Ej. PROV-001" />
+        <app-mensaje-ayuda-error [campo]="formulario.codigo"></app-mensaje-ayuda-error>
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-estado" [obligatorio]="true">Estado del proveedor</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="prov-estado" [formField]="formulario.estadoProveedor" class="w-full" [options]="opcionesEstado" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+        <app-mensaje-ayuda-error [campo]="formulario.estadoProveedor"></app-mensaje-ayuda-error>
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-razon-social" [obligatorio]="true">Nombre o razón social</app-etiqueta-formulario>
+        <input id="prov-razon-social" pInputText [formField]="formulario.nombreRazonSocial" type="text" class="ds-input" placeholder="Ej. Grupo Industrial Raudal, S.A. de C.V." />
+        <app-mensaje-ayuda-error [campo]="formulario.nombreRazonSocial"></app-mensaje-ayuda-error>
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-nombre-comercial">Nombre comercial</app-etiqueta-formulario>
+        <input id="prov-nombre-comercial" pInputText [formField]="formulario.nombreComercial" type="text" class="ds-input" placeholder="Ej. Raudal" />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-tipo-persona" [obligatorio]="true">Tipo de persona</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="prov-tipo-persona" [formField]="formulario.tipoPersona" [options]="opcionesTipoPersona" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+        <app-mensaje-ayuda-error [campo]="formulario.tipoPersona"></app-mensaje-ayuda-error>
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-rfc" [obligatorio]="true">RFC</app-etiqueta-formulario>
+        <input id="prov-rfc" pInputText [formField]="formulario.rfc" type="text" class="ds-input uppercase" placeholder="Ej. RIR240315AB1" />
+        <app-mensaje-ayuda-error [campo]="formulario.rfc" mensajeAyuda="Registro Federal de Contribuyentes."></app-mensaje-ayuda-error>
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-identificador-fiscal">Identificador fiscal extranjero</app-etiqueta-formulario>
+        <input id="prov-identificador-fiscal" pInputText [formField]="formulario.identificadorFiscalExtranjero" type="text" class="ds-input" placeholder="Ej. IDF-88231" />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-fecha-alta">Fecha de alta</app-etiqueta-formulario>
+        <p-datepicker appendTo="body" inputId="prov-fecha-alta" [formField]="formulario.fechaAlta" fluid dateFormat="dd/mm/yy" [showClear]="true" placeholder="Selecciona fecha" />
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <button pButton type="submit">Guardar datos generales</button>
+    </div>
+  </form>
+</section>

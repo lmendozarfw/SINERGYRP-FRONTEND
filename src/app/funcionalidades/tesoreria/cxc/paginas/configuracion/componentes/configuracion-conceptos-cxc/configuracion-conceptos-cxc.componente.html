@@ -70,7 +70,6 @@
                         </span>
                     </th>
                     <th class="w-[110px] min-w-[110px]">Timbrado</th>
-                    <th class="w-[170px] min-w-[170px]">Cuenta contable</th>
                     <th pSortableColumn="activo" class="w-[110px] min-w-[110px]">
                         <span class="inline-flex items-center gap-1.5">
                             Estatus
@@ -96,25 +95,13 @@
                         </span>
                     </td>
                     <td>
-                        <p-tag [value]="obtenerEtiquetaTipoDocumento(concepto.tipoDocumento)" severity="info" />
+                        {{ obtenerEtiquetaTipoDocumento(concepto.tipoDocumento) }}
                     </td>
                     <td>
-                        <p-tag [value]="obtenerEtiquetaNaturaleza(concepto.naturaleza)"
-                            [severity]="severidadNaturaleza(concepto.naturaleza)" />
+                        {{ obtenerEtiquetaNaturaleza(concepto.naturaleza) }}
                     </td>
                     <td>
-                        <p-tag [value]="concepto.requiereTimbrado ? 'Sí' : 'No'"
-                            [severity]="concepto.requiereTimbrado ? 'success' : 'info'" />
-                    </td>
-                    <td>
-                        <span class="block font-mono text-xs leading-[18px] text-ds-ink">
-                            {{ concepto.cuentaContableCodigo || '—' }}
-                        </span>
-                        @if (concepto.polizaSeleccionada) {
-                            <span class="block text-xs leading-[18px] text-ds-muted">
-                                Póliza {{ concepto.polizaSeleccionada }}
-                            </span>
-                        }
+                        {{ concepto.requiereTimbrado ? 'Sí' : 'No' }}
                     </td>
                     <td>
                         <p-tag [value]="concepto.activo ? 'Activo' : 'Inactivo'"
@@ -184,33 +171,6 @@
                         class="ds-input h-auto! min-h-24! resize-y! px-3! py-2.5!"
                         placeholder="Describe el movimiento que representa el concepto…"></textarea>
                     <app-mensaje-ayuda-error [campo]="formulario.descripcion" />
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h3 class="mb-4 text-sm font-semibold leading-5 text-ds-ink">Información contable</h3>
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                <div class="ds-field">
-                    <app-etiqueta-formulario para="concepto-cuenta">Cuenta contable</app-etiqueta-formulario>
-                    <input id="concepto-cuenta" pInputText [formField]="formulario.cuentaContableCodigo" type="text"
-                        class="ds-input font-mono" placeholder="Ej. 4010" />
-                    <app-mensaje-ayuda-error [campo]="formulario.cuentaContableCodigo"
-                        mensajeAyuda="Cuenta utilizada por el concepto." />
-                </div>
-                <div class="ds-field">
-                    <app-etiqueta-formulario para="concepto-poliza">Póliza seleccionada</app-etiqueta-formulario>
-                    <input id="concepto-poliza" pInputText [formField]="formulario.polizaSeleccionada" type="text"
-                        class="ds-input font-mono" placeholder="Ej. POL-FAC" />
-                    <app-mensaje-ayuda-error [campo]="formulario.polizaSeleccionada"
-                        mensajeAyuda="Equivale a PolSec del catálogo original." />
-                </div>
-                <div class="ds-field lg:col-span-2">
-                    <app-etiqueta-formulario para="concepto-reemplazo">Cuenta contable de reemplazo</app-etiqueta-formulario>
-                    <input id="concepto-reemplazo" pInputText [formField]="formulario.cuentaContableReemplazo" type="text"
-                        class="ds-input font-mono" placeholder="Ej. 4010" />
-                    <app-mensaje-ayuda-error [campo]="formulario.cuentaContableReemplazo"
-                        mensajeAyuda="Equivale a CtaCont del catálogo original." />
                 </div>
             </div>
         </section>

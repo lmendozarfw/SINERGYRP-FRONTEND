@@ -25,7 +25,7 @@ export class ConfiguracionCxcPagina {
 
     readonly catalogos: IPestanaComponente[] = [
         { valor: '0', titulo: 'Configuración general', descripcion: 'Define la moneda base, la tolerancia de vencimientos y las reglas de cobro de la organización.' },
-        { valor: '1', titulo: 'Conceptos de movimientos', descripcion: 'Administra los cargos y abonos, su cuenta contable y las reglas de timbrado de cada documento.' },
+        { valor: '1', titulo: 'Conceptos de movimientos', descripcion: 'Administra los cargos y las reglas de timbrado de cada documento.' },
         { valor: '2', titulo: 'Cuentas bancarias', descripcion: 'Administra las cuentas bancarias de la organización para recibir los cobros.' },
         { valor: '3', titulo: 'Clasificación de clientes', descripcion: 'Administra las clasificaciones de los clientes para su uso en cuentas por cobrar.' },
     ];

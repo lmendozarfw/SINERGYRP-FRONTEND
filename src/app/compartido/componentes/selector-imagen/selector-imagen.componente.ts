@@ -5,7 +5,7 @@ import {
     input,
     output
 } from '@angular/core';
-
+import { PIcon } from '@primeicons/angular';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 
@@ -18,7 +18,7 @@ interface ArchivoSeleccionado {
 @Component({
     selector: 'app-selector-imagen',
     standalone: true,
-    imports: [CommonModule, ButtonModule],
+    imports: [CommonModule, ButtonModule, PIcon],
     templateUrl: './selector-imagen.componente.html',
     styleUrl: './selector-imagen.componente.scss'
 })

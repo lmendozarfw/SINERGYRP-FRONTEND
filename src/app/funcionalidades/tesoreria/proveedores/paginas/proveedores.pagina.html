@@ -88,10 +88,10 @@
             </span>
           </th>
           <th class="w-[190px] min-w-[190px]">Régimen fiscal</th>
-          <th pSortableColumn="estado" class="w-[130px] min-w-[130px]">
+          <th pSortableColumn="estadoProveedor" class="w-[130px] min-w-[130px]">
             <span class="inline-flex items-center gap-1.5">
               Estado
-              <p-sorticon field="estado" />
+              <p-sorticon field="estadoProveedor" />
             </span>
           </th>
           <th pSortableColumn="limiteCredito" class="w-[175px] min-w-[175px] text-right!">
@@ -142,12 +142,12 @@
             />
           </td>
           <td>
-            <span class="block text-xs leading-[18px] text-ds-muted">{{ proveedor.idRegimentFiscal }}</span>
+            <span class="block text-xs leading-[18px] text-ds-muted">{{ proveedor.idRegimenFiscal }}</span>
           </td>
           <td>
             <p-tag
-              [value]="proveedor.estado"
-              [severity]="severidadEstado(proveedor.estado)"
+              [value]="proveedor.estadoProveedor"
+              [severity]="severidadEstado(proveedor.estadoProveedor)"
             />
           </td>
           <td class="text-right!">
@@ -162,12 +162,12 @@
             <div class="flex justify-end gap-1">
               <button type="button"
                 class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
-                aria-label="Ver proveedor">
+                aria-label="Ver proveedor" (click)="verProveedor(proveedor)">
                 <svg pIcon="eye" [size]="15"></svg>
               </button>
               <button type="button"
                 class="inline-flex size-8 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-ds-muted transition-colors hover:border-ds-primary-soft hover:bg-ds-primary-soft hover:text-ds-primary focus-visible:shadow-ds-focus focus-visible:outline-none"
-                aria-label="Editar proveedor">
+                aria-label="Editar proveedor" (click)="editarProveedor(proveedor)">
                 <svg pIcon="pencil" [size]="15"></svg>
               </button>
               <button type="button"

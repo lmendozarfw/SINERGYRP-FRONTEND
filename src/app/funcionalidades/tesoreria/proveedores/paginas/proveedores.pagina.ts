@@ -1,5 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { BarraAccionesMasivasComponente } from '@compartido/componentes/barra-acciones-masivas/barra-acciones-masivas.componente';
 import { CopiarTextoComponente } from '@compartido/componentes/copiar-texto/copiar-texto.componente';
 import { DialogoConfirmacionServicio } from '@compartido/componentes/confirmacion/confirmacion.servicio';
@@ -17,7 +18,7 @@ import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
-import { IProveedor } from '../modelos/peoveedor';
+import { IProveedor } from '../modelos/proveedor';
 
 @Component({
   selector: 'app-proveedores-pagina',
@@ -43,6 +44,7 @@ import { IProveedor } from '../modelos/peoveedor';
 export class ProveedoresPagina {
   private readonly dialogoConfirmacion = inject(DialogoConfirmacionServicio);
   private readonly breadcrumb = inject(BreadcrumbServicio);
+  private readonly router = inject(Router);
 
   readonly drawerVisible = signal(false);
   readonly seleccion = signal<IProveedor[]>([]);
@@ -80,14 +82,14 @@ export class ProveedoresPagina {
       id: 1,
       idOrganizacion: 1,
       codigo: 'PROV-001',
-      estado: 'Activo',
+      estadoProveedor: 'Activo',
       fechaAlta: new Date('2023-02-15T00:00:00'),
       nombreRazonSocial: 'Grupo Industrial Raudal, S.A. de C.V.',
       nombreComercial: 'Raudal',
       tipoPersona: 'Moral',
       rfc: 'RIR240315AB1',
       identificadorFiscalExtranjero: '',
-      idRegimentFiscal: '601 · General',
+      idRegimenFiscal: '601 · General',
       cuentaContable: '2010 · Proveedores nacionales',
       diasCredito: 30,
       limiteCredito: 150000,
@@ -96,21 +98,21 @@ export class ProveedoresPagina {
       idMetodoPagoPredeterminado: 2,
       esPagoContrarecibo: true,
       observaciones: 'Proveedor preferente con facturación mensual.',
-      fechaCreacion: new Date('2023-02-15T00:00:00'),
-      fechaModificacion: new Date('2026-01-20T00:00:00'),
+      creadoEn: new Date('2023-02-15T00:00:00'),
+      actualizadoEn: new Date('2026-01-20T00:00:00'),
     },
     {
       id: 2,
       idOrganizacion: 1,
       codigo: 'PROV-002',
-      estado: 'Activo',
+      estadoProveedor: 'Activo',
       fechaAlta: new Date('2022-08-03T00:00:00'),
       nombreRazonSocial: 'Comercializadora Nova, S. de R.L. de C.V.',
       nombreComercial: 'Nova',
       tipoPersona: 'Moral',
       rfc: 'CNO890412H23',
       identificadorFiscalExtranjero: '',
-      idRegimentFiscal: '601 · General',
+      idRegimenFiscal: '601 · General',
       cuentaContable: '2010 · Proveedores nacionales',
       diasCredito: 15,
       limiteCredito: 85000,
@@ -119,21 +121,21 @@ export class ProveedoresPagina {
       idMetodoPagoPredeterminado: 1,
       esPagoContrarecibo: false,
       observaciones: 'Solicita factura por cada pedido.',
-      fechaCreacion: new Date('2022-08-03T00:00:00'),
-      fechaModificacion: new Date('2025-11-04T00:00:00'),
+      creadoEn: new Date('2022-08-03T00:00:00'),
+      actualizadoEn: new Date('2025-11-04T00:00:00'),
     },
     {
       id: 3,
       idOrganizacion: 1,
       codigo: 'PROV-003',
-      estado: 'Activo',
+      estadoProveedor: 'Activo',
       fechaAlta: new Date('2024-01-10T00:00:00'),
       nombreRazonSocial: 'Laura Gutiérrez Méndez',
       nombreComercial: 'Estudio Gutiérrez',
       tipoPersona: 'Física',
       rfc: 'GUML850921E45',
       identificadorFiscalExtranjero: '',
-      idRegimentFiscal: '612 · PFAE',
+      idRegimenFiscal: '612 · PFAE',
       cuentaContable: '2011 · Proveedores de servicios',
       diasCredito: 0,
       limiteCredito: 25000,
@@ -142,21 +144,21 @@ export class ProveedoresPagina {
       idMetodoPagoPredeterminado: 1,
       esPagoContrarecibo: false,
       observaciones: 'Pago de contado por defecto.',
-      fechaCreacion: new Date('2024-01-10T00:00:00'),
-      fechaModificacion: new Date('2025-09-18T00:00:00'),
+      creadoEn: new Date('2024-01-10T00:00:00'),
+      actualizadoEn: new Date('2025-09-18T00:00:00'),
     },
     {
       id: 4,
       idOrganizacion: 1,
       codigo: 'PROV-004',
-      estado: 'Activo',
+      estadoProveedor: 'Activo',
       fechaAlta: new Date('2021-05-22T00:00:00'),
       nombreRazonSocial: 'Manufacturas del Norte, S.A. de C.V.',
       nombreComercial: 'Man Norte',
       tipoPersona: 'Moral',
       rfc: 'MNO750618K12',
       identificadorFiscalExtranjero: '',
-      idRegimentFiscal: '601 · General',
+      idRegimenFiscal: '601 · General',
       cuentaContable: '2010 · Proveedores nacionales',
       diasCredito: 45,
       limiteCredito: 220000,
@@ -165,21 +167,21 @@ export class ProveedoresPagina {
       idMetodoPagoPredeterminado: 2,
       esPagoContrarecibo: true,
       observaciones: 'Requiere orden de compra para cada entrega.',
-      fechaCreacion: new Date('2021-05-22T00:00:00'),
-      fechaModificacion: new Date('2026-02-11T00:00:00'),
+      creadoEn: new Date('2021-05-22T00:00:00'),
+      actualizadoEn: new Date('2026-02-11T00:00:00'),
     },
     {
       id: 5,
       idOrganizacion: 1,
       codigo: 'PROV-005',
-      estado: 'Inactivo',
+      estadoProveedor: 'Inactivo',
       fechaAlta: new Date('2020-11-02T00:00:00'),
       nombreRazonSocial: 'Servicios Profesionales Ámbar, S.C.',
       nombreComercial: 'Ámbar',
       tipoPersona: 'Moral',
       rfc: 'SPA910203R77',
       identificadorFiscalExtranjero: '',
-      idRegimentFiscal: '601 · General',
+      idRegimenFiscal: '601 · General',
       cuentaContable: '2011 · Proveedores de servicios',
       diasCredito: 0,
       limiteCredito: 0,
@@ -188,21 +190,21 @@ export class ProveedoresPagina {
       idMetodoPagoPredeterminado: 1,
       esPagoContrarecibo: false,
       observaciones: 'Sin línea de crédito autorizada.',
-      fechaCreacion: new Date('2020-11-02T00:00:00'),
-      fechaModificacion: new Date('2025-03-29T00:00:00'),
+      creadoEn: new Date('2020-11-02T00:00:00'),
+      actualizadoEn: new Date('2025-03-29T00:00:00'),
     },
     {
       id: 6,
       idOrganizacion: 1,
       codigo: 'PROV-006',
-      estado: 'Activo',
+      estadoProveedor: 'Activo',
       fechaAlta: new Date('2025-04-17T00:00:00'),
       nombreRazonSocial: 'Fernando Ríos Castro',
       nombreComercial: 'Ríos y Asociados',
       tipoPersona: 'Física',
       rfc: 'RICF790114M31',
       identificadorFiscalExtranjero: '',
-      idRegimentFiscal: '612 · PFAE',
+      idRegimenFiscal: '612 · PFAE',
       cuentaContable: '2011 · Proveedores de servicios',
       diasCredito: 8,
       limiteCredito: 12000,
@@ -211,21 +213,21 @@ export class ProveedoresPagina {
       idMetodoPagoPredeterminado: 1,
       esPagoContrarecibo: false,
       observaciones: 'Contacto principal: fernando.rios@example.com.',
-      fechaCreacion: new Date('2025-04-17T00:00:00'),
-      fechaModificacion: new Date('2025-12-06T00:00:00'),
+      creadoEn: new Date('2025-04-17T00:00:00'),
+      actualizadoEn: new Date('2025-12-06T00:00:00'),
     },
     {
       id: 7,
       idOrganizacion: 1,
       codigo: 'PROV-007',
-      estado: 'En revisión',
+      estadoProveedor: 'En revisión',
       fechaAlta: new Date('2026-03-08T00:00:00'),
       nombreRazonSocial: 'Distribuidora Solstice, S.A. de C.V.',
       nombreComercial: 'Solstice',
       tipoPersona: 'Moral',
       rfc: 'DSO160902TQ8',
       identificadorFiscalExtranjero: 'IDF-88231',
-      idRegimentFiscal: '616 · Sin obligaciones',
+      idRegimenFiscal: '616 · Sin obligaciones',
       cuentaContable: '2010 · Proveedores nacionales',
       diasCredito: 20,
       limiteCredito: 60000,
@@ -234,8 +236,8 @@ export class ProveedoresPagina {
       idMetodoPagoPredeterminado: 1,
       esPagoContrarecibo: true,
       observaciones: 'Documentación fiscal pendiente de validación.',
-      fechaCreacion: new Date('2026-03-08T00:00:00'),
-      fechaModificacion: new Date('2026-03-15T00:00:00'),
+      creadoEn: new Date('2026-03-08T00:00:00'),
+      actualizadoEn: new Date('2026-03-15T00:00:00'),
     },
   ];
 
@@ -259,6 +261,14 @@ export class ProveedoresPagina {
 
   abrirDrawer(): void {
     this.drawerVisible.set(true);
+  }
+
+  verProveedor(proveedor: IProveedor): void {
+    this.router.navigate(['/app/proveedores', proveedor.id]);
+  }
+
+  editarProveedor(proveedor: IProveedor): void {
+    this.router.navigate(['/app/proveedores', proveedor.id]);
   }
 
   limpiarSeleccion(): void {

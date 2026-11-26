@@ -1,6 +1,6 @@
 <form class="flex flex-col gap-5" (submit)="$event.preventDefault(); guardar()">
   <app-tarjeta titulo="Moneda y vencimientos" descripcion="Define la moneda base y la tolerancia permitida en los vencimientos."
-    icono="pi-calendar-clock">
+    icono="calendar-clock">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <div class="ds-field">
         <app-etiqueta-formulario para="config-moneda-base" [obligatorio]="true">Moneda base</app-etiqueta-formulario>
@@ -20,7 +20,7 @@
   </app-tarjeta>
 
   <app-tarjeta titulo="Reglas de pago" descripcion="Controla cómo se aplican los pagos a los saldos pendientes."
-    icono="pi-shield">
+    icono="shield">
     <label class="flex cursor-pointer items-start gap-3" for="config-permitir-mayor-saldo">
       <p-checkbox [formField]="formulario.permitirPagoMayorSaldo" [binary]="true"
         inputId="config-permitir-mayor-saldo" />

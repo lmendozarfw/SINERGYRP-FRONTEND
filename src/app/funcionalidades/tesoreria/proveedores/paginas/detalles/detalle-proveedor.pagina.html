@@ -1,0 +1,34 @@
+<div class="flex flex-col gap-6">
+  <app-encabezado-pagina
+    [titulo]="titulo"
+    descripcion="Gestiona la información de tu proveedor, desde sus unidades de negocio hasta sus cuentas bancarias."
+  />
+
+  <p-tabs lazy [value]="pestanaActiva()" (valueChange)="cambiarPestana($event)">
+    <p-tablist>
+      @for (pestana of pestanas; track pestana.valor) {
+        <p-tab [value]="pestana.valor">
+          <p>{{ pestana.titulo }}</p>
+          @if (tieneInformacionPendiente(pestana.valor)) {
+            <small class="ds-meta text-ds-warning!">Información pendiente</small>
+          }
+        </p-tab>
+      }
+    </p-tablist>
+    <p-tabpanels>
+      @for (pestana of pestanas; track pestana.valor) {
+        <p-tabpanel [value]="pestana.valor">
+          @switch (pestana.valor) {
+            @case ('0') { <app-datos-generales-proveedor /> }
+            @case ('1') { <app-informacion-fiscal-proveedor /> }
+            @case ('2') { <app-configuracion-credito-proveedor /> }
+            @case ('3') { <app-unidades-negocio-proveedor /> }
+            @case ('4') { <app-domicilios-proveedor /> }
+            @case ('5') { <app-contactos-proveedor /> }
+            @case ('6') { <app-cuentas-bancarias-proveedor /> }
+          }
+        </p-tabpanel>
+      }
+    </p-tabpanels>
+  </p-tabs>
+</div>

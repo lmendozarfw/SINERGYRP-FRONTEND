@@ -12,11 +12,11 @@ let instances = 0;
       @if (error(); as message) {
       <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-ds-canvas-inverse-soft px-6 text-center">
         <span class="flex h-12 w-12 items-center justify-center rounded-full bg-ds-on-navy/10 text-ds-on-navy">
-          <svg pIcon="pi-exclamation-triangle"></svg>
+          <svg pIcon="exclamation-triangle"></svg>
         </span>
         <p class="m-0 text-sm text-ds-on-navy/90">{{ message }}</p>
         <button nz-button nzType="primary" (click)="start()">
-           <svg pIcon="pi-refresh"></svg>
+           <svg pIcon="refresh"></svg>
           Reintentar
         </button>
       </div>
@@ -27,7 +27,7 @@ let instances = 0;
       } @else {
       <p
         class="absolute inset-x-0 bottom-3 m-0 flex items-center justify-center gap-1.5 px-4 text-center text-xs text-ds-on-navy/90">
-        <svg pIcon="pi-qrcode"></svg>
+        <svg pIcon="qrcode"></svg>
         {{ hint }}
       </p>
       }

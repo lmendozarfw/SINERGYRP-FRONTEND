@@ -1,0 +1,85 @@
+<section class="ds-card overflow-hidden p-0!">
+  <div class="flex flex-col gap-5 p-6">
+    <div class="flex items-center justify-between gap-4 border-b border-ds-line pb-4">
+      <div>
+        <p class="text-sm font-semibold text-ds-ink">Domicilios</p>
+        <p class="text-xs text-ds-muted">Direcciones fiscales, de entrega y cobranza.</p>
+      </div>
+      <button pButton type="button" size="small" (click)="abrirNuevo()"><svg pIcon="plus" [size]="14"></svg>Agregar</button>
+    </div>
+
+    @if (domicilios().length) {
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
+        @for (item of domicilios(); track item.id) {
+          <article class="group relative flex flex-col rounded-lg border border-ds-line bg-ds-surface p-4 transition-colors hover:border-ds-primary-soft hover:bg-ds-canvas/40">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex min-w-0 items-center gap-3">
+                <span class="flex size-9 shrink-0 items-center justify-center rounded-md bg-ds-canvas-strong text-ds-muted ring-1 ring-ds-line">
+                  <svg pIcon="map-marker" [size]="16"></svg>
+                </span>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2">
+                    <p class="truncate text-sm font-semibold text-ds-ink">{{ item.alias || item.tipoDomicilio }}</p>
+                    @if (item.esPrincipal) {
+                      <span class="inline-flex items-center rounded-full bg-ds-primary-soft px-2 py-0.5 text-[11px] font-medium text-ds-primary">Principal</span>
+                    }
+                  </div>
+                  <p class="text-xs text-ds-muted">{{ item.tipoDomicilio }}</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-[11px] font-medium" [class]="item.activo ? 'bg-ds-success-soft text-ds-success' : 'bg-ds-canvas-strong text-ds-muted'">
+                <span class="size-1.5 rounded-full" [class]="item.activo ? 'bg-ds-success' : 'bg-ds-muted'"></span>
+                {{ item.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </div>
+
+            <div class="mt-4 flex flex-col gap-2 text-[13px]">
+              <p class="font-medium leading-5 text-ds-ink">{{ obtenerDireccion(item) }}</p>
+              <p class="leading-5 text-ds-muted">{{ obtenerUbicacion(item) || 'Ubicación no especificada' }}</p>
+              @if (item.nombreReceptor || item.telefono) {
+                <div class="mt-1 flex flex-wrap gap-x-4 gap-y-1 border-t border-ds-line pt-3 text-xs text-ds-muted">
+                  @if (item.nombreReceptor) { <span class="inline-flex items-center gap-1.5"><svg pIcon="user" [size]="13"></svg>{{ item.nombreReceptor }}</span> }
+                  @if (item.telefono) { <span class="inline-flex items-center gap-1.5"><svg pIcon="phone" [size]="13"></svg>{{ item.telefono }}</span> }
+                </div>
+              }
+            </div>
+
+            <div class="mt-4 flex items-center justify-end gap-1 border-t border-ds-line pt-3">
+              <button type="button" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-primary-soft hover:text-ds-primary" (click)="editar(item)">
+                <svg pIcon="pencil" [size]="13"></svg>Editar
+              </button>
+              <button type="button" class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-danger-soft hover:text-ds-danger" (click)="eliminar(item)">
+                <svg pIcon="trash" [size]="13"></svg>Eliminar
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="rounded-lg border border-dashed border-ds-line bg-ds-canvas px-6 py-10 text-center">
+        <div class="mx-auto mb-3 flex size-10 items-center justify-center rounded-full bg-ds-canvas-strong text-ds-muted"><svg pIcon="map-marker" [size]="18"></svg></div>
+        <p class="text-sm font-medium text-ds-ink">No hay domicilios registrados</p>
+        <p class="mt-1 text-xs text-ds-muted">Agrega un domicilio fiscal, de entrega o cobranza.</p>
+      </div>
+    }
+  </div>
+</section>
+
+<p-drawer [visible]="drawerVisible()" (visibleChange)="drawerVisible.set($event)" position="right" [header]="tituloDrawer()" styleClass="ds-client-drawer !w-full md:!w-[560px]">
+  <form class="ds-client-form grid grid-cols-1 gap-4 p-6 md:grid-cols-2" (submit)="$event.preventDefault(); guardar()">
+    <div class="ds-field"><app-etiqueta-formulario para="dom-tipo" [obligatorio]="true">Tipo domicilio</app-etiqueta-formulario><p-select appendTo="body" inputId="dom-tipo" [formField]="formulario.tipoDomicilio" fluid [options]="opcionesTipoDomicilio" optionLabel="label" optionValue="value" placeholder="Selecciona" /><app-mensaje-ayuda-error [campo]="formulario.tipoDomicilio"></app-mensaje-ayuda-error></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-alias">Alias</app-etiqueta-formulario><input id="dom-alias" class="ds-input" pInputText [formField]="formulario.alias" fluid /></div>
+    <div class="ds-field md:col-span-2"><app-etiqueta-formulario para="dom-receptor">Nombre receptor</app-etiqueta-formulario><input id="dom-receptor" class="ds-input" pInputText [formField]="formulario.nombreReceptor" fluid /></div>
+    <div class="ds-field md:col-span-2"><app-etiqueta-formulario para="dom-calle">Calle</app-etiqueta-formulario><input id="dom-calle" class="ds-input" pInputText [formField]="formulario.calle" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-ext">No. exterior</app-etiqueta-formulario><input id="dom-ext" class="ds-input" pInputText [formField]="formulario.numeroExterior" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-int">No. interior</app-etiqueta-formulario><input id="dom-int" class="ds-input" pInputText [formField]="formulario.numeroInterior" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-col">Colonia</app-etiqueta-formulario><input id="dom-col" class="ds-input" pInputText [formField]="formulario.colonia" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-cp">Código postal</app-etiqueta-formulario><input id="dom-cp" class="ds-input" pInputText [formField]="formulario.codigoPostal" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-loc">Localidad</app-etiqueta-formulario><input id="dom-loc" class="ds-input" pInputText [formField]="formulario.localidad" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-tel">Teléfono</app-etiqueta-formulario><input id="dom-tel" class="ds-input" pInputText [formField]="formulario.telefono" fluid /></div>
+    <div class="ds-field md:col-span-2"><app-etiqueta-formulario para="dom-ref">Referencias</app-etiqueta-formulario><input id="dom-ref" class="ds-input" pInputText [formField]="formulario.referencias" fluid /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-principal">Principal</app-etiqueta-formulario><p-select appendTo="body" inputId="dom-principal" [formField]="formulario.esPrincipal" fluid [options]="opcionesSiNo" optionLabel="label" optionValue="value" /></div>
+    <div class="ds-field"><app-etiqueta-formulario para="dom-activo">Activo</app-etiqueta-formulario><p-select appendTo="body" inputId="dom-activo" [formField]="formulario.activo" fluid [options]="opcionesSiNo" optionLabel="label" optionValue="value" /></div>
+  </form>
+  <ng-template #footer><div class="flex justify-end gap-2"><button pButton type="button" variant="outlined" (click)="cerrarDrawer()">Cancelar</button><button pButton type="button" (click)="guardar()">Guardar</button></div></ng-template>
+</p-drawer>

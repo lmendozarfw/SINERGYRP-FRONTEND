@@ -98,6 +98,11 @@ export const routes: Routes = [
           import('./funcionalidades/tesoreria/proveedores/paginas/proveedores.pagina').then(p => p.ProveedoresPagina)
       },
       {
+        path: 'proveedores/:id',
+        loadComponent: () =>
+          import('./funcionalidades/tesoreria/proveedores/paginas/detalles/detalle-proveedor.pagina').then(p => p.DetalleProveedorPagina)
+      },
+      {
         path: 'ingenieria-producto/nuevo-producto',
         loadComponent: () =>
           import('./funcionalidades/ingenieria-producto/paginas/nuevo-producto/nuevo-producto.pagina').then(

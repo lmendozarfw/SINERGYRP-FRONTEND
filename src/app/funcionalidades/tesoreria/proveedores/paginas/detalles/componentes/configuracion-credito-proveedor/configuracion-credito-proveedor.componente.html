@@ -1,0 +1,39 @@
+<section class="ds-card overflow-hidden p-0!">
+  <form class="ds-client-form flex flex-col gap-7 p-6" (submit)="$event.preventDefault(); guardar()">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-moneda">ID moneda predeterminada</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="prov-moneda" [formField]="formulario.idMonedaPredeterminada" class="w-full" [options]="opcionesMoneda" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-forma-pago">ID forma de pago predeterminada</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="prov-forma-pago" [formField]="formulario.idFormaPagoPredeterminada" [options]="opcionesFormaPago" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-metodo-pago">ID método de pago predeterminado</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="prov-metodo-pago" [formField]="formulario.idMetodoPagoPredeterminado" [options]="opcionesMetodoPago" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-contrarecibo">Pago con contrarecibo</app-etiqueta-formulario>
+        <p-select appendTo="body" inputId="prov-contrarecibo" [formField]="formulario.esPagoContrarecibo" [options]="opcionesContrarecibo" optionLabel="etiqueta" optionValue="valor" placeholder="Selecciona una opción" />
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-limite-credito">Límite de crédito</app-etiqueta-formulario>
+        <p-inputnumber inputId="prov-limite-credito" [formField]="formulario.limiteCredito" fluid mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="0.00" />
+        <app-mensaje-ayuda-error [campo]="formulario.limiteCredito"></app-mensaje-ayuda-error>
+      </div>
+      <div class="ds-field">
+        <app-etiqueta-formulario para="prov-dias-credito">Días de crédito</app-etiqueta-formulario>
+        <p-inputnumber inputId="prov-dias-credito" [formField]="formulario.diasCredito" fluid [min]="0" [useGrouping]="false" placeholder="0" />
+        <app-mensaje-ayuda-error [campo]="formulario.diasCredito"></app-mensaje-ayuda-error>
+      </div>
+      <div class="ds-field col-span-full">
+        <app-etiqueta-formulario para="prov-observaciones">Observaciones</app-etiqueta-formulario>
+        <textarea id="prov-observaciones" pTextarea [formField]="formulario.observaciones" rows="4" class="w-full" placeholder="Notas internas sobre el proveedor…"></textarea>
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <button pButton type="submit">Guardar configuración de crédito</button>
+    </div>
+  </form>
+</section>
