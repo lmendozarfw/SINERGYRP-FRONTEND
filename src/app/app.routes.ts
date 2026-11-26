@@ -68,6 +68,10 @@ export const routes: Routes = [
                 (p) => p.EmisoresFiscalesPagina,
               ),
           },
+          {
+            path: 'series-folios',
+            loadComponent: () => import('./funcionalidades/configuracion/paginas/series-folios/series-folios.pagina').then(p => p.SeriesFoliosPagina)
+          }
         ],
       },
       {

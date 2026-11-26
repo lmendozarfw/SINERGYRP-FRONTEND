@@ -106,7 +106,7 @@ interface AccionUsuario extends MenuItem {
                 [attr.data-active]="estaElementoActivo(elemento) ? 'true' : null"
                 [attr.aria-expanded]="estaSubmenuAbierto(elemento.etiqueta)"
                 [attr.title]="elemento.etiqueta"
-                (click)="alternarSubmenu(elemento.etiqueta)"
+                (click)="alternarSubmenu(elemento)"
               >
                 <svg [pIcon]="elemento.icono" [size]="16" class="shrink-0"></svg>
                 @if (!estaContraido()) {
@@ -125,8 +125,8 @@ interface AccionUsuario extends MenuItem {
                       [id]="hijo.id"
                       type="button"
                       class="flex h-9 w-full items-center gap-2 rounded-md border-0 bg-transparent px-3 text-left text-xs font-medium text-ds-navy-muted transition-colors hover:bg-ds-navy-hover hover:text-ds-on-navy focus-visible:shadow-ds-focus focus-visible:outline-none data-[active=true]:bg-ds-primary data-[active=true]:text-ds-on-primary data-[active=true]:hover:bg-ds-primary-hover"
-                      [attr.data-active]="elementoActivo() === hijo.etiqueta ? 'true' : null"
-                      [attr.aria-current]="elementoActivo() === hijo.etiqueta ? 'page' : null"
+                      [attr.data-active]="elementoActivo() === hijo.ruta ? 'true' : null"
+                      [attr.aria-current]="elementoActivo() === hijo.ruta ? 'page' : null"
                       [attr.title]="hijo.etiqueta"
                       (click)="abrir(hijo)"
                     >
@@ -207,24 +207,12 @@ export class SidebarComponente {
   readonly navegar = output<void>();
 
   readonly estaContraido = computed(() => this.contraido() && !this.movil());
-  readonly elementoActivo = signal('Inicio');
+  readonly elementoActivo = signal('/app/inicio');
   readonly espacioTrabajoSeleccionado = signal('SINERGYERP');
   readonly elementosExpandidos = signal<ReadonlySet<string>>(new Set<string>());
 
   readonly elementosPrincipales: ElementoNavegacion[] = [
     { id: "inicio", etiqueta: 'Inicio', icono: 'home', ruta: '/app/inicio' },
-    {
-      id: "ventasPedidos",
-      etiqueta: 'Ventas y pedidos',
-      icono: 'shopping-cart',
-      hijos: [
-        { id: "pedidos", etiqueta: 'Pedidos', icono: 'receipt', ruta: '/app/configuration' },
-        { etiqueta: 'Cotizaciones', icono: 'file', ruta: '/app/configuration' },
-        { etiqueta: 'Clientes', icono: 'users', ruta: '/app/clientes' },
-        { etiqueta: 'Facturación', icono: 'file', ruta: '/app/clientes' },
-        { etiqueta: 'Devoluciones', icono: 'undo', ruta: '/app/configuration' },
-      ],
-    },
     {
       etiqueta: 'Producción',
       icono: 'hammer',
@@ -260,17 +248,6 @@ export class SidebarComponente {
       ],
     },
     {
-      etiqueta: 'Compras y proveedores',
-      icono: 'shopping-cart',
-      hijos: [
-        { etiqueta: 'Solicitudes de compra', icono: 'file', ruta: '/app/configuration' },
-        { etiqueta: 'Órdenes de compra', icono: 'receipt', ruta: '/app/configuration' },
-        { etiqueta: 'Recepción de mercancía', icono: 'truck', ruta: '/app/configuration' },
-        { etiqueta: 'Proveedores', icono: 'users', ruta: '/app/proveedores' },
-        { etiqueta: 'Facturas de proveedores', icono: 'file', ruta: '/app/cuentas-por-pagar' },
-      ],
-    },
-    {
       etiqueta: 'Tesorería',
       icono: 'wallet',
       hijos: [
@@ -280,9 +257,11 @@ export class SidebarComponente {
     {
       etiqueta: 'Cuentas por cobrar',
       icono: 'credit-card',
+      ruta: '',
       hijos: [
         { etiqueta: 'Configuración', icono: 'cog', ruta: '/app/tesoreria/cuentas-por-cobrar/configuracion' },
-        { etiqueta: 'Cobros', icono: 'money-bill', ruta: '/app/configuration' },
+        { etiqueta: 'Clientes', icono: 'users', ruta: '/app/clientes' },
+        { etiqueta: 'Cobros', icono: 'money-bill', ruta: '' },
         { etiqueta: 'Facturas', icono: 'receipt', ruta: '/app/clientes' },
         { etiqueta: 'Aplicaciones de cobros', icono: 'credit-card', ruta: '' },
       ],
@@ -292,6 +271,7 @@ export class SidebarComponente {
       icono: 'credit-card',
       hijos: [
         { etiqueta: 'Configuración', icono: 'cog', ruta: '/app/tesoreria/cuentas-por-pagar/configuracion' },
+        { etiqueta: 'Proveedores', icono: 'users', ruta: '/app/proveedores' },
         { etiqueta: 'Pagos', icono: 'money-bill', ruta: '' },
         { etiqueta: 'Aplicaciones de pagos', icono: 'credit-card', ruta: '' },
       ],
@@ -356,6 +336,7 @@ export class SidebarComponente {
   readonly elementosSecundarios: ElementoNavegacion[] = [
     {
       etiqueta: 'Configuración',
+      ruta: '/app/configuracion',
       icono: 'cog',
       hijos: [
         {
@@ -368,6 +349,11 @@ export class SidebarComponente {
           icono: 'bell',
           ruta: '/app/configuracion/emisores-fiscales',
         },
+        {
+          etiqueta: 'Series y folios',
+          icono: 'asterisk',
+          ruta: '/app/configuracion/series-folios'
+        }
       ],
     },
     { etiqueta: 'Componentes', icono: 'question-circle', ruta: '/design-system' },
@@ -408,12 +394,16 @@ export class SidebarComponente {
 
   estaElementoActivo(elemento: ElementoNavegacion): boolean {
     return (
-      this.elementoActivo() === elemento.etiqueta ||
-      !!elemento.hijos?.some((hijo) => hijo.etiqueta === this.elementoActivo())
+      this.elementoActivo() === elemento.ruta ||
+      !!elemento.hijos?.some((hijo) => hijo.ruta === this.elementoActivo())
     );
   }
 
-  alternarSubmenu(titulo: string): void {
+  alternarSubmenu(elemento: ElementoNavegacion): void {
+    const titulo = elemento.etiqueta;
+    if (elemento.ruta) {
+      this.abrir(elemento);
+    }
     const siguientes = new Set(this.elementosExpandidos());
     if (siguientes.has(titulo)) {
       siguientes.delete(titulo);
@@ -424,7 +414,8 @@ export class SidebarComponente {
   }
 
   abrir(elemento: ElementoNavegacion): void {
-    this.elementoActivo.set(elemento.etiqueta);
+    this.elementoActivo.set(elemento.ruta ?? '');
+    console.log({activo: this.elementoActivo()});
     if (elemento.ruta) {
       void this.router.navigateByUrl(elemento.ruta);
     }

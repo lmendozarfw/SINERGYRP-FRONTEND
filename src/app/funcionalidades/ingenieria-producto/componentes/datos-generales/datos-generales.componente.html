@@ -24,7 +24,7 @@
 
                 <div class="ds-field">
                     <app-etiqueta-formulario para="modelo-fecha-alta">Fecha de alta</app-etiqueta-formulario>
-                    <p-datepicker class="" inputId="modelo-fecha-alta" formControlName="fechaAlta"
+                    <p-datepicker appendTo="body" class="" inputId="modelo-fecha-alta" formControlName="fechaAlta"
                         dateFormat="dd/mm/yy" [showIcon]="true" [fluid]="true" />
                     <app-mensaje-ayuda-error mensajeAyuda="Se registra automáticamente al crear el modelo."></app-mensaje-ayuda-error>
                 </div>

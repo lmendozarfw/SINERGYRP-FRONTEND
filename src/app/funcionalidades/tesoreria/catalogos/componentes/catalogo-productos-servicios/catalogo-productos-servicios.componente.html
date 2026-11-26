@@ -3,23 +3,23 @@
         tableStyleClass="w-full min-w-[1200px] border-collapse text-sm">
         <ng-template #header>
             <tr class="border-b border-ds-line bg-ds-canvas-strong">
-                <th class="w-[145px] px-4 py-3 align-middle text-left min-w-[145px]">
+                <th class="w-[150px] px-4 py-3 align-middle text-left min-w-[150px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Código</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. 01010101</span>
                 </th>
-                <th class="w-[170px] px-4 py-3 align-middle text-left min-w-[170px]">
+                <th class="w-[250px] px-4 py-3 align-middle text-left min-w-[250px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Nombre</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Ej. No categorizado</span>
                 </th>
-                <th class="px-4 py-3 align-middle text-left min-w-[220px]">
+                <th class="w-[250px] px-4 py-3 align-middle text-left min-w-[250px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Descripción</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Detalle del producto o servicio</span>
                 </th>
-                <th class="w-[165px] px-4 py-3 align-middle text-left min-w-[165px]">
+                <th class="w-[200px] px-4 py-3 align-middle text-left min-w-[200px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Inicio vigencia</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Opcional</span>
                 </th>
-                <th class="w-[165px] px-4 py-3 align-middle text-left min-w-[165px]">
+                <th class="w-[200px] px-4 py-3 align-middle text-left min-w-[200px]">
                     <span class="block text-xs font-semibold tracking-wide text-ds-muted uppercase">Fin vigencia</span>
                     <span class="mt-0.5 block text-[11px] font-normal text-ds-ink-soft normal-case">Opcional</span>
                 </th>
@@ -55,14 +55,14 @@
                             [campo]="fila.formulario.descripcion"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-datepicker [formField]="fila.formulario.fechaInicioVigencia"
+                        <p-datepicker appendTo="body" [formField]="fila.formulario.fechaInicioVigencia"
                             [class.p-invalid]="fechaInicioError.errorVisible()" dateFormat="dd/mm/yy"
                             [showIcon]="true" fluid />
                         <app-mensaje-ayuda-error #fechaInicioError
                             [campo]="fila.formulario.fechaInicioVigencia"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <p-datepicker [formField]="fila.formulario.fechaFinVigencia"
+                        <p-datepicker appendTo="body" [formField]="fila.formulario.fechaFinVigencia"
                             [class.p-invalid]="fechaFinError.errorVisible()" dateFormat="dd/mm/yy" [showIcon]="true"
                             fluid />
                         <app-mensaje-ayuda-error #fechaFinError
@@ -127,7 +127,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-datepicker [formField]="fila.formulario.fechaInicioVigencia"
+                                <p-datepicker appendTo="body" [formField]="fila.formulario.fechaInicioVigencia"
                                     [class.p-invalid]="fechaInicioEdicionError.errorVisible()" dateFormat="dd/mm/yy"
                                     [showIcon]="true" fluid />
                                 <app-mensaje-ayuda-error #fechaInicioEdicionError
@@ -142,7 +142,7 @@
                         class="h-[60px] cursor-text px-4 py-3 align-middle">
                         <p-cell-editor>
                             <ng-template #input>
-                                <p-datepicker [formField]="fila.formulario.fechaFinVigencia"
+                                <p-datepicker appendTo="body" [formField]="fila.formulario.fechaFinVigencia"
                                     [class.p-invalid]="fechaFinEdicionError.errorVisible()" dateFormat="dd/mm/yy"
                                     [showIcon]="true" fluid />
                                 <app-mensaje-ayuda-error #fechaFinEdicionError

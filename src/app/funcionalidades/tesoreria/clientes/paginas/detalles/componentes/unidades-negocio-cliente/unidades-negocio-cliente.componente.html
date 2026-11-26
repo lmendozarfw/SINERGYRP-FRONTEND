@@ -72,12 +72,12 @@
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="un-inicio" [obligatorio]="true">Fecha inicio</app-etiqueta-formulario>
-      <p-datepicker inputId="un-inicio" [formField]="formulario.fechaInicio" fluid dateFormat="dd/mm/yy" placeholder="Selecciona fecha" />
+      <p-datepicker appendTo="body" inputId="un-inicio" [formField]="formulario.fechaInicio" fluid dateFormat="dd/mm/yy" placeholder="Selecciona fecha" />
       <app-mensaje-ayuda-error [campo]="formulario.fechaInicio"></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="un-fin">Fecha fin</app-etiqueta-formulario>
-      <p-datepicker inputId="un-fin" [formField]="formulario.fechaFin" fluid dateFormat="dd/mm/yy" [showClear]="true" placeholder="Selecciona fecha" />
+      <p-datepicker appendTo="body" inputId="un-fin" [formField]="formulario.fechaFin" fluid dateFormat="dd/mm/yy" [showClear]="true" placeholder="Selecciona fecha" />
     </div>
   </form>
   <ng-template #footer>
