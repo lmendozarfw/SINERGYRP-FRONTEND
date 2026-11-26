@@ -2,7 +2,43 @@
   display: block;
 }
 
-:host ::ng-deep .ds-documentos-expansion-cell {
-  padding: 0 !important;
-  background: var(--ds-canvas-strong);
+.detalle-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px;
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-input);
+  background: var(--ds-surface);
+
+  dt {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ds-text-muted);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ds-text);
+  }
+
+  &--destacado {
+    border-color: var(--ds-primary);
+    background: var(--ds-primary-soft);
+
+    dd {
+      font-size: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}
+
+:host ::ng-deep .documento-detalle-drawer {
+  .p-drawer-header {
+    border-bottom: 1px solid var(--ds-border);
+  }
 }

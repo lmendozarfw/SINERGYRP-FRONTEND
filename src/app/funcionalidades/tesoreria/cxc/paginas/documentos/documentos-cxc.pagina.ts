@@ -7,15 +7,18 @@ import { IOpcionSelector } from '@compartido/interfaces/selector.interface';
 import { EstadoDocumentoCxcEnum } from '@funcionalidades/tesoreria/cxc/enumerables/estado-documento-cxc.enum';
 import { TipoDocumentoCxcEnum } from '@funcionalidades/tesoreria/cxc/enumerables/tipo-documento-cxc.enum';
 import { IDocumentoCxcListado } from '@funcionalidades/tesoreria/cxc/modelos/documento_cxc.interface';
+import { ObjetoImpDocumentoCxc } from '@funcionalidades/tesoreria/cxc/modelos/partida-documento-cxc.interface';
 import { BreadcrumbServicio } from '@nucleo/servicios/breadcrumb.servicio';
 import { PIcon } from '@primeicons/angular';
 import { ButtonDirective } from 'primeng/button';
+import { Drawer } from 'primeng/drawer';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputText } from 'primeng/inputtext';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
+import { Tooltip } from 'primeng/tooltip';
 
 const ETIQUETAS_TIPO_DOCUMENTO: Record<TipoDocumentoCxcEnum, string> = {
   [TipoDocumentoCxcEnum.FACTURA]: 'Factura',
@@ -30,6 +33,13 @@ const ETIQUETAS_ESTADO_DOCUMENTO: Record<EstadoDocumentoCxcEnum, string> = {
   [EstadoDocumentoCxcEnum.BORRADOR]: 'Borrador',
   [EstadoDocumentoCxcEnum.EMITIDO]: 'Emitido',
   [EstadoDocumentoCxcEnum.CANCELADO]: 'Cancelado',
+};
+
+const ETIQUETAS_OBJETO_IMP: Record<ObjetoImpDocumentoCxc, string> = {
+  '01': 'No objeto de impuesto',
+  '02': 'Sí objeto de impuesto',
+  '03': 'Sí objeto, sin desglose',
+  '04': 'No obligado al desglose',
 };
 
 const DATOS_FISCALES = {
@@ -55,6 +65,7 @@ const DATOS_FISCALES = {
     ButtonDirective,
     DatePipe,
     DecimalPipe,
+    Drawer,
     EncabezadoPaginaComponente,
     FormsModule,
     IconField,
@@ -64,6 +75,7 @@ const DATOS_FISCALES = {
     Select,
     TableModule,
     Tag,
+    Tooltip,
   ],
 })
 export class DocumentosCxcPagina {
@@ -73,6 +85,8 @@ export class DocumentosCxcPagina {
   readonly busqueda = signal('');
   readonly filtroTipoDocumento = signal<string | null>(null);
   readonly filtroEstado = signal<string | null>(null);
+  readonly detalleVisible = signal(false);
+  readonly documentoSeleccionado = signal<IDocumentoCxcListado | null>(null);
 
   readonly opcionesTipoDocumento: IOpcionSelector[] = Object.entries(ETIQUETAS_TIPO_DOCUMENTO)
     .map(([valor, etiqueta]) => ({ etiqueta, valor }));
@@ -297,6 +311,11 @@ export class DocumentosCxcPagina {
     });
   });
 
+  readonly tituloDetalle = computed(() => {
+    const documento = this.documentoSeleccionado();
+    return documento ? `${documento.serie} · ${documento.folio}` : 'Detalle del documento';
+  });
+
   constructor() {
     this.breadcrumb.configurar([
       { etiqueta: 'Tesoreria', llave: 'tesoreria', deshabilitado: true },
@@ -318,6 +337,19 @@ export class DocumentosCxcPagina {
       return 'success';
     }
     return estado === EstadoDocumentoCxcEnum.CANCELADO ? 'danger' : 'warn';
+  }
+
+  verDetalle(documento: IDocumentoCxcListado): void {
+    this.documentoSeleccionado.set(documento);
+    this.detalleVisible.set(true);
+  }
+
+  cerrarDetalle(): void {
+    this.detalleVisible.set(false);
+  }
+
+  etiquetaObjetoImp(valor: ObjetoImpDocumentoCxc): string {
+    return ETIQUETAS_OBJETO_IMP[valor];
   }
 
   limpiarFiltros(): void {
