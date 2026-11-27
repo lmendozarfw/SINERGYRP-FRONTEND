@@ -2,7 +2,7 @@
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
     <div class="ds-field">
       <app-etiqueta-formulario para="codigo" [obligatorio]="true">Código</app-etiqueta-formulario>
-      <input id="codigo" pInputText [formField]="formulario.codigo" [invalid]="codigoError.errorVisible()" type="text" class="ds-input" placeholder="Ej. CLI-001" />
+      <input id="codigo" pInputText [formField]="formulario.codigo" [class.p-invalid]="codigoError.errorVisible()" type="text" class="ds-input" placeholder="Ej. CLI-001" />
       <app-mensaje-ayuda-error #codigoError [campo]="formulario.codigo"></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">
@@ -12,7 +12,7 @@
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="razon-social" [obligatorio]="true">Nombre o razón social</app-etiqueta-formulario>
-      <input id="razon-social" pInputText [formField]="formulario.nombreRazonSocial" [invalid]="razonSocialError.errorVisible()" type="text" class="ds-input" placeholder="Ej. Grupo Industrial Raudal, S.A. de C.V." />
+      <input id="razon-social" pInputText [formField]="formulario.nombreRazonSocial" [class.p-invalid]="razonSocialError.errorVisible()" type="text" class="ds-input" placeholder="Ej. Grupo Industrial Raudal, S.A. de C.V." />
       <app-mensaje-ayuda-error #razonSocialError [campo]="formulario.nombreRazonSocial"></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">
@@ -26,7 +26,7 @@
     </div>
     <div class="ds-field">
       <app-etiqueta-formulario para="rfc" [obligatorio]="true">RFC</app-etiqueta-formulario>
-      <input id="rfc" pInputText [formField]="formulario.rfc" [invalid]="rfcError.errorVisible()" type="text" class="ds-input uppercase" placeholder="Ej. RIR240315AB1" />
+      <input id="rfc" pInputText [formField]="formulario.rfc" [class.p-invalid]="rfcError.errorVisible()" type="text" class="ds-input uppercase" placeholder="Ej. RIR240315AB1" />
       <app-mensaje-ayuda-error #rfcError [campo]="formulario.rfc" mensajeAyuda="Registro Federal de Contribuyentes."></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">

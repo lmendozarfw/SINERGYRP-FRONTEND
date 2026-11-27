@@ -54,20 +54,20 @@
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.rfc"
-                            [invalid]="rfcError.errorVisible()" type="text" placeholder="Ej. MELL940512GT6"
+                            [class.p-invalid]="rfcError.errorVisible()" type="text" placeholder="Ej. MELL940512GT6"
                             fluid />
                         <app-mensaje-ayuda-error #rfcError [campo]="fila.formulario.rfc"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.razonSocial"
-                            [invalid]="razonSocialError.errorVisible()" type="text" placeholder="Ej. Rudal"
+                            [class.p-invalid]="razonSocialError.errorVisible()" type="text" placeholder="Ej. Rudal"
                             fluid />
                         <app-mensaje-ayuda-error #razonSocialError
                             [campo]="fila.formulario.razonSocial"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.codigoPostalExpedicion"
-                            [invalid]="codigoPostalError.errorVisible()" type="text" placeholder="Ej. 37295"
+                            [class.p-invalid]="codigoPostalError.errorVisible()" type="text" placeholder="Ej. 37295"
                             fluid />
                         <app-mensaje-ayuda-error #codigoPostalError
                             [campo]="fila.formulario.codigoPostalExpedicion"></app-mensaje-ayuda-error>
@@ -125,7 +125,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.rfc"
-                                    [invalid]="rfcEdicionError.errorVisible()" type="text" fluid />
+                                    [class.p-invalid]="rfcEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #rfcEdicionError
                                     [campo]="fila.formulario.rfc"></app-mensaje-ayuda-error>
                             </ng-template>
@@ -139,7 +139,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.razonSocial"
-                                    [invalid]="razonSocialEdicionError.errorVisible()" type="text" fluid />
+                                    [class.p-invalid]="razonSocialEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #razonSocialEdicionError
                                     [campo]="fila.formulario.razonSocial"></app-mensaje-ayuda-error>
                             </ng-template>
@@ -153,7 +153,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.codigoPostalExpedicion"
-                                    [invalid]="codigoPostalEdicionError.errorVisible()" type="text" fluid />
+                                    [class.p-invalid]="codigoPostalEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #codigoPostalEdicionError
                                     [campo]="fila.formulario.codigoPostalExpedicion"></app-mensaje-ayuda-error>
                             </ng-template>

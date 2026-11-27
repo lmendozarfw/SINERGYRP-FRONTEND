@@ -34,12 +34,12 @@
                 <tr class="border-b border-ds-line bg-ds-canvas-strong">
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.codigo"
-                            [invalid]="codigoError.errorVisible()" type="text" placeholder="Ej. G01" fluid />
+                            [class.p-invalid]="codigoError.errorVisible()" type="text" placeholder="Ej. G01" fluid />
                         <app-mensaje-ayuda-error #codigoError [campo]="fila.formulario.codigo"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.descripcion"
-                            [invalid]="descripcionError.errorVisible()" type="text"
+                            [class.p-invalid]="descripcionError.errorVisible()" type="text"
                             placeholder="Ej. Adquisición de mercancías" fluid />
                         <app-mensaje-ayuda-error #descripcionError
                             [campo]="fila.formulario.descripcion"></app-mensaje-ayuda-error>
@@ -76,7 +76,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.codigo"
-                                    [invalid]="codigoEdicionError.errorVisible()" type="text" fluid />
+                                    [class.p-invalid]="codigoEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #codigoEdicionError
                                     [campo]="fila.formulario.codigo"></app-mensaje-ayuda-error>
                             </ng-template>
@@ -90,7 +90,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.descripcion"
-                                    [invalid]="descripcionEdicionError.errorVisible()" type="text" fluid />
+                                    [class.p-invalid]="descripcionEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #descripcionEdicionError
                                     [campo]="fila.formulario.descripcion"></app-mensaje-ayuda-error>
                             </ng-template>

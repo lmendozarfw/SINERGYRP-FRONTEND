@@ -1,30 +1,20 @@
 ﻿import { Component, computed, signal } from "@angular/core";
 import { DatePipe } from '@angular/common';
-import { FieldTree, FormField, form, required } from "@angular/forms/signals";
+import { FieldTree, form, required } from "@angular/forms/signals";
 import { ButtonDirective } from "primeng/button";
-import { DatePicker } from "primeng/datepicker";
 import { Drawer } from "primeng/drawer";
-import { Select } from "primeng/select";
 import { PIcon } from "@primeicons/angular";
-import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente";
-import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { CLIENTE_UNIDAD_NEGOCIO_VACIO, IUnidadNegocioCliente } from "../../../../modelos/unidad-negocio-cliente.interface";
+import { FormularioUnidadNegocioClienteComponente } from "../formulario-unidad-negocio-cliente/formulario-unidad-negocio-cliente.componente";
 
 interface IUnidadNegocioClienteItem extends IUnidadNegocioCliente { id: number; }
 
 @Component({
     selector: 'app-unidades-negocio-cliente',
     templateUrl: './unidades-negocio-cliente.componente.html',
-    imports: [DatePipe, ButtonDirective, DatePicker, Drawer, EtiquetaFormularioComponente, FormField, MensajeAyudaErrorComponente, PIcon, Select]
+    imports: [DatePipe, ButtonDirective, Drawer, PIcon, FormularioUnidadNegocioClienteComponente]
 })
 export class UnidadesNegocioClienteComponente {
-    readonly opcionesUnidadNegocio = [
-        { label: 'Manufactura', value: 1 },
-        { label: 'Comercialización', value: 2 },
-        { label: 'Servicios', value: 3 }
-    ];
-    readonly opcionesPrincipal = [{ label: 'Sí', value: true }, { label: 'No', value: false }];
-
     protected readonly formulario: FieldTree<IUnidadNegocioCliente> = this.crearFormulario();
     protected readonly unidades = signal<IUnidadNegocioClienteItem[]>([]);
     protected readonly drawerVisible = signal(false);
@@ -37,6 +27,14 @@ export class UnidadesNegocioClienteComponente {
     });
 
     private siguienteId = 1;
+
+    readonly opcionesUnidadNegocio = [
+        { label: 'Manufactura', value: 1 },
+        { label: 'Comercialización', value: 2 },
+        { label: 'Servicios', value: 3 }
+    ];
+    readonly opcionesPrincipal = [{ label: 'Sí', value: true }, { label: 'No', value: false }];
+    constructor() {}
 
     abrirNuevo(): void {
         this.editandoId.set(null);

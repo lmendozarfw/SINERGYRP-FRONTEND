@@ -32,14 +32,14 @@
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.codigoMunicipio"
-                            [invalid]="codigoMunicipioError.errorVisible()" type="text" placeholder="Ej. 023"
+                            [class.p-invalid]="codigoMunicipioError.errorVisible()" type="text" placeholder="Ej. 023"
                             fluid />
                         <app-mensaje-ayuda-error #codigoMunicipioError
                             [campo]="fila.formulario.codigoMunicipio"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.nombre"
-                            [invalid]="nombreError.errorVisible()" type="text" placeholder="Ej. León" fluid />
+                            [class.p-invalid]="nombreError.errorVisible()" type="text" placeholder="Ej. León" fluid />
                         <app-mensaje-ayuda-error #nombreError [campo]="fila.formulario.nombre"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle text-right">
@@ -72,7 +72,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.codigoMunicipio"
-                                    [invalid]="codigoMunicipioEdicionError.errorVisible()" type="text" fluid />
+                                    [class.p-invalid]="codigoMunicipioEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #codigoMunicipioEdicionError
                                     [campo]="fila.formulario.codigoMunicipio"></app-mensaje-ayuda-error>
                             </ng-template>
@@ -86,7 +86,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.nombre"
-                                    [invalid]="nombreEdicionError.errorVisible()" type="text" fluid />
+                                    [class.p-invalid]="nombreEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #nombreEdicionError
                                     [campo]="fila.formulario.nombre"></app-mensaje-ayuda-error>
                             </ng-template>

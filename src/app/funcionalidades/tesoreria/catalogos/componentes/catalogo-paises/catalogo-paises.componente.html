@@ -31,7 +31,7 @@
                     <input
                         pInputText 
                         [formField]="fila.formulario.codigoPais"
-                        [invalid]="codigoPaisError.errorVisible()"
+                        [class.p-invalid]="codigoPaisError.errorVisible()"
                         type="text" 
                         placeholder="Ej. MX" 
                         fluid />
@@ -41,7 +41,7 @@
                     ></app-mensaje-ayuda-error>
                 </td>
                 <td class="h-[60px] px-4 py-3 align-middle">
-                    <input pInputText [formField]="fila.formulario.nombre" [invalid]="nombreError.errorVisible()" type="text" placeholder="Ej. México" fluid />
+                    <input pInputText [formField]="fila.formulario.nombre" [class.p-invalid]="nombreError.errorVisible()" type="text" placeholder="Ej. México" fluid />
                     <app-mensaje-ayuda-error 
                         #nombreError 
                         [campo]="fila.formulario.nombre"
@@ -49,7 +49,7 @@
                 </td>
                 <td class="h-[60px] px-4 py-3 align-middle">
                     <input pInputText [formField]="fila.formulario.codigoMoneda"
-                        [invalid]="codigoMonedaError.errorVisible()" type="text" placeholder="Ej. MXN"
+                        [class.p-invalid]="codigoMonedaError.errorVisible()" type="text" placeholder="Ej. MXN"
                         fluid />
                     <app-mensaje-ayuda-error 
                         #codigoMonedaError 
@@ -69,7 +69,7 @@
                     <p-cell-editor>
                         <ng-template #input>
                             <input pInputText [formField]="fila.formulario.codigoPais"
-                                [invalid]="codigoPaisEdicionError.errorVisible()" type="text" fluid />
+                                [class.p-invalid]="codigoPaisEdicionError.errorVisible()" type="text" fluid />
                             <app-mensaje-ayuda-error 
                                 #codigoPaisEdicionError 
                                 [campo]="fila.formulario.codigoPais"
@@ -85,7 +85,7 @@
                     <p-cell-editor>
                         <ng-template #input>
                             <input pInputText [formField]="fila.formulario.nombre"
-                                [invalid]="nombreEdicionError.errorVisible()" type="text" fluid />
+                                [class.p-invalid]="nombreEdicionError.errorVisible()" type="text" fluid />
                             <app-mensaje-ayuda-error 
                                 #nombreEdicionError 
                                 [campo]="fila.formulario.nombre"
@@ -101,7 +101,7 @@
                     <p-cell-editor>
                         <ng-template #input>
                             <input pInputText [formField]="fila.formulario.codigoMoneda"
-                                [invalid]="codigoMonedaEdicionError.errorVisible()" type="text" fluid />
+                                [class.p-invalid]="codigoMonedaEdicionError.errorVisible()" type="text" fluid />
                             <app-mensaje-ayuda-error 
                                 #codigoMonedaEdicionError 
                                 [campo]="fila.formulario.codigoMoneda"

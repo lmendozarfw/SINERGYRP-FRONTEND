@@ -46,7 +46,7 @@
                             [campo]="fila.formulario.tipoDocumento"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
-                        <input pInputText [formField]="fila.formulario.serie" [invalid]="serieError.errorVisible()"
+                        <input pInputText [formField]="fila.formulario.serie" [class.p-invalid]="serieError.errorVisible()"
                             type="text" placeholder="Ej. A, FAC-2026" fluid />
                         <app-mensaje-ayuda-error #serieError [campo]="fila.formulario.serie"></app-mensaje-ayuda-error>
                     </td>
@@ -109,7 +109,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.serie"
-                                    [invalid]="serieEdicionError.errorVisible()" type="text" fluid />
+                                    [class.p-invalid]="serieEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #serieEdicionError [campo]="fila.formulario.serie"></app-mensaje-ayuda-error>
                             </ng-template>
                             <ng-template #output>
