@@ -6,6 +6,7 @@ import { Select } from "primeng/select";
 import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente";
 import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { IOpcionSelector } from "@compartido/interfaces/selector.interface";
+import { DatePicker } from "primeng/datepicker";
 
 interface IDatosGeneralesClienteForm {
     codigo: string;
@@ -15,7 +16,7 @@ interface IDatosGeneralesClienteForm {
     tipoPersona: string;
     rfc: string;
     identificadorFiscalExtranjero: string;
-    fechaAlta: string;
+    fechaAlta: Date | null;
 }
 
 const DATOS_GENERALES_VACIO: IDatosGeneralesClienteForm = {
@@ -26,13 +27,13 @@ const DATOS_GENERALES_VACIO: IDatosGeneralesClienteForm = {
     tipoPersona: '',
     rfc: '',
     identificadorFiscalExtranjero: '',
-    fechaAlta: ''
+    fechaAlta: null
 };
 
 @Component({
     selector: 'app-datos-generales-cliente',
     templateUrl: './datos-generales-cliente.componente.html',
-    imports: [ButtonDirective, EtiquetaFormularioComponente, FormField, InputText, MensajeAyudaErrorComponente, Select]
+    imports: [ButtonDirective, EtiquetaFormularioComponente, FormField, InputText, MensajeAyudaErrorComponente, Select, DatePicker]
 })
 export class DatosGeneralesClienteComponente {
     readonly opcionesTipoPersona: IOpcionSelector[] = [
@@ -81,7 +82,7 @@ export class DatosGeneralesClienteComponente {
             tipoPersona: String(this.formulario.tipoPersona().value() ?? ''),
             rfc: String(this.formulario.rfc().value() ?? '').trim().toUpperCase(),
             identificadorFiscalExtranjero: String(this.formulario.identificadorFiscalExtranjero().value() ?? '').trim(),
-            fechaAlta: String(this.formulario.fechaAlta().value() ?? '')
+            fechaAlta: new Date(this.formulario.fechaAlta().value() ?? '')
         };
     }
 }

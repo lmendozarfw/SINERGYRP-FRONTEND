@@ -16,24 +16,33 @@
         <app-tarjeta-credito [banco]="cuenta.banco" [titular]="cuenta.titularCuenta!" [esSoloLectura]="false"
           [activo]="cuenta.activa" [moneda]="'MXN'" [numeroCuenta]="cuenta.numeroCuenta!"></app-tarjeta-credito>
 
-        <div class="flex items-center justify-between gap-3 px-1">
-          <div class="min-w-0 text-xs text-ds-muted">
+        <div class="flex flex-col px-1">
+          <div class="min-w-0 text-xs text-ds-muted flex items-center justify-between">
             <span class="truncate">{{ cuenta.nombreCuenta || 'Sin nombre de cuenta' }}</span>
-            @if (cuenta.clabe) { 
+
+            <div class="flex shrink-0 items-center gap-1">
+              <button type="button"
+                class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-primary-soft hover:text-ds-primary"
+                (click)="editar(cuenta)"><svg pIcon="pencil" [size]="13"></svg>Editar</button>
+              <button type="button"
+                class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-danger-soft hover:text-ds-danger"
+                (click)="eliminar(cuenta)"><svg pIcon="trash" [size]="13"></svg>Eliminar</button>
+            </div>
+          </div>
+
+          <p>
+            <span class="text-xs">
+              @if (cuenta.clabe) {
               CLABE · <app-copiar-texto [etiqueta]="'CLABE'" [valor]="cuenta.clabe"></app-copiar-texto>
-            }
-            @if (cuenta.swift) { 
+              }
+            </span>
+            <span class="text-xs">
+              @if (cuenta.swift) {
               SWIFT · <app-copiar-texto [etiqueta]="'SWIFT'" [valor]="cuenta.swift"></app-copiar-texto>
-            }
-          </div>
-          <div class="flex shrink-0 items-center gap-1">
-            <button type="button"
-              class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-primary-soft hover:text-ds-primary"
-              (click)="editar(cuenta)"><svg pIcon="pencil" [size]="13"></svg>Editar</button>
-            <button type="button"
-              class="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-ds-muted transition-colors hover:bg-ds-danger-soft hover:text-ds-danger"
-              (click)="eliminar(cuenta)"><svg pIcon="trash" [size]="13"></svg>Eliminar</button>
-          </div>
+              }
+            </span>
+          </p>
+
         </div>
       </div>
       }
@@ -61,8 +70,8 @@
     <form class="ds-client-form grid grid-cols-1 gap-4 md:grid-cols-2" (submit)="$event.preventDefault(); guardar()">
       <div class="ds-field">
         <app-etiqueta-formulario para="banco" [obligatorio]="true">Banco</app-etiqueta-formulario>
-        <p-select appendTo="body" inputId="banco" [formField]="formulario.banco" fluid [options]="opcionesBanco" optionLabel="label"
-          optionValue="value" placeholder="Selecciona banco" />
+        <p-select appendTo="body" inputId="banco" [formField]="formulario.banco" fluid [options]="opcionesBanco"
+          optionLabel="label" optionValue="value" placeholder="Selecciona banco" />
         <app-mensaje-ayuda-error [campo]="formulario.banco"></app-mensaje-ayuda-error>
       </div>
 
@@ -101,8 +110,8 @@
 
       <div class="ds-field">
         <app-etiqueta-formulario para="activa">Activa</app-etiqueta-formulario>
-        <p-select appendTo="body" inputId="activa" [formField]="formulario.activa" fluid [options]="opcionesSiNo" optionLabel="label"
-          optionValue="value" />
+        <p-select appendTo="body" inputId="activa" [formField]="formulario.activa" fluid [options]="opcionesSiNo"
+          optionLabel="label" optionValue="value" />
       </div>
 
       <div class="ds-field md:col-span-2">

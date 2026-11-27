@@ -338,7 +338,7 @@
             [options]="tiposPieza"
             placeholder="Selecciona un tipo"
             [fluid]="true"
-            [class.p-invalid]="campoInvalido('tipo')"
+            [invalid]="campoInvalido('tipo')"
           />
           <app-mensaje-ayuda-error [condicion]="campoInvalido('tipo')"
             mensajeError="Selecciona el tipo de pieza."
@@ -354,7 +354,7 @@
             [options]="materiales"
             placeholder="Selecciona un material"
             [fluid]="true"
-            [class.p-invalid]="campoInvalido('material')"
+            [invalid]="campoInvalido('material')"
           />
           <app-mensaje-ayuda-error [condicion]="campoInvalido('material')"
             mensajeError="Selecciona el material."
@@ -370,7 +370,7 @@
             [options]="unidades"
             placeholder="Selecciona una unidad"
             [fluid]="true"
-            [class.p-invalid]="campoInvalido('unidad')"
+            [invalid]="campoInvalido('unidad')"
           />
           <app-mensaje-ayuda-error [condicion]="campoInvalido('unidad')"
             mensajeError="Selecciona la unidad de medida."
@@ -386,7 +386,7 @@
             [options]="departamentos"
             placeholder="Selecciona un departamento"
             [fluid]="true"
-            [class.p-invalid]="campoInvalido('departamento')"
+            [invalid]="campoInvalido('departamento')"
           />
           <app-mensaje-ayuda-error [condicion]="campoInvalido('departamento')"
             mensajeError="Selecciona el departamento."
@@ -433,7 +433,7 @@
               [options]="suajes"
               placeholder="Selecciona un suaje"
               [fluid]="true"
-              [class.p-invalid]="campoInvalido('suaje')"
+              [invalid]="campoInvalido('suaje')"
             />
             <app-mensaje-ayuda-error [condicion]="campoInvalido('suaje')"
               mensajeError="Selecciona el suaje de la pieza."
@@ -478,7 +478,7 @@
               [minFractionDigits]="2"
               [maxFractionDigits]="2"
               [fluid]="true"
-              [class.p-invalid]="campoInvalido('consumoGeneral')"
+              [invalid]="campoInvalido('consumoGeneral')"
             />
             <app-mensaje-ayuda-error [condicion]="campoInvalido('consumoGeneral')"
               mensajeError="Captura un consumo mayor a cero."
@@ -495,7 +495,7 @@
               [minFractionDigits]="2"
               [maxFractionDigits]="2"
               [fluid]="true"
-              [class.p-invalid]="campoInvalido('rendimientoGeneral')"
+              [invalid]="campoInvalido('rendimientoGeneral')"
             />
             <app-mensaje-ayuda-error [condicion]="campoInvalido('rendimientoGeneral')"
               mensajeError="Captura un rendimiento mayor a cero."
@@ -553,7 +553,7 @@
                           [maxFractionDigits]="2"
                           [fluid]="true"
                           [ariaLabel]="'Consumo talla ' + fila.controls.talla.value"
-                          [class.p-invalid]="consumosInvalidos && fila.controls.consumo.value <= 0"
+                          [invalid]="consumosInvalidos && fila.controls.consumo.value <= 0"
                         />
                       </div>
                     </td>
@@ -577,7 +577,7 @@
                           [maxFractionDigits]="2"
                           [fluid]="true"
                           [ariaLabel]="'Rendimiento talla ' + fila.controls.talla.value"
-                          [class.p-invalid]="
+                          [invalid]="
                             consumosInvalidos && fila.controls.rendimiento.value <= 0
                           "
                         />

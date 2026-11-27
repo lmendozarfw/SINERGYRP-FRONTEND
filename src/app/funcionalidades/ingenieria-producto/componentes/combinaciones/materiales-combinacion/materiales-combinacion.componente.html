@@ -53,7 +53,7 @@
             optionValue="valor"
             [fluid]="true"
             placeholder="Selecciona un material"
-            [class.p-invalid]="esInvalido(fila.pieza.id)"
+            [invalid]="esInvalido(fila.pieza.id)"
           />
           <app-mensaje-ayuda-error [condicion]="esInvalido(fila.pieza.id)"
             mensajeError="Selecciona el material de esta pieza."></app-mensaje-ayuda-error>

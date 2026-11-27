@@ -45,34 +45,34 @@
                 <tr class="border-b border-ds-line bg-ds-canvas-strong">
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <p-select appendTo="body" [formField]="fila.formulario.idUnidadNegocio"
-                            [class.p-invalid]="unidadError.errorVisible()" fluid [options]="unidadesNegocioOpciones"
+                            [invalid]="unidadError.errorVisible()" fluid [options]="unidadesNegocioOpciones"
                             optionLabel="label" optionValue="value" placeholder="Selecciona una unidad" />
                         <app-mensaje-ayuda-error #unidadError
                             [campo]="fila.formulario.idUnidadNegocio"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <p-select appendTo="body" [formField]="fila.formulario.tipoDocumento"
-                            [class.p-invalid]="tipoDocumentoError.errorVisible()" fluid [options]="tiposDocumento"
+                            [invalid]="tipoDocumentoError.errorVisible()" fluid [options]="tiposDocumento"
                             optionLabel="label" optionValue="value" placeholder="Selecciona un documento" />
                         <app-mensaje-ayuda-error #tipoDocumentoError
                             [campo]="fila.formulario.tipoDocumento"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <input pInputText [formField]="fila.formulario.serie"
-                            [class.p-invalid]="serieError.errorVisible()" type="text" placeholder="Ej. A, FAC-2026"
+                            [invalid]="serieError.errorVisible()" type="text" placeholder="Ej. A, FAC-2026"
                             fluid />
                         <app-mensaje-ayuda-error #serieError [campo]="fila.formulario.serie"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <p-inputnumber [formField]="fila.formulario.siguienteFolio"
-                            [class.p-invalid]="siguienteFolioError.errorVisible()" fluid [min]="1" [useGrouping]="false"
+                            [invalid]="siguienteFolioError.errorVisible()" fluid [min]="1" [useGrouping]="false"
                             placeholder="1" />
                         <app-mensaje-ayuda-error #siguienteFolioError
                             [campo]="fila.formulario.siguienteFolio"></app-mensaje-ayuda-error>
                     </td>
                     <td class="h-[60px] px-4 py-3 align-middle">
                         <p-select appendTo="body" [formField]="fila.formulario.activo"
-                            [class.p-invalid]="activoError.errorVisible()" fluid [options]="estatus" optionLabel="label"
+                            [invalid]="activoError.errorVisible()" fluid [options]="estatus" optionLabel="label"
                             optionValue="value" placeholder="Selecciona" />
                         <app-mensaje-ayuda-error #activoError
                             [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>
@@ -90,7 +90,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <p-select appendTo="body" [formField]="fila.formulario.idUnidadNegocio"
-                                    [class.p-invalid]="unidadEdicionError.errorVisible()" fluid
+                                    [invalid]="unidadEdicionError.errorVisible()" fluid
                                     [options]="unidadesNegocioOpciones" optionLabel="label" optionValue="value"
                                     placeholder="Selecciona una unidad" />
                                 <app-mensaje-ayuda-error #unidadEdicionError
@@ -107,7 +107,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <p-select appendTo="body" [formField]="fila.formulario.tipoDocumento"
-                                    [class.p-invalid]="tipoDocumentoEdicionError.errorVisible()" fluid
+                                    [invalid]="tipoDocumentoEdicionError.errorVisible()" fluid
                                     [options]="tiposDocumento" optionLabel="label" optionValue="value"
                                     placeholder="Selecciona un documento" />
                                 <app-mensaje-ayuda-error #tipoDocumentoEdicionError
@@ -124,7 +124,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <input pInputText [formField]="fila.formulario.serie"
-                                    [class.p-invalid]="serieEdicionError.errorVisible()" type="text" fluid />
+                                    [invalid]="serieEdicionError.errorVisible()" type="text" fluid />
                                 <app-mensaje-ayuda-error #serieEdicionError
                                     [campo]="fila.formulario.serie"></app-mensaje-ayuda-error>
                             </ng-template>
@@ -138,7 +138,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <p-inputnumber [formField]="fila.formulario.siguienteFolio"
-                                    [class.p-invalid]="siguienteFolioEdicionError.errorVisible()" fluid [min]="1"
+                                    [invalid]="siguienteFolioEdicionError.errorVisible()" fluid [min]="1"
                                     [useGrouping]="false" />
                                 <app-mensaje-ayuda-error #siguienteFolioEdicionError
                                     [campo]="fila.formulario.siguienteFolio"></app-mensaje-ayuda-error>
@@ -154,7 +154,7 @@
                         <p-cell-editor>
                             <ng-template #input>
                                 <p-select appendTo="body" [formField]="fila.formulario.activo"
-                                    [class.p-invalid]="activoEdicionError.errorVisible()" fluid [options]="estatus"
+                                    [invalid]="activoEdicionError.errorVisible()" fluid [options]="estatus"
                                     optionLabel="label" optionValue="value" placeholder="Selecciona" />
                                 <app-mensaje-ayuda-error #activoEdicionError
                                     [campo]="fila.formulario.activo"></app-mensaje-ayuda-error>

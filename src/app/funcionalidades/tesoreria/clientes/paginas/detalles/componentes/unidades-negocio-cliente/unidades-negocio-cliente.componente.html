@@ -62,22 +62,22 @@
 <p-drawer [visible]="drawerVisible()" (visibleChange)="drawerVisible.set($event)" position="right" [header]="tituloDrawer()" styleClass="!w-full md:!w-[480px]">
   <form class="flex flex-col gap-4 pt-2" (submit)="$event.preventDefault(); guardar()">
     <div class="ds-field">
-      <app-etiqueta-formulario para="un-id" [obligatorio]="true">Unidad de negocio</app-etiqueta-formulario>
-      <p-select appendTo="body" inputId="un-id" [formField]="formulario.idUnidadNegocio" fluid [options]="opcionesUnidadNegocio" optionLabel="label" optionValue="value" placeholder="Selecciona una unidad" />
-      <app-mensaje-ayuda-error [campo]="formulario.idUnidadNegocio"></app-mensaje-ayuda-error>
+      <app-etiqueta-formulario para="id" [obligatorio]="true">Unidad de negocio</app-etiqueta-formulario>
+      <p-select appendTo="body" inputId="id" [formField]="formulario.idUnidadNegocio" [invalid]="unidadNegocioError.errorVisible()" fluid [options]="opcionesUnidadNegocio" optionLabel="label" optionValue="value" placeholder="Selecciona una unidad" />
+      <app-mensaje-ayuda-error #unidadNegocioError [campo]="formulario.idUnidadNegocio"></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">
-      <app-etiqueta-formulario para="un-principal">¿Es principal?</app-etiqueta-formulario>
-      <p-select appendTo="body" inputId="un-principal" [formField]="formulario.esPrincipal" fluid [options]="opcionesPrincipal" optionLabel="label" optionValue="value" />
+      <app-etiqueta-formulario para="principal">¿Es principal?</app-etiqueta-formulario>
+      <p-select appendTo="body" inputId="principal" [formField]="formulario.esPrincipal" fluid [options]="opcionesPrincipal" optionLabel="label" optionValue="value" />
     </div>
     <div class="ds-field">
-      <app-etiqueta-formulario para="un-inicio" [obligatorio]="true">Fecha inicio</app-etiqueta-formulario>
-      <p-datepicker appendTo="body" inputId="un-inicio" [formField]="formulario.fechaInicio" fluid dateFormat="dd/mm/yy" placeholder="Selecciona fecha" />
-      <app-mensaje-ayuda-error [campo]="formulario.fechaInicio"></app-mensaje-ayuda-error>
+      <app-etiqueta-formulario para="inicio" [obligatorio]="true">Fecha inicio</app-etiqueta-formulario>
+      <p-datepicker appendTo="body" inputId="inicio" [formField]="formulario.fechaInicio" [invalid]="fechaInicioError.errorVisible()" fluid dateFormat="dd/mm/yy" placeholder="Selecciona fecha" />
+      <app-mensaje-ayuda-error #fechaInicioError [campo]="formulario.fechaInicio"></app-mensaje-ayuda-error>
     </div>
     <div class="ds-field">
-      <app-etiqueta-formulario para="un-fin">Fecha fin</app-etiqueta-formulario>
-      <p-datepicker appendTo="body" inputId="un-fin" [formField]="formulario.fechaFin" fluid dateFormat="dd/mm/yy" [showClear]="true" placeholder="Selecciona fecha" />
+      <app-etiqueta-formulario para="fin">Fecha fin</app-etiqueta-formulario>
+      <p-datepicker appendTo="body" inputId="fin" [formField]="formulario.fechaFin" fluid dateFormat="dd/mm/yy" [showClear]="true" placeholder="Selecciona fecha" />
     </div>
   </form>
   <ng-template #footer>

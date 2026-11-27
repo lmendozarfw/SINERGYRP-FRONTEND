@@ -57,7 +57,7 @@
                     <p-select appendTo="body" class="" inputId="modelo-categoria" formControlName="categoria"
                         [options]="store.categorias" optionLabel="etiqueta" optionValue="valor"
                         placeholder="Selecciona una categoría" [fluid]="true"
-                        [class.p-invalid]="store.categoriaInvalida" />
+                        [invalid]="store.categoriaInvalida" />
                     <app-mensaje-ayuda-error [condicion]="store.categoriaInvalida"
                         mensajeError="La categoría es obligatoria."
                         mensajeAyuda="Tipo de producto al que pertenece el modelo."></app-mensaje-ayuda-error>

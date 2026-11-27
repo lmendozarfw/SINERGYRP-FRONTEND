@@ -24,7 +24,7 @@
       optionValue="valor"
       placeholder="Selecciona una empresa"
       [fluid]="true"
-      [class.p-invalid]="!!empresaError"
+      [invalid]="!!empresaError"
     />
     <app-mensaje-ayuda-error
       [condicion]="!!empresaError"

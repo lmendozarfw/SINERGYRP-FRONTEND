@@ -19,6 +19,7 @@ import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { Tag } from 'primeng/tag';
 import { IProveedor } from '../modelos/proveedor';
+import { DatePicker } from 'primeng/datepicker';
 
 @Component({
   selector: 'app-proveedores-pagina',
@@ -38,7 +39,8 @@ import { IProveedor } from '../modelos/proveedor';
     EtiquetaFormularioComponente,
     MensajeAyudaErrorComponente,
     BarraAccionesMasivasComponente,
-  ],
+    DatePicker
+],
   templateUrl: './proveedores.pagina.html',
 })
 export class ProveedoresPagina {
