@@ -61,65 +61,7 @@
 
 <p-drawer [visible]="drawerVisible()" (visibleChange)="drawerVisible.set($event)" position="right"
   [header]="tituloDrawer()" styleClass="ds-client-drawer !w-full md:!w-[560px]">
-  <div class="flex flex-col gap-5 p-6">
-
-    <app-tarjeta-credito [banco]="formulario.banco().value()" [titular]="formulario.titularCuenta().value()!"
-      [esSoloLectura]="false" [activo]="formulario.activa().value()" [moneda]="'MXN'"
-      [numeroCuenta]="formulario.numeroCuenta().value()"></app-tarjeta-credito>
-
-    <form class="ds-client-form grid grid-cols-1 gap-4 md:grid-cols-2" (submit)="$event.preventDefault(); guardar()">
-      <div class="ds-field">
-        <app-etiqueta-formulario para="banco" [obligatorio]="true">Banco</app-etiqueta-formulario>
-        <p-select appendTo="body" inputId="banco" [formField]="formulario.banco" fluid [options]="opcionesBanco"
-          optionLabel="label" optionValue="value" placeholder="Selecciona banco" />
-        <app-mensaje-ayuda-error [campo]="formulario.banco"></app-mensaje-ayuda-error>
-      </div>
-
-      <div class="ds-field">
-        <app-etiqueta-formulario para="swift">Código SWIFT</app-etiqueta-formulario>
-        <input id="swift" class="ds-input" pInputText [formField]="formulario.swift" fluid />
-        <app-mensaje-ayuda-error [campo]="formulario.swift"></app-mensaje-ayuda-error>
-      </div>
-
-      <div class="ds-field">
-        <app-etiqueta-formulario para="nombre">Nombre cuenta</app-etiqueta-formulario>
-        <input id="nombre" class="ds-input" pInputText [formField]="formulario.nombreCuenta" fluid />
-      </div>
-
-      <div class="ds-field">
-        <app-etiqueta-formulario para="titular">Titular</app-etiqueta-formulario>
-        <input id="titular" class="ds-input" pInputText [formField]="formulario.titularCuenta" fluid />
-      </div>
-
-      <div class="ds-field">
-        <app-etiqueta-formulario para="num">Número de cuenta</app-etiqueta-formulario>
-        <input id="num" class="ds-input" pInputText [formField]="formulario.numeroCuenta" fluid />
-        <app-mensaje-ayuda-error [campo]="formulario.numeroCuenta"></app-mensaje-ayuda-error>
-      </div>
-
-      <div class="ds-field">
-        <app-etiqueta-formulario para="clabe">CLABE</app-etiqueta-formulario>
-        <input id="clabe" class="ds-input" pInputText [formField]="formulario.clabe" fluid />
-      </div>
-      <div class="ds-field">
-        <app-etiqueta-formulario para="moneda">Moneda</app-etiqueta-formulario>
-        <p-select appendTo="body" inputId="moneda" [formField]="formulario.idMoneda" fluid [options]="opcionesMoneda"
-          optionLabel="label" optionValue="value" placeholder="Selecciona" />
-        <app-mensaje-ayuda-error [campo]="formulario.idMoneda"></app-mensaje-ayuda-error>
-      </div>
-
-      <div class="ds-field">
-        <app-etiqueta-formulario para="activa">Activa</app-etiqueta-formulario>
-        <p-select appendTo="body" inputId="activa" [formField]="formulario.activa" fluid [options]="opcionesSiNo"
-          optionLabel="label" optionValue="value" />
-      </div>
-
-      <div class="ds-field md:col-span-2">
-        <app-etiqueta-formulario para="observaciones">Observaciones</app-etiqueta-formulario>
-        <input id="observaciones" class="ds-input" pInputText [formField]="formulario.observaciones" fluid />
-      </div>
-    </form>
-  </div>
+  <app-formulario-cuenta-bancaria-proveedor [formulario]="formulario"></app-formulario-cuenta-bancaria-proveedor>
   <ng-template #footer>
     <div class="flex justify-end gap-2">
       <button pButton type="button" variant="outlined" (click)="cerrarDrawer()">Cancelar</button>

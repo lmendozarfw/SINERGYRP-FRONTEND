@@ -1,27 +1,19 @@
 import { Component, computed, signal } from "@angular/core";
-import { FieldTree, FormField, form, pattern, required } from "@angular/forms/signals";
+import { FieldTree, form, pattern, required } from "@angular/forms/signals";
 import { ButtonDirective } from "primeng/button";
 import { Drawer } from "primeng/drawer";
-import { InputText } from "primeng/inputtext";
-import { Select } from "primeng/select";
 import { PIcon } from "@primeicons/angular";
-import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente";
-import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { CONTACTO_PROVEEDOR_VACIO, IContactoProveedor } from "../../../../modelos/contacto-proveedor.interface";
+import { CONTACTO_FORM_VACIO, FormularioContactoProveedorComponente, IContactoProveedorForm } from "../formulario-contacto-proveedor/formulario-contacto-proveedor.componente";
 
-interface IContactoProveedorForm { nombre: string; puesto: string; tipoContacto: string; telefono: string; email: string; esPrincipal: boolean; activo: boolean; }
 interface IContactoProveedorItem extends IContactoProveedor { id: number; }
-const CONTACTO_FORM_VACIO: IContactoProveedorForm = { nombre: '', puesto: '', tipoContacto: '', telefono: '', email: '', esPrincipal: false, activo: true };
 
 @Component({
     selector: 'app-contactos-proveedor',
     templateUrl: './contactos-proveedor.componente.html',
-    imports: [ButtonDirective, Drawer, EtiquetaFormularioComponente, FormField, InputText, MensajeAyudaErrorComponente, PIcon, Select]
+    imports: [ButtonDirective, Drawer, FormularioContactoProveedorComponente, PIcon]
 })
 export class ContactosProveedorComponente {
-    readonly opcionesSiNo = [{ label: 'Sí', value: true }, { label: 'No', value: false }];
-    readonly opcionesTipoContacto = [{ label: 'Comercial', value: 'Comercial' }, { label: 'Facturación', value: 'Facturación' }, { label: 'Cobranza', value: 'Cobranza' }];
-
     protected readonly formulario: FieldTree<IContactoProveedorForm> = this.crearFormulario();
     protected readonly contactos = signal<IContactoProveedorItem[]>([]);
     protected readonly drawerVisible = signal(false);

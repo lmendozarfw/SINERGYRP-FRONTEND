@@ -1,27 +1,19 @@
 ﻿import { Component, computed, signal } from "@angular/core";
-import { FieldTree, FormField, form, pattern, required } from "@angular/forms/signals";
+import { FieldTree, form, pattern, required } from "@angular/forms/signals";
 import { ButtonDirective } from "primeng/button";
 import { Drawer } from "primeng/drawer";
-import { InputText } from "primeng/inputtext";
-import { Select } from "primeng/select";
 import { PIcon } from "@primeicons/angular";
-import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente";
-import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { CONTACTO_CLIENTE_VACIO, IContactoCliente } from "../../../../modelos/contacto-cliente.interface";
+import { CONTACTO_FORM_VACIO, FormularioContactoClienteComponente, IContactoClienteForm } from "../formulario-contacto-cliente/formulario-contacto-cliente.componente";
 
-interface IContactoClienteForm { nombre: string; puesto: string; tipoContacto: string; telefono: string; email: string; esPrincipal: boolean; activo: boolean; }
 interface IContactoClienteItem extends IContactoCliente { id: number; }
-const CONTACTO_FORM_VACIO: IContactoClienteForm = { nombre: '', puesto: '', tipoContacto: '', telefono: '', email: '', esPrincipal: false, activo: true };
 
 @Component({
     selector: 'app-contactos-cliente',
     templateUrl: './contactos-cliente.componente.html',
-    imports: [ButtonDirective, Drawer, EtiquetaFormularioComponente, FormField, InputText, MensajeAyudaErrorComponente, PIcon, Select]
+    imports: [ButtonDirective, Drawer, FormularioContactoClienteComponente, PIcon]
 })
 export class ContactosClienteComponente {
-    readonly opcionesSiNo = [{ label: 'Sí', value: true }, { label: 'No', value: false }];
-    readonly opcionesTipoContacto = [{ label: 'Comercial', value: 'Comercial' }, { label: 'Facturación', value: 'Facturación' }, { label: 'Cobranza', value: 'Cobranza' }];
-
     protected readonly formulario: FieldTree<IContactoClienteForm> = this.crearFormulario();
     protected readonly contactos = signal<IContactoClienteItem[]>([]);
     protected readonly drawerVisible = signal(false);

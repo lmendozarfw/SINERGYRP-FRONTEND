@@ -1,21 +1,18 @@
 import { Component, computed, signal } from "@angular/core";
 import { DatePipe } from '@angular/common';
-import { FieldTree, FormField, form, required } from "@angular/forms/signals";
+import { FieldTree, form, required } from "@angular/forms/signals";
 import { ButtonDirective } from "primeng/button";
-import { DatePicker } from "primeng/datepicker";
 import { Drawer } from "primeng/drawer";
-import { Select } from "primeng/select";
 import { PIcon } from "@primeicons/angular";
-import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente";
-import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { IUnidadNegocioProveedor, PROVEEDOR_UNIDAD_NEGOCIO_VACIO } from "../../../../modelos/unidad-negocio-proveedor.interface";
+import { FormularioUnidadNegocioProveedorComponente } from "../formulario-unidad-negocio-proveedor/formulario-unidad-negocio-proveedor.componente";
 
 interface IUnidadNegocioProveedorItem extends IUnidadNegocioProveedor { id: number; }
 
 @Component({
     selector: 'app-unidades-negocio-proveedor',
     templateUrl: './unidades-negocio-proveedor.componente.html',
-    imports: [DatePipe, ButtonDirective, DatePicker, Drawer, EtiquetaFormularioComponente, FormField, MensajeAyudaErrorComponente, PIcon, Select]
+    imports: [DatePipe, ButtonDirective, Drawer, FormularioUnidadNegocioProveedorComponente, PIcon]
 })
 export class UnidadesNegocioProveedorComponente {
     readonly opcionesUnidadNegocio = [
@@ -23,7 +20,6 @@ export class UnidadesNegocioProveedorComponente {
         { label: 'Comercialización', value: 2 },
         { label: 'Servicios', value: 3 }
     ];
-    readonly opcionesPrincipal = [{ label: 'Sí', value: true }, { label: 'No', value: false }];
 
     protected readonly formulario: FieldTree<IUnidadNegocioProveedor> = this.crearFormulario();
     protected readonly unidades = signal<IUnidadNegocioProveedorItem[]>([]);

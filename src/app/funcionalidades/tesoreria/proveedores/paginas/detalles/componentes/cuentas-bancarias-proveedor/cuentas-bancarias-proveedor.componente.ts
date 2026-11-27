@@ -1,33 +1,21 @@
 import { Component, computed, inject, Injector, signal } from "@angular/core";
-import { FieldTree, form, FormField, pattern, required } from "@angular/forms/signals";
+import { FieldTree, form, pattern, required } from "@angular/forms/signals";
 import { ButtonDirective } from "primeng/button";
 import { Drawer } from "primeng/drawer";
-import { InputText } from "primeng/inputtext";
-import { Select } from "primeng/select";
 import { PIcon } from "@primeicons/angular";
-import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente";
-import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { CUENTA_BANCARIA_PROVEEDOR_VACIA, ICuentaBancariaProveedor, IFilaCuentaBancariaProveedor } from "../../../../modelos/cuenta-bancaria-proveedor.interface";
 import { TarjetaCreditoComponente } from "@compartido/componentes/tarjeta-credito/tarjeta-credito.componente";
 import { EXPRESION_REGULAR_SWIFT } from "@compartido/constantes/expresion-rgular-swift";
 import { CopiarTextoComponente } from "@compartido/componentes/copiar-texto/copiar-texto.componente";
+import { FormularioCuentaBancariaProveedorComponente } from "../formulario-cuenta-bancaria-proveedor/formulario-cuenta-bancaria-proveedor.componente";
 
 @Component({
     selector: 'app-cuentas-bancarias-proveedor',
     templateUrl: './cuentas-bancarias-proveedor.componente.html',
-    imports: [ButtonDirective, Drawer, EtiquetaFormularioComponente, FormField, InputText, MensajeAyudaErrorComponente, PIcon, Select, TarjetaCreditoComponente, CopiarTextoComponente]
+    imports: [ButtonDirective, CopiarTextoComponente, Drawer, FormularioCuentaBancariaProveedorComponente, PIcon, TarjetaCreditoComponente]
 })
 export class CuentasBancariasProveedorComponente {
     private readonly injector = inject(Injector);
-
-    readonly opcionesSiNo = [{ label: 'Sí', value: true }, { label: 'No', value: false }];
-    readonly opcionesMoneda = [{ label: 'MXN', value: 1 }, { label: 'USD', value: 2 }];
-    readonly opcionesBanco = [
-        { label: 'BBVA', value: 'BBVA' },
-        { label: 'Citibanamex', value: 'Citibanamex' },
-        { label: 'BanBajío', value: 'BanBajío' },
-        { label: 'Otro banco', value: 'Otro' }
-    ];
 
     protected readonly formulario: FieldTree<ICuentaBancariaProveedor> = this.crearFormulario();
     protected readonly cuentas = signal<IFilaCuentaBancariaProveedor[]>([]);

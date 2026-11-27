@@ -58,14 +58,6 @@
 </div>
 
 <p-drawer [visible]="drawerVisible()" (visibleChange)="drawerVisible.set($event)" position="right" [header]="tituloDrawer()" styleClass="!w-full md:!w-[480px]">
-  <form class="flex flex-col gap-4 pt-2" (submit)="$event.preventDefault(); guardar()">
-    <div class="ds-field"><app-etiqueta-formulario para="con-nombre" [obligatorio]="true">Nombre</app-etiqueta-formulario><input id="con-nombre" pInputText [formField]="formulario.nombre" fluid /><app-mensaje-ayuda-error [campo]="formulario.nombre"></app-mensaje-ayuda-error></div>
-    <div class="ds-field"><app-etiqueta-formulario para="con-puesto">Puesto</app-etiqueta-formulario><input id="con-puesto" pInputText [formField]="formulario.puesto" fluid /></div>
-    <div class="ds-field"><app-etiqueta-formulario para="con-tipo">Tipo de contacto</app-etiqueta-formulario><p-select appendTo="body" inputId="con-tipo" [formField]="formulario.tipoContacto" fluid [options]="opcionesTipoContacto" optionLabel="label" optionValue="value" placeholder="Selecciona" /></div>
-    <div class="ds-field"><app-etiqueta-formulario para="con-tel">Teléfono</app-etiqueta-formulario><input id="con-tel" pInputText [formField]="formulario.telefono" fluid /></div>
-    <div class="ds-field"><app-etiqueta-formulario para="con-email">Email</app-etiqueta-formulario><input id="con-email" pInputText [formField]="formulario.email" type="email" fluid /><app-mensaje-ayuda-error [campo]="formulario.email"></app-mensaje-ayuda-error></div>
-    <div class="ds-field"><app-etiqueta-formulario para="con-principal">Principal</app-etiqueta-formulario><p-select appendTo="body" inputId="con-principal" [formField]="formulario.esPrincipal" fluid [options]="opcionesSiNo" optionLabel="label" optionValue="value" /></div>
-    <div class="ds-field"><app-etiqueta-formulario para="con-activo">Activo</app-etiqueta-formulario><p-select appendTo="body" inputId="con-activo" [formField]="formulario.activo" fluid [options]="opcionesSiNo" optionLabel="label" optionValue="value" /></div>
-  </form>
+  <app-formulario-contacto-cliente [formulario]="formulario"></app-formulario-contacto-cliente>
   <ng-template #footer><div class="flex justify-end gap-2"><button pButton type="button" variant="outlined" (click)="cerrarDrawer()">Cancelar</button><button pButton type="button" (click)="guardar()">Guardar</button></div></ng-template>
 </p-drawer>

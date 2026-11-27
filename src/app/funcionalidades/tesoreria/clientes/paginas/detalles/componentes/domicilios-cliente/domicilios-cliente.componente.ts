@@ -1,27 +1,19 @@
 ﻿import { Component, computed, signal } from "@angular/core";
-import { FieldTree, FormField, form, required } from "@angular/forms/signals";
+import { FieldTree, form, required } from "@angular/forms/signals";
 import { ButtonDirective } from "primeng/button";
 import { Drawer } from "primeng/drawer";
-import { InputText } from "primeng/inputtext";
-import { Select } from "primeng/select";
 import { PIcon } from "@primeicons/angular";
-import { EtiquetaFormularioComponente } from "@compartido/componentes/etiqueta-formulario/etiqueta-formulario.componente";
-import { MensajeAyudaErrorComponente } from "@compartido/componentes/mesaje-ayuda-error/mensaje-ayuda-error.componente";
 import { DOMICILIO_CLIENTE_VACIO, IDomicilioCliente } from "../../../../modelos/domicilio-cliente.interface";
+import { DOM_FORM_VACIO, FormularioDomicilioClienteComponente, IDomicilioClienteForm } from "../formulario-domicilio-cliente/formulario-domicilio-cliente.componente";
 
-interface IDomicilioClienteForm { tipoDomicilio: string; alias: string; nombreReceptor: string; calle: string; numeroExterior: string; numeroInterior: string; colonia: string; codigoPostal: string; localidad: string; telefono: string; referencias: string; esPrincipal: boolean; activo: boolean; }
 interface IDomicilioClienteItem extends IDomicilioCliente { id: number; }
-const DOM_FORM_VACIO: IDomicilioClienteForm = { tipoDomicilio: '', alias: '', nombreReceptor: '', calle: '', numeroExterior: '', numeroInterior: '', colonia: '', codigoPostal: '', localidad: '', telefono: '', referencias: '', esPrincipal: false, activo: true };
 
 @Component({
     selector: 'app-domicilios-cliente',
     templateUrl: './domicilios-cliente.componente.html',
-    imports: [ButtonDirective, Drawer, EtiquetaFormularioComponente, FormField, InputText, MensajeAyudaErrorComponente, PIcon, Select]
+    imports: [ButtonDirective, Drawer, FormularioDomicilioClienteComponente, PIcon]
 })
 export class DomiciliosClienteComponente {
-    readonly opcionesTipoDomicilio = [{ label: 'Fiscal', value: 'Fiscal' }, { label: 'Envío', value: 'Envío' }, { label: 'Cobranza', value: 'Cobranza' }];
-    readonly opcionesSiNo = [{ label: 'Sí', value: true }, { label: 'No', value: false }];
-
     protected readonly formulario: FieldTree<IDomicilioClienteForm> = this.crearFormulario();
     protected readonly domicilios = signal<IDomicilioClienteItem[]>([]);
     protected readonly drawerVisible = signal(false);
