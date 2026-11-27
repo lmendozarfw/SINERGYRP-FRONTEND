@@ -1,0 +1,102 @@
+<section class="ds-card overflow-hidden p-0!">
+  <div class="border-b border-ds-line px-6 py-5">
+    <h2 class="font-display text-lg font-semibold text-ds-ink">Documentos del cliente</h2>
+    <p class="text-xs text-ds-muted">
+      Facturas, notas y cobros emitidos, con el saldo pendiente de cada documento.
+    </p>
+  </div>
+
+  <div class="flex flex-nowrap items-center gap-2 px-6 py-4">
+    <p-iconfield iconPosition="left" class="w-auto min-w-[220px] grow basis-[280px]">
+      <p-inputicon>
+        <svg pIcon="search" [size]="16"></svg>
+      </p-inputicon>
+      <input pInputText type="text" class="ds-input" placeholder="Buscar por folio, tipo o estado"
+        aria-label="Buscar documentos" [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+    </p-iconfield>
+
+    <p-select appendTo="body" class="w-[190px]! shrink-0" [options]="opcionesTipo" optionLabel="etiqueta"
+      optionValue="valor" placeholder="Tipo de documento" aria-label="Filtrar por tipo de documento"
+      [ngModelOptions]="{ standalone: true }" [(ngModel)]="filtroTipo" />
+    <p-select appendTo="body" class="w-[160px]! shrink-0" [options]="opcionesEstado" optionLabel="etiqueta"
+      optionValue="valor" placeholder="Estado" aria-label="Filtrar por estado" [ngModelOptions]="{ standalone: true }"
+      [(ngModel)]="filtroEstado" />
+    <div class="shrink-0">
+      <button type="button" pButton variant="outlined" (click)="limpiarFiltros()">
+        <svg pIcon="filter" [size]="14"></svg>
+        Limpiar
+      </button>
+    </div>
+  </div>
+
+  <div class="mx-6 mb-6 p-0! ds-card overflow-hidden">
+    <p-table styleClass="ds-table" [value]="documentosFiltrados()" dataKey="id" [paginator]="true" [rows]="6"
+      [rowsPerPageOptions]="[6, 12, 24]" [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} - {last} de {totalRecords} documentos" [scrollable]="true"
+      [tableStyle]="{ 'min-width': '980px' }">
+      <ng-template #header>
+        <tr>
+          <th class="w-[170px] min-w-[170px]">Documento</th>
+          <th class="w-[140px] min-w-[140px]">Tipo</th>
+          <th class="w-[130px] min-w-[130px]">Fecha</th>
+          <th class="w-[130px] min-w-[130px]">Vencimiento</th>
+          <th class="w-[140px] min-w-[140px] text-right!">Importe</th>
+          <th class="w-[140px] min-w-[140px] text-right!">Saldo</th>
+          <th class="w-[120px] min-w-[120px]">Estado</th>
+          <th class="w-[130px] min-w-[130px]">Situación</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-documento>
+        <tr>
+          <td>
+            <p class="text-sm font-semibold tabular-nums text-ds-ink">
+              {{ documento.serie }} · {{ documento.folio }}
+            </p>
+            <p class="text-xs text-ds-muted">ID {{ documento.id }}</p>
+          </td>
+          <td class="text-sm text-ds-ink">{{ etiquetaTipo(documento.tipoDocumento) }}</td>
+          <td class="text-sm tabular-nums text-ds-ink">{{ documento.fechaDocumento | date: 'dd/MM/yyyy' }}</td>
+          <td class="text-sm tabular-nums text-ds-ink">
+            {{ documento.fechaVencimiento ? (documento.fechaVencimiento | date: 'dd/MM/yyyy') : '—' }}
+          </td>
+          <td class="text-right!">
+            <span class="text-sm font-semibold tabular-nums text-ds-ink">
+              {{ documento.total | number: '1.2-2' }}
+            </span>
+            <span class="ml-1 text-xs text-ds-muted">{{ documento.idMoneda }}</span>
+          </td>
+          <td class="text-right!">
+            @if (documento.saldo !== null) {
+            <span class="text-sm font-semibold tabular-nums text-ds-ink">
+              {{ documento.saldo | number: '1.2-2' }}
+            </span>
+            } @else {
+            <span class="text-sm text-ds-muted">—</span>
+            }
+          </td>
+          <td>
+            <p-tag [value]="etiquetaEstado(documento.estado)" [severity]="severidadEstado(documento.estado)" />
+          </td>
+          <td>
+            @if (documento.estaVencido) {
+            <p-tag value="Vencido" severity="warn" />
+            } @else if (documento.saldo !== null && documento.saldo > 0) {
+            <span class="text-xs font-medium text-ds-primary">Pendiente</span>
+            } @else if (documento.saldo !== null) {
+            <span class="text-xs text-ds-muted">Saldado</span>
+            } @else {
+            <span class="text-xs text-ds-muted">—</span>
+            }
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="8" class="p-8 text-center text-sm text-ds-muted">
+            No hay documentos que coincidan con los filtros seleccionados.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</section>

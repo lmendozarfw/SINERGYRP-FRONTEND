@@ -88,6 +88,11 @@ export const routes: Routes = [
           import('./funcionalidades/tesoreria/clientes/paginas/lista/clientes.pagina').then((p) => p.ClientesPagina),
       },
       {
+        path: 'clientes/:id/estado-cuenta',
+        loadComponent: () =>
+          import('./funcionalidades/tesoreria/clientes/paginas/estado-cuenta/estado-cuenta.pagina').then((p) => p.EstadoCuentaPagina),
+      },
+      {
         path: 'clientes/:id',
         loadComponent: () =>
           import('./funcionalidades/tesoreria/clientes/paginas/detalles/detalle-cliente.pagina').then((p) => p.DetalleClientePagina),

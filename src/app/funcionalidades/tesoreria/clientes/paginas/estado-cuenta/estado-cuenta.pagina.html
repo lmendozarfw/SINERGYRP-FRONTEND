@@ -1,0 +1,66 @@
+@if (estadoCuenta(); as estado) {
+  <div class="flex flex-col gap-6">
+    <app-encabezado-pagina
+      eyebrow="Estado de cuenta"
+      [titulo]="estado.cliente.nombre"
+      descripcion="Consulta la posición financiera del cliente, sus cuentas bancarias, documentos de cobro y aplicaciones registradas."
+    >
+      <div class="flex flex-wrap items-center gap-2">
+        <button type="button" pButton variant="outlined" (click)="volverAlCliente()">
+          <svg pIcon="arrow-left" [size]="14"></svg>
+          Volver al cliente
+        </button>
+        <button type="button" pButton (click)="imprimir()">
+          <svg pIcon="print" [size]="14"></svg>
+          Imprimir
+        </button>
+      </div>
+    </app-encabezado-pagina>
+
+    <app-datos-cliente-estado-cuenta [cliente]="estado.cliente" />
+
+    <p-tabs lazy [value]="pestanaActiva()" (valueChange)="cambiarPestana($event)">
+      <p-tablist>
+        @for (pestana of pestanas; track pestana.valor) {
+          <p-tab [value]="pestana.valor">
+            <p>{{ pestana.titulo }}</p>
+          </p-tab>
+        }
+      </p-tablist>
+      <p-tabpanels>
+        @for (pestana of pestanas; track pestana.valor) {
+          <p-tabpanel [value]="pestana.valor">
+            @switch (pestana.valor) {
+              @case ('0') {
+                <div class="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+                  <app-resumen-financiero-estado-cuenta [resumen]="estado.resumen" />
+                  <app-cuentas-bancarias-estado-cuenta [cuentas]="estado.cuentas" />
+                </div>
+              }
+              @case ('1') {
+                <app-documentos-estado-cuenta [documentos]="estado.documentos" />
+              }
+              @case ('2') {
+                <app-aplicaciones-cobro-estado-cuenta [aplicaciones]="estado.aplicaciones" />
+              }
+            }
+          </p-tabpanel>
+        }
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+} @else {
+  <section class="ds-card p-10 text-center">
+    <div class="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-ds-canvas-strong text-ds-muted">
+      <svg pIcon="exclamation-triangle" [size]="20"></svg>
+    </div>
+    <h2 class="font-display text-lg font-semibold text-ds-ink">No encontramos este estado de cuenta</h2>
+    <p class="mt-2 text-sm text-ds-muted">
+      Verifica que el cliente exista o regresa al listado de clientes para seleccionar uno.
+    </p>
+    <button type="button" pButton class="mt-5" (click)="volverAlCliente()">
+      <svg pIcon="arrow-left" [size]="14"></svg>
+      Volver a clientes
+    </button>
+  </section>
+}

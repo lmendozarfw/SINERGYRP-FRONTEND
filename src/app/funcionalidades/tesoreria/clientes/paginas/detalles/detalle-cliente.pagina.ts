@@ -1,5 +1,8 @@
 ﻿import { Component, inject, signal, viewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbServicio } from '@nucleo/servicios/breadcrumb.servicio';
+import { PIcon } from '@primeicons/angular';
+import { ButtonDirective } from 'primeng/button';
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from 'primeng/tabs';
 import { EncabezadoPaginaComponente } from '@compartido/componentes/encabezado-pagina/encabezado-pagina.componente';
 import { IPestanaComponente } from '@compartido/interfaces/pestana-componente.interface';
@@ -14,7 +17,9 @@ import { CuentasBancariasClienteComponente } from './componentes/cuentas-bancari
 @Component({
   selector: 'app-detalle-cliente-pagina',
   imports: [
+    ButtonDirective,
     EncabezadoPaginaComponente,
+    PIcon,
     Tabs,
     TabList,
     Tab,
@@ -32,6 +37,8 @@ import { CuentasBancariasClienteComponente } from './componentes/cuentas-bancari
 })
 export class DetalleClientePagina {
   private readonly breadcrumb = inject(BreadcrumbServicio);
+  private readonly ruta = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   readonly datosGenerales = viewChild(DatosGeneralesClienteComponente);
   readonly informacionFiscal = viewChild(InformacionFiscalClienteComponente);
@@ -75,5 +82,10 @@ export class DetalleClientePagina {
       case '6': return this.cuentasBancarias()?.tieneInformacionPendiente() ?? false;
       default: return false;
     }
+  }
+
+  irAEstadoCuenta(): void {
+    const id = Number(this.ruta.snapshot.paramMap.get('id')) || 1;
+    this.router.navigate(['/app', 'clientes', id, 'estado-cuenta']);
   }
 }

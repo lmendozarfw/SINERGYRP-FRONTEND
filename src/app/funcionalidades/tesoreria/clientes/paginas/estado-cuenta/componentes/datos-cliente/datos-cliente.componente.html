@@ -1,0 +1,28 @@
+<section class="ds-card p-6">
+  <dl class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <dt class="ds-meta uppercase tracking-wider">Límite de crédito</dt>
+      <dd class="mt-1 text-sm font-semibold tabular-nums text-ds-ink">
+        {{ cliente().limiteCredito | number: '1.2-2' }}
+        <span class="text-xs font-normal text-ds-muted">{{ cliente().moneda }}</span>
+      </dd>
+    </div>
+    <div>
+      <dt class="ds-meta uppercase tracking-wider">Días de crédito</dt>
+      <dd class="mt-1 text-sm font-semibold tabular-nums text-ds-ink">
+        {{ cliente().diasCredito }}
+        <span class="text-xs font-normal text-ds-muted">{{ cliente().diasCredito === 1 ? 'día' : 'días' }}</span>
+      </dd>
+    </div>
+    <div>
+      <dt class="ds-meta uppercase tracking-wider">Cuenta contable</dt>
+      <dd class="mt-1 text-sm font-medium text-ds-ink">{{ cliente().cuentaContable }}</dd>
+    </div>
+    <div>
+      <dt class="ds-meta uppercase tracking-wider">Fecha de alta</dt>
+      <dd class="mt-1 text-sm font-medium tabular-nums text-ds-ink">
+        {{ cliente().fechaAlta | date: 'dd/MM/yyyy' }}
+      </dd>
+    </div>
+  </dl>
+</section>

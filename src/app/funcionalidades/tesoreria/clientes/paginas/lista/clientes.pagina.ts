@@ -263,6 +263,10 @@ export class ClientesPagina {
     this.rutas.navigate(['app', 'clientes', '1']);
   }
 
+  irAEstadoCuenta(cliente: ICliente): void {
+    this.rutas.navigate(['/app', 'clientes', cliente.id, 'estado-cuenta']);
+  }
+
   limpiarSeleccion(): void {
     this.seleccion.set([]);
   }

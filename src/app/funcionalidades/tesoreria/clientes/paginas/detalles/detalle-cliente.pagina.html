@@ -1,6 +1,10 @@
 ﻿<div class="flex flex-col gap-6">
   <app-encabezado-pagina titulo="Grupo industrial de caja S.A. de C.V."
     descripcion="Gestiona la información de tu cliente, desde sus contactos hasta sus cuentas bancarias.">
+    <button type="button" pButton (click)="irAEstadoCuenta()">
+      <svg pIcon="file" [size]="14"></svg>
+      Estado de cuenta
+    </button>
   </app-encabezado-pagina>
 
   <p-tabs lazy [value]="pestanaActiva()" (valueChange)="cambiarPestana($event)">

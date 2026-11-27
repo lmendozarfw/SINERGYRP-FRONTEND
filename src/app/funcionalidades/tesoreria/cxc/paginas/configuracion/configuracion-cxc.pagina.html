@@ -3,8 +3,8 @@
         descripcion="Gestiona las cuentas de la empresa, conceptos y folios."></app-encabezado-pagina>
 
     <section class="rounded-lg border border-ds-line bg-ds-surface p-4">
-        <h2 class="m-0 mt-1 text-base font-semibold text-ds-ink">{{ catalogoActual().titulo }}</h2>
-        <p class="m-0 mt-1 text-sm leading-5 text-ds-muted">{{ catalogoActual().descripcion }}</p>
+        <h2 class="m-0 text-base font-semibold text-ds-ink">{{ catalogoActual().titulo }}</h2>
+        <p class="m-0 text-sm leading-5 text-ds-muted">{{ catalogoActual().descripcion }}</p>
     </section>
 
     <p-tabs lazy [value]="pestanaActiva()" (valueChange)="cambiarPestana($event)">

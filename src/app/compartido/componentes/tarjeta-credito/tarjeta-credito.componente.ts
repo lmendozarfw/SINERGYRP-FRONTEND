@@ -1,6 +1,8 @@
 import { Component, computed, input } from "@angular/core";
 import { PIcon } from "@primeicons/angular";
 
+type TamanoTarjetaCredito = 'normal' | 'pequeno';
+
 interface IEstiloBanco { 
     fondo: string; 
     overlay: string; 
@@ -13,34 +15,35 @@ interface IEstiloBanco {
 @Component({
     selector: 'app-tarjeta-credito',
     template: `
-    <article class="relative overflow-hidden rounded-2xl p-5" [style.background]="estiloBanco().fondo" [style.color]="estiloBanco().texto">
+    <article class="relative overflow-hidden" [class]="clases().contenedor" [style.background]="estiloBanco().fondo" [style.color]="estiloBanco().texto">
       <div class="pointer-events-none absolute inset-0" [style.background]="estiloBanco().overlay"></div>
-      <div class="pointer-events-none absolute -right-10 -top-10 size-28 rounded-full border border-white/10"></div>
-      <div class="relative flex items-start justify-between gap-3">
+      <div class="pointer-events-none absolute rounded-full border border-white/10" [class]="clases().decoracion"></div>
+      <div class="relative flex items-start justify-between" [class]="clases().cabecera">
         <div>
-          <p class="text-[11px] font-semibold uppercase tracking-[0.22em]"
+          <p class="font-semibold uppercase tracking-[0.22em]" [class]="clases().etiqueta"
             [style.color]="estiloBanco().muted">Vista previa</p>
-          <p class="mt-1 text-lg font-semibold tracking-tight">{{ banco() }}</p>
+          <p class="mt-1 font-semibold tracking-tight" [class]="clases().titulo">{{ banco() }}</p>
         </div>
         <span
-          class="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[11px] font-medium backdrop-blur-sm">
+          class="rounded-full border border-white/20 bg-white/10 font-medium backdrop-blur-sm"
+          [class]="clases().distintivo">
           {{ activo() ? 'Activa' : 'Inactiva' }}
         </span>
       </div>
-      <div class="relative mt-6 flex items-center justify-between">
-        <div class="h-9 w-11 rounded-md" [style.background]="estiloBanco().chip"></div>
-        <svg pIcon="credit-card" [size]="28" class="opacity-80"></svg>
+      <div class="relative flex items-center justify-between" [class]="clases().bloque">
+        <div class="rounded-md" [style.background]="estiloBanco().chip" [class]="clases().chip"></div>
+        <svg pIcon="credit-card" [size]="clases().icono" class="opacity-80"></svg>
       </div>
-      <p class="relative mt-6 font-mono text-[1.15rem] tracking-[0.18em]">{{ esSoloLectura() ? enmascaraNumeroCuenta() : formatoNumeroCuenta() }}</p>
-      <div class="relative mt-6 flex items-end justify-between gap-4">
+      <p class="relative font-mono text-left" [class]="clases().numero">{{ esSoloLectura() ? enmascaraNumeroCuenta() : formatoNumeroCuenta() }}</p>
+      <div class="relative flex items-end justify-between" [class]="clases().pie">
         <div class="min-w-0">
-          <p class="text-[10px] uppercase tracking-[0.18em]" [style.color]="estiloBanco().muted">Titular</p>
-          <p class="truncate text-sm font-medium">{{ titular() || 'Titular no especificado' }}</p>
+          <p class="uppercase tracking-[0.18em] text-left" [class]="clases().etiquetaDetalle" [style.color]="estiloBanco().muted">Titular</p>
+          <p class="truncate font-medium" [class]="clases().dato">{{ titular() || 'Titular no especificado' }}</p>
         </div>
         <div class="text-right">
-          <p class="text-[10px] uppercase tracking-[0.18em]"
+          <p class="uppercase tracking-[0.18em]" [class]="clases().etiquetaDetalle"
             [style.color]="estiloBanco().muted">Moneda</p>
-          <p class="text-sm font-semibold">{{ moneda() }}</p>
+          <p class="font-semibold" [class]="clases().dato">{{ moneda() }}</p>
         </div>
       </div>
     </article>
@@ -54,6 +57,26 @@ export class TarjetaCreditoComponente {
     activo = input.required<boolean>();
     moneda = input.required<string>();
     esSoloLectura = input<boolean>(true);
+    tamano = input<TamanoTarjetaCredito>('normal');
+
+    clases = computed(() => {
+        const small = this.tamano() === 'pequeno';
+        return {
+            contenedor: small ? 'rounded-xl p-3' : 'rounded-2xl p-5',
+            decoracion: small ? '-right-6 -top-6 size-16' : '-right-10 -top-10 size-28',
+            cabecera: small ? 'gap-2' : 'gap-3',
+            etiqueta: small ? 'text-[9px]' : 'text-[11px]',
+            titulo: small ? 'text-sm' : 'text-lg',
+            distintivo: small ? 'px-1.5 py-0.5 text-[9px]' : 'px-2.5 py-1 text-[11px]',
+            bloque: small ? 'mt-3' : 'mt-6',
+            chip: small ? 'h-6 w-8' : 'h-9 w-11',
+            icono: small ? 18 : 28,
+            numero: small ? 'mt-3 text-xs tracking-[0.12em]' : 'mt-6 text-[1.15rem] tracking-[0.18em]',
+            pie: small ? 'mt-3 gap-2' : 'mt-6 gap-4',
+            etiquetaDetalle: small ? 'text-[8px]' : 'text-[10px]',
+            dato: small ? 'text-xs' : 'text-sm'
+        };
+    });
 
     formatoNumeroCuenta = computed(() => {
         const numero = this.numeroCuenta();
@@ -81,7 +104,7 @@ export class TarjetaCreditoComponente {
 
     estiloBanco = computed(() => {
         const banco = this.banco();
-        return banco ?  this.estilosBanco[banco] : this.estilosBanco['Otro'];
+        return banco && this.estilosBanco[banco] ?  this.estilosBanco[banco] : this.estilosBanco['Otro'];
     });
     constructor() {}
 }

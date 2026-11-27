@@ -1,0 +1,44 @@
+<section class="ds-card p-6">
+  <div class="flex items-center gap-3">
+    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ds-primary-soft text-ds-primary">
+      <svg pIcon="credit-card" [size]="17"></svg>
+    </div>
+    <div>
+      <h2 class="font-display text-lg font-semibold text-ds-ink">Cuentas bancarias</h2>
+      <p class="text-xs text-ds-muted">Referencias disponibles para aplicar cobros.</p>
+    </div>
+  </div>
+
+  @if (cuentas().length) {
+
+  <p-carousel class="max-w-xl mx-auto mt-4" align="center">
+    <p-carousel-content class="h-max">
+      @for (cuenta of cuentas(); track cuenta) {
+      <p-carousel-item>
+        <app-tarjeta-credito [banco]="cuenta.banco" [titular]="cuenta.titularCuenta!" [esSoloLectura]="true"
+        [tamano]="'pequeno'" [activo]="cuenta.activa" [moneda]="'MXN'"
+        [numeroCuenta]="cuenta.numeroCuenta!"></app-tarjeta-credito>
+      </p-carousel-item>
+      }
+    </p-carousel-content>
+    <div class="flex mt-4 gap-4">
+      <p-carousel-indicators></p-carousel-indicators>
+      <div class="flex items-center justify-end gap-2 flex-1">
+        <button pCarouselPrev
+          class="w-9 h-9 flex items-center justify-center rounded-full border border-surface bg-surface-0 dark:bg-surface-800 text-surface-500 dark:text-surface-400 hover:opacity-75 cursor-pointer transition-opacity">
+          <svg [pIcon]="'chevron-left'"></svg>
+        </button>
+        <button pCarouselNext
+          class="w-9 h-9 flex items-center justify-center rounded-full border border-surface bg-surface-0 dark:bg-surface-800 text-surface-500 dark:text-surface-400 hover:opacity-75 cursor-pointer transition-opacity">
+          <svg [pIcon]="'chevron-right'"></svg>
+        </button>
+      </div>
+    </div>
+  </p-carousel>
+  } @else {
+  <div class="mt-5 rounded-lg border border-dashed border-ds-line bg-ds-canvas px-4 py-8 text-center">
+    <p class="text-sm font-medium text-ds-ink">Sin cuentas bancarias registradas</p>
+    <p class="text-xs text-ds-muted">Registra una cuenta para identificar los cobros del cliente.</p>
+  </div>
+  }
+</section>

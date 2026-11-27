@@ -1,0 +1,51 @@
+<section class="ds-card p-6">
+  <div class="flex flex-wrap items-end justify-between gap-3">
+    <div>
+      <p class="ds-meta uppercase tracking-widest">Resumen financiero</p>
+      <h2 class="mt-1 font-display text-lg font-semibold text-ds-ink">Posición de la cuenta</h2>
+    </div>
+  </div>
+
+  <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="rounded-xl border border-ds-line bg-ds-canvas p-4">
+      <p class="ds-meta uppercase tracking-wider">Saldo actual</p>
+      <p class="mt-2 font-display text-2xl font-semibold tabular-nums text-ds-ink">
+        {{ resumen().saldoActual | number: '1.2-2' }}
+      </p>
+      <p class="mt-1 text-xs text-ds-muted">Cargos menos abonos aplicados</p>
+    </div>
+    <div class="rounded-xl border border-ds-line bg-ds-canvas p-4">
+      <p class="ds-meta uppercase tracking-wider">Total de cargos</p>
+      <p class="mt-2 font-display text-2xl font-semibold tabular-nums text-ds-ink">
+        {{ resumen().totalCargos | number: '1.2-2' }}
+      </p>
+      <p class="mt-1 text-xs text-ds-muted">Facturas y notas de cargo vigentes</p>
+    </div>
+    <div class="rounded-xl border border-ds-line bg-ds-canvas p-4">
+      <p class="ds-meta uppercase tracking-wider">Abonos aplicados</p>
+      <p class="mt-2 font-display text-2xl font-semibold tabular-nums text-ds-success">
+        - {{ resumen().totalAbonos | number: '1.2-2' }}
+      </p>
+      <p class="mt-1 text-xs text-ds-muted">Cobros y notas de crédito aplicadas</p>
+    </div>
+  </div>
+
+  <div class="mt-6 rounded-xl border border-ds-line bg-ds-canvas p-4">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <p class="text-sm font-medium text-ds-ink">Uso de la línea de crédito</p>
+      <p class="text-sm font-semibold tabular-nums text-ds-ink">
+        {{ resumen().porcentajeUsoCredito | number: '1.0-0' }}%
+      </p>
+    </div>
+    <div class="mt-3 h-2 overflow-hidden rounded-full bg-ds-canvas-strong">
+      <div
+        class="h-full rounded-full bg-ds-primary transition-all duration-500"
+        [style.width.%]="resumen().porcentajeUsoCredito"
+      ></div>
+    </div>
+    <div class="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-ds-muted">
+      <span>Saldo {{ resumen().saldoActual | number: '1.2-2' }}</span>
+      <span>Límite {{ resumen().limiteCredito | number: '1.2-2' }}</span>
+    </div>
+  </div>
+</section>
